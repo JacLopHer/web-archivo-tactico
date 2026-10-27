@@ -29,6 +29,7 @@
 8. Modelar la clase de tropa (Infantería Ligera/Media/Pesada, etc.) como dato separado de `troopType`; completar cuando se decidan fuente y alcance de clasificación.
 9. Mantener sectoriales desactivados hasta disponer de asignaciones respaldadas por fuentes.
 10. Configurar y probar el despliegue estático en GitHub Pages; no está publicado todavía.
+11. **A más largo plazo:** replantear el diseño gráfico de la aplicación. El diseño visual actual no convence al propietario; dejar el rediseño para después de atender las prioridades funcionales y de datos.
 
 ### Despliegue previsto: GitHub Pages
 

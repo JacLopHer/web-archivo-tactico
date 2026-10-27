@@ -16,6 +16,7 @@ La importación está adaptada al formato de texto copiado de Infinity Army; no 
 
 - **Pendiente de modelado:** clasificar cada perfil por clase de tropa (por ejemplo, Infantería Ligera, Media o Pesada). Hoy se muestra el tipo de tropa heredado (como T. Línea, T. Apoyo, REM o TAG), que es una categoría distinta.
 - **Siguiente paso funcional recomendado:** añadir exportación e importación de copias de seguridad de proyectos locales.
+- **Rediseño visual futuro:** el diseño gráfico actual no convence al propietario y deberá replantearse más adelante. No es el siguiente paso; primero se priorizan las funciones pendientes.
 
 ## Despliegue
 
