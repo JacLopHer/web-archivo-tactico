@@ -88,9 +88,11 @@ test('incluye los perfiles ausentes que se encontraron al cotejar las páginas 1
 });
 
 test('conserva el sufijo (+1R) sin reinterpretarlo como cambio de perfil', () => {
-  const profile = weaponCatalog.profiles.find((weapon) => weapon.name === 'Arco Táctico(+1R)');
-  assert.ok(profile);
-  assert.equal(profile.verificationStatus, 'unverified');
+  for (const name of ['Arco Táctico(+1R)', 'Pistola Aturdidora(+1R)']) {
+    const profile = weaponCatalog.profiles.find((weapon) => weapon.name === name);
+    assert.ok(profile);
+    assert.equal(profile.verificationStatus, 'unverified');
+  }
 });
 
 test('coteja la variante Arma CC DA(PS=8) con su perfil de referencia equivalente', () => {
@@ -101,6 +103,14 @@ test('coteja la variante Arma CC DA(PS=8) con su perfil de referencia equivalent
   assert.ok(variant.source.endsWith('p. 184'));
   for (const key of ['damage', 'burst', 'ammunition', 'saveAttribute', 'saves', 'properties']) {
     assert.equal(variant[key], referenceProfile[key], `${key} should match the reference profile`);
+  }
+});
+
+test('mantiene pendientes las entradas agrupadas y el equipo sin perfil individual en el PDF', () => {
+  for (const name of ['Carabina de Plasma', 'Spitfire MULTI', 'Torreta Artillada (Fusil Combi)']) {
+    const profile = weaponCatalog.profiles.find((weapon) => weapon.name === name);
+    assert.ok(profile);
+    assert.equal(profile.verificationStatus, 'unverified');
   }
 });
 
