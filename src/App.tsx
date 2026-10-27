@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { FormEvent } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
 import { parseListImport } from './domain/listImport.mjs';
 import {
   createInitialProjectStore,
+  createProjectsBackup,
   createProject,
+  addProjectCopies,
   deleteProject,
   loadProjectStore,
+  parseProjectsBackup,
   renameProject,
   saveProjectStore,
   setActiveProject,
@@ -52,14 +55,21 @@ function App() {
   const [persistenceMessage, setPersistenceMessage] = useState('Cargando proyectos locales…');
   const [newProjectName, setNewProjectName] = useState('');
   const [renameProjectName, setRenameProjectName] = useState('');
+  const [isCreatingProject, setIsCreatingProject] = useState(false);
   const [isRenamingProject, setIsRenamingProject] = useState(false);
   const [projectConfirmation, setProjectConfirmation] = useState<'delete' | 'overwrite' | null>(null);
+  const [backupMessage, setBackupMessage] = useState('');
+  const [backupError, setBackupError] = useState('');
+  const [backupBusy, setBackupBusy] = useState(false);
   const [collectionAnnouncement, setCollectionAnnouncement] = useState('');
   const [clearConfirmationOpen, setClearConfirmationOpen] = useState(false);
   const nextCollectionId = useRef(0);
+  const backupFileInputRef = useRef<HTMLInputElement>(null);
   const clearCollectionButtonRef = useRef<HTMLButtonElement>(null);
   const cancelClearButtonRef = useRef<HTMLButtonElement>(null);
   const cancelProjectActionButtonRef = useRef<HTMLButtonElement>(null);
+  const projectStoreRef = useRef<ProjectStore | null>(null);
+  projectStoreRef.current = projectStore;
   const activeProjectId = projectStore?.activeProjectId;
   const activeProject = projectStore?.projects.find((project) => project.id === activeProjectId);
   const collection = activeProject?.cards ?? [];
@@ -114,6 +124,7 @@ function App() {
   }, [projectStore, projectsHydrated, projectsDirty, persistenceBlocked]);
 
   const updateProjectStore = (nextStore: ProjectStore) => {
+    projectStoreRef.current = nextStore;
     setProjectStore(nextStore);
     setProjectsDirty(true);
     setPersistenceMessage('Cambios pendientes de guardado local.');
@@ -257,6 +268,7 @@ function App() {
     if (!projectStore || !newProjectName.trim()) return;
     updateProjectStore(createProject(projectStore, { id: createProjectId(), name: newProjectName }));
     setNewProjectName('');
+    setIsCreatingProject(false);
     setIsRenamingProject(false);
     setCollectionAnnouncement(`Proyecto ${newProjectName.trim()} creado.`);
   };
@@ -269,81 +281,151 @@ function App() {
     setCollectionAnnouncement(`Proyecto renombrado a ${renameProjectName.trim()}.`);
   };
 
+  const exportProjectsBackup = () => {
+    if (!projectStore) return;
+    try {
+      const backup = createProjectsBackup(projectStore);
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `infinity-datacards-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      setBackupMessage('Copia de seguridad descargada.');
+      setBackupError('');
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'No se pudo crear la copia de seguridad.';
+      setBackupError(message);
+      setBackupMessage('');
+    }
+  };
+
+  const importProjectsBackup = async (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.currentTarget;
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      setBackupError('El archivo supera el límite de 5 MB.');
+      setBackupMessage('');
+      return;
+    }
+    if (!projectStore) {
+      setBackupError('Espera a que se carguen los proyectos antes de importar.');
+      setBackupMessage('');
+      return;
+    }
+
+    setBackupBusy(true);
+    setBackupError('');
+    setBackupMessage('');
+    try {
+      const backupStore = parseProjectsBackup(
+        await file.text(),
+        catalog.profiles.map((profile) => profile.id),
+      );
+      const currentStore = projectStoreRef.current;
+      if (!currentStore) throw new Error('No hay proyectos cargados para añadir la copia.');
+      const nextStore = addProjectCopies(currentStore, backupStore.projects, createProjectId);
+      nextCollectionId.current = Math.max(
+        nextCollectionId.current,
+        ...nextStore.projects.flatMap((project) => project.cards.map((card) => card.id + 1)),
+      );
+      updateProjectStore(nextStore);
+      const count = backupStore.projects.length;
+      setBackupMessage(
+        `${count} ${count === 1 ? 'proyecto añadido' : 'proyectos añadidos'} como copias. Tus proyectos se conservaron.`,
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'No se pudo leer la copia de seguridad.';
+      setBackupError(message);
+    } finally {
+      setBackupBusy(false);
+    }
+  };
+
   return (
     <main className="app-shell">
       <header className="topbar">
-        <a className="brand" href="#" aria-label="Infinity Datacards, inicio">
-          <span className="brand-mark">∞</span>
-          <span>
-            <strong>INFINITY</strong>
-            <small>DATACARDS</small>
-          </span>
-        </a>
+        <div className="header-identity">
+          <a className="brand" href="#" aria-label="Infinity Datacards, inicio">
+            <span className="brand-mark">∞</span>
+            <span>
+              <strong>INFINITY</strong>
+              <small>DATACARDS</small>
+            </span>
+          </a>
+          <div className="header-copy">
+            <span className="eyebrow">ARCHIVO TÁCTICO · FASE 01</span>
+            <h1>Tu fuerza, <span>ficha a ficha.</span></h1>
+            <p>Consulta los perfiles de JSA y prepara el terreno para tus próximas listas.</p>
+          </div>
+        </div>
         <span className="edition-tag">N5 · PILOTO JSA</span>
       </header>
 
       <section className="project-manager panel-surface" aria-label="Gestión de proyectos">
-        <div className="project-manager-heading">
-          <div>
-            <span className="eyebrow">LISTAS LOCALES</span>
-            <h2>Proyectos</h2>
-          </div>
-          <span className="active-project-label">
-            {activeProject ? `ACTIVO · ${activeProject.name}` : 'Cargando…'}
-          </span>
-        </div>
-        <div className="project-manager-controls">
-          <label className="select-control project-select">
-            <span>Cambiar proyecto</span>
+        <div className="project-nav">
+          <label className="project-select">
+            <span className="sr-only">Proyecto activo</span>
             <select
               value={activeProject?.id ?? ''}
               disabled={!projectsHydrated || !projectStore}
               onChange={(event) => {
                 if (!projectStore) return;
                 updateProjectStore(setActiveProject(projectStore, event.target.value));
+                setIsCreatingProject(false);
                 setIsRenamingProject(false);
               }}
+              aria-label="Proyecto activo"
             >
               {projectStore?.projects.map((project) => (
                 <option key={project.id} value={project.id}>{project.name}</option>
               ))}
             </select>
           </label>
-          <form className="project-create-form" onSubmit={submitNewProject}>
-            <label>
-              <span>Nuevo proyecto</span>
+          {isCreatingProject && (
+            <form className="project-inline-form" onSubmit={submitNewProject}>
               <input
+                autoFocus
                 value={newProjectName}
                 onChange={(event) => setNewProjectName(event.target.value)}
                 maxLength={60}
                 placeholder="Nombre de la lista"
+                aria-label="Nombre del nuevo proyecto"
                 disabled={!projectsHydrated}
               />
-            </label>
-            <button className="action-button primary" type="submit" disabled={!projectsHydrated || !newProjectName.trim()}>
-              Crear
-            </button>
-          </form>
-          {isRenamingProject ? (
-            <form className="project-rename-form" onSubmit={submitRenameProject}>
-              <label>
-                <span>Renombrar proyecto activo</span>
-                <input
-                  autoFocus
-                  value={renameProjectName}
-                  onChange={(event) => setRenameProjectName(event.target.value)}
-                  maxLength={60}
-                  disabled={!activeProject}
-                />
-              </label>
-              <button className="action-button primary" type="submit" disabled={!renameProjectName.trim()}>Guardar nombre</button>
-              <button className="action-button" type="button" onClick={() => setIsRenamingProject(false)}>Cancelar</button>
+              <button className="action-button primary" type="submit" aria-label="Crear proyecto" title="Crear proyecto" disabled={!projectsHydrated || !newProjectName.trim()}>
+                Crear
+              </button>
+              <button className="action-button" type="button" aria-label="Cancelar creación" title="Cancelar" onClick={() => {
+                setIsCreatingProject(false);
+                setNewProjectName('');
+              }}>×</button>
             </form>
-          ) : (
+          )}
+          {isRenamingProject && (
+            <form className="project-inline-form" onSubmit={submitRenameProject}>
+              <input
+                autoFocus
+                value={renameProjectName}
+                onChange={(event) => setRenameProjectName(event.target.value)}
+                maxLength={60}
+                aria-label="Nuevo nombre del proyecto"
+                disabled={!activeProject}
+              />
+              <button className="action-button primary" type="submit" aria-label="Guardar nombre" title="Guardar nombre" disabled={!renameProjectName.trim()}>Guardar</button>
+              <button className="action-button" type="button" aria-label="Cancelar renombrado" title="Cancelar" onClick={() => setIsRenamingProject(false)}>×</button>
+            </form>
+          )}
+          {!isCreatingProject && !isRenamingProject && (
             <div className="project-actions">
               <button
                 className="action-button"
                 type="button"
+                aria-label="Renombrar proyecto activo"
+                title="Renombrar proyecto activo"
                 disabled={!activeProject}
                 onClick={() => {
                   setRenameProjectName(activeProject?.name ?? '');
@@ -353,30 +435,77 @@ function App() {
                 Renombrar
               </button>
               <button
+                className="action-button"
+                type="button"
+                aria-label="Crear proyecto"
+                title="Crear proyecto"
+                disabled={!projectsHydrated}
+                onClick={() => setIsCreatingProject(true)}
+              >
+                + Nuevo
+              </button>
+              <button
                 className="action-button clear-collection-button"
                 type="button"
+                aria-label="Eliminar proyecto activo"
+                title="Eliminar proyecto activo"
                 disabled={!activeProject}
                 onClick={() => setProjectConfirmation('delete')}
               >
-                Eliminar proyecto
+                Eliminar
               </button>
             </div>
           )}
-        </div>
-        <p className={`persistence-message${persistenceError ? ' is-error' : ''}`} role="status">
-          {persistenceMessage}
-          {persistenceError && (
-            <button className="action-button" type="button" onClick={() => setProjectConfirmation('overwrite')}>
-              Reintentar / reemplazar guardado local
+          <div className="project-backup-controls">
+            <button
+              className="action-button"
+              type="button"
+              onClick={exportProjectsBackup}
+              aria-label="Descargar copia de seguridad"
+              title="Descargar copia de seguridad"
+              disabled={!projectsHydrated || !projectStore || backupBusy}
+            >
+              ↓ Copia
             </button>
-          )}
-        </p>
-      </section>
-
-      <section className="intro">
-        <div className="eyebrow">ARCHIVO TÁCTICO · FASE 01</div>
-        <h1>Tu fuerza, <span>ficha a ficha.</span></h1>
-        <p>Consulta los perfiles de JSA y prepara el terreno para tus próximas listas.</p>
+            <button
+              className="action-button"
+              type="button"
+              onClick={() => backupFileInputRef.current?.click()}
+              aria-label="Añadir proyectos desde una copia de seguridad"
+              title="Añadir proyectos desde una copia de seguridad"
+              disabled={!projectsHydrated || !projectStore || backupBusy}
+            >
+              {backupBusy ? '…' : '↑ Añadir'}
+            </button>
+          </div>
+          <input
+            ref={backupFileInputRef}
+            className="visually-hidden-file-input"
+            type="file"
+            accept=".json,application/json"
+            aria-label="Seleccionar archivo de copia de seguridad"
+            onChange={importProjectsBackup}
+          />
+          <span
+            className={`persistence-indicator${persistenceError ? ' is-error' : ''}`}
+            role="status"
+            title={persistenceError || persistenceMessage}
+            aria-label={persistenceError ? `Error de guardado: ${persistenceError}` : persistenceMessage}
+          >
+            <span className="persistence-dot" />
+            {persistenceError ? 'Error' : !projectsHydrated ? 'Cargando' : projectsDirty ? 'Guardando' : 'Guardado'}
+          </span>
+        </div>
+        {(backupMessage || backupError || persistenceError) && (
+          <p className={`project-feedback${backupError || persistenceError ? ' is-error' : ''}`} role="status">
+            {persistenceError ? persistenceError : backupError || backupMessage}
+            {persistenceError && (
+              <button className="action-button" type="button" onClick={() => setProjectConfirmation('overwrite')}>
+                Reintentar / reemplazar guardado local
+              </button>
+            )}
+          </p>
+        )}
       </section>
 
       <section className="catalog-controls" aria-label="Filtros del catálogo">

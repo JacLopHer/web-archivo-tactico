@@ -2,9 +2,12 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   createInitialProjectStore,
+  createProjectsBackup,
   createProject,
+  addProjectCopies,
   deleteProject,
   loadProjectStore,
+  parseProjectsBackup,
   PROJECT_STORAGE_KEY,
   renameProject,
   saveProjectStore,
@@ -122,4 +125,77 @@ test('el autosave espera a hidratar y bloquea escrituras hasta autorizar recuper
   assert.equal(shouldAutosaveProjects({ hydrated: true, dirty: false, persistenceBlocked: false }), false);
   assert.equal(shouldAutosaveProjects({ hydrated: true, dirty: true, persistenceBlocked: true }), false);
   assert.equal(shouldAutosaveProjects({ hydrated: true, dirty: true, persistenceBlocked: false }), true);
+});
+
+test('crea y valida una copia de seguridad sin perder orden, grupos ni duplicados', () => {
+  let store = createInitialProjectStore('alpha');
+  store = updateProjectCards(store, 'alpha', [
+    { id: 2, profileId: 'ninja', groupName: 'Grupo 1' },
+    { id: 3, profileId: 'domaru' },
+    { id: 4, profileId: 'ninja', groupName: 'Grupo 2' },
+  ]);
+  const backup = createProjectsBackup(store, '2026-10-27T13:00:00.000Z');
+
+  assert.deepEqual(parseProjectsBackup(JSON.stringify(backup), ['ninja', 'domaru']), store);
+});
+
+test('rechaza copias inválidas, incompatibles o con perfiles ausentes del catálogo', () => {
+  assert.throws(() => parseProjectsBackup('{', []), /JSON válido/);
+  assert.throws(
+    () => parseProjectsBackup(JSON.stringify({ format: 'other', backupVersion: 1 }), []),
+    /no son compatibles/,
+  );
+  const backup = createProjectsBackup(updateProjectCards(
+    createInitialProjectStore('alpha'),
+    'alpha',
+    [{ id: 0, profileId: 'removed-profile' }],
+  ));
+  assert.throws(
+    () => parseProjectsBackup(JSON.stringify(backup), ['ninja']),
+    /no existe en el catálogo actual/,
+  );
+});
+
+test('añade copias de proyectos sin alterar los existentes ni cambiar el proyecto activo', () => {
+  const existing = updateProjectCards(
+    createInitialProjectStore('alpha'),
+    'alpha',
+    [{ id: 0, profileId: 'ninja' }],
+  );
+  const imported = updateProjectCards(
+    createInitialProjectStore('backup-source'),
+    'backup-source',
+    [
+      { id: 7, profileId: 'domaru', groupName: 'Grupo 1' },
+      { id: 8, profileId: 'domaru', groupName: 'Grupo 1' },
+    ],
+  );
+  const ids = ['copy-1', 'copy-2'];
+  const result = addProjectCopies(existing, imported.projects, () => ids.shift());
+
+  assert.equal(result.activeProjectId, 'alpha');
+  assert.deepEqual(result.projects.map(({ id, name }) => ({ id, name })), [
+    { id: 'alpha', name: 'Mi lista' },
+    { id: 'copy-1', name: 'Mi lista (copia)' },
+  ]);
+  assert.deepEqual(result.projects[0].cards, [{ id: 0, profileId: 'ninja' }]);
+  assert.deepEqual(result.projects[1].cards, [
+    { id: 7, profileId: 'domaru', groupName: 'Grupo 1' },
+    { id: 8, profileId: 'domaru', groupName: 'Grupo 1' },
+  ]);
+});
+
+test('importar copias repetidas genera nombres visibles y únicos', () => {
+  const existing = createInitialProjectStore('original');
+  const importedProjects = [
+    { id: 'from-backup-1', name: 'Mi lista', cards: [] },
+    { id: 'from-backup-2', name: 'Mi lista', cards: [] },
+  ];
+  const ids = ['copy-1', 'copy-2'];
+  const result = addProjectCopies(existing, importedProjects, () => ids.shift());
+  assert.deepEqual(result.projects.map(({ name }) => name), [
+    'Mi lista',
+    'Mi lista (copia)',
+    'Mi lista (copia) 2',
+  ]);
 });

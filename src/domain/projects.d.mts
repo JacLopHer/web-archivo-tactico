@@ -20,6 +20,8 @@ export class ProjectStorageError extends Error {}
 
 export const PROJECT_STORAGE_KEY: string;
 export const PROJECT_SCHEMA_VERSION: number;
+export const PROJECT_BACKUP_FORMAT: string;
+export const PROJECT_BACKUP_VERSION: number;
 export const DEFAULT_PROJECT_NAME: string;
 
 export function createInitialProjectStore(projectId: string): ProjectStore;
@@ -50,3 +52,15 @@ export function shouldAutosaveProjects(state: {
   dirty: boolean;
   persistenceBlocked: boolean;
 }): boolean;
+export function createProjectsBackup(store: ProjectStore, exportedAt?: string): {
+  format: string;
+  backupVersion: number;
+  exportedAt: string;
+  store: ProjectStore;
+};
+export function parseProjectsBackup(serialized: string, availableProfileIds: string[]): ProjectStore;
+export function addProjectCopies(
+  store: ProjectStore,
+  projects: Project[],
+  createProjectId: () => string,
+): ProjectStore;

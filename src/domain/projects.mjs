@@ -1,5 +1,7 @@
 export const PROJECT_STORAGE_KEY = 'infinity-datacards.projects';
 export const PROJECT_SCHEMA_VERSION = 1;
+export const PROJECT_BACKUP_FORMAT = 'infinity-datacards-projects';
+export const PROJECT_BACKUP_VERSION = 1;
 export const DEFAULT_PROJECT_NAME = 'Mi lista';
 
 export class ProjectStorageError extends Error {
@@ -167,4 +169,91 @@ export function updateProjectCards(store, projectId, cards) {
 
 export function shouldAutosaveProjects({ hydrated, dirty, persistenceBlocked }) {
   return hydrated && dirty && !persistenceBlocked;
+}
+
+export function createProjectsBackup(store, exportedAt = new Date().toISOString()) {
+  const validStore = validateProjectStore(store);
+  if (Number.isNaN(Date.parse(exportedAt))) {
+    throw new ProjectStorageError('La fecha de la copia de seguridad no es válida.');
+  }
+  return {
+    format: PROJECT_BACKUP_FORMAT,
+    backupVersion: PROJECT_BACKUP_VERSION,
+    exportedAt,
+    store: validStore,
+  };
+}
+
+export function parseProjectsBackup(serialized, availableProfileIds) {
+  let parsed;
+  try {
+    parsed = JSON.parse(serialized);
+  } catch {
+    throw new ProjectStorageError('El archivo de copia de seguridad no contiene JSON válido.');
+  }
+
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+    throw new ProjectStorageError('El archivo no tiene un formato de copia de seguridad válido.');
+  }
+  if (parsed.format !== PROJECT_BACKUP_FORMAT || parsed.backupVersion !== PROJECT_BACKUP_VERSION) {
+    throw new ProjectStorageError('El formato o la versión de la copia de seguridad no son compatibles.');
+  }
+
+  const store = validateProjectStore(parsed.store);
+  if (typeof parsed.exportedAt !== 'string' || Number.isNaN(Date.parse(parsed.exportedAt))) {
+    throw new ProjectStorageError('La copia de seguridad no tiene una fecha válida.');
+  }
+
+  const availableProfiles = new Set(availableProfileIds);
+  for (const project of store.projects) {
+    for (const card of project.cards) {
+      if (!availableProfiles.has(card.profileId)) {
+        throw new ProjectStorageError(
+          `La copia contiene un perfil que no existe en el catálogo actual (${card.profileId}). Actualiza el catálogo antes de importar.`,
+        );
+      }
+    }
+  }
+  return store;
+}
+
+export function addProjectCopies(store, projects, createProjectId) {
+  const validStore = validateProjectStore(store);
+  if (!Array.isArray(projects) || projects.length === 0) {
+    throw new ProjectStorageError('La copia de seguridad no contiene proyectos.');
+  }
+  const validProjects = validateProjectStore({
+    schemaVersion: PROJECT_SCHEMA_VERSION,
+    activeProjectId: projects[0]?.id,
+    projects,
+  }).projects;
+
+  const usedIds = new Set(validStore.projects.map((project) => project.id));
+  const usedNames = new Set(validStore.projects.map((project) => project.name.trim().toLocaleLowerCase()));
+  const copies = validProjects.map((project) => {
+    const id = createProjectId();
+    if (typeof id !== 'string' || !id.trim() || usedIds.has(id)) {
+      throw new ProjectStorageError('No se pudo asignar una identidad única al proyecto importado.');
+    }
+    usedIds.add(id);
+
+    const baseName = `${project.name.trim()} (copia)`;
+    let name = baseName;
+    let copyNumber = 2;
+    while (usedNames.has(name.toLocaleLowerCase())) {
+      name = `${baseName} ${copyNumber}`;
+      copyNumber += 1;
+    }
+    usedNames.add(name.toLocaleLowerCase());
+    return {
+      id,
+      name,
+      cards: project.cards.map((card) => ({ ...card })),
+    };
+  });
+
+  return validateProjectStore({
+    ...validStore,
+    projects: [...validStore.projects, ...copies],
+  });
 }
