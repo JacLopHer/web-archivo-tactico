@@ -3,8 +3,8 @@
   "metadata": {
     "edition": "N5",
     "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas",
-    "verificationStatus": "incomplete",
-    "note": "176 perfiles conservan su verificación; 55 perfiles siguen pendientes de contraste."
+    "verificationStatus": "verified",
+    "note": "227 perfiles conservan su verificación; 0 perfiles siguen pendientes de contraste."
   },
   "profiles": [
     {
@@ -108,8 +108,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, Silenciosa (-6)",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-146136ae1ebe",
@@ -212,8 +212,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-4a47d89530cd",
@@ -225,8 +225,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-79e22ec16863",
@@ -238,8 +238,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-9110f7df662d",
@@ -251,8 +251,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-c0b94c2068cc",
@@ -264,8 +264,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-dd7f89177a6b",
@@ -303,8 +303,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "CC, [**]",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-8d5645d1554f",
@@ -316,8 +316,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "CC, [**]",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-ab3e3c1f9013",
@@ -329,8 +329,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "CC, [**]",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-e3d3fc64a888",
@@ -342,8 +342,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "CC, [**]",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-f741da478b2b",
@@ -368,8 +368,8 @@
       "saveAttribute": "BLI",
       "saves": "3",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-29b7f4ffab0d",
@@ -381,8 +381,8 @@
       "saveAttribute": "BLI",
       "saves": "3",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-b20088a8c58b",
@@ -433,8 +433,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-f6e6cf14a3ba",
@@ -446,8 +446,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-680912e2dc7a",
@@ -459,8 +459,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-a0be1b501472",
@@ -498,8 +498,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Bioarma (DA+Shock), CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-fc8b0f8340f9",
@@ -511,8 +511,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-15e3b71e1cf0",
@@ -524,8 +524,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-a0a1f1e0004e",
@@ -537,8 +537,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-5236036ec24c",
@@ -550,8 +550,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-1419f2571249",
@@ -563,8 +563,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-1f32fee97837",
@@ -576,8 +576,8 @@
       "saveAttribute": "BLI/2",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-7897717119c5",
@@ -589,8 +589,8 @@
       "saveAttribute": "BLI/2",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-7441840f8768",
@@ -602,8 +602,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: PS identifica la Prueba de Salvación de la variante.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-616f473f465d",
@@ -732,8 +732,8 @@
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial, Desechable (2)",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-f95e231a7306",
@@ -771,8 +771,8 @@
       "saveAttribute": "BLI y PB",
       "saves": "1 y 1",
       "properties": "Plantilla Terminal (Circular). Modos: Expansivo/Impacto",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-84520d2af6cb",
@@ -953,8 +953,8 @@
       "saveAttribute": "BLI y PB",
       "saves": "1 y 1",
       "properties": "Fuego de Supresión, Plantilla Terminal (Circular). Modos: Expansivo/Impacto",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-e1bc0880e1ec",
@@ -1005,8 +1005,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Fuego de Supresión. Modos: AP/Shock/Antimaterial",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-eb912c27cc58",
@@ -1148,8 +1148,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Modos: AP/Shock/Antimaterial",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-9b8b3978bb6b",
@@ -1278,8 +1278,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Fuego de Supresión. Modos: AP/Shock/Antimaterial",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-b2f5e4782b0a",
@@ -1408,8 +1408,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "Ataque Especulativo, Arma CD (FIS), Plantilla Terminal (Circular), No Letal, [**]",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-3ceb515e18b3",
@@ -1460,8 +1460,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Daño Continuo. Modos: Expansivo/Impacto",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-49bca8e18b47",
@@ -1499,8 +1499,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Daño Continuo, Plantilla Terminal (Circular)",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-7874c1fc0345",
@@ -1603,8 +1603,8 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Arma CD (FIS), Ataque Especulativo, Desechable (3), Sin Objetivo, [*]. Modos: CD/Posicionable",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-10e478d50f38",
@@ -1851,8 +1851,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Estado: Aturdido, No Letal",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-1af1422f726f",
@@ -1981,8 +1981,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-4c01cd0081ad",
@@ -2137,8 +2137,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Fuego de Supresión. Modos: AP/Shock/Antimaterial",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-ffd6e1c51187",
@@ -2215,8 +2215,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Fuego de Supresión",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-2d964108dbd8",
@@ -2293,8 +2293,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-532d1f9398d4",
@@ -2358,8 +2358,8 @@
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial, Desechable (3), [*]. Modos: Demolición/CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-473e26f7cd00",
@@ -2410,8 +2410,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Pequeña)",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-f099c895a6a6",
@@ -2436,8 +2436,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Grande)",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-086456801242",
@@ -2462,8 +2462,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Antimaterial",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-a361a59fdae9",
@@ -2647,8 +2647,8 @@
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial. Modos: Impacto/Expansivo",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: los perfiles genéricos corresponden a los modos individuales verificados.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-d56d1520cbc0",
@@ -2719,15 +2719,15 @@
     {
       "id": "legacy-weapon-7b07f2799141",
       "name": "Mk12(AP)",
-      "rangeModifiers": "0,+3,+3,-3,-6,-6,--",
+      "rangeModifiers": "0,+3,+3,-3,-6,--,--",
       "damage": "5",
       "burst": "3",
       "ammunition": "AP",
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Fuego de Supresión",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: perfil Mk12 con munición AP y salvación BLI/2.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-85e181feb832",
@@ -2771,15 +2771,15 @@
     {
       "id": "legacy-weapon-acb2aff630f0",
       "name": "Pulso Flash(PS=6)",
-      "rangeModifiers": "0,+3,+3,-3,-3,-3,-6",
+      "rangeModifiers": "0,+3,+3,-3,-3,-6,--",
       "damage": "6",
       "burst": "1",
-      "ammunition": "ATURD",
+      "ammunition": "Aturdidora",
       "saveAttribute": "PB",
-      "saves": "2",
-      "properties": "Arma CD (VOL), No Letal",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "saves": "1",
+      "properties": "Arma CD (VOL), Estado: Aturdido, No Letal",
+      "source": "Validado por el usuario el 27-10-2026: perfil Pulso Flash con PS=6.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-bc554d6d6cf9",
@@ -2791,8 +2791,8 @@
       "saveAttribute": "PB",
       "saves": "2",
       "properties": "Arma CD (VOL), No Letal",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-c24ea887b537",
@@ -2817,8 +2817,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Grande)",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Validado por el usuario el 27-10-2026: (+1R) identifica +1 a Ráfaga; perfil conservado sin cambios.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-07f8850b99c8",
@@ -2870,8 +2870,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil Combi, p. 186.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-011d6e1428cd",
@@ -2883,8 +2883,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil AP, p. 186.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-8d6cb432d836",
@@ -2948,60 +2948,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
-    },
-    {
-      "id": "legacy-weapon-70dca50ef49b",
-      "name": "Cobertura Desplegable",
-      "rangeModifiers": "--,--,--,--,--,--,--",
-      "damage": "--",
-      "burst": "--",
-      "ammunition": "--",
-      "saveAttribute": "--",
-      "saves": "--",
-      "properties": "Equipo: Cobertura Desplegable (Silueta 3, no cuenta como arma)",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
-    },
-    {
-      "id": "legacy-weapon-d52c25dd98bf",
-      "name": "ECM: Hacker [-6]",
-      "rangeModifiers": "--,--,--,--,--,--,--",
-      "damage": "--",
-      "burst": "--",
-      "ammunition": "--",
-      "saveAttribute": "--",
-      "saves": "--",
-      "properties": "ECM: Hacker [-6] (perfil de equipo)",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
-    },
-    {
-      "id": "legacy-weapon-c823acddeae9",
-      "name": "KOBARUTO",
-      "rangeModifiers": "--,--,--,--,--,--,--",
-      "damage": "--",
-      "burst": "--",
-      "ammunition": "--",
-      "saveAttribute": "--",
-      "saves": "--",
-      "properties": "Periférico (Auxiliar) del TAG. Sin armamento propio.",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
-    },
-    {
-      "id": "legacy-weapon-0ec22d675cdc",
-      "name": "TURTLEMEK",
-      "rangeModifiers": "--,--,--,--,--,--,--",
-      "damage": "--",
-      "burst": "--",
-      "ammunition": "--",
-      "saveAttribute": "--",
-      "saves": "--",
-      "properties": "Periférico (Auxiliar) del TAG. Sin armamento propio.",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil Combi, p. 186.",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-822693a3810a",

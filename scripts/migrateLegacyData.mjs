@@ -60,11 +60,19 @@ const legacyProfiles = extractArray('UDB');
 const legacyWeaponRows = extractArray('DB');
 const references = extractArray('REF');
 const legacyWeaponSource = 'Ultima versión .html · JSA CHEAT SHEETS v40';
+const nonWeaponProfileNames = new Set([
+  'Cobertura Desplegable',
+  'ECM: Hacker [-6]',
+  'KOBARUTO',
+  'TURTLEMEK',
+]);
 const previousWeaponsById = new Map(
   (previousWeaponProfiles?.profiles ?? []).map((weapon) => [weapon.id, weapon]),
 );
 const statKeys = ['movement', 'cc', 'bs', 'physical', 'willpower', 'armor', 'bts', 'wounds', 'silhouette', 'availability'];
-const weapons = legacyWeaponRows.map(([name, rangeModifiers, damage, burst, ammunition, saveAttribute, saves, properties]) => {
+const weapons = legacyWeaponRows
+  .filter(([name]) => !nonWeaponProfileNames.has(name))
+  .map(([name, rangeModifiers, damage, burst, ammunition, saveAttribute, saves, properties]) => {
   const id = stableId('legacy-weapon', [name, rangeModifiers, damage, burst, ammunition, saveAttribute, saves, properties]);
   const previousWeapon = previousWeaponsById.get(id);
   if (previousWeapon?.verificationStatus === 'verified') return previousWeapon;
@@ -84,10 +92,12 @@ const weapons = legacyWeaponRows.map(([name, rangeModifiers, damage, burst, ammu
     source: previousWeapon?.source ?? legacyWeaponSource,
     verificationStatus: previousWeapon?.verificationStatus ?? 'unverified',
   };
-});
+  });
 const legacyWeaponIds = new Set(weapons.map((weapon) => weapon.id));
 for (const previousWeapon of previousWeaponProfiles?.profiles ?? []) {
-  if (!legacyWeaponIds.has(previousWeapon.id)) weapons.push(previousWeapon);
+  if (!legacyWeaponIds.has(previousWeapon.id) && !nonWeaponProfileNames.has(previousWeapon.name)) {
+    weapons.push(previousWeapon);
+  }
 }
 
 const profiles = legacyProfiles.map((profile, index) => {

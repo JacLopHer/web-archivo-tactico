@@ -105,13 +105,13 @@ button, select { cursor: pointer; }
 .range-track { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-self: center; min-width: 0; height: 19px; border: 1px solid #35444a; border-radius: 2px; overflow: hidden; }
 .range-note { align-self: center; padding: 2px 4px; font-size: 7px; font-weight: 700; text-align: center; overflow-wrap: anywhere; }
 .range-blank { min-width: 0; }
-.range-band { min-width: 0; display: grid; place-items: center; border-right: 1px solid #ffffff3d; color: #fff; font-size: 9px; font-weight: 800; line-height: 1; text-shadow: 0 1px 2px #0008; }
+.range-band { min-width: 0; display: grid; place-items: center; border-right: 1px solid #ffffff3d; color: #1b2024; font-size: 9px; font-weight: 800; line-height: 1; }
 .range-band:last-child { border-right: 0; }
-.range-band.neutral { background: #087ba8; }
-.range-band.positive { background: #56a848; }
-.range-band.short { background: #ffbf22; color: #1b2024; text-shadow: none; }
-.range-band.long { background: #d72e3c; }
-.range-band.unavailable { background: #212a30; }
+.range-band.neutral { background: #3fb3cf; }
+.range-band.positive { background: #7da76d; }
+.range-band.short { background: #eba244; }
+.range-band.long { background: #da5453; }
+.range-band.unavailable { background: #231f20; }
 .weapon-value { display: grid; place-items: center; min-width: 0; padding: 2px; border-left: 1px solid #d5dddd; font-size: 9px; font-weight: 700; text-align: center; overflow-wrap: anywhere; }
 .weapon-unmatched { display: flex; flex-direction: column; gap: 3px; padding: 6px 8px; border-bottom: 1px solid #c7d0d1; color: #775a23; }
 .weapon-unmatched strong { font-size: 9px; }
