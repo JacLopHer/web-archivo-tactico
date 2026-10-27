@@ -4,7 +4,7 @@
     "edition": "N5",
     "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas",
     "verificationStatus": "incomplete",
-    "note": "129 perfiles cotejados con las páginas impresas 183–192; 99 perfiles siguen pendientes de contraste."
+    "note": "175 perfiles conservan su verificación; 56 perfiles siguen pendientes de contraste."
   },
   "profiles": [
     {
@@ -108,8 +108,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, Silenciosa (-6)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-146136ae1ebe",
@@ -212,8 +212,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-4a47d89530cd",
@@ -225,8 +225,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-79e22ec16863",
@@ -238,8 +238,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-9110f7df662d",
@@ -251,8 +251,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-c0b94c2068cc",
@@ -264,8 +264,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-dd7f89177a6b",
@@ -277,8 +277,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-b1d36b8c5b36",
@@ -303,8 +303,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "CC, [**]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-8d5645d1554f",
@@ -316,8 +316,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "CC, [**]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-ab3e3c1f9013",
@@ -329,8 +329,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "CC, [**]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-e3d3fc64a888",
@@ -342,8 +342,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "CC, [**]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-f741da478b2b",
@@ -368,8 +368,8 @@
       "saveAttribute": "BLI",
       "saves": "3",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-29b7f4ffab0d",
@@ -381,8 +381,8 @@
       "saveAttribute": "BLI",
       "saves": "3",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-b20088a8c58b",
@@ -433,8 +433,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-f6e6cf14a3ba",
@@ -446,8 +446,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-680912e2dc7a",
@@ -459,8 +459,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-a0be1b501472",
@@ -498,8 +498,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Bioarma (DA+Shock), CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-fc8b0f8340f9",
@@ -511,8 +511,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-15e3b71e1cf0",
@@ -524,8 +524,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-a0a1f1e0004e",
@@ -537,8 +537,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-5236036ec24c",
@@ -550,8 +550,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-1419f2571249",
@@ -563,8 +563,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-1f32fee97837",
@@ -576,8 +576,8 @@
       "saveAttribute": "BLI/2",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-7897717119c5",
@@ -589,8 +589,8 @@
       "saveAttribute": "BLI/2",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-7441840f8768",
@@ -602,8 +602,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Antimaterial, CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-616f473f465d",
@@ -732,8 +732,8 @@
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial, Desechable (2)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-f95e231a7306",
@@ -771,8 +771,8 @@
       "saveAttribute": "BLI y PB",
       "saves": "1 y 1",
       "properties": "Plantilla Terminal (Circular). Modos: Expansivo/Impacto",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-84520d2af6cb",
@@ -953,8 +953,8 @@
       "saveAttribute": "BLI y PB",
       "saves": "1 y 1",
       "properties": "Fuego de Supresión, Plantilla Terminal (Circular). Modos: Expansivo/Impacto",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-e1bc0880e1ec",
@@ -1005,8 +1005,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Fuego de Supresión. Modos: AP/Shock/Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-eb912c27cc58",
@@ -1148,8 +1148,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Modos: AP/Shock/Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-9b8b3978bb6b",
@@ -1278,8 +1278,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Fuego de Supresión. Modos: AP/Shock/Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-b2f5e4782b0a",
@@ -1408,8 +1408,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "Ataque Especulativo, Arma CD (FIS), Plantilla Terminal (Circular), No Letal, [**]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-3ceb515e18b3",
@@ -1460,8 +1460,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Daño Continuo. Modos: Expansivo/Impacto",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-49bca8e18b47",
@@ -1499,8 +1499,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Daño Continuo, Plantilla Terminal (Circular)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-7874c1fc0345",
@@ -1603,8 +1603,8 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Arma CD (FIS), Ataque Especulativo, Desechable (3), Sin Objetivo, [*]. Modos: CD/Posicionable",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-10e478d50f38",
@@ -1851,8 +1851,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Estado: Aturdido, No Letal",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-1af1422f726f",
@@ -1981,8 +1981,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-4c01cd0081ad",
@@ -2137,8 +2137,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Fuego de Supresión. Modos: AP/Shock/Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-ffd6e1c51187",
@@ -2215,8 +2215,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Fuego de Supresión",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-2d964108dbd8",
@@ -2228,8 +2228,8 @@
       "saveAttribute": "PB/2",
       "saves": "1",
       "properties": "Arma CD (VOL), Ataque de Comunicaciones, Desechable (2), Doble Disparo, Objetivo (VITA), Sin LDT, Zona de Control",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 193"
     },
     {
       "id": "legacy-weapon-bcf63dc55edd",
@@ -2241,8 +2241,8 @@
       "saveAttribute": "PB",
       "saves": "2",
       "properties": "Arma CD (VOL), Ataque de Comunicaciones, Objetivo (VITA), Estado: Aislado, No Letal, Sin LDT, Zona de Control",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 193"
     },
     {
       "id": "legacy-weapon-9cd1e2d27290",
@@ -2254,8 +2254,8 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Arma CD (VOL), Ataque de Comunicaciones, Plantilla Terminal (Circular), No Letal, Reflectante, Sin LDT, Sin Objetivo, Zona de Control",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 193"
     },
     {
       "id": "legacy-weapon-787803da3d86",
@@ -2267,8 +2267,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 193"
     },
     {
       "id": "legacy-weapon-439c2bd3c013",
@@ -2280,8 +2280,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 193"
     },
     {
       "id": "legacy-weapon-fd39f0931aa4",
@@ -2293,8 +2293,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-532d1f9398d4",
@@ -2306,8 +2306,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Fuego de Supresión",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-c3248f4b5a49",
@@ -2319,8 +2319,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Fuego de Supresión",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-24bd3051deac",
@@ -2332,21 +2332,21 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-53ca0dc1e422",
       "name": "Cañón Portátil Automático",
-      "rangeModifiers": "-3,0,+3,+3,-3,-3,--",
+      "rangeModifiers": "-3,0,+3,+3,-3,--,--",
       "damage": "5",
       "burst": "2",
       "ammunition": "AP+EXP",
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-ca469c7edb10",
@@ -2358,8 +2358,8 @@
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial, Desechable (3), [*]. Modos: Demolición/CC",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-473e26f7cd00",
@@ -2371,8 +2371,8 @@
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial, Desechable (3), [*]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-0bd6b7fddee6",
@@ -2384,8 +2384,8 @@
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial, CC, Desechable (3), Improvisado, [*]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-8815626890da",
@@ -2397,8 +2397,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Pequeña)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-02a8c57d6da2",
@@ -2410,8 +2410,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Pequeña)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-f099c895a6a6",
@@ -2423,8 +2423,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Grande)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-52ba9310b3f8",
@@ -2436,8 +2436,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Grande)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-086456801242",
@@ -2449,8 +2449,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-bbfe7afd1695",
@@ -2462,8 +2462,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-a361a59fdae9",
@@ -2475,21 +2475,23 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Desechable (2), Impulsión, Perimetral, Posicionable, [*]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194",
+      "rangeNote": "BLI=0 | PB=0 | EST=1 | S=1"
     },
     {
       "id": "legacy-weapon-1e9a7d4273d2",
       "name": "Dazer",
       "rangeModifiers": "",
+      "rangeNote": "BLI=0 | PB=0 | EST=1 | S=0",
       "damage": "--",
       "burst": "--",
       "ammunition": "--",
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Desechable (3), Posicionable, Zona de Control",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-2d3019c9c76b",
@@ -2501,34 +2503,34 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Arma CD (VOL), [***]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-6016dd7d3f7c",
       "name": "Descubrir",
-      "rangeModifiers": "+3,0,0,0,-3,-3,-6",
+      "rangeModifiers": "+3,0,0,-3,-6,--,--",
       "damage": "--",
       "burst": "--",
       "ammunition": "--",
       "saveAttribute": "--",
       "saves": "--",
       "properties": "[***]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-57ef90a38bab",
       "name": "Disco Baller",
-      "rangeModifiers": "0,+3,-3,-3,-6,-6,-6",
+      "rangeModifiers": "0,+3,-3,-6,-6,--,--",
       "damage": "--",
       "burst": "1",
       "ammunition": "--",
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Ataque Especulativo, Desechable (2), Doble Disparo, Sin Objetivo, [*]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-6d54c3f9ed76",
@@ -2540,8 +2542,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "Ataque Intuitivo, No Letal, Plantilla Directa (Lágrima Grande), [**]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-692c725ef2da",
@@ -2553,21 +2555,22 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "No Letal, [**]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-6a23742be41e",
       "name": "FastPanda",
       "rangeModifiers": "",
+      "rangeNote": "BLI=0 | PB=0 | EST=1 | S=1",
       "damage": "--",
       "burst": "1",
       "ammunition": "--",
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Desechable (1), Indiscriminado, Perimetral, Posicionable, Zona de Control, [***]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-2f7b47b360c4",
@@ -2579,8 +2582,8 @@
       "saveAttribute": "BLI",
       "saves": "3",
       "properties": "Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-a647b940552a",
@@ -2592,8 +2595,8 @@
       "saveAttribute": "BLI/2",
       "saves": "2",
       "properties": "Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-ce08845bad28",
@@ -2605,8 +2608,8 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "No Letal, [***]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-b1e01a37093a",
@@ -2618,21 +2621,21 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Arma CD (VOL), Ataque de Comunicaciones, Ataque Intuitivo, Desechable (2), Estado: Aislado, No Letal, Sin LDT, Zona de Control",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-4546f44e0605",
       "name": "Katyusha MRL",
-      "rangeModifiers": "-3,+3,0,-6,-6,--,--",
+      "rangeModifiers": "-3,+3,0,0,-6,--,--",
       "damage": "6",
       "burst": "1",
       "ammunition": "DA",
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, Ataque Especulativo, Plantilla Terminal (Circular)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-b6f07634cd79",
@@ -2644,47 +2647,48 @@
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial. Modos: Impacto/Expansivo",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-d56d1520cbc0",
       "name": "Lanzamisiles (Modo Impacto)",
-      "rangeModifiers": "-3,0,0,+3,+3,-3,-3",
+      "rangeModifiers": "-3,0,+3,-3,-3,--,--",
       "damage": "6",
       "burst": "1",
       "ammunition": "AP+EXP",
       "saveAttribute": "BLI/2",
       "saves": "3",
       "properties": "Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-42465d80a58d",
       "name": "Lanzamisiles (Modo Expansivo)",
-      "rangeModifiers": "-3,0,0,+3,+3,-3,-3",
+      "rangeModifiers": "-3,0,+3,-3,-3,--,--",
       "damage": "6",
       "burst": "1",
       "ammunition": "EXP",
       "saveAttribute": "BLI",
       "saves": "3",
       "properties": "Antimaterial, Plantilla Terminal (Circular)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-1034e5347ce1",
       "name": "MadTraps",
       "rangeModifiers": "",
+      "rangeNote": "BLI=0 | PB=0 | EST=1 | S=1",
       "damage": "--",
       "burst": "1",
       "ammunition": "PARA",
       "saveAttribute": "FIS-6",
       "saves": "1",
       "properties": "Desechable (2), Impulsión, No Letal, Perimetral, Posicionable, [*]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-d973f542780c",
@@ -2696,21 +2700,21 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "No Letal, [***]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-ed9fdd8ad2ae",
       "name": "Mk12",
-      "rangeModifiers": "0,+3,+3,-3,-6,-6,--",
+      "rangeModifiers": "0,+3,+3,-3,-6,--,--",
       "damage": "5",
       "burst": "3",
       "ammunition": "N",
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Fuego de Supresión",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-7b07f2799141",
@@ -2722,8 +2726,8 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Fuego de Supresión",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-85e181feb832",
@@ -2735,8 +2739,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Pequeña)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-f6210eb41729",
@@ -2748,21 +2752,21 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Antimaterial",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
     },
     {
       "id": "legacy-weapon-9ad4998a5612",
       "name": "Pulso Flash",
-      "rangeModifiers": "0,+3,+3,-3,-3,-3,-6",
+      "rangeModifiers": "0,+3,+3,-3,-3,-6,--",
       "damage": "7",
       "burst": "1",
-      "ammunition": "ATURD",
+      "ammunition": "Aturdidora",
       "saveAttribute": "PB",
-      "saves": "2",
-      "properties": "Arma CD (VOL), No Letal",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "saves": "1",
+      "properties": "Arma CD (VOL), Estado: Aturdido, No Letal",
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196"
     },
     {
       "id": "legacy-weapon-acb2aff630f0",
@@ -2774,8 +2778,8 @@
       "saveAttribute": "PB",
       "saves": "2",
       "properties": "Arma CD (VOL), No Letal",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-bc554d6d6cf9",
@@ -2787,8 +2791,8 @@
       "saveAttribute": "PB",
       "saves": "2",
       "properties": "Arma CD (VOL), No Letal",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-c24ea887b537",
@@ -2800,8 +2804,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Grande)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196"
     },
     {
       "id": "legacy-weapon-0a97f0eaafc7",
@@ -2813,8 +2817,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Ataque Intuitivo, Plantilla Directa (Lágrima Grande)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-07f8850b99c8",
@@ -2826,8 +2830,9 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Desechable (3), Posicionable",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196",
+      "rangeNote": "BLI=0 | PB=0 | EST=1 | S=1"
     },
     {
       "id": "legacy-weapon-a557c12b0414",
@@ -2839,8 +2844,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Ataque Intuitivo, Desechable (2), Estado: Sepsitorizado, Plantilla Directa (Lágrima Grande), [*]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196"
     },
     {
       "id": "legacy-weapon-8e650494174c",
@@ -2852,8 +2857,8 @@
       "saveAttribute": "PB",
       "saves": "1",
       "properties": "Ataque Intuitivo, Estado: Sepsitorizado, Plantilla Directa (Lágrima Grande), [*]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196"
     },
     {
       "id": "legacy-weapon-e035c3d6e3c0",
@@ -2865,8 +2870,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-011d6e1428cd",
@@ -2878,34 +2883,34 @@
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-8d6cb432d836",
       "name": "Uragan MRL (Modo Expansivo)",
-      "rangeModifiers": "-3,+3,+3,0,0,-6,--",
+      "rangeModifiers": "-3,+3,0,0,-6,--,--",
       "damage": "6",
       "burst": "3",
       "ammunition": "AP+SHOCK",
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Ataque Especulativo, Plantilla Terminal (Circular), Ráfaga: Blanco Único",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196"
     },
     {
       "id": "legacy-weapon-5f4b18ac2907",
       "name": "Uragan MRL (Modo Impacto)",
-      "rangeModifiers": "-3,+3,+3,0,0,-6,--",
+      "rangeModifiers": "-3,+3,0,0,-6,--,--",
       "damage": "5",
       "burst": "3",
       "ammunition": "AP+SHOCK",
       "saveAttribute": "BLI/2",
       "saves": "1",
       "properties": "Ráfaga: Blanco Único",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196"
     },
     {
       "id": "legacy-weapon-43692b49ef84",
@@ -2917,8 +2922,8 @@
       "saveAttribute": "PB/2",
       "saves": "2",
       "properties": "Ataque Intuitivo, No Letal, Plantilla Directa (Lágrima Pequeña), [**]",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196"
     },
     {
       "id": "legacy-weapon-a070ace9fea0",
@@ -2930,8 +2935,8 @@
       "saveAttribute": "*",
       "saves": "*",
       "properties": "[***] (PS/Mun/TS = los del arma original)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 194"
     },
     {
       "id": "legacy-weapon-b47d1f2ef945",
@@ -2943,8 +2948,8 @@
       "saveAttribute": "BLI",
       "saves": "1",
       "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-70dca50ef49b",
@@ -2956,8 +2961,8 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Equipo: Cobertura Desplegable (Silueta 3, no cuenta como arma)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-d52c25dd98bf",
@@ -2969,8 +2974,8 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "ECM: Hacker [-6] (perfil de equipo)",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-c823acddeae9",
@@ -2982,8 +2987,8 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Periférico (Auxiliar) del TAG. Sin armamento propio.",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
     },
     {
       "id": "legacy-weapon-0ec22d675cdc",
@@ -2995,8 +3000,48 @@
       "saveAttribute": "--",
       "saves": "--",
       "properties": "Periférico (Auxiliar) del TAG. Sin armamento propio.",
-      "verificationStatus": "unverified",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40"
+      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
+      "verificationStatus": "unverified"
+    },
+    {
+      "id": "legacy-weapon-822693a3810a",
+      "name": "Disco Ball",
+      "rangeModifiers": "",
+      "rangeNote": "BLI=0 | PB=0 | EST=1 | S=1",
+      "damage": "--",
+      "burst": "--",
+      "ammunition": "--",
+      "saveAttribute": "--",
+      "saves": "--",
+      "properties": "",
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
+    },
+    {
+      "id": "legacy-weapon-ab71a659c9c9",
+      "name": "Observador de Artillería",
+      "rangeModifiers": "0,0,0,-3,-3,-3,-6",
+      "damage": "--",
+      "burst": "2",
+      "ammunition": "--",
+      "saveAttribute": "--",
+      "saves": "1",
+      "properties": "Arma CD (VOL), Estado: Marcado, No Letal, [***]",
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195"
+    },
+    {
+      "id": "legacy-weapon-9f9bdeb26e14",
+      "name": "Pitcher",
+      "rangeModifiers": "0,-3,-6,-6,-6,-6,--",
+      "damage": "--",
+      "burst": "1",
+      "ammunition": "--",
+      "saveAttribute": "--",
+      "saves": "--",
+      "properties": "Ataque Especulativo, Desechable (2), Indiscriminado, No Letal, Sin Objetivo, [*]",
+      "verificationStatus": "verified",
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196"
     }
   ]
 }

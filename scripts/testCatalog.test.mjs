@@ -11,7 +11,7 @@ const weaponCatalog = JSON.parse(
 
 test('el catálogo migrado conserva el inventario heredado', () => {
   assert.equal(catalog.profiles.length, 181);
-  assert.equal(weaponCatalog.profiles.length, 228);
+  assert.equal(weaponCatalog.profiles.length, 231);
   assert.equal(catalog.references.length, 8);
 });
 
@@ -55,6 +55,10 @@ test('solo los perfiles cotejados con el PDF figuran como verificados', () => {
     '190': 11,
     '191': 17,
     '192': 14,
+    '193': 5,
+    '194': 11,
+    '195': 21,
+    '196': 9,
   };
   const sourceCounts = Object.fromEntries(
     Object.keys(expectedSourceCounts).map((page) => [
@@ -63,11 +67,42 @@ test('solo los perfiles cotejados con el PDF figuran como verificados', () => {
     ]),
   );
 
-  assert.equal(verifiedWeapons.length, 129);
-  assert.equal(unverifiedWeapons.length, 99);
+  assert.equal(verifiedWeapons.length, 175);
+  assert.equal(unverifiedWeapons.length, 56);
   assert.deepEqual(sourceCounts, expectedSourceCounts);
   assert.equal(weaponCatalog.metadata.verificationStatus, 'incomplete');
   assert.ok(unverifiedWeapons.every((weapon) => weapon.source.includes('Ultima versión .html')));
+});
+
+test('incluye los perfiles ausentes que se encontraron al cotejar las páginas 195 y 196', () => {
+  for (const [name, page] of [
+    ['Disco Ball', 195],
+    ['Observador de Artillería', 195],
+    ['Pitcher', 196],
+  ]) {
+    const profile = weaponCatalog.profiles.find((weapon) => weapon.name === name);
+    assert.ok(profile);
+    assert.equal(profile.verificationStatus, 'verified');
+    assert.ok(profile.source.endsWith(`p. ${page}`));
+  }
+});
+
+test('conserva el sufijo (+1R) sin reinterpretarlo como cambio de perfil', () => {
+  const profile = weaponCatalog.profiles.find((weapon) => weapon.name === 'Arco Táctico(+1R)');
+  assert.ok(profile);
+  assert.equal(profile.verificationStatus, 'unverified');
+});
+
+test('actualiza los campos que diferían entre el HTML y las páginas del PDF', () => {
+  const profileByName = new Map(weaponCatalog.profiles.map((weapon) => [weapon.name, weapon]));
+
+  assert.equal(profileByName.get('Cañón Portátil Automático').rangeModifiers, '-3,0,+3,+3,-3,--,--');
+  assert.equal(profileByName.get('Descubrir').rangeModifiers, '+3,0,0,-3,-6,--,--');
+  assert.equal(profileByName.get('Disco Baller').rangeModifiers, '0,+3,-3,-6,-6,--,--');
+  assert.equal(profileByName.get('Pulso Flash').rangeModifiers, '0,+3,+3,-3,-3,-6,--');
+  assert.equal(profileByName.get('Pulso Flash').ammunition, 'Aturdidora');
+  assert.equal(profileByName.get('Pulso Flash').saves, '1');
+  assert.equal(profileByName.get('Uragan MRL (Modo Expansivo)').rangeModifiers, '-3,+3,0,0,-6,--,--');
 });
 
 test('no se asigna disponibilidad sectorial sin datos de pertenencia', () => {

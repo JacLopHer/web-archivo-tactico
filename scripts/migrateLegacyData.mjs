@@ -67,6 +67,8 @@ const statKeys = ['movement', 'cc', 'bs', 'physical', 'willpower', 'armor', 'bts
 const weapons = legacyWeaponRows.map(([name, rangeModifiers, damage, burst, ammunition, saveAttribute, saves, properties]) => {
   const id = stableId('legacy-weapon', [name, rangeModifiers, damage, burst, ammunition, saveAttribute, saves, properties]);
   const previousWeapon = previousWeaponsById.get(id);
+  if (previousWeapon?.verificationStatus === 'verified') return previousWeapon;
+
   return {
     id,
     name: previousWeapon?.name ?? name,
@@ -83,6 +85,10 @@ const weapons = legacyWeaponRows.map(([name, rangeModifiers, damage, burst, ammu
     verificationStatus: previousWeapon?.verificationStatus ?? 'unverified',
   };
 });
+const legacyWeaponIds = new Set(weapons.map((weapon) => weapon.id));
+for (const previousWeapon of previousWeaponProfiles?.profiles ?? []) {
+  if (!legacyWeaponIds.has(previousWeapon.id)) weapons.push(previousWeapon);
+}
 
 const profiles = legacyProfiles.map((profile, index) => {
   const statValues = profile.s.trim().split(/\s+/);
@@ -116,7 +122,7 @@ const catalog = {
     edition: 'N5',
     source: 'Ultima versión .html',
     verificationStatus: 'unverified',
-    note: 'Migración de perfiles de tropas heredados. No presentar perfiles ni disponibilidad sectorial como verificados hasta contrastarlos con fuentes de reglas.',
+    note: 'Perfiles de tropas migrados desde datos heredados. No presentar perfiles ni disponibilidad sectorial como verificados hasta contrastarlos con fuentes de reglas.',
   },
   sectorials: [
     { id: 'jsa-vanilla', name: 'JSA (genérica)', rosterImage: 'Vanilla_JSA_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
