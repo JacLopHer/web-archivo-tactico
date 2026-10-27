@@ -57,7 +57,8 @@ test('los grupos siguen en el modelo y en impresión sin ocupar la lista activa'
 test('el espacio de trabajo separa unidades, perfiles y añadidos en tres columnas', () => {
   assert.match(styles, /\.workspace\s*\{\s*display:\s*grid;\s*grid-template-columns:\s*minmax\(210px,\s*\.7fr\)\s*minmax\(250px,\s*\.85fr\)\s*minmax\(320px,\s*1\.1fr\)/);
   assert.ok(styles.indexOf('@media (max-width: 1020px)') < styles.indexOf('.workspace { grid-template-columns: 1fr; }'));
-  assert.ok(styles.indexOf('@media (max-width: 520px)') < styles.indexOf('.stat-grid { margin-left: 0; }'));
+  const mobileStyles = styles.slice(styles.indexOf('@media (max-width: 520px)'));
+  assert.match(mobileStyles, /\.stat-grid \{ margin-left: 0; \}/);
   assert.doesNotMatch(styles, /@media[^}]*\.stat-grid\s*\{[^}]*grid-template-columns:\s*repeat\(5/);
   assert.match(app, /catalog\.units\.filter\(\(unit\)/);
   assert.match(app, /className="roster-panel catalog-families"/);
@@ -137,32 +138,35 @@ test('marca los perfiles FTO dentro de las variantes de su unidad base', () => {
 test('la vista previa muestra las fichas compactas con las opciones elegidas antes de imprimir', () => {
   assert.match(app, /printPreviewOpen \? 'dialog' : undefined/);
   assert.match(app, /aria-modal=\{printPreviewOpen \|\| undefined\}/);
-  assert.match(app, /Vista detallada según el papel y los saltos seleccionados/);
+  assert.match(app, /Vista detallada según los saltos seleccionados/);
   assert.match(app, /printPreviewOpen \? window\.print\(\) : setPrintPreviewOpen\(true\)/);
   assert.match(app, /printPreviewOpen \? 'Imprimir \/ Guardar PDF' : 'Vista previa'/);
   assert.match(app, /onClick=\{\(\) => setPrintPreviewOpen\(false\)\}/);
   assert.match(styles, /\.app-shell\.print-preview-open \.collection-print-card\s*\{[^}]*width:\s*150mm/);
-  assert.match(styles, /\.app-shell\.print-preview-open\.print-preview-letter \.collection-list\s*\{[^}]*width:\s*215\.9mm/);
+  assert.doesNotMatch(app, /Tamaño de papel|paperSize|Letter/);
   assert.match(styles, /\.app-shell\.print-preview-open \.collection-print-card\s*\{[^}]*display:\s*block/);
   assert.match(styles, /\.app-shell\.print-preview-open \.collection-print-card \{ box-shadow: none; \}/);
 });
 
 test('permite imprimir la misma datacard completa en dos columnas por cinco filas', () => {
   assert.match(app, /Formato de impresión/);
-  assert.match(app, /value="detailed">Detallado · ficha completa/);
-  assert.match(app, /value="compact">Compacto · hasta 10 por grupo/);
-  assert.match(app, /size: \$\{paperSize\} portrait; margin: \$\{printLayout === 'compact' \? '6mm' : '10mm'\}/);
+  assert.ok(app.indexOf('Formato de impresión') < app.indexOf('Saltos de página'));
+  assert.match(app, /value="detailed">Detallado</);
+  assert.match(app, /value="compact">Compacto · 10 por hoja/);
+  assert.match(app, /size: A4 portrait; margin: \$\{printLayout === 'compact' \? '6mm' : '10mm'\}/);
   assert.match(app, /className=\{`app-shell print-layout-\$\{printLayout\}/);
   assert.match(app, /la misma ficha completa con atributos, reglas y tablas de armas, reducida en dos columnas por cinco filas para hasta 10 por hoja/);
   assert.equal((app.match(/<article className="collection-print-card datacard">/g) ?? []).length, 1);
   assert.doesNotMatch(app, /compact-print-card/);
+  assert.match(app, /const tallest = Math\.max\(\.\.\.cards\.map\(\(card\) => card\.offsetHeight\)\) \* mmPerPixel/);
+  assert.match(app, /const scale = Math\.min\(1, cellHeight \/ tallest\)/);
   assert.match(app, /card\.style\.setProperty\('--compact-card-scale', String\(scale\)\)/);
-  assert.match(app, /entry\.clientHeight \/ card\.offsetHeight/);
+  assert.match(app, /card\.style\.minHeight = `\$\{cellHeight \/ scale \/ mmPerPixel\}px`/);
   assert.match(styles, /transform:\s*translate\(-50%,\s*-50%\)\s*scale\(var\(--compact-card-scale,\s*\.48\)\)/);
   assert.match(styles, /\.app-shell\.print-layout-compact\.print-preview-open \.collection-print-card/);
   assert.match(styles, /grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\);\s*grid-template-rows:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\)/);
   assert.match(styles, /\.app-shell\.print-layout-compact\.print-preview-open \.print-preview-page\s*\{[^}]*width:\s*210mm;\s*height:\s*297mm/s);
-  assert.match(styles, /\.app-shell\.print-layout-compact\.print-preview-open \.print-preview-page,\s*\.app-shell\.print-layout-compact\.print-preview-open\.print-preview-letter \.print-preview-page\s*\{[^}]*height:\s*calc\(297mm - 12mm\)/);
+  assert.match(styles, /\.app-shell\.print-layout-compact\.print-preview-open \.print-preview-page\s*\{[^}]*height:\s*calc\(297mm - 12mm\)/);
   assert.match(styles, /\.app-shell\.print-layout-compact\.print-preview-open \.print-preview-page-entries/);
-  assert.match(styles, /\.app-shell\.print-layout-compact\.print-preview-open \.print-preview-page,\s*\.app-shell\.print-layout-compact\.print-preview-open\.print-preview-letter \.print-preview-page\s*\{[^}]*break-after:\s*page/);
+  assert.match(styles, /\.app-shell\.print-layout-compact\.print-preview-open \.print-preview-page\s*\{[^}]*break-after:\s*page/);
 });

@@ -20,7 +20,7 @@
 ### Deuda técnica y siguientes pasos
 
 1. Alinear la interfaz del importador con el criterio del propietario: conservar cada repetición de perfil como una ficha distinta; añadir las unidades validadas al aceptar; mostrar un error claro por las no validadas y dejar que el usuario las añada desde el catálogo, sin cola de revisión manual del importador. Mantener la confirmación y sus recuentos. Añadir pruebas de interfaz solo donde aporten cobertura útil a este flujo.
-2. **Siguiente prioridad funcional: impresión y exportación a PDF.** Implementar controles para imprimir/exportar la colección, elegir tamaño de papel y controlar los saltos de página; comprobar la paginación, los estilos y el resultado en navegador y en papel/PDF. Revisar primero los estilos de impresión existentes y escoger la solución más simple compatible con el proyecto.
+2. **Siguiente prioridad funcional: impresión y exportación a PDF.** Implementar controles para imprimir/exportar la colección, elegir el formato de impresión (el papel es siempre A4) y controlar los saltos de página; comprobar la paginación, los estilos y el resultado en navegador y en papel/PDF. Revisar primero los estilos de impresión existentes y escoger la solución más simple compatible con el proyecto.
 3. Probar el parser con más variantes reales de Infinity Army y cambios de formato del exportador, comprobando que las resoluciones siempre utilicen perfiles y armas del catálogo. Mantener el catálogo actualizado cuando se publiquen perfiles nuevos; no se admitirán opciones ajenas al catálogo. El enlace codificado y archivos exportados no se procesan.
 4. Completar las fichas de colección con la tabla visual de perfiles de armas, ahora disponible en el detalle del perfil.
 5. Incorporar imágenes permitidas y asociadas de forma fiable a unidad/perfil; actualmente se usa un marcador.
@@ -33,23 +33,23 @@
 
 ### Despliegue previsto: GitHub Pages
 
-GitHub Pages es la opción inicial prevista por ser un alojamiento estático y gratuito para sitios de repositorios públicos. Encaja con el piloto actual: React/Vite, catálogos JSON locales y lógica que se ejecuta en el navegador. El despliegue no está configurado todavía.
+GitHub Pages es la opción inicial prevista por ser un alojamiento estático y gratuito para sitios de repositorios públicos. Encaja con el piloto actual: React/Vite, catálogos JSON locales y lógica que se ejecuta en el navegador. La configuración local de Vite y el workflow de publicación están preparados; Pages ya está configurado para publicar mediante GitHub Actions, pero aún no se ha publicado el sitio.
 
 **Consecuencias para la arquitectura y el uso:**
 
 - Pages sirve HTML, CSS, JavaScript y recursos estáticos; no ejecuta un backend, base de datos, funciones de servidor ni tareas privadas. El catálogo y el código incluidos en el build son descargables por los visitantes. No incluir secretos ni datos que deban mantenerse privados.
 - La persistencia inicial puede ser local en el navegador, pero no sincroniza proyectos entre dispositivos ni usuarios. `localStorage` pertenece al origen del sitio: localhost, el dominio `github.io` y un dominio personalizado son almacenamientos separados. Debe haber exportación/importación de copias de seguridad antes de depender de proyectos locales.
-- Al ser un sitio de proyecto, la URL por defecto incluye el nombre del repositorio (`/<repo>/`). Vite debe compilar con el `base` correcto (actualmente no configurado) y los recursos/rutas deben probarse desde esa subruta, no solo desde la raíz local.
+- Al ser un sitio de proyecto, la URL por defecto incluye el nombre del repositorio (`/<repo>/`). Vite está configurado con `base: '/web-archivo-tactico/'`, y la compilación local se ha probado desde esa subruta. La URL pública prevista es `https://jaclopher.github.io/web-archivo-tactico/`; falta verificarla tras activar Pages. Los recursos/rutas deben seguir probándose desde la subruta, no solo desde la raíz local.
 - GitHub Pages no proporciona fallback de servidor para rutas SPA. Si se añaden rutas, habrá que diseñar la navegación para hosting estático (por ejemplo, hash routing o una solución explícita de fallback) y probar recarga/enlaces directos.
 - Los sitios publicados pueden tener hasta 1 GB; GitHub documenta límites suaves de 100 GB de transferencia mensual y 10 builds por hora (este último no aplica si se publica mediante un workflow personalizado de GitHub Actions). Los despliegues pueden expirar si tardan más de 10 minutos. Son límites holgados para el piloto, pero las imágenes pesadas y un aumento de uso deben vigilarse. Revisar la [documentación vigente de límites de Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
 - GitHub registra las direcciones IP de quienes visitan Pages por razones de seguridad. No se debe presentar la app como anónima respecto al proveedor de hosting. Más información: [qué es GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
 
 **Trabajo necesario para publicarla:**
 
-1. Configurar `base` en Vite para el nombre real del repositorio y verificar que funcione en una ruta `/repo/`.
-2. Añadir un workflow de GitHub Actions con permisos mínimos para compilar y publicar el directorio `dist`.
-3. Habilitar GitHub Pages desde ese workflow en la configuración del repositorio.
-4. Probar URL, carga de recursos, refresco, impresión y funcionamiento completo en el sitio publicado; dejar la URL de producción documentada.
+1. **Preparado localmente:** configurar `base` en Vite para `/web-archivo-tactico/`; la build y la carga desde esa subruta se han verificado en local.
+2. **Preparado localmente:** el workflow de GitHub Actions ejecuta las pruebas y la build, y publica `dist` al hacer push a `main` o lanzarlo manualmente.
+3. **Configurado en GitHub:** Pages utiliza GitHub Actions como fuente de publicación.
+4. **Pendiente:** subir el workflow a `main`, esperar a que pasen las pruebas y se complete el primer despliegue; después probar la URL, la carga de recursos, el refresco, la impresión y el funcionamiento completo.
 5. Si se configura dominio personalizado, revisar DNS, HTTPS y el cambio de origen para los datos locales guardados.
 
 Si en el futuro se requieren cuentas, sincronización entre dispositivos, listas compartidas o datos privados, GitHub Pages por sí solo no será suficiente: habrá que añadir un backend y alojamiento independiente, o elegir una plataforma que los proporcione.

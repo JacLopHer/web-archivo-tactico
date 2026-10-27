@@ -138,6 +138,12 @@ const unitIconSlugByName: Record<string, string> = {
   'TRIPHAMMER': 'triphammers-repurposed-industrial-tags',
 };
 
+const sectorialIconSlug: Record<string, string> = {
+  'jsa-vanilla': 'jsa',
+  'jsa-oban': 'oban',
+  'jsa-shindenbutai': 'shindenbutai',
+};
+
 const unitIconPath = (name: string) => {
   const iconSlug = unitIconSlugByName[name];
   return iconSlug
@@ -155,7 +161,6 @@ function App() {
     resolved: Array<ImportedProfileLine & { id: string }>;
     unresolved: Array<ImportedProfileLine & { id: string }>;
   } | null>(null);
-  const [paperSize, setPaperSize] = useState<'A4' | 'Letter'>('A4');
   const [pageBreakMode, setPageBreakMode] = useState<'automatic' | 'group' | 'card'>('automatic');
   const [printLayout, setPrintLayout] = useState<'detailed' | 'compact'>('detailed');
   const [brokenImages, setBrokenImages] = useState<Set<string>>(() => new Set());
@@ -213,8 +218,7 @@ function App() {
     }
 
     const pages: Array<typeof collectionEntries> = [[]];
-    const pageHeight = paperSize === 'A4' ? 297 : 279.4;
-    const availableHeight = pageHeight - 20 - 12;
+    const availableHeight = 297 - 20 - 12;
     let usedHeight = 0;
 
     collectionEntries.forEach((entry, entryIndex) => {
@@ -233,7 +237,7 @@ function App() {
     });
 
     return pages;
-  }, [collectionEntries, pageBreakMode, paperSize, printLayout, previewEntryHeights]);
+  }, [collectionEntries, pageBreakMode, printLayout, previewEntryHeights]);
 
   useEffect(() => {
     try {
@@ -474,8 +478,8 @@ function App() {
     if (!printPreviewOpen || !collectionListRef.current) return;
     if (printLayout === 'compact') {
       const mmPerPixel = 25.4 / 96;
-      const cellWidth = ((paperSize === 'A4' ? 210 : 215.9) - 12 - 2) / 2;
-      const cellHeight = ((paperSize === 'A4' ? 297 : 279.4) - 12 - 4 * 2) / 5;
+      const cellWidth = (210 - 12 - 2) / 2;
+      const cellHeight = (297 - 12 - 4 * 2) / 5;
       const cards = Array.from(collectionListRef.current.querySelectorAll<HTMLElement>('.collection-print-card'));
       cards.forEach((card) => {
         card.style.width = '';
@@ -508,7 +512,7 @@ function App() {
       if (measurements.every(([id, height]) => Math.abs((current[id] ?? 0) - height) < 0.5)) return current;
       return Object.fromEntries(measurements);
     });
-  }, [brokenImages, collection, pageBreakMode, paperSize, printLayout, printPreviewOpen]);
+  }, [brokenImages, collection, pageBreakMode, printLayout, printPreviewOpen]);
 
   useEffect(() => {
     if (!projectConfirmation) return;
@@ -634,7 +638,7 @@ function App() {
   };
 
   return (
-    <main className={`app-shell print-layout-${printLayout}${printPreviewOpen ? ` print-preview-open print-preview-${paperSize.toLowerCase()}` : ''}`}>
+    <main className={`app-shell print-layout-${printLayout}${printPreviewOpen ? ` print-preview-open print-preview-a4` : ''}`}>
       <header className="topbar">
         <div className="header-identity">
           <a className="brand" href="#" aria-label="Infinity Datacards, inicio">
@@ -673,16 +677,15 @@ function App() {
               ))}
             </select>
           </label>
-          <label className="print-control">
-            <span>Formato de impresión</span>
-            <select
-              value={printLayout}
-              onChange={(event) => setPrintLayout(event.target.value === 'compact' ? 'compact' : 'detailed')}
-            >
-              <option value="detailed">Detallado · ficha completa</option>
-              <option value="compact">Compacto · hasta 10 por grupo</option>
-            </select>
-          </label>
+          <span
+            className={`persistence-indicator${persistenceError ? ' is-error' : ''}`}
+            role="status"
+            title={persistenceError || persistenceMessage}
+            aria-label={persistenceError ? `Error de guardado: ${persistenceError}` : persistenceMessage}
+          >
+            <span className="persistence-dot" />
+            {persistenceError ? 'Error' : !projectsHydrated ? 'Cargando' : projectsDirty ? 'Guardando' : 'Guardado'}
+          </span>
           {isCreatingProject && (
             <form className="project-inline-form" onSubmit={submitNewProject}>
               <input
@@ -784,16 +787,35 @@ function App() {
             aria-label="Seleccionar archivo de copia de seguridad"
             onChange={importProjectsBackup}
           />
-          <span
-            className={`persistence-indicator${persistenceError ? ' is-error' : ''}`}
-            role="status"
-            title={persistenceError || persistenceMessage}
-            aria-label={persistenceError ? `Error de guardado: ${persistenceError}` : persistenceMessage}
-          >
-            <span className="persistence-dot" />
-            {persistenceError ? 'Error' : !projectsHydrated ? 'Cargando' : projectsDirty ? 'Guardando' : 'Guardado'}
-          </span>
+          <div className="list-import panel-surface" aria-labelledby="import-title">
+            <div className="panel-heading import-panel-heading">
+              <div className="import-heading-title">
+                <h2 id="import-title">Importar lista</h2>
+              </div>
+              <p className="import-heading-help">
+                Importa desde el portapapeles una lista exportada de Infinity Army.
+              </p>
+              <button
+                className="action-button primary import-list-button"
+                type="button"
+                onClick={importListFromClipboard}
+                disabled={clipboardBusy || !projectsHydrated || !activeProject}
+                title="Importa y analiza la lista que hayas copiado al portapapeles"
+              >
+                <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+                  <rect x="6" y="5" width="10" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M8 5V3.8A.8.8 0 0 1 8.8 3h4.4a.8.8 0 0 1 .8.8V5M4 7v9.2a.8.8 0 0 0 .8.8H6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+                {clipboardBusy ? 'Importando…' : 'Importar lista'}
+              </button>
+            </div>
+          </div>
         </div>
+        {clipboardFeedback && (
+          <p className={`clipboard-feedback${clipboardFeedback.isError ? ' is-error' : ''}`} role="status">
+            {clipboardFeedback.message}
+          </p>
+        )}
         {(backupMessage || backupError || persistenceError) && (
           <p className={`project-feedback${backupError || persistenceError ? ' is-error' : ''}`} role="status">
             {persistenceError ? persistenceError : backupError || backupMessage}
@@ -809,64 +831,32 @@ function App() {
       <section className="catalog-controls" aria-label="Filtros del catálogo">
         <label className="select-control">
           <span>Facción</span>
-          <select value={catalog.faction.id} disabled aria-label="Facción">
-            <option value={catalog.faction.id}>{catalog.faction.name}</option>
-          </select>
+          <div className="select-with-icon">
+            <img className="select-icon" src={`${import.meta.env.BASE_URL}units/factions/${catalog.faction.id}.svg`} alt="" aria-hidden="true" />
+            <select value={catalog.faction.id} disabled aria-label="Facción">
+              <option value={catalog.faction.id}>{catalog.faction.name}</option>
+            </select>
+          </div>
         </label>
         <label className="select-control">
           <span>Sectorial</span>
-          <select value={selectedSectorial} onChange={(event) => selectSectorial(event.target.value)}>
-            <option value="">Catálogo JSA · sin filtrar sectorial</option>
-            {catalog.sectorials.map((sectorial) => (
-              <option
-                key={sectorial.id}
-                value={sectorial.id}
-                disabled={sectorial.verificationStatus !== 'mapped'}
-              >
-                {sectorial.name}
-                {sectorial.verificationStatus !== 'mapped' ? ' · datos pendientes' : ''}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="search-control">
-          <span>Buscar unidad, perfil o armamento</span>
-          <input
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Ej. Ninja, Domaru, Spitfire…"
-          />
-        </label>
-      </section>
-
-      <section className="list-import panel-surface" aria-labelledby="import-title">
-        <div className="panel-heading import-panel-heading">
-          <div className="import-heading-title">
-            <h2 id="import-title">Importar lista</h2>
+          <div className="select-with-icon">
+            <img className="select-icon" src={`${import.meta.env.BASE_URL}units/factions/${sectorialIconSlug[selectedSectorial] ?? 'generic'}.svg`} alt="" aria-hidden="true" />
+            <select value={selectedSectorial} onChange={(event) => selectSectorial(event.target.value)}>
+              <option value="">Catálogo JSA · sin filtrar sectorial</option>
+              {catalog.sectorials.map((sectorial) => (
+                <option
+                  key={sectorial.id}
+                  value={sectorial.id}
+                  disabled={sectorial.verificationStatus !== 'mapped'}
+                >
+                  {sectorial.name}
+                  {sectorial.verificationStatus !== 'mapped' ? ' · datos pendientes' : ''}
+                </option>
+              ))}
+            </select>
           </div>
-          <p className="import-heading-help">
-            Importa desde el portapapeles una lista exportada de Infinity Army.
-          </p>
-          <button
-            className="action-button primary import-list-button"
-            type="button"
-            onClick={importListFromClipboard}
-            disabled={clipboardBusy || !projectsHydrated || !activeProject}
-            title="Importa y analiza la lista que hayas copiado al portapapeles"
-          >
-            <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
-              <rect x="6" y="5" width="10" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M8 5V3.8A.8.8 0 0 1 8.8 3h4.4a.8.8 0 0 1 .8.8V5M4 7v9.2a.8.8 0 0 0 .8.8H6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-            {clipboardBusy ? 'Importando…' : 'Importar lista'}
-          </button>
-        </div>
-        {clipboardFeedback && (
-          <p className={`clipboard-feedback${clipboardFeedback.isError ? ' is-error' : ''}`} role="status">
-            {clipboardFeedback.message}
-          </p>
-        )}
+        </label>
       </section>
 
       <div className="workspace">
@@ -879,6 +869,15 @@ function App() {
             </div>
             <span className="result-count">{filteredUnits.length}</span>
           </div>
+          <label className="search-control unit-search">
+            <span>Buscar unidad, perfil o armamento</span>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Ej. Ninja, Domaru, Spitfire…"
+            />
+          </label>
           <div className="profile-list family-list">
             {filteredUnits.map((unit) => {
               const profileCount = filteredProfiles.filter((profile) => profile.unitId === unit.id).length;
@@ -973,7 +972,7 @@ function App() {
           aria-modal={printPreviewOpen || undefined}
           aria-describedby={printPreviewOpen ? 'print-preview-description' : undefined}
         >
-          <style>{`@page { size: ${paperSize} portrait; margin: ${printLayout === 'compact' ? '6mm' : '10mm'}; }`}</style>
+          <style>{`@page { size: A4 portrait; margin: ${printLayout === 'compact' ? '6mm' : '10mm'}; }`}</style>
           <p className="sr-only" aria-live="polite">{collectionAnnouncement}</p>
           <div className="panel-heading collection-panel-heading">
             <div>
@@ -998,19 +997,19 @@ function App() {
           {printPreviewOpen && (
             <p className="print-preview-description" id="print-preview-description">
               {printLayout === 'compact'
-                ? `Formato compacto: la misma ficha completa con atributos, reglas y tablas de armas, reducida en dos columnas por cinco filas para hasta 10 por hoja. Cada grupo de hasta 10 va en su propia hoja y los grupos más grandes se reparten. Papel ${paperSize === 'A4' ? 'A4' : 'Carta'} vertical.`
-                : `Vista detallada según el papel y los saltos seleccionados. El ajuste final puede variar ligeramente según el navegador y la impresora. Papel ${paperSize === 'A4' ? 'A4' : 'Carta'}.`}
+                ? `Formato compacto: la misma ficha completa con atributos, reglas y tablas de armas, reducida en dos columnas por cinco filas para hasta 10 por hoja. Cada grupo de hasta 10 va en su propia hoja y los grupos más grandes                 se reparten. Papel A4 vertical.`
+                                : `Vista detallada según los saltos seleccionados. El ajuste final puede variar ligeramente según el navegador y la impresora. Papel A4.`}
             </p>
           )}
           <div className="collection-controls">
             <label className="print-control">
-              <span>Tamaño de papel</span>
+              <span>Formato de impresión</span>
               <select
-                value={paperSize}
-                onChange={(event) => setPaperSize(event.target.value === 'Letter' ? 'Letter' : 'A4')}
+                value={printLayout}
+                onChange={(event) => setPrintLayout(event.target.value === 'compact' ? 'compact' : 'detailed')}
               >
-                <option value="A4">A4</option>
-                <option value="Letter">Carta (Letter)</option>
+                <option value="detailed">Detallado</option>
+                <option value="compact">Compacto · 10 por hoja</option>
               </select>
             </label>
             <label className="print-control">
