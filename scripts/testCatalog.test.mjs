@@ -46,7 +46,7 @@ test('solo los perfiles cotejados con el PDF figuran como verificados', () => {
   const unverifiedWeapons = weaponCatalog.profiles.filter((weapon) => weapon.verificationStatus === 'unverified');
   const expectedSourceCounts = {
     '183': 7,
-    '184': 23,
+    '184': 24,
     '185': 8,
     '186': 15,
     '187': 10,
@@ -67,8 +67,8 @@ test('solo los perfiles cotejados con el PDF figuran como verificados', () => {
     ]),
   );
 
-  assert.equal(verifiedWeapons.length, 175);
-  assert.equal(unverifiedWeapons.length, 56);
+  assert.equal(verifiedWeapons.length, 176);
+  assert.equal(unverifiedWeapons.length, 55);
   assert.deepEqual(sourceCounts, expectedSourceCounts);
   assert.equal(weaponCatalog.metadata.verificationStatus, 'incomplete');
   assert.ok(unverifiedWeapons.every((weapon) => weapon.source.includes('Ultima versión .html')));
@@ -91,6 +91,17 @@ test('conserva el sufijo (+1R) sin reinterpretarlo como cambio de perfil', () =>
   const profile = weaponCatalog.profiles.find((weapon) => weapon.name === 'Arco Táctico(+1R)');
   assert.ok(profile);
   assert.equal(profile.verificationStatus, 'unverified');
+});
+
+test('coteja la variante Arma CC DA(PS=8) con su perfil de referencia equivalente', () => {
+  const referenceProfile = weaponCatalog.profiles.find((weapon) => weapon.name === 'Arma CC DA');
+  const variant = weaponCatalog.profiles.find((weapon) => weapon.name === 'Arma CC DA(PS=8)');
+  assert.ok(referenceProfile && variant);
+  assert.equal(variant.verificationStatus, 'verified');
+  assert.ok(variant.source.endsWith('p. 184'));
+  for (const key of ['damage', 'burst', 'ammunition', 'saveAttribute', 'saves', 'properties']) {
+    assert.equal(variant[key], referenceProfile[key], `${key} should match the reference profile`);
+  }
 });
 
 test('actualiza los campos que diferían entre el HTML y las páginas del PDF', () => {

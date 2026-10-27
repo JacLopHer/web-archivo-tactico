@@ -4,7 +4,7 @@
     "edition": "N5",
     "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas",
     "verificationStatus": "incomplete",
-    "note": "175 perfiles conservan su verificación; 56 perfiles siguen pendientes de contraste."
+    "note": "176 perfiles conservan su verificación; 55 perfiles siguen pendientes de contraste."
   },
   "profiles": [
     {
@@ -277,8 +277,8 @@
       "saveAttribute": "BLI",
       "saves": "2",
       "properties": "Antimaterial, CC",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified"
+      "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 184",
+      "verificationStatus": "verified"
     },
     {
       "id": "legacy-weapon-b1d36b8c5b36",
