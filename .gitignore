@@ -1,0 +1,17 @@
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+
+# Local game references and legacy material (not for the public repository).
+1 N5 Versions (v4)/
+Ultima versión .html
+hojas_ayuda_JSA (1).pdf
+
+# Local editor and OS files.
+.vscode/
+.DS_Store
+Thumbs.db
