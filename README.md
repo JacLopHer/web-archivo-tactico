@@ -1,6 +1,6 @@
 # Infinity Datacards
 
-Aplicación web en React y TypeScript para consultar perfiles de Infinity. El piloto actual se centra exclusivamente en JSA.
+Aplicación web en React y TypeScript para consultar perfiles y preparar tarjetas de Infinity. El piloto actual se centra exclusivamente en JSA.
 
 ## Desarrollo
 
