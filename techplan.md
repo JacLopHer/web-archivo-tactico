@@ -1,5 +1,31 @@
 # PROMPT MAESTRO — INFINITY DATACARDS
 
+## Estado de ejecución y deuda técnica (27-10-2026)
+
+### Decisión de alcance
+
+- Los perfiles de tropa JSA heredados se aceptan como conjunto de datos válido para avanzar con el MVP, por decisión del propietario del proyecto. No se realizará un cotejo adicional de esos perfiles como requisito funcional. Se conserva su procedencia y el estado de verificación del catálogo para no alterar la trazabilidad.
+- La disponibilidad sectorial sigue pendiente: no se asignan perfiles a sectoriales ni se habilitan esos filtros sin evidencia específica.
+
+### Flujo MVP implementado
+
+- Catálogo piloto JSA con búsqueda, ficha de detalle y perfiles de armas separados.
+- Pegado de una lista de perfiles, con una entrada por línea. Se conservan el texto original y el número de línea.
+- Resolución automática solo con coincidencia completa del nombre normalizado (sin distinguir mayúsculas, acentos ni puntuación). Las coincidencias duplicadas y las desconocidas requieren selección manual; no se infieren coincidencias parciales.
+- Las coincidencias resueltas se pueden añadir a una colección de fichas; se pueden eliminar y reordenar. La colección presenta atributos, habilidades/equipo y nombres de armamento, y permite abrir la ficha detallada del perfil.
+- La colección es temporal en memoria. Hay estilos de impresión para la colección, pero aún no hay controles de impresión/PDF, previsualización paginada ni validación de impresión.
+
+### Deuda técnica y siguientes pasos
+
+1. Confirmar con listas reales qué contenido y formato se va a admitir. La importación actual no entiende cabeceras, cantidades, grupos de combate ni formatos de exportación externos.
+2. Añadir proyectos persistentes, guardado/recuperación y exportación/importación de copias de seguridad.
+3. Implementar exportación PDF e impresión completa con selección de papel, control de saltos y pruebas en navegador/impresora.
+4. Completar las fichas de colección con la tabla visual de perfiles de armas, ahora disponible en el detalle del perfil.
+5. Incorporar imágenes permitidas y asociadas de forma fiable a unidad/perfil; actualmente se usa un marcador.
+6. Desarrollar las explicaciones didácticas contextuales del modo de aprendizaje.
+7. Añadir pruebas de interfaz en navegador para importación, resolución manual, colección, reordenación, responsive e impresión.
+8. Mantener sectoriales desactivados hasta disponer de asignaciones respaldadas por fuentes.
+
 ## 1. Rol y objetivo
 
 Actúa como un desarrollador senior especializado en React, TypeScript, diseño UX/UI, arquitectura frontend y aplicaciones de consulta de reglas para juegos de miniaturas.
@@ -28,7 +54,7 @@ Antes de programar:
 6. Conserva las funcionalidades útiles existentes, salvo que haya una razón justificada para sustituirlas.
 7. Presenta un breve diagnóstico y una arquitectura propuesta antes de iniciar la implementación.
 8. Usa JSA como único catálogo seleccionable en el piloto. Estructura los modelos para ampliar a otras facciones sin simular datos que todavía no existen.
-9. Trata los perfiles heredados del HTML y sus reglas como pendientes de verificación hasta contrastarlos con fuentes de la edición correspondiente.
+9. En el piloto actual, acepta los perfiles heredados de JSA como datos válidos por decisión del propietario; su cotejo adicional no bloquea la implementación funcional. Conserva su procedencia y estado de verificación para mantener la trazabilidad, y no inventes relaciones sectoriales.
 
 No elimines datos ni funcionalidades sin identificar previamente qué se perdería.
 
@@ -325,10 +351,10 @@ Trabaja por fases, con entregables comprobables.
 - Crear el proyecto React.
 - Implementar el catálogo piloto de JSA y la selección de sus perfiles.
 - Habilitar sectoriales únicamente cuando se disponga de una relación de perfiles verificada.
-- Implementar importación de una lista con advertencias y resolución manual de coincidencias ambiguas.
-- Reconocer un conjunto inicial de perfiles con su estado de verificación explícito.
+- Implementar importación de texto pegado, con una entrada por línea, advertencias y resolución manual de coincidencias ambiguas o no encontradas.
+- Utilizar el catálogo JSA heredado aceptado para el MVP; mantener su procedencia y su estado de verificación explícitos, sin bloquear el flujo por un cotejo adicional.
 - Mostrar las unidades en fichas visuales con imágenes o sustitutos.
-- Incorporar búsqueda, edición básica y vista previa.
+- Incorporar búsqueda, adición, eliminación, reordenación y vista previa de la colección.
 
 **Fase 3 — Gestión y exportación**
 - Guardado de proyectos.

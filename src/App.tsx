@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
+import { parseProfileList } from './domain/listImport.mjs';
 import type { JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
+import type { ImportedProfileLine } from './domain/listImport.mjs';
 
 const catalog = catalogData as JsaCatalog;
 const weaponProfiles = weaponProfilesData as WeaponProfilesCatalog;
@@ -22,29 +24,28 @@ const statLabels: Array<[keyof TroopProfile['stats'], string]> = [
   ['availability', 'DISP'],
 ];
 
-function normalize(value: string) {
-  return value
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, '');
-}
-
 function App() {
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState(catalog.profiles[0]?.id ?? '');
   const [selectedSectorial, setSelectedSectorial] = useState('');
+  const [listText, setListText] = useState('');
+  const [importedEntries, setImportedEntries] = useState<Array<ImportedProfileLine & { id: string }>>([]);
+  const [collection, setCollection] = useState<Array<{ id: number; profileId: string }>>([]);
+  const [collectionAnnouncement, setCollectionAnnouncement] = useState('');
+  const nextCollectionId = useRef(0);
   const selectedProfile = catalog.profiles.find((profile) => profile.id === selectedId);
   const profileWeapons = selectedProfile ? getProfileWeapons(selectedProfile, weaponIndex) : [];
+  const resolvedImportCount = importedEntries.filter((entry) => entry.profileId).length;
 
   const filteredProfiles = useMemo(() => {
-    const normalizedQuery = normalize(query.trim());
+    const normalizedQuery = query.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
     const sectorial = catalog.sectorials.find((item) => item.id === selectedSectorial);
 
     return catalog.profiles.filter((profile) => {
       const matchesQuery =
         !normalizedQuery ||
-        normalize(`${profile.name} ${profile.troopType} ${profile.rangedEquipment} ${profile.meleeEquipment}`)
+        `${profile.name} ${profile.troopType} ${profile.rangedEquipment} ${profile.meleeEquipment}`
+          .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '')
           .includes(normalizedQuery);
       const matchesSectorial = !sectorial || sectorial.profileIds.includes(profile.id);
       return matchesQuery && matchesSectorial;
@@ -64,6 +65,53 @@ function App() {
     if (sectorial && !sectorial.profileIds.includes(selectedId)) {
       setSelectedId(sectorial.profileIds[0] ?? '');
     }
+  };
+
+  const analyzeList = () => {
+    const timestamp = Date.now();
+    setImportedEntries(
+      parseProfileList(listText, catalog.profiles).map((entry) => ({
+        ...entry,
+        id: `${timestamp}-${entry.lineNumber}`,
+      })),
+    );
+  };
+
+  const updateImportedProfile = (entryId: string, profileId: string) => {
+    setImportedEntries((entries) =>
+      entries.map((entry) => (entry.id === entryId ? { ...entry, profileId } : entry)),
+    );
+  };
+
+  const addProfilesToCollection = (profileIds: string[]) => {
+    setCollection((items) => [
+      ...items,
+      ...profileIds.map((profileId) => ({ id: nextCollectionId.current++, profileId })),
+    ]);
+    const addedNames = profileIds
+      .map((profileId) => catalog.profiles.find((profile) => profile.id === profileId)?.name)
+      .filter((name): name is string => Boolean(name));
+    setCollectionAnnouncement(
+      addedNames.length === 1
+        ? `${addedNames[0]} añadida a la colección.`
+        : `${addedNames.length} perfiles añadidos a la colección.`,
+    );
+  };
+
+  const addResolvedImports = () => {
+    const resolved = importedEntries.filter((entry) => entry.profileId);
+    addProfilesToCollection(resolved.map((entry) => entry.profileId));
+    setImportedEntries((entries) => entries.filter((entry) => !entry.profileId));
+  };
+
+  const moveCollectionItem = (index: number, direction: -1 | 1) => {
+    setCollection((items) => {
+      const target = index + direction;
+      if (target < 0 || target >= items.length) return items;
+      const reordered = [...items];
+      [reordered[index], reordered[target]] = [reordered[target], reordered[index]];
+      return reordered;
+    });
   };
 
   return (
@@ -122,11 +170,82 @@ function App() {
       <div className="data-notice" role="status">
         <span className="notice-icon">!</span>
         <p>
-          <strong>Datos heredados pendientes de verificar.</strong> Los perfiles proceden de la herramienta JSA anterior.
-          Las opciones sectoriales están desactivadas hasta validar la disponibilidad unidad por unidad.
+          <strong>Catálogo de perfiles aceptado para el MVP.</strong> Los datos de tropa proceden de la herramienta JSA anterior.
+          La disponibilidad sectorial sigue sin mapear y sus filtros permanecen desactivados.
         </p>
         <span className="profile-count">{filteredProfiles.length} perfiles</span>
       </div>
+
+      <section className="list-import panel-surface" aria-labelledby="import-title">
+        <div className="panel-heading">
+          <div>
+            <span className="eyebrow">IMPORTAR LISTA</span>
+            <h2 id="import-title">Pega los perfiles, uno por línea</h2>
+          </div>
+          <span className="result-count">{importedEntries.length}</span>
+        </div>
+        <div className="import-input-area">
+          <label htmlFor="profile-list-input">Lista de perfiles JSA</label>
+          <textarea
+            id="profile-list-input"
+            value={listText}
+            onChange={(event) => setListText(event.target.value)}
+            placeholder={'SHINOBU (Teniente)\nDOMARU (AP HMG)\nNINJA'}
+            rows={5}
+          />
+          <div className="import-input-footer">
+            <p>Se comparan nombres completos del catálogo. No se interpreta automáticamente ningún formato externo.</p>
+            <button className="action-button" type="button" onClick={analyzeList} disabled={!listText.trim()}>
+              Analizar lista
+            </button>
+          </div>
+        </div>
+        {importedEntries.length > 0 && (
+          <div className="import-review">
+            <div className="import-review-heading">
+              <strong>Revisión de coincidencias</strong>
+              <button
+                className="action-button primary"
+                type="button"
+                onClick={addResolvedImports}
+                disabled={!resolvedImportCount}
+              >
+                Añadir resueltas ({resolvedImportCount})
+              </button>
+            </div>
+            <ul className="import-entry-list">
+              {importedEntries.map((entry) => {
+                const profile = catalog.profiles.find((item) => item.id === entry.profileId);
+                const status = profile
+                  ? entry.candidateIds.length > 1 ? 'Coincidencia elegida manualmente' : 'Coincidencia exacta'
+                  : entry.candidateIds.length > 1 ? 'Nombre ambiguo' : 'Sin coincidencia';
+                return (
+                  <li className="import-entry" key={entry.id}>
+                    <div className="import-original">
+                      <strong>{entry.originalName}</strong>
+                      <span>Línea {entry.lineNumber} · {status}</span>
+                    </div>
+                    <label className="import-profile-select">
+                      <span className="sr-only">Perfil para {entry.originalName}</span>
+                      <select
+                        value={entry.profileId}
+                        onChange={(event) => updateImportedProfile(entry.id, event.target.value)}
+                      >
+                        <option value="">Elegir perfil manualmente</option>
+                        {catalog.profiles.map((item) => (
+                          <option key={item.id} value={item.id}>
+                            {item.name} · {item.troopType} · {item.points} PTS
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </section>
 
       <div className="workspace">
         <section className="roster-panel" aria-label="Perfiles disponibles">
@@ -134,6 +253,7 @@ function App() {
             <div>
               <span className="eyebrow">JAPANESE SECESSIONIST ARMY</span>
               <h2>Perfiles</h2>
+              <small className="profile-list-hint">Doble clic para añadir a la colección</small>
             </div>
             <span className="result-count">{filteredProfiles.length}</span>
           </div>
@@ -143,6 +263,7 @@ function App() {
                 className={`profile-option ${selectedId === profile.id ? 'is-selected' : ''}`}
                 key={profile.id}
                 onClick={() => setSelectedId(profile.id)}
+                onDoubleClick={() => addProfilesToCollection([profile.id])}
                 type="button"
               >
                 <span className="profile-avatar" aria-hidden="true">{profile.name.slice(0, 1)}</span>
@@ -162,6 +283,13 @@ function App() {
 
         <section className="detail-panel" aria-label="Ficha del perfil seleccionado">
           {selectedProfile ? (
+            <>
+            <div className="detail-actions">
+              <span>Vista detallada del perfil</span>
+              <button className="action-button primary" type="button" onClick={() => addProfilesToCollection([selectedProfile.id])}>
+                Añadir a la colección
+              </button>
+            </div>
             <article className="datacard">
               <header className="unit-header">
                 <div
@@ -268,11 +396,59 @@ function App() {
                 </section>
               </div>
             </article>
+            </>
           ) : (
             <div className="empty-detail">Selecciona un perfil para consultar su ficha.</div>
           )}
         </section>
       </div>
+      <section className="collection-section" aria-labelledby="collection-title">
+        <p className="sr-only" aria-live="polite">{collectionAnnouncement}</p>
+        <div className="panel-heading">
+          <div>
+            <span className="eyebrow">VISTA PREVIA</span>
+            <h2 id="collection-title">Colección de fichas</h2>
+          </div>
+          <span className="result-count">{collection.length}</span>
+        </div>
+        {collection.length ? (
+          <div className="collection-grid">
+            {collection.map((item, index) => {
+              const profile = catalog.profiles.find((candidate) => candidate.id === item.profileId);
+              if (!profile) return null;
+              return (
+                <article className="collection-card" key={item.id}>
+                  <div className="collection-card-toolbar">
+                    <span>FICHA {index + 1}</span>
+                    <div>
+                      <button type="button" aria-label={`Mover ${profile.name} arriba`} onClick={() => moveCollectionItem(index, -1)} disabled={index === 0}>↑</button>
+                      <button type="button" aria-label={`Mover ${profile.name} abajo`} onClick={() => moveCollectionItem(index, 1)} disabled={index === collection.length - 1}>↓</button>
+                      <button type="button" aria-label={`Eliminar ${profile.name}`} onClick={() => setCollection((items) => items.filter((candidate) => candidate.id !== item.id))}>×</button>
+                    </div>
+                  </div>
+                  <button className="collection-card-main" type="button" onClick={() => setSelectedId(profile.id)}>
+                    <span className="collection-card-heading">
+                      <strong>{profile.name}</strong>
+                      <span>{profile.points} PTS · CAP {profile.cap}</span>
+                    </span>
+                    <span className="collection-stats">
+                      {statLabels.map(([key, label]) => (
+                        <span key={key}><small>{key === 'wounds' ? profile.woundsLabel : label}</small><strong>{profile.stats[key]}</strong></span>
+                      ))}
+                    </span>
+                    <span className="collection-card-details">
+                      <span><small>HABILIDADES Y EQUIPO</small>{profile.skillsAndEquipment || 'No registrado en la fuente heredada.'}</span>
+                      <span><small>ARMAMENTO</small>{[profile.rangedEquipment, profile.meleeEquipment].filter(Boolean).join(' · ') || 'No registrado'}</span>
+                    </span>
+                  </button>
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <p className="collection-empty">Analiza una lista o añade perfiles del catálogo para preparar tu colección.</p>
+        )}
+      </section>
       <footer className="app-footer">Catálogo piloto · JSA únicamente · preparado para ampliar con fuentes verificadas</footer>
     </main>
   );

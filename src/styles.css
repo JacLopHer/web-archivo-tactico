@@ -48,6 +48,7 @@ button, select { cursor: pointer; }
 .panel-heading h2 { font: 600 26px/1 'Barlow Condensed', sans-serif; margin: 6px 0 0; }
 .result-count { display: grid; width: 32px; height: 32px; place-items: center; border: 1px solid #374757; color: var(--teal); font-size: 12px; }
 .profile-list { max-height: 690px; overflow: auto; }
+.profile-list-hint { display: block; margin-top: 5px; color: #8293a2; font-size: 9px; }
 .profile-option { display: flex; width: 100%; align-items: center; gap: 11px; padding: 12px 15px; text-align: left; color: inherit; background: transparent; border: 0; border-bottom: 1px solid #22303c; }
 .profile-option:hover, .profile-option.is-selected { background: #1b2936; }
 .profile-option.is-selected { box-shadow: inset 3px 0 var(--accent); }
@@ -123,6 +124,49 @@ button, select { cursor: pointer; }
 .equipment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; border-top: 1px solid #2c3946; border-bottom: 1px solid #2c3946; }
 .equipment-grid .card-section + .card-section { border-left: 1px solid #2c3946; padding-left: 18px; }
 .empty-state, .empty-detail { padding: 35px 20px; color: #94a3b0; text-align: center; font-size: 12px; }
+.panel-surface, .collection-section { margin-bottom: 18px; background: var(--surface); border: 1px solid #293745; }
+.panel-heading h2 { color: #eef2f6; }
+.import-input-area { padding: 16px 18px; }
+.import-input-area > label { display: block; margin-bottom: 7px; color: #b6c1cb; font-size: 11px; font-weight: 600; }
+.import-input-area textarea { display: block; width: 100%; resize: vertical; padding: 11px 12px; color: #e8edf2; background: #0e151d; border: 1px solid #2a3948; border-radius: 3px; font: 12px/1.6 'DM Sans', sans-serif; }
+.import-input-area textarea:focus, .import-profile-select select:focus { outline: 1px solid var(--teal); border-color: var(--teal); }
+.import-input-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; }
+.import-input-footer p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.action-button { min-height: 36px; padding: 7px 12px; color: #dce5eb; background: #263443; border: 1px solid #3b5062; border-radius: 3px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.action-button:hover:not(:disabled) { border-color: var(--teal); }
+.action-button.primary { color: #091311; background: var(--teal); border-color: var(--teal); }
+.action-button:disabled { opacity: .45; cursor: not-allowed; }
+.import-review { border-top: 1px solid #293745; }
+.import-review-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px; color: #dce4ea; font-size: 12px; }
+.import-entry-list { margin: 0; padding: 0; list-style: none; }
+.import-entry { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(240px, 1fr); align-items: center; gap: 16px; padding: 10px 18px; border-top: 1px solid #23303c; }
+.import-original { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.import-original strong { overflow-wrap: anywhere; color: #edf2f5; font-size: 11px; }
+.import-original span { color: #9cabb8; font-size: 9px; }
+.import-profile-select select { width: 100%; min-height: 36px; padding: 6px 9px; color: #e8edf2; background: #0e151d; border: 1px solid #2a3948; border-radius: 3px; font-size: 10px; }
+.detail-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 0 0 10px; color: #9eacb9; font-size: 10px; }
+.collection-section { padding-bottom: 15px; }
+.collection-section > .panel-heading { margin-bottom: 15px; }
+.collection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr)); gap: 14px; padding: 0 15px; }
+.collection-card { min-width: 0; overflow: hidden; color: #142029; background: #e6eeee; border: 1px solid #aebfbe; border-radius: 3px; }
+.collection-card-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; color: #d9e3e8; background: #172631; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
+.collection-card-toolbar div { display: flex; gap: 5px; }
+.collection-card-toolbar button { width: 24px; height: 23px; padding: 0; color: #e5edf1; background: #243746; border: 1px solid #445563; border-radius: 2px; font-size: 14px; }
+.collection-card-toolbar button:disabled { opacity: .4; cursor: not-allowed; }
+.collection-card-main { display: block; width: 100%; padding: 0; color: inherit; text-align: left; background: transparent; border: 0; }
+.collection-card-main:hover .collection-card-heading { background: #d5e1e1; }
+.collection-card-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 10px 12px; background: #eef4f2; border-bottom: 1px solid #bac8c8; }
+.collection-card-heading strong { min-width: 0; overflow-wrap: anywhere; color: #15252c; font: 700 20px/1.1 'Barlow Condensed', sans-serif; }
+.collection-card-heading > span { flex: 0 0 auto; color: #435960; font-size: 9px; font-weight: 700; }
+.collection-stats { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); background: #c4c6c7; border-bottom: 1px solid #8e999b; }
+.collection-stats > span { min-width: 0; min-height: 43px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid #a5abad; }
+.collection-stats small { overflow: hidden; max-width: 100%; color: #35434a; font-size: 7px; font-weight: 700; white-space: nowrap; }
+.collection-stats strong { margin-top: 3px; color: #161d21; font: 700 12px/1 'Barlow Condensed', sans-serif; white-space: nowrap; }
+.collection-card-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 12px 12px; background: #f0f3f3; }
+.collection-card-details > span { min-width: 0; color: #26363d; font-size: 9px; line-height: 1.5; overflow-wrap: anywhere; }
+.collection-card-details small { display: block; margin-bottom: 4px; color: #286c69; font-size: 7px; font-weight: 700; letter-spacing: .08em; }
+.collection-empty { margin: 0; padding: 12px 18px; color: #94a3b0; font-size: 11px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .app-footer { padding-top: 24px; color: #64727f; text-align: center; font-size: 10px; letter-spacing: .04em; }
 
 @media (max-width: 1020px) {
@@ -132,6 +176,7 @@ button, select { cursor: pointer; }
   .workspace { grid-template-columns: 1fr; }
   .profile-list { max-height: 360px; }
   .detail-panel { min-width: 0; }
+  .collection-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 520px) {
@@ -142,7 +187,9 @@ button, select { cursor: pointer; }
   .search-control { grid-column: auto; }
   .data-notice { align-items: flex-start; }
   .profile-count { display: none; }
-  .datacard { padding: 17px 13px; }
+  .import-entry { grid-template-columns: 1fr; gap: 8px; padding: 10px 12px; }
+  .import-input-footer, .import-review-heading { align-items: flex-start; flex-direction: column; }
+  .datacard { padding: 0; }
   .card-topline { align-items: flex-start; gap: 8px; }
   .unit-header { grid-template-columns: 64px 1fr; min-height: 66px; }
   .unit-portrait { width: 58px; height: 58px; border-width: 4px; font-size: 28px; }
@@ -154,4 +201,19 @@ button, select { cursor: pointer; }
   .stat span { font-size: 6px; }
   .stat strong { font-size: 11px; }
   .skills-band { padding-left: 14px; }
+  .collection-grid { padding: 0 10px; }
+  .collection-card-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .collection-stats { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .collection-card-details { grid-template-columns: 1fr; }
+}
+
+@media print {
+  body { min-width: 0; color: #000; background: #fff; }
+  .app-shell { width: 100%; padding: 0; }
+  .topbar, .intro, .catalog-controls, .data-notice, .list-import, .workspace, .collection-card-toolbar, .app-footer { display: none !important; }
+  .collection-section { margin: 0; border: 0; background: #fff; }
+  .collection-section > .panel-heading { padding: 0 0 12px; }
+  .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0; }
+  .collection-card { break-inside: avoid; box-shadow: none; }
+  .collection-empty { display: none; }
 }
