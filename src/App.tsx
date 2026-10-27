@@ -44,9 +44,14 @@ function App() {
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState(catalog.profiles[0]?.id ?? '');
   const [selectedSectorial, setSelectedSectorial] = useState('');
-  const [listText, setListText] = useState('');
   const [importedEntries, setImportedEntries] = useState<Array<ImportedProfileLine & { id: string }>>([]);
-  const [importedFormat, setImportedFormat] = useState<'infinity-army' | 'profile-list'>('profile-list');
+  const [pendingImport, setPendingImport] = useState<{
+    format: 'infinity-army' | 'profile-list';
+    resolved: Array<ImportedProfileLine & { id: string }>;
+    unresolved: Array<ImportedProfileLine & { id: string }>;
+  } | null>(null);
+  const [clipboardBusy, setClipboardBusy] = useState(false);
+  const [clipboardFeedback, setClipboardFeedback] = useState<{ message: string; isError: boolean } | null>(null);
   const [projectStore, setProjectStore] = useState<ProjectStore | null>(null);
   const [projectsHydrated, setProjectsHydrated] = useState(false);
   const [projectsDirty, setProjectsDirty] = useState(false);
@@ -65,6 +70,7 @@ function App() {
   const [clearConfirmationOpen, setClearConfirmationOpen] = useState(false);
   const nextCollectionId = useRef(0);
   const backupFileInputRef = useRef<HTMLInputElement>(null);
+  const discardImportButtonRef = useRef<HTMLButtonElement>(null);
   const clearCollectionButtonRef = useRef<HTMLButtonElement>(null);
   const cancelClearButtonRef = useRef<HTMLButtonElement>(null);
   const cancelProjectActionButtonRef = useRef<HTMLButtonElement>(null);
@@ -76,6 +82,8 @@ function App() {
   const selectedProfile = catalog.profiles.find((profile) => profile.id === selectedId);
   const profileWeapons = selectedProfile ? getProfileWeapons(selectedProfile, weaponIndex) : [];
   const resolvedImportCount = importedEntries.filter((entry) => entry.profileId).length;
+  const pendingResolvedCount = pendingImport?.resolved.length ?? 0;
+  const pendingUnresolvedCount = pendingImport?.unresolved.length ?? 0;
 
   useEffect(() => {
     try {
@@ -162,22 +170,82 @@ function App() {
     }
   };
 
-  const analyzeList = () => {
-    const timestamp = Date.now();
-    const parsed = parseListImport(listText, catalog.profiles);
-    setImportedFormat(parsed.format);
-    setImportedEntries(
-      parsed.entries.map((entry) => ({
+  const importListFromClipboard = async () => {
+    if (!navigator.clipboard?.readText) {
+      setClipboardFeedback({
+        message: 'Este navegador no permite acceder al portapapeles. Copia la lista e inténtalo en un contexto seguro, como localhost o HTTPS.',
+        isError: true,
+      });
+      return;
+    }
+
+    setClipboardBusy(true);
+    setClipboardFeedback(null);
+    try {
+      const clipboardText = await navigator.clipboard.readText();
+      if (!clipboardText.trim()) {
+        setClipboardFeedback({
+          message: 'El portapapeles está vacío. Copia una lista antes de importarla.',
+          isError: true,
+        });
+        return;
+      }
+
+      const parsed = parseListImport(clipboardText, catalog.profiles);
+      const timestamp = Date.now();
+      const entries = parsed.entries.map((entry) => ({
         ...entry,
         id: `${timestamp}-${entry.lineNumber}`,
-      })),
-    );
+      }));
+
+      if (!entries.length) {
+        setClipboardFeedback({
+          message: 'No se encontraron perfiles reconocibles en el portapapeles.',
+          isError: true,
+        });
+        return;
+      }
+
+      setPendingImport({
+        format: parsed.format,
+        resolved: entries.filter((entry) => entry.profileId),
+        unresolved: entries.filter((entry) => !entry.profileId),
+      });
+    } catch (error) {
+      const message = error instanceof DOMException && error.name === 'NotAllowedError'
+        ? 'El navegador denegó el acceso al portapapeles. Permite el acceso e inténtalo de nuevo.'
+        : 'No se pudo leer el portapapeles. Comprueba los permisos del navegador e inténtalo de nuevo.';
+      setClipboardFeedback({ message, isError: true });
+    } finally {
+      setClipboardBusy(false);
+    }
   };
 
   const updateImportedProfile = (entryId: string, profileId: string) => {
     setImportedEntries((entries) =>
       entries.map((entry) => (entry.id === entryId ? { ...entry, profileId } : entry)),
     );
+  };
+
+  const acceptPendingImport = () => {
+    if (!pendingImport) return;
+    if (pendingImport.resolved.length) {
+      addProfilesToCollection(pendingImport.resolved.map((entry) => ({
+        profileId: entry.profileId,
+        groupName: entry.groupName,
+      })));
+    }
+    setImportedEntries(pendingImport.unresolved);
+    setClipboardFeedback({
+      message: `${pendingImport.resolved.length} ${pendingImport.resolved.length === 1 ? 'unidad validada añadida' : 'unidades validadas añadidas'}${pendingImport.unresolved.length ? `; ${pendingImport.unresolved.length} no validadas quedan para resolver` : ''}.`,
+      isError: pendingImport.unresolved.length > 0,
+    });
+    setPendingImport(null);
+  };
+
+  const discardPendingImport = () => {
+    setPendingImport(null);
+    setClipboardFeedback({ message: 'Importación descartada; no se añadió ninguna unidad.', isError: false });
   };
 
   const addProfilesToCollection = (entries: Array<{ profileId: string; groupName?: string }>) => {
@@ -241,6 +309,16 @@ function App() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [projectConfirmation]);
+
+  useEffect(() => {
+    if (!pendingImport) return;
+    discardImportButtonRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') discardPendingImport();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [pendingImport]);
 
   const clearCollection = () => {
     if (!collection.length || !projectStore || !activeProject) return;
@@ -542,47 +620,38 @@ function App() {
         </label>
       </section>
 
-      <div className="data-notice" role="status">
-        <span className="notice-icon">!</span>
-        <p>
-          <strong>Catálogo de perfiles aceptado para el MVP.</strong> Los datos de tropa proceden de la herramienta JSA anterior.
-          La disponibilidad sectorial sigue sin mapear y sus filtros permanecen desactivados.
-        </p>
-        <span className="profile-count">{filteredProfiles.length} perfiles</span>
-      </div>
-
       <section className="list-import panel-surface" aria-labelledby="import-title">
-        <div className="panel-heading">
-          <div>
-            <span className="eyebrow">IMPORTAR LISTA</span>
-            <h2 id="import-title">Pega una lista de perfiles</h2>
+        <div className="panel-heading import-panel-heading">
+          <div className="import-heading-title">
+            <h2 id="import-title">Importar lista</h2>
+            <span className="result-count">{importedEntries.length}</span>
           </div>
-          <span className="result-count">{importedEntries.length}</span>
+          <p className="import-heading-help">
+            Importa desde el portapapeles una lista exportada de Infinity Army.
+          </p>
+          <button
+            className="action-button primary import-list-button"
+            type="button"
+            onClick={importListFromClipboard}
+            disabled={clipboardBusy || !projectsHydrated || !activeProject}
+            title="Importa y analiza la lista que hayas copiado al portapapeles"
+          >
+            <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+              <rect x="6" y="5" width="10" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M8 5V3.8A.8.8 0 0 1 8.8 3h4.4a.8.8 0 0 1 .8.8V5M4 7v9.2a.8.8 0 0 0 .8.8H6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+            {clipboardBusy ? 'Importando…' : 'Importar lista'}
+          </button>
         </div>
-        <div className="import-input-area">
-          <label htmlFor="profile-list-input">Lista de perfiles JSA o exportación de Infinity Army</label>
-          <textarea
-            id="profile-list-input"
-            value={listText}
-            onChange={(event) => setListText(event.target.value)}
-            placeholder={'Pega aquí el texto copiado de Infinity Army o escribe perfiles, uno por línea.'}
-            rows={5}
-          />
-          <div className="import-input-footer">
-            <p>
-              {importedFormat === 'infinity-army'
-                ? 'Formato Infinity Army: grupos, coste y armamento se extraen del texto. Revisa las coincidencias antes de añadir.'
-                : 'Para listas simples, escribe un perfil por línea. Los nombres ambiguos requieren selección manual.'}
-            </p>
-            <button className="action-button" type="button" onClick={analyzeList} disabled={!listText.trim()}>
-              Analizar lista
-            </button>
-          </div>
-        </div>
+        {clipboardFeedback && (
+          <p className={`clipboard-feedback${clipboardFeedback.isError ? ' is-error' : ''}`} role="status">
+            {clipboardFeedback.message}
+          </p>
+        )}
         {importedEntries.length > 0 && (
           <div className="import-review">
             <div className="import-review-heading">
-              <strong>Revisión de coincidencias</strong>
+              <strong>Unidades omitidas · selecciona solo si corresponde</strong>
               <div className="import-review-actions">
                 <button
                   className="action-button"
@@ -590,7 +659,7 @@ function App() {
                   onClick={removeResolvedImports}
                   disabled={!resolvedImportCount}
                 >
-                  Quitar resueltas ({resolvedImportCount})
+                  Descartar seleccionadas ({resolvedImportCount})
                 </button>
                 <button
                   className="action-button primary"
@@ -598,7 +667,7 @@ function App() {
                   onClick={addResolvedImports}
                   disabled={!resolvedImportCount}
                 >
-                  Añadir resueltas ({resolvedImportCount})
+                  Añadir seleccionadas ({resolvedImportCount})
                 </button>
               </div>
             </div>
@@ -625,7 +694,7 @@ function App() {
                           {entry.meleeEquipment ? ` · CC: ${entry.meleeEquipment}` : ''}
                         </span>
                       )}
-                      {importedFormat === 'infinity-army' && !entry.profileId && (
+                      {entry.sourceLine && !entry.profileId && (
                         <span className="import-source-line">{entry.sourceLine}</span>
                       )}
                     </div>
@@ -940,6 +1009,58 @@ function App() {
               </button>
               <button className="action-button destructive" type="button" onClick={confirmProjectAction}>
                 {projectConfirmation === 'delete' ? 'Sí, eliminar proyecto' : 'Sí, reintentar guardado'}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+      {pendingImport && (
+        <div
+          className="dialog-backdrop"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) discardPendingImport();
+          }}
+        >
+          <section
+            className="confirm-dialog import-confirm-dialog"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="import-dialog-title"
+            aria-describedby="import-dialog-description"
+          >
+            <div className="dialog-eyebrow">CONFIRMAR IMPORTACIÓN</div>
+            <h2 id="import-dialog-title">¿Añadir esta lista?</h2>
+            <p id="import-dialog-description">
+              {pendingImport.format === 'infinity-army' ? 'Lista exportada de Infinity Army' : 'Lista de perfiles'} · proyecto «{activeProject?.name ?? 'actual'}».
+            </p>
+            <div className="import-count-summary">
+              <p className="import-count-valid">
+                <strong>{pendingResolvedCount}</strong>
+                <span>{pendingResolvedCount === 1 ? 'unidad validada' : 'unidades validadas'}</span>
+              </p>
+              {pendingUnresolvedCount > 0 && (
+                <p className="import-count-unresolved">
+                  <strong>{pendingUnresolvedCount}</strong>
+                  <span>{pendingUnresolvedCount === 1 ? 'unidad no validada' : 'unidades no validadas'}</span>
+                </p>
+              )}
+            </div>
+            {pendingUnresolvedCount > 0 && (
+              <p className="import-unresolved-note">
+                Las no validadas no se añadirán automáticamente; podrás resolverlas después.
+              </p>
+            )}
+            <div className="dialog-actions">
+              <button
+                ref={discardImportButtonRef}
+                className="action-button"
+                type="button"
+                onClick={discardPendingImport}
+              >
+                Descartar
+              </button>
+              <button className="action-button primary" type="button" onClick={acceptPendingImport}>
+                Aceptar e importar
               </button>
             </div>
           </section>

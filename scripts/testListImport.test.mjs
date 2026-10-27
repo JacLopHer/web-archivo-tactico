@@ -150,3 +150,73 @@ test('importa la lista del ejemplo compartido de Infinity Army', () => {
   assert.equal(result.entries[0].groupName, 'Grupo 1');
   assert.equal(result.entries.at(-1).groupName, 'Grupo 2');
 });
+
+test('importa Infinity Army con etiquetas BBCode e iconos de imagen en los grupos', () => {
+  const result = parseListImport([
+    '[imglogoarmy=14]https://assets.example/jsa.svg[/imglogoarmy][b]Lista de prueba[/b]',
+    '──────────────────────────────────────────────────',
+    'GRUPO 1[img]https://assets.example/sep.gif[/img] [img]https://assets.example/regular.png[/img]7 [img]https://assets.example/irregular.png[/img]2',
+    '[imglogoarmy=14]https://assets.example/shinobu.svg[/imglogoarmy] [b]SHINOBU[/b] Fusil Combi, Nanopulser, Granadas de Humo / Pistola, Arma CC Monofilo. (0.5 | [b]44[/b])',
+    '[imglogoarmy=14]https://assets.example/ryuken.svg[/imglogoarmy] [b]RYŪKEN  (Ataque Sorpresa [-3], Camuflaje [1 Uso])[/b] Lanzacohetes Pesado, Minas Shock / Pistola Pesada, Arma CC. (1.5 | [b]23[/b])',
+    '[imglogoarmy=14]https://assets.example/ryuken.svg[/imglogoarmy] [b]RYŪKEN  (Ataque Sorpresa [-3], Camuflaje [1 Uso])[/b] Lanzacohetes Pesado, Minas Shock / Pistola Pesada, Arma CC. (1.5 | [b]23[/b])',
+    'GRUPO 2[img]https://assets.example/sep.gif[/img] [img]https://assets.example/regular.png[/img]5 [img]https://assets.example/irregular.png[/img]1 [img]https://assets.example/impetuous.png[/img]2',
+    '[imglogoarmy=14]https://assets.example/ninja.svg[/imglogoarmy] [b]NINJA (Hacker, Disp. Hacker Asesino)[/b] Arco Táctico(+1DE), Minas Shock ( ) / Pistola, Arma CC DA(PS=6). (0 | [b]26[/b])',
+    '[b] 3.5 CAP | 299 Puntos[/b]',
+    '[url=https://infinitytheuniverse.com/army/list/abc]Abrir en Infinity Army[/url]',
+  ].join('\n'), realCatalog.profiles);
+
+  assert.equal(result.format, 'infinity-army');
+  assert.equal(result.entries.length, 4);
+  assert.deepEqual(result.entries.map((entry) => entry.groupName), [
+    'Grupo 1',
+    'Grupo 1',
+    'Grupo 1',
+    'Grupo 2',
+  ]);
+  assert.deepEqual(result.entries.map((entry) => entry.originalName), [
+    'SHINOBU',
+    'RYŪKEN (Ataque Sorpresa [-3], Camuflaje [1 Uso])',
+    'RYŪKEN (Ataque Sorpresa [-3], Camuflaje [1 Uso])',
+    'NINJA (Hacker, Disp. Hacker Asesino)',
+  ]);
+  assert.equal(result.entries[0].lineNumber, 4);
+  assert.equal(result.entries[0].points, '44');
+  assert.equal(result.entries[1].profileId, result.entries[2].profileId);
+  assert.ok(result.entries.every((entry) => entry.profileId), 'every sample unit resolves to a catalog profile');
+});
+
+test('importa la lista JSA completa copiada con BBCode e imágenes de Infinity Army', () => {
+  const result = parseListImport([
+    '[imglogoarmy=14]https://assets.example/jsa.svg[/imglogoarmy][b]Krug Kawaii Samuraii[/b]',
+    '──────────────────────────────────────────────────',
+    'GRUPO 1[img]https://assets.example/sep.gif[/img] [img]https://assets.example/regular.png[/img]7 [img]https://assets.example/irregular.png[/img]2',
+    '[imglogoarmy=14]https://assets.example/shinobu.svg[/imglogoarmy] [b]SHINOBU[/b] Fusil Combi, Nanopulser, Granadas de Humo / Pistola, Arma CC Monofilo. (0.5 | [b]44[/b])',
+    '[imglogoarmy=14]https://assets.example/ioann.svg[/imglogoarmy] [b]IOANN BANN[/b] Chain Rifle(+1R), Arco Táctico Viral(+1DE), Granadas(PS=6) / Pistola Pesada AP(+1R), Arma CC AP + T2(PS=4). (0 | [b]30[/b])',
+    '[imglogoarmy=14]https://assets.example/ryuken.svg[/imglogoarmy] [b]RYŪKEN  (Ataque Sorpresa [-3], Camuflaje [1 Uso])[/b] Lanzacohetes Pesado, Minas Shock / Pistola Pesada, Arma CC. (1.5 | [b]23[/b])',
+    '[imglogoarmy=14]https://assets.example/ryuken.svg[/imglogoarmy] [b]RYŪKEN  (Ataque Sorpresa [-3], Camuflaje [1 Uso])[/b] Lanzacohetes Pesado, Minas Shock / Pistola Pesada, Arma CC. (1.5 | [b]23[/b])',
+    '[imglogoarmy=14]https://assets.example/kempei.svg[/imglogoarmy] [b]KEMPEI (Cadena de Mando)[/b] Escopeta de Abordaje / Pistola, Arma CC, Arma CC PARA(-3). (0 | [b]17[/b])',
+    '[imglogoarmy=14]https://assets.example/pilot.svg[/imglogoarmy] [b]PILOTO O-YOROI (Observador de Artillería)[/b] Escopeta Ligera, Pulso Flash, Cargas-D / Pistola, Arma CC Shock(PS=7). (0 | [b]11[/b])',
+    '[imglogoarmy=14]https://assets.example/robio.svg[/imglogoarmy] [b]ROBIO AIBŌT[/b] Pulso Flash / Arma CC PARA(-3). (0 | [b]7[/b])',
+    '[imglogoarmy=14]https://assets.example/pangguling.svg[/imglogoarmy] [b]PANGGULING (Desactivador, Repetidor)[/b]  ( ) / Arma CC PARA(-3). (0 | [b]8[/b])',
+    '[imglogoarmy=14]https://assets.example/warcor.svg[/imglogoarmy] [b]WARCOR (Visor 360º)[/b] Pulso Flash ( ) / Pistola Aturdidora, Arma CC PARA(-3). (0 | [b]3[/b])',
+    'GRUPO 2[img]https://assets.example/sep.gif[/img] [img]https://assets.example/regular.png[/img]5 [img]https://assets.example/irregular.png[/img]1 [img]https://assets.example/impetuous.png[/img]2',
+    '[imglogoarmy=14]https://assets.example/ninja.svg[/imglogoarmy] [b]NINJA (Hacker, Disp. Hacker Asesino)[/b] Arco Táctico(+1DE), Minas Shock ( ) / Pistola, Arma CC DA(PS=6). (0 | [b]26[/b])',
+    '[imglogoarmy=14]https://assets.example/kyojin.svg[/imglogoarmy] [b]KYOJIN KILLER[/b] Lanzallamas Pesado, Flammenspeer / Pistola, Arma CC DA(PS=6). (0 | [b]15[/b])',
+    '[imglogoarmy=14]https://assets.example/hatamoto.svg[/imglogoarmy] [b]HATAMOTO (Teniente [+1 Orden])[/b] Spitfire / Pistola Pesada, Arma CC Monofilo, Arma CC E/M(PS=4). (+1 | [b]39[/b])',
+    '[imglogoarmy=14]https://assets.example/tanko.svg[/imglogoarmy] [b]TANKŌ (Desactivador)[/b] Blitzen, Escopeta Ligera, Disco Baller ( ) / Pistola, Arma CC Monofilo, Arma CC Shock(PS=6). (0 | [b]19[/b])',
+    '[imglogoarmy=14]https://assets.example/tanko.svg[/imglogoarmy] [b]TANKŌ (Desactivador)[/b] Blitzen, Escopeta Ligera, Disco Baller ( ) / Pistola, Arma CC Monofilo, Arma CC Shock(PS=6). (0 | [b]19[/b])',
+    '[imglogoarmy=14]https://assets.example/atom.svg[/imglogoarmy] [b]ATOM AIBŌT (Sensor)[/b] Fusil Combi, Pulso Flash / Arma CC PARA(-3). (0 | [b]15[/b])',
+    '[b] 3.5 CAP | 299 Puntos[/b]',
+    '[url=https://infinitytheuniverse.com/army/list/abc]Abrir en Infinity Army[/url]',
+  ].join('\n'), realCatalog.profiles);
+
+  assert.equal(result.format, 'infinity-army');
+  assert.equal(result.entries.length, 15);
+  assert.ok(result.entries.every((entry) => entry.profileId), 'all units resolve to profiles in the catalog');
+  assert.equal(result.entries.filter((entry) => entry.groupName === 'Grupo 1').length, 9);
+  assert.equal(result.entries.filter((entry) => entry.groupName === 'Grupo 2').length, 6);
+  assert.equal(result.entries[0].originalName, 'SHINOBU');
+  assert.equal(result.entries[2].profileId, result.entries[3].profileId, 'duplicate Ryuken units are preserved');
+  assert.equal(result.entries[12].profileId, result.entries[13].profileId, 'duplicate Tanko units are preserved');
+  assert.equal(result.entries[9].originalName, 'NINJA (Hacker, Disp. Hacker Asesino)');
+});

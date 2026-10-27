@@ -33,7 +33,7 @@ function findProfileName(rawName, profiles) {
   }
 
   return {
-    profileName: rawName.slice(0, rawPrefixLength).trim(),
+    profileName: rawName.slice(0, rawPrefixLength).trim().replace(/\s+/g, ' '),
     remaining: rawName.slice(rawPrefixLength).trim(),
     candidates: candidates.map(({ profile }) => profile),
   };
@@ -86,6 +86,14 @@ function isArmyUnitLine(line) {
     && line.includes('/');
 }
 
+function stripArmyMarkup(line) {
+  return line
+    .replace(/\[(imglogoarmy|img)(?:=[^\]]*)?\][\s\S]*?\[\/\1\]/gi, ' ')
+    .replace(/\[url(?:=[^\]]*)?\][\s\S]*?\[\/url\]/gi, ' ')
+    .replace(/\[\/?(?:b|i|u)\]/gi, '')
+    .trim();
+}
+
 function parseArmyUnitLine(line, lineNumber, groupName, profiles) {
   const costMatch = line.match(/\(\s*([+-]?\d+(?:[.,]\d+)?)\s*\|\s*(\d+)\s*\)\s*\.?\s*$/);
   const sides = line.slice(0, costMatch.index).split(/\s+\/\s+/);
@@ -121,8 +129,8 @@ export function parseInfinityArmyList(text, profiles) {
   let groupName = '';
 
   text.split(/\r?\n/).forEach((rawLine, index) => {
-    const line = rawLine.trim();
-    const groupMatch = line.match(/^GRUPO\s+([12])(?:\s*\d+)?(?:\s*\/.*)?$/i);
+    const line = stripArmyMarkup(rawLine);
+    const groupMatch = line.match(/^GRUPO\s+([12])(?:\s*\d+)?\b/i);
     if (groupMatch) {
       groupName = `Grupo ${groupMatch[1]}`;
     } else if (isArmyUnitLine(line)) {
@@ -134,7 +142,7 @@ export function parseInfinityArmyList(text, profiles) {
 }
 
 export function parseListImport(text, profiles) {
-  const lines = text.split(/\r?\n/);
+  const lines = text.split(/\r?\n/).map(stripArmyMarkup);
   if (lines.some(isArmyUnitLine)) {
     return {
       format: 'infinity-army',

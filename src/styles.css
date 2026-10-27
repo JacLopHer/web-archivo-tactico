@@ -39,11 +39,6 @@ button, select { cursor: pointer; }
 .select-control select:focus, .search-control input:focus { border-color: var(--teal); }
 .select-control select:disabled { opacity: 1; color: #e8edf2; cursor: default; }
 .select-control option:disabled { color: #7f8b96; }
-.data-notice { display: flex; align-items: center; gap: 12px; margin: 16px 0 20px; padding: 12px 15px; color: #ead9ae; background: #27251e; border: 1px solid #574c30; font-size: 11px; }
-.data-notice p { margin: 0; line-height: 1.5; flex: 1; }
-.data-notice strong { color: #ffe19a; }
-.notice-icon { display: grid; flex: 0 0 21px; height: 21px; place-items: center; border: 1px solid #e8c878; border-radius: 50%; font-weight: 700; }
-.profile-count { color: #c8b87f; white-space: nowrap; }
 .workspace { display: grid; grid-template-columns: minmax(340px, .78fr) minmax(0, 1.6fr); gap: 18px; align-items: start; }
 .roster-panel, .datacard { background: var(--surface); border: 1px solid #293745; }
 .panel-heading { display: flex; justify-content: space-between; align-items: center; padding: 18px 18px 14px; border-bottom: 1px solid #293745; }
@@ -128,12 +123,15 @@ button, select { cursor: pointer; }
 .empty-state, .empty-detail { padding: 35px 20px; color: #94a3b0; text-align: center; font-size: 12px; }
 .panel-surface, .collection-section { margin-bottom: 18px; background: var(--surface); border: 1px solid #293745; }
 .panel-heading h2 { color: #eef2f6; }
-.import-input-area { padding: 16px 18px; }
-.import-input-area > label { display: block; margin-bottom: 7px; color: #b6c1cb; font-size: 11px; font-weight: 600; }
-.import-input-area textarea { display: block; width: 100%; resize: vertical; padding: 11px 12px; color: #e8edf2; background: #0e151d; border: 1px solid #2a3948; border-radius: 3px; font: 12px/1.6 'DM Sans', sans-serif; }
-.import-input-area textarea:focus, .import-profile-select select:focus { outline: 1px solid var(--teal); border-color: var(--teal); }
-.import-input-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; }
-.import-input-footer p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }
+.import-panel-heading { min-height: 42px; margin: 0 !important; padding: 6px 10px; }
+.import-heading-title { min-width: 0; display: flex; align-items: center; gap: 8px; }
+.import-panel-heading h2 { margin: 0; font-size: 20px; }
+.import-panel-heading .result-count { width: 23px; height: 23px; font-size: 10px; }
+.import-heading-help { flex: 1; margin: 0 8px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+.import-list-button { min-height: 30px; display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; gap: 6px; padding: 4px 9px; font-size: 10px; }
+.import-list-button svg { width: 15px; height: 15px; }
+.clipboard-feedback { margin: 0; padding: 7px 10px; color: var(--teal); background: #10211f; border-top: 1px solid #293745; font-size: 10px; line-height: 1.4; }
+.clipboard-feedback.is-error { color: #ffc0c7; }
 .action-button { min-height: 36px; padding: 7px 12px; color: #dce5eb; background: #263443; border: 1px solid #3b5062; border-radius: 3px; font-size: 11px; font-weight: 600; white-space: nowrap; }
 .action-button:hover:not(:disabled) { border-color: var(--teal); }
 .action-button.primary { color: #091311; background: var(--teal); border-color: var(--teal); }
@@ -181,6 +179,14 @@ button, select { cursor: pointer; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 23px; }
 .dialog-actions .destructive { color: #fff; background: #a43e4d; border-color: #c35363; }
 .dialog-actions .destructive:hover { background: #bd4758; border-color: #e16a78; }
+.import-confirm-dialog { width: min(100%, 460px); }
+.import-count-summary { display: grid; gap: 8px; margin-top: 18px; }
+.import-count-summary p { display: flex; align-items: baseline; gap: 10px; margin: 0; padding: 11px 12px; border: 1px solid currentColor; border-radius: 3px; }
+.import-count-summary strong { font: 700 25px/1 'Barlow Condensed', sans-serif; }
+.import-count-summary span { font-size: 12px; font-weight: 600; }
+.import-count-valid { color: #72d6a0 !important; background: #153024; }
+.import-count-unresolved { color: #edc567 !important; background: #302919; }
+.import-unresolved-note { margin-top: 10px !important; font-size: 10px !important; }
 .collection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr)); gap: 14px; padding: 0 15px; }
 .collection-card { min-width: 0; overflow: hidden; color: #142029; background: #e6eeee; border: 1px solid #aebfbe; border-radius: 3px; }
 .collection-card-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; color: #d9e3e8; background: #172631; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
@@ -227,10 +233,14 @@ button, select { cursor: pointer; }
   .edition-tag { padding: 4px 5px; font-size: 7px; letter-spacing: .04em; }
   .catalog-controls { grid-template-columns: 1fr; }
   .search-control { grid-column: auto; }
-  .data-notice { align-items: flex-start; }
-  .profile-count { display: none; }
   .import-entry { grid-template-columns: 1fr; gap: 8px; padding: 10px 12px; }
-  .import-input-footer, .import-review-heading { align-items: flex-start; flex-direction: column; }
+  .import-panel-heading h2 { font-size: 18px; }
+  .import-panel-heading { flex-wrap: wrap; }
+  .import-heading-title { order: 1; }
+  .import-list-button { order: 2; margin-left: auto; }
+  .import-heading-help { flex: 1 0 100%; order: 3; margin: 0; font-size: 9px; }
+  .import-list-button { padding: 4px 7px; }
+  .import-review-heading { align-items: flex-start; flex-direction: column; }
   .import-review-actions { width: 100%; flex-wrap: wrap; }
   .confirm-dialog { padding: 21px; }
   .dialog-actions { flex-direction: column-reverse; }
@@ -256,7 +266,7 @@ button, select { cursor: pointer; }
 @media print {
   body { min-width: 0; color: #000; background: #fff; }
   .app-shell { width: 100%; padding: 0; }
-  .topbar, .project-manager, .catalog-controls, .data-notice, .list-import, .workspace, .collection-card-toolbar, .app-footer { display: none !important; }
+  .topbar, .project-manager, .catalog-controls, .list-import, .workspace, .collection-card-toolbar, .app-footer { display: none !important; }
   .collection-section { margin: 0; border: 0; background: #fff; }
   .collection-section > .panel-heading { padding: 0 0 12px; }
   .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0; }
