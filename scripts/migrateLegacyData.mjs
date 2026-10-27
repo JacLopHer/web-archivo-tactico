@@ -109,37 +109,97 @@ const profiles = legacyProfiles.map((profile, index) => {
   return {
     id: stableId('legacy-profile', [index, profile.n, profile.t, profile.s, profile.k, profile.a, profile.m, profile.cp, profile.c]),
     name: profile.n,
+    rules: profile.k.split(/\s+·\s+/).map((rule) => rule.replace(/\.+$/, '').trim()).filter(Boolean),
     troopType: profile.t,
     stats: Object.fromEntries(statKeys.map((key, statIndex) => [key, statValues[statIndex]])),
     woundsLabel: profile.h || 'VITA',
-    skillsAndEquipment: profile.k,
     rangedEquipment: profile.a,
     meleeEquipment: profile.m,
     cap: profile.cp,
     points: profile.c,
+  };
+});
+
+function getUnitName(profileName) {
+  return profileName.replace(/\s*\([^()]*\)\s*$/, '').trim();
+}
+
+function getVariantName(profile, unitName) {
+  const suffix = profile.name.slice(unitName.length).trim().replace(/^\(|\)$/g, '').trim();
+  return suffix || profile.rangedEquipment || profile.meleeEquipment || 'Perfil estándar';
+}
+
+const profilesByUnit = new Map();
+for (const profile of profiles) {
+  const unitName = getUnitName(profile.name);
+  const unitProfiles = profilesByUnit.get(unitName) ?? [];
+  unitProfiles.push(profile);
+  profilesByUnit.set(unitName, unitProfiles);
+}
+
+const units = [...profilesByUnit].map(([name, unitProfiles]) => {
+  const firstProfile = unitProfiles[0];
+  const sharedSpecialRules = firstProfile.rules.filter((rule) =>
+    unitProfiles.every((profile) => profile.rules.includes(rule)),
+  );
+  const usedNames = new Set();
+  const variants = unitProfiles.map((profile) => {
+    const baseName = getVariantName(profile, name);
+    let variantName = baseName;
+    if (usedNames.has(variantName)) {
+      const equipment = profile.rangedEquipment || profile.meleeEquipment || `${profile.points} PTS`;
+      variantName = `${baseName} · ${equipment}`;
+      let collisionNumber = 2;
+      while (usedNames.has(variantName)) {
+        variantName = `${baseName} · ${equipment} · ${collisionNumber}`;
+        collisionNumber += 1;
+      }
+    }
+    usedNames.add(variantName);
+
+    return {
+      id: profile.id,
+      name: variantName,
+      armyName: profile.name,
+      specialRules: profile.rules.filter((rule) => !sharedSpecialRules.includes(rule)),
+      rangedEquipment: profile.rangedEquipment,
+      meleeEquipment: profile.meleeEquipment,
+      cap: profile.cap,
+      points: profile.points,
+    };
+  });
+
+  return {
+    id: stableId('legacy-unit', [name]),
+    name,
+    troopType: firstProfile.troopType,
+    stats: firstProfile.stats,
+    woundsLabel: firstProfile.woundsLabel,
+    sharedSpecialRules,
     factionId: 'jsa',
     sectorialIds: [],
     edition: 'N5',
     source: 'Ultima versión .html · JSA CHEAT SHEETS v40',
     verificationStatus: 'unverified',
+    profiles: variants,
   };
 });
 
 const catalog = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   faction: { id: 'jsa', name: 'Japanese Secessionist Army', shortName: 'JSA' },
   metadata: {
     edition: 'N5',
     source: 'Ultima versión .html',
     verificationStatus: 'unverified',
-    note: 'Perfiles de tropas migrados desde datos heredados. No presentar perfiles ni disponibilidad sectorial como verificados hasta contrastarlos con fuentes de reglas.',
+    note: 'Unidades y perfiles de tropas migrados desde datos heredados. Los atributos y reglas compartidos se guardan en la unidad; cada perfil conserva su equipo y reglas diferenciales. No presentar perfiles ni disponibilidad sectorial como verificados hasta contrastarlos con fuentes de reglas.',
   },
   sectorials: [
     { id: 'jsa-vanilla', name: 'JSA (genérica)', rosterImage: 'Vanilla_JSA_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
     { id: 'jsa-oban', name: 'Oban', rosterImage: 'JSA_Oban_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
     { id: 'jsa-shindenbutai', name: 'Shindenbutai', rosterImage: 'JSA_Shindenbutai_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
   ],
-  profiles,
+  units,
   references,
 };
 
@@ -158,4 +218,4 @@ const weaponCatalog = {
 await mkdir(dirname(outputPath), { recursive: true });
 await writeFile(outputPath, `${JSON.stringify(catalog, null, 2)}\n`, 'utf8');
 await writeFile(weaponProfilesPath, `${JSON.stringify(weaponCatalog, null, 2)}\n`, 'utf8');
-console.log(`Migrados ${profiles.length} perfiles, ${weapons.length} perfiles de arma y ${references.length} referencias.`);
+console.log(`Migrados ${units.length} unidades con ${profiles.length} perfiles, ${weapons.length} perfiles de arma y ${references.length} referencias.`);

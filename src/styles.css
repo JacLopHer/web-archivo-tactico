@@ -39,12 +39,28 @@ button, select { cursor: pointer; }
 .select-control select:focus, .search-control input:focus { border-color: var(--teal); }
 .select-control select:disabled { opacity: 1; color: #e8edf2; cursor: default; }
 .select-control option:disabled { color: #7f8b96; }
-.workspace { display: grid; grid-template-columns: minmax(340px, .78fr) minmax(0, 1.6fr); gap: 18px; align-items: start; }
+.workspace { display: grid; grid-template-columns: minmax(210px, .7fr) minmax(250px, .85fr) minmax(320px, 1.1fr); gap: 14px; align-items: start; }
 .roster-panel, .datacard { background: var(--surface); border: 1px solid #293745; }
 .panel-heading { display: flex; justify-content: space-between; align-items: center; padding: 18px 18px 14px; border-bottom: 1px solid #293745; }
 .panel-heading h2 { font: 600 26px/1 'Barlow Condensed', sans-serif; margin: 6px 0 0; }
 .result-count { display: grid; width: 32px; height: 32px; place-items: center; border: 1px solid #374757; color: var(--teal); font-size: 12px; }
 .profile-list { max-height: 690px; overflow: auto; }
+.family-list { max-height: 690px; }
+.family-option { min-height: 43px; padding: 9px 13px; }
+.family-option .profile-summary strong { white-space: normal; }
+.family-variant-count { flex: 0 0 auto; color: #8998a7; font-size: 9px; }
+.variant-list { max-height: 690px; }
+.unit-shared-rules { display: flex; flex-direction: column; gap: 5px; padding: 10px 12px; color: #c8d3db; border-bottom: 1px solid #293745; font-size: 9px; line-height: 1.45; }
+.unit-shared-rules strong { color: var(--teal); font-size: 8px; letter-spacing: .1em; }
+.variant-option { display: flex; align-items: stretch; gap: 6px; padding: 8px; border-bottom: 1px solid #22303c; }
+.variant-option.is-selected { background: #1b2936; box-shadow: inset 3px 0 var(--accent); }
+.variant-option-main { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 2px 4px; color: inherit; text-align: left; background: transparent; border: 0; }
+.variant-option-main strong { color: #edf2f5; font-size: 11px; }
+.variant-option-main span { overflow: hidden; color: #8998a7; font-size: 9px; line-height: 1.4; text-overflow: ellipsis; }
+.variant-option-main .variant-special-rules { color: #d3b878; white-space: normal; }
+.variant-option-main small { color: #f0c77c; font-size: 9px; }
+.variant-add-button { flex: 0 0 auto; align-self: center; min-height: 30px; padding: 4px 8px; color: var(--teal); background: #142522; border: 1px solid #346b62; border-radius: 3px; font-size: 9px; font-weight: 700; }
+.variant-add-button:hover { border-color: var(--teal); }
 .profile-list-hint { display: block; margin-top: 5px; color: #8293a2; font-size: 9px; }
 .profile-option { display: flex; width: 100%; align-items: center; gap: 11px; padding: 12px 15px; text-align: left; color: inherit; background: transparent; border: 0; border-bottom: 1px solid #22303c; }
 .profile-option:hover, .profile-option.is-selected { background: #1b2936; }
@@ -166,9 +182,14 @@ button, select { cursor: pointer; }
 .project-feedback { display: flex; align-items: center; gap: 8px; margin: 2px 0 6px; color: var(--teal); font-size: 10px; line-height: 1.4; }
 .project-feedback.is-error { color: #ffc0c7; }
 .project-feedback .action-button { min-height: 28px; padding: 3px 7px; }
-.collection-section { padding-bottom: 15px; }
-.collection-section > .panel-heading { margin-bottom: 15px; }
-.collection-heading-actions { display: flex; align-items: center; gap: 10px; }
+.collection-section { min-width: 0; margin: 0; padding-bottom: 10px; }
+.collection-section > .panel-heading { min-height: 75px; margin: 0; padding: 12px; }
+.collection-section > .panel-heading h2 { font-size: 23px; }
+.collection-count { display: flex; align-items: center; gap: 8px; }
+.collection-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 7px; padding: 10px; border-bottom: 1px solid #293745; }
+.print-control { display: flex; flex-direction: column; gap: 4px; color: #9eacb9; font-size: 9px; }
+.print-control select { min-height: 30px; max-width: 100%; padding: 4px 7px; color: #e8edf2; background: var(--surface); border: 1px solid #2a3948; border-radius: 3px; font-size: 9px; }
+.print-button { min-height: 30px; padding: 5px 8px; font-size: 9px; }
 .clear-collection-button { min-height: 32px; padding: 5px 9px; color: #ffc0c7; background: #35232b; border-color: #70404b; }
 .clear-collection-button:hover:not(:disabled) { border-color: #ed6878; }
 .dialog-backdrop { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; padding: 20px; background: #05090dcc; backdrop-filter: blur(4px); }
@@ -187,24 +208,118 @@ button, select { cursor: pointer; }
 .import-count-valid { color: #72d6a0 !important; background: #153024; }
 .import-count-unresolved { color: #edc567 !important; background: #302919; }
 .import-unresolved-note { margin-top: 10px !important; font-size: 10px !important; }
-.collection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr)); gap: 14px; padding: 0 15px; }
-.collection-card { min-width: 0; overflow: hidden; color: #142029; background: #e6eeee; border: 1px solid #aebfbe; border-radius: 3px; }
-.collection-card-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; color: #d9e3e8; background: #172631; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
-.collection-card-toolbar div { display: flex; gap: 5px; }
-.collection-card-toolbar button { width: 24px; height: 23px; padding: 0; color: #e5edf1; background: #243746; border: 1px solid #445563; border-radius: 2px; font-size: 14px; }
-.collection-card-toolbar button:disabled { opacity: .4; cursor: not-allowed; }
-.collection-card-main { display: block; width: 100%; padding: 0; color: inherit; text-align: left; background: transparent; border: 0; }
-.collection-card-main:hover .collection-card-heading { background: #d5e1e1; }
-.collection-card-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 10px 12px; background: #eef4f2; border-bottom: 1px solid #bac8c8; }
-.collection-card-heading strong { min-width: 0; overflow-wrap: anywhere; color: #15252c; font: 700 20px/1.1 'Barlow Condensed', sans-serif; }
-.collection-card-heading > span { flex: 0 0 auto; color: #435960; font-size: 9px; font-weight: 700; }
-.collection-stats { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); background: #c4c6c7; border-bottom: 1px solid #8e999b; }
-.collection-stats > span { min-width: 0; min-height: 43px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid #a5abad; }
-.collection-stats small { overflow: hidden; max-width: 100%; color: #35434a; font-size: 7px; font-weight: 700; white-space: nowrap; }
-.collection-stats strong { margin-top: 3px; color: #161d21; font: 700 12px/1 'Barlow Condensed', sans-serif; white-space: nowrap; }
-.collection-card-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 12px 12px; background: #f0f3f3; }
-.collection-card-details > span { min-width: 0; color: #26363d; font-size: 9px; line-height: 1.5; overflow-wrap: anywhere; }
-.collection-card-details small { display: block; margin-bottom: 4px; color: #286c69; font-size: 7px; font-weight: 700; letter-spacing: .08em; }
+.collection-list { max-height: 690px; overflow: auto; margin: 0; padding: 0; list-style: none; }
+.print-preview-page, .print-preview-page-entries { margin: 0; padding: 0; list-style: none; }
+.collection-entry { min-width: 0; border-bottom: 1px solid #293745; }
+.collection-entry-summary { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 7px; padding: 5px 9px; }
+.collection-entry-name { min-width: 0; display: flex; align-items: center; gap: 6px; }
+.collection-entry-name strong { flex: 0 0 auto; max-width: 45%; overflow: hidden; color: #edf2f5; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.collection-entry-name span { min-width: 0; overflow: hidden; color: #9aa8b7; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.collection-entry-points { flex: 0 0 auto; color: #f0c77c; font-size: 9px; font-weight: 700; }
+.collection-entry-actions { display: flex; gap: 3px; }
+.collection-entry-actions button { width: 23px; height: 22px; padding: 0; color: #e5edf1; background: #243746; border: 1px solid #445563; border-radius: 2px; font-size: 13px; }
+.collection-entry-actions button:disabled { opacity: .4; cursor: not-allowed; }
+.collection-entry-icon { flex: 0 0 auto; width: 26px; height: 26px; align-self: center; border-radius: 50%; object-fit: cover; background: #0b1318; border: 1px solid #445563; }
+.collection-print-card { display: none; }
+.collection-print-card .unit-header { grid-template-columns: 65px 1fr; min-height: 64px; }
+.collection-print-card .unit-portrait { width: 58px; height: 58px; border-width: 4px; font-size: 30px; }
+.collection-print-card .unit-name-row { gap: 6px; padding: 6px 8px 6px 4px; }
+.collection-print-card .unit-name-row h2 { font-size: 18pt; }
+.collection-print-card .unit-type-row { flex-wrap: wrap; gap: 3px 8px; font-size: 7pt; white-space: normal; }
+.collection-print-card .unit-cost { margin-left: 0; }
+.collection-print-card .stat-grid { margin-left: 62px; }
+.collection-print-card .stat { min-height: 9mm; }
+.collection-print-card .stat span { font-size: 6.5pt; }
+.collection-print-card .stat strong { font-size: 10pt; }
+.collection-print-card .skills-band { min-height: 0; padding: 2mm 3mm; }
+.collection-print-card .skills-band-title { font-size: 6.5pt; }
+.collection-print-card .skills-band p { font-size: 7.5pt; line-height: 1.3; }
+.collection-print-card .card-lower { padding: 0 3mm 2mm; }
+.collection-print-card .weapon-section { padding: 2mm 0 0; }
+.collection-print-card .weapon-section-heading { margin-bottom: 1.5mm; }
+.collection-print-card .section-title { font-size: 6.5pt; }
+.collection-print-card .weapon-table-scroll { overflow: visible; }
+.collection-print-card .weapon-table { width: 100%; min-width: 0; }
+.collection-print-card .weapon-table-head,
+.collection-print-card .weapon-main-row { grid-template-columns: minmax(26mm, 1.15fr) minmax(43mm, 2fr) 7mm 6mm 9mm 8mm 7mm; }
+.collection-print-card .weapon-table-head { min-height: 5mm; font-size: 6.5pt; }
+.collection-print-card .weapon-main-row { min-height: 5mm; }
+.collection-print-card .weapon-name { font-size: 7pt; }
+.collection-print-card .weapon-category,
+.collection-print-card .weapon-properties { font-size: 5.5pt; }
+.collection-print-card .range-track { height: 4mm; }
+.collection-print-card .range-head span { font-size: 5pt; }
+.collection-print-card .range-band,
+.collection-print-card .weapon-value,
+.collection-print-card .range-note { font-size: 5.5pt; }
+.collection-print-card .weapon-entry,
+.collection-print-card .weapon-main-row { break-inside: avoid; page-break-inside: avoid; }
+.print-preview-description { margin: 0; padding: 8px 12px; color: #aab7c2; border-bottom: 1px solid #293745; font-size: 10px; line-height: 1.5; }
+.app-shell.print-preview-open { position: relative; z-index: 31; }
+.app-shell.print-preview-open::before { position: fixed; z-index: 0; inset: 0; background: #05090def; content: ''; }
+.app-shell.print-preview-open > :not(.workspace) { display: none; }
+.app-shell.print-preview-open .workspace > :not(.collection-section) { display: none; }
+.app-shell.print-preview-open .collection-section { position: fixed; z-index: 1; inset: 3vh 3vw; display: flex; width: auto; max-height: 94vh; flex-direction: column; margin: 0; overflow: hidden; padding: 0; border: 1px solid #3b4c5c; border-top: 2px solid var(--teal); background: #101923; box-shadow: 0 24px 80px #000b; }
+.app-shell.print-preview-open .collection-section > .panel-heading { flex: 0 0 auto; min-height: 54px; }
+.app-shell.print-preview-open .collection-count { gap: 8px; }
+.app-shell.print-preview-open .collection-count .action-button { min-height: 30px; padding: 4px 8px; font-size: 10px; }
+.app-shell.print-preview-open .collection-controls { flex: 0 0 auto; }
+.app-shell.print-preview-open .collection-list { width: 210mm; max-width: 100%; max-height: none; flex: 1 1 auto; margin: 0 auto; overflow: auto; padding: 8mm; background: #c8ced1; }
+.app-shell.print-preview-open.print-preview-letter .collection-list { width: 215.9mm; }
+.app-shell.print-preview-open .print-preview-page { width: 210mm; min-height: 297mm; margin: 0 auto 8mm; padding: 10mm; list-style: none; background: #fff; box-shadow: 0 2mm 5mm #0004; }
+.app-shell.print-preview-open.print-preview-letter .print-preview-page { width: 215.9mm; min-height: 279.4mm; }
+.app-shell.print-layout-compact.print-preview-open .print-preview-page { display: block; width: 210mm; height: 297mm; min-height: 0; padding: 6mm; }
+.app-shell.print-layout-compact.print-preview-open.print-preview-letter .print-preview-page { width: 215.9mm; height: 279.4mm; }
+.app-shell.print-preview-open .print-preview-page-entries { margin: 0; padding: 0; list-style: none; }
+.app-shell.print-layout-compact.print-preview-open .print-preview-page-entries { height: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(5, minmax(0, 1fr)); gap: 2mm; }
+.app-shell.print-preview-open .collection-entry { display: flex; justify-content: center; padding-bottom: 4mm; border: 0; background: transparent; }
+.app-shell.print-layout-compact.print-preview-open .collection-entry { position: relative; min-height: 0; display: block; overflow: hidden; padding: 0; }
+.app-shell.print-preview-open .collection-entry + .collection-entry { padding-top: 4mm; }
+.app-shell.print-layout-compact.print-preview-open .collection-entry + .collection-entry { padding-top: 0; }
+.app-shell.print-preview-open .collection-entry-summary { display: none; }
+.app-shell.print-preview-open .collection-print-card { display: block; width: 150mm; max-width: 100%; box-shadow: 0 2mm 5mm #0004; }
+.app-shell.print-layout-compact.print-preview-open .collection-print-card { position: absolute; top: 50%; left: 50%; display: block; width: 150mm; max-width: none; margin: 0; transform: translate(-50%, -50%) scale(var(--compact-card-scale, .48)); transform-origin: center; box-shadow: 0 1mm 2mm #0004; }
+.app-shell.print-preview-open .collection-print-meta { padding: 1.5mm 2mm; font-size: 6.5pt; }
+/* Modo compacto: la ficha se maqueta a tamaño de celda (sin reducir 150mm → ~0.5) para que la letra sea legible. */
+.app-shell.print-layout-compact .collection-print-card .collection-print-meta,
+.app-shell.print-layout-compact .collection-print-card .unit-edition,
+.app-shell.print-layout-compact .collection-print-card .section-title,
+.app-shell.print-layout-compact .collection-print-card .skills-band-title { display: none; }
+.collection-print-card .unit-icon { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #0b1318; }
+.app-shell.print-layout-compact .collection-print-card .unit-portrait { display: grid; width: 8mm; height: 8mm; margin: 1mm 0 1mm 1.5mm; border-width: 1px; font-size: 11pt; }
+.app-shell.print-layout-compact .collection-print-card .unit-portrait span { transform: none; }
+.app-shell.print-layout-compact .collection-print-card .unit-portrait small { display: none; }
+.app-shell.print-layout-compact .collection-print-card .unit-header { grid-template-columns: 11mm 1fr; min-height: 0; border-bottom-width: 1px; }
+.collection-print-card .unit-miniature { display: none; }
+.app-shell.print-layout-compact .collection-print-card .unit-miniature { display: flex; flex: 1 1 0; min-width: 0; height: 15mm; align-items: center; justify-content: center; }
+.app-shell.print-layout-compact .collection-print-card .unit-miniature img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.app-shell.print-layout-compact .collection-print-card .unit-name-row { min-height: 15mm; }
+.app-shell.print-layout-compact .collection-print-card .unit-type-row { flex: 0 0 auto; max-width: 30mm; justify-content: flex-end; text-align: right; }
+.app-shell.print-layout-compact .collection-print-card .unit-name-row { gap: 4px; padding: 1mm 2mm; }
+.app-shell.print-layout-compact .collection-print-card .unit-name-row h2 { font-size: 10pt; }
+.app-shell.print-layout-compact .collection-print-card .unit-type-row { gap: 0 5px; font-size: 5.5pt; }
+.app-shell.print-layout-compact .collection-print-card .stat-grid { margin-left: 0; }
+.app-shell.print-layout-compact .collection-print-card .stat { min-height: 6mm; padding: 1px; }
+.app-shell.print-layout-compact .collection-print-card .stat span { font-size: 4.5pt; }
+.app-shell.print-layout-compact .collection-print-card .stat strong { margin-top: 1px; font-size: 8pt; }
+.app-shell.print-layout-compact .collection-print-card .skills-band { padding: 1mm 2mm; }
+.app-shell.print-layout-compact .collection-print-card .skills-band p { font-size: 5.5pt; line-height: 1.25; }
+.app-shell.print-layout-compact .collection-print-card .card-lower { padding: 0 1.5mm 1mm; }
+.app-shell.print-layout-compact .collection-print-card .weapon-section { padding: 1mm 0 0; }
+.app-shell.print-layout-compact .collection-print-card .weapon-section-heading { margin-bottom: 0; }
+.app-shell.print-layout-compact .collection-print-card .weapon-table-head,
+.app-shell.print-layout-compact .collection-print-card .weapon-main-row { grid-template-columns: minmax(18mm, 1.2fr) minmax(28mm, 2fr) 5mm 4mm 6mm 5mm 5mm; }
+.app-shell.print-layout-compact .collection-print-card .weapon-table-head { min-height: 3.2mm; font-size: 5pt; }
+.app-shell.print-layout-compact .collection-print-card .weapon-main-row { min-height: 3.6mm; }
+.app-shell.print-layout-compact .collection-print-card .weapon-name-cell { gap: 0; padding: .3mm 1mm; }
+.app-shell.print-layout-compact .collection-print-card .weapon-name { font-size: 5.5pt; }
+.app-shell.print-layout-compact .collection-print-card .weapon-category,
+.app-shell.print-layout-compact .collection-print-card .weapon-properties { font-size: 4.5pt; }
+.app-shell.print-layout-compact .collection-print-card .range-track { height: 3mm; }
+.app-shell.print-layout-compact .collection-print-card .range-head span { font-size: 4pt; }
+.app-shell.print-layout-compact .collection-print-card .range-band,
+.app-shell.print-layout-compact .collection-print-card .weapon-value,
+.app-shell.print-layout-compact .collection-print-card .range-note { font-size: 5pt; }
 .collection-empty { margin: 0; padding: 12px 18px; color: #94a3b0; font-size: 11px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .app-footer { padding-top: 24px; color: #64727f; text-align: center; font-size: 10px; letter-spacing: .04em; }
@@ -215,8 +330,7 @@ button, select { cursor: pointer; }
   .search-control { grid-column: 1 / -1; }
   .workspace { grid-template-columns: 1fr; }
   .profile-list { max-height: 360px; }
-  .detail-panel { min-width: 0; }
-  .collection-grid { grid-template-columns: 1fr; }
+  .collection-list { max-height: 360px; }
 }
 
 @media (max-width: 520px) {
@@ -257,19 +371,65 @@ button, select { cursor: pointer; }
   .stat span { font-size: 6px; }
   .stat strong { font-size: 11px; }
   .skills-band { padding-left: 14px; }
-  .collection-grid { padding: 0 10px; }
-  .collection-card-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
-  .collection-stats { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  .collection-card-details { grid-template-columns: 1fr; }
+  .collection-controls { align-items: stretch; }
+  .collection-controls > * { flex: 1 1 calc(50% - 7px); }
+  .collection-controls .print-button { flex-basis: 100%; }
+  .collection-entry-summary { grid-template-columns: minmax(0, 1fr) auto; }
+  .collection-entry-actions { grid-column: 2; grid-row: 1; }
+  .collection-entry-points { grid-column: 1; grid-row: 2; }
+  .collection-entry-name { grid-column: 1; grid-row: 1; }
+  .app-shell.print-preview-open .collection-section { inset: 8px; max-height: calc(100dvh - 16px); }
+  .app-shell.print-preview-open .collection-section > .panel-heading { padding: 8px; }
+  .app-shell.print-preview-open .collection-section > .panel-heading h2 { font-size: 20px; }
+  .app-shell.print-preview-open .collection-controls { max-height: 150px; overflow: auto; }
+  .app-shell.print-preview-open .collection-list,
+  .app-shell.print-preview-open.print-preview-letter .collection-list { width: 100%; padding: 5mm; }
+  .app-shell.print-layout-compact.print-preview-open .collection-list,
+  .app-shell.print-layout-compact.print-preview-open.print-preview-letter .collection-list { width: 100%; padding: 3mm; }
+  .app-shell.print-preview-open .print-preview-page,
+  .app-shell.print-preview-open.print-preview-letter .print-preview-page { width: 100%; }
+  .app-shell.print-layout-compact.print-preview-open .print-preview-page,
+  .app-shell.print-layout-compact.print-preview-open.print-preview-letter .print-preview-page { width: 100%; }
 }
 
 @media print {
-  body { min-width: 0; color: #000; background: #fff; }
-  .app-shell { width: 100%; padding: 0; }
-  .topbar, .project-manager, .catalog-controls, .list-import, .workspace, .collection-card-toolbar, .app-footer { display: none !important; }
-  .collection-section { margin: 0; border: 0; background: #fff; }
-  .collection-section > .panel-heading { padding: 0 0 12px; }
-  .collection-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0; }
-  .collection-card { break-inside: avoid; box-shadow: none; }
+  body { min-width: 0; color: #000; background: #fff !important; }
+  .app-shell { width: 100%; max-width: none; padding: 0; }
+  .topbar, .project-manager, .catalog-controls, .list-import, .catalog-families, .catalog-variants, .app-footer { display: none !important; }
+  .app-shell.print-preview-open { position: static; z-index: auto; }
+  .app-shell.print-preview-open::before { display: none; }
+  .workspace { display: block; }
+  .collection-section, .app-shell.print-preview-open .collection-section { position: static; inset: auto; z-index: auto; display: block; width: 100%; max-height: none; margin: 0; overflow: visible; padding: 0; border: 0; background: #fff; box-shadow: none; }
+  .collection-section > .panel-heading { margin: 0 0 5mm; padding: 0; }
+  .collection-section > .panel-heading h2 { color: #000; }
+  .collection-count, .collection-controls { display: none !important; }
+  .print-preview-description { display: none !important; }
+  .collection-list { max-height: none; overflow: visible; margin: 0; padding: 0; }
+  .app-shell.print-preview-open .collection-list, .app-shell.print-preview-open.print-preview-letter .collection-list { display: contents; width: auto; max-width: none; padding: 0; background: #fff; }
+  .app-shell.print-layout-compact.print-preview-open .collection-list,
+  .app-shell.print-layout-compact.print-preview-open.print-preview-letter .collection-list { display: block; width: auto; padding: 0; }
+  .app-shell.print-preview-open .print-preview-page,
+  .app-shell.print-preview-open.print-preview-letter .print-preview-page { display: contents; width: auto; min-height: 0; margin: 0; padding: 0; background: transparent; box-shadow: none; }
+  .app-shell.print-layout-compact.print-preview-open .print-preview-page,
+  .app-shell.print-layout-compact.print-preview-open.print-preview-letter .print-preview-page { display: block; width: auto; height: calc(297mm - 12mm); min-height: 0; margin: 0; padding: 0; break-after: page; page-break-after: always; }
+  .app-shell.print-layout-compact.print-preview-open.print-preview-letter .print-preview-page { height: calc(279.4mm - 12mm); }
+  .app-shell.print-layout-compact.print-preview-open .print-preview-page:last-child { break-after: auto; page-break-after: auto; }
+  .app-shell.print-preview-open .print-preview-page-entries { display: contents; }
+  .app-shell.print-layout-compact.print-preview-open .print-preview-page-entries { height: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(5, minmax(0, 1fr)); gap: 2mm; }
+  .app-shell.print-layout-compact.print-preview-open .collection-section > .panel-heading { display: none !important; }
+  .app-shell.print-preview-open .collection-section > .panel-heading .eyebrow { display: none; }
+  .collection-entry, .app-shell.print-preview-open .collection-entry { display: block; width: 100%; overflow: visible; padding: 0; border: 0; background: transparent; break-inside: avoid; page-break-inside: avoid; }
+  .app-shell.print-layout-compact.print-preview-open .collection-entry { position: relative; height: 100%; overflow: hidden; }
+  .app-shell.print-layout-compact.print-preview-open .collection-print-card { position: absolute; top: 50%; left: 50%; display: block; width: 150mm; max-width: none; margin: 0; transform: translate(-50%, -50%) scale(var(--compact-card-scale, .48)); transform-origin: center; box-shadow: none; }
+  .app-shell:not(.print-layout-compact) .collection-entry.starts-card[data-page-breaks="card"] { break-before: page; page-break-before: always; }
+  .app-shell:not(.print-layout-compact) .collection-entry.starts-group[data-page-breaks="group"] { break-before: page; page-break-before: always; }
+  .collection-entry-summary { display: none !important; }
+  .collection-print-card { display: block; width: 150mm; max-width: 100%; margin: 0 auto; box-shadow: none; break-inside: avoid; page-break-inside: avoid; }
+  .app-shell.print-preview-open .collection-print-card { box-shadow: none; }
+  .collection-print-meta { padding: 2mm 3mm; color: #26363d; background: #e6eeee; border-bottom: 1px solid #aebfbe; font-size: 8pt; font-weight: 700; }
+  .collection-print-card { margin: 0 auto; }
+  .collection-print-card .unit-header { grid-template-columns: 65px 1fr; }
+  .collection-print-card .stat-grid { margin-left: 62px; }
+  .collection-section, .collection-section * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .collection-empty { display: none; }
 }

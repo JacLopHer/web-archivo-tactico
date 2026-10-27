@@ -15,6 +15,25 @@ const catalog = JSON.parse(
 const weaponCatalog = JSON.parse(
   await readFile(new URL('../src/data/weaponProfiles.json', import.meta.url), 'utf8'),
 );
+const troopProfiles = catalog.units.flatMap((unit) =>
+  unit.profiles.map((profile) => ({
+    id: profile.id,
+    name: profile.armyName,
+    troopType: unit.troopType,
+    stats: unit.stats,
+    woundsLabel: unit.woundsLabel,
+    skillsAndEquipment: [...unit.sharedSpecialRules, ...profile.specialRules].join(' · '),
+    rangedEquipment: profile.rangedEquipment,
+    meleeEquipment: profile.meleeEquipment,
+    cap: profile.cap,
+    points: profile.points,
+    factionId: unit.factionId,
+    sectorialIds: unit.sectorialIds,
+    edition: unit.edition,
+    source: unit.source,
+    verificationStatus: unit.verificationStatus,
+  })),
+);
 const weaponIndex = createWeaponIndex(weaponCatalog.profiles);
 
 test('separa equipo múltiple y conserva armamento secundario', () => {
@@ -26,7 +45,7 @@ test('separa equipo múltiple y conserva armamento secundario', () => {
 });
 
 test('resuelve perfiles coincidentes y mantiene explícitos los no encontrados', () => {
-  const profile = catalog.profiles.find((item) => item.name === 'SHINOBU');
+  const profile = troopProfiles.find((item) => item.name === 'SHINOBU');
   const weapons = getProfileWeapons(profile, weaponIndex);
   const combi = weapons.find((weapon) => weapon.name === 'Fusil Combi');
   const mono = weapons.find((weapon) => weapon.name === 'Arma CC Monofilo');
@@ -38,7 +57,7 @@ test('resuelve perfiles coincidentes y mantiene explícitos los no encontrados',
   assert.equal(combi.profile.verificationStatus, 'verified');
   assert.equal(mono.profile.verificationStatus, 'verified');
 
-  const unmatchedProfile = catalog.profiles.find((item) => item.rangedEquipment.includes('Arco Táctico(+1DE)'));
+  const unmatchedProfile = troopProfiles.find((item) => item.rangedEquipment.includes('Arco Táctico(+1DE)'));
   const unmatched = getProfileWeapons(unmatchedProfile, weaponIndex)
     .find((weapon) => weapon.name === 'Arco Táctico(+1DE)');
   assert.equal(unmatched.profile, undefined);

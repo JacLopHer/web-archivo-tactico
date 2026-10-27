@@ -16,9 +16,14 @@ export interface TroopStats {
 export interface TroopProfile {
   id: string;
   name: string;
+  variantName: string;
+  unitId: string;
+  unitName: string;
   troopType: string;
   stats: TroopStats;
   woundsLabel: string;
+  sharedSpecialRules: string[];
+  additionalSpecialRules: string[];
   skillsAndEquipment: string;
   rangedEquipment: string;
   meleeEquipment: string;
@@ -29,6 +34,32 @@ export interface TroopProfile {
   edition: string;
   source: string;
   verificationStatus: VerificationStatus;
+}
+
+export interface TroopVariant {
+  id: string;
+  name: string;
+  armyName: string;
+  specialRules: string[];
+  rangedEquipment: string;
+  meleeEquipment: string;
+  cap: string;
+  points: string;
+}
+
+export interface TroopUnit {
+  id: string;
+  name: string;
+  troopType: string;
+  stats: TroopStats;
+  woundsLabel: string;
+  sharedSpecialRules: string[];
+  factionId: string;
+  sectorialIds: string[];
+  edition: string;
+  source: string;
+  verificationStatus: VerificationStatus;
+  profiles: TroopVariant[];
 }
 
 export interface Sectorial {
@@ -82,7 +113,7 @@ export interface JsaCatalog {
     note: string;
   };
   sectorials: Sectorial[];
-  profiles: TroopProfile[];
+  units: TroopUnit[];
   references: Array<{
     id: string;
     title: string;

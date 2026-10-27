@@ -5,6 +5,16 @@ import test from 'node:test';
 const catalog = JSON.parse(
   await readFile(new URL('../src/data/legacyJsaCatalog.json', import.meta.url), 'utf8'),
 );
+const troopProfiles = catalog.units.flatMap((unit) =>
+  unit.profiles.map((profile) => ({
+    ...unit,
+    ...profile,
+    name: profile.armyName,
+    variantName: profile.name,
+    unitId: unit.id,
+    unitName: unit.name,
+  })),
+);
 const weaponCatalog = JSON.parse(
   await readFile(new URL('../src/data/weaponProfiles.json', import.meta.url), 'utf8'),
 );
@@ -15,17 +25,22 @@ const migrationScript = await readFile(
 const stylesheet = await readFile(new URL('../src/styles.css', import.meta.url), 'utf8');
 
 test('el catálogo migrado conserva el inventario heredado', () => {
-  assert.equal(catalog.profiles.length, 181);
+  assert.equal(catalog.schemaVersion, 2);
+  assert.equal(catalog.units.length, 67);
+  assert.equal(troopProfiles.length, 181);
   assert.equal(weaponCatalog.profiles.length, 227);
   assert.equal(catalog.references.length, 8);
+  assert.equal('profiles' in catalog, false);
 });
 
 test('cada perfil tiene una identidad única y los diez atributos tipados', () => {
-  const profileIds = catalog.profiles.map((profile) => profile.id);
+  const unitIds = catalog.units.map((unit) => unit.id);
+  const profileIds = troopProfiles.map((profile) => profile.id);
+  assert.equal(new Set(unitIds).size, unitIds.length);
   assert.equal(new Set(profileIds).size, profileIds.length);
 
-  for (const profile of catalog.profiles) {
-    assert.deepEqual(Object.keys(profile.stats), [
+  for (const unit of catalog.units) {
+    assert.deepEqual(Object.keys(unit.stats), [
       'movement',
       'cc',
       'bs',
@@ -37,13 +52,48 @@ test('cada perfil tiene una identidad única y los diez atributos tipados', () =
       'silhouette',
       'availability',
     ]);
+    assert.ok(Array.isArray(unit.sharedSpecialRules));
+    assert.ok(unit.profiles.length > 0);
+    for (const profile of unit.profiles) {
+      assert.ok(Array.isArray(profile.specialRules));
+      assert.ok(profile.id.startsWith('legacy-profile-'));
+    }
+    assert.ok(
+      unit.profiles.every((profile) => profile.armyName.replace(/\s*\([^()]*\)\s*$/, '').trim() === unit.name),
+      `${unit.name} profiles must stay grouped under their base unit`,
+    );
+    assert.ok(unit.profiles.every((profile) =>
+      profile.specialRules.every((rule) => !unit.sharedSpecialRules.includes(rule)),
+    ));
   }
 });
 
 test('los perfiles de tropas heredados no se presentan como verificados', () => {
-  assert.ok(catalog.profiles.every((profile) => profile.verificationStatus === 'unverified'));
+  assert.ok(catalog.units.every((unit) => unit.verificationStatus === 'unverified'));
   assert.equal(catalog.metadata.verificationStatus, 'unverified');
   assert.equal('weapons' in catalog, false);
+});
+
+test('Ninja conserva atributos y reglas comunes con cada equipo y regla de perfil separado', () => {
+  const ninja = catalog.units.find((unit) => unit.name === 'NINJA');
+  assert.ok(ninja);
+  assert.equal(ninja.profiles.length, 6);
+  assert.ok(ninja.sharedSpecialRules.includes('Artes Marciales N3'));
+  assert.ok(ninja.sharedSpecialRules.includes('Infiltración'));
+  assert.deepEqual(
+    ninja.profiles.map((profile) => profile.name),
+    [
+      'Arco Táctico(+1DE), Minas Shock',
+      'Subfusil',
+      'Fusil de Francotirador MULTI',
+      'Hacker, Disp. Hacker',
+      'Hacker, Disp. Hacker Asesino',
+      'Observador de Artillería',
+    ],
+  );
+  const hacker = ninja.profiles.find((profile) => profile.name === 'Hacker, Disp. Hacker');
+  assert.ok(hacker.specialRules.includes('Hacker'));
+  assert.equal(hacker.rangedEquipment, 'Subfusil');
 });
 
 test('distingue los perfiles cotejados con el PDF y las variantes confirmadas por el usuario', () => {
@@ -268,5 +318,5 @@ test('no se asigna disponibilidad sectorial sin datos de pertenencia', () => {
       (sectorial) => sectorial.verificationStatus === 'unmapped' && sectorial.profileIds.length === 0,
     ),
   );
-  assert.ok(catalog.profiles.every((profile) => profile.sectorialIds.length === 0));
+  assert.ok(catalog.units.every((unit) => unit.sectorialIds.length === 0));
 });

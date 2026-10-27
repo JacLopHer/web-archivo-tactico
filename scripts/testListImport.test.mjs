@@ -6,6 +6,17 @@ import { parseListImport, parseProfileList } from '../src/domain/listImport.mjs'
 const realCatalog = JSON.parse(
   await readFile(new URL('../src/data/legacyJsaCatalog.json', import.meta.url), 'utf8'),
 );
+const realProfiles = realCatalog.units.flatMap((unit) =>
+  unit.profiles.map((profile) => ({
+    id: profile.id,
+    name: profile.armyName,
+    troopType: unit.troopType,
+    points: profile.points,
+    cap: profile.cap,
+    rangedEquipment: profile.rangedEquipment,
+    meleeEquipment: profile.meleeEquipment,
+  })),
+);
 
 const profiles = [
   { id: 'shinobu', name: 'SHINOBU' },
@@ -133,7 +144,7 @@ test('importa la lista del ejemplo compartido de Infinity Army', () => {
     ' HATAMOTO (Teniente [+1 Orden]) Red Fury / Pistola Pesada, Arma CC Monofilo, Arma CC E/M(PS=4). (+1 | 38)',
     '3 CAP | 300 Puntos',
     '[url=https://infinitytheuniverse.com/army/list/abc]Abrir en Infinity Army',
-  ].join('\n'), realCatalog.profiles);
+  ].join('\n'), realProfiles);
 
   assert.equal(result.format, 'infinity-army');
   assert.equal(result.entries.length, 14);
@@ -163,7 +174,7 @@ test('importa Infinity Army con etiquetas BBCode e iconos de imagen en los grupo
     '[imglogoarmy=14]https://assets.example/ninja.svg[/imglogoarmy] [b]NINJA (Hacker, Disp. Hacker Asesino)[/b] Arco Táctico(+1DE), Minas Shock ( ) / Pistola, Arma CC DA(PS=6). (0 | [b]26[/b])',
     '[b] 3.5 CAP | 299 Puntos[/b]',
     '[url=https://infinitytheuniverse.com/army/list/abc]Abrir en Infinity Army[/url]',
-  ].join('\n'), realCatalog.profiles);
+  ].join('\n'), realProfiles);
 
   assert.equal(result.format, 'infinity-army');
   assert.equal(result.entries.length, 4);
@@ -208,7 +219,7 @@ test('importa la lista JSA completa copiada con BBCode e imágenes de Infinity A
     '[imglogoarmy=14]https://assets.example/atom.svg[/imglogoarmy] [b]ATOM AIBŌT (Sensor)[/b] Fusil Combi, Pulso Flash / Arma CC PARA(-3). (0 | [b]15[/b])',
     '[b] 3.5 CAP | 299 Puntos[/b]',
     '[url=https://infinitytheuniverse.com/army/list/abc]Abrir en Infinity Army[/url]',
-  ].join('\n'), realCatalog.profiles);
+  ].join('\n'), realProfiles);
 
   assert.equal(result.format, 'infinity-army');
   assert.equal(result.entries.length, 15);
