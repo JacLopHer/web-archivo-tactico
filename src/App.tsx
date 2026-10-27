@@ -1,10 +1,23 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import type { FormEvent } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
 import { parseListImport } from './domain/listImport.mjs';
+import {
+  createInitialProjectStore,
+  createProject,
+  deleteProject,
+  loadProjectStore,
+  renameProject,
+  saveProjectStore,
+  setActiveProject,
+  shouldAutosaveProjects,
+  updateProjectCards,
+} from './domain/projects.mjs';
 import type { JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
 import type { ImportedProfileLine } from './domain/listImport.mjs';
+import type { ProjectStore } from './domain/projects.mjs';
 
 const catalog = catalogData as JsaCatalog;
 const weaponProfiles = weaponProfilesData as WeaponProfilesCatalog;
@@ -31,15 +44,82 @@ function App() {
   const [listText, setListText] = useState('');
   const [importedEntries, setImportedEntries] = useState<Array<ImportedProfileLine & { id: string }>>([]);
   const [importedFormat, setImportedFormat] = useState<'infinity-army' | 'profile-list'>('profile-list');
-  const [collection, setCollection] = useState<Array<{ id: number; profileId: string; groupName?: string }>>([]);
+  const [projectStore, setProjectStore] = useState<ProjectStore | null>(null);
+  const [projectsHydrated, setProjectsHydrated] = useState(false);
+  const [projectsDirty, setProjectsDirty] = useState(false);
+  const [persistenceBlocked, setPersistenceBlocked] = useState(false);
+  const [persistenceError, setPersistenceError] = useState('');
+  const [persistenceMessage, setPersistenceMessage] = useState('Cargando proyectos locales…');
+  const [newProjectName, setNewProjectName] = useState('');
+  const [renameProjectName, setRenameProjectName] = useState('');
+  const [isRenamingProject, setIsRenamingProject] = useState(false);
+  const [projectConfirmation, setProjectConfirmation] = useState<'delete' | 'overwrite' | null>(null);
   const [collectionAnnouncement, setCollectionAnnouncement] = useState('');
   const [clearConfirmationOpen, setClearConfirmationOpen] = useState(false);
   const nextCollectionId = useRef(0);
   const clearCollectionButtonRef = useRef<HTMLButtonElement>(null);
   const cancelClearButtonRef = useRef<HTMLButtonElement>(null);
+  const cancelProjectActionButtonRef = useRef<HTMLButtonElement>(null);
+  const activeProjectId = projectStore?.activeProjectId;
+  const activeProject = projectStore?.projects.find((project) => project.id === activeProjectId);
+  const collection = activeProject?.cards ?? [];
   const selectedProfile = catalog.profiles.find((profile) => profile.id === selectedId);
   const profileWeapons = selectedProfile ? getProfileWeapons(selectedProfile, weaponIndex) : [];
   const resolvedImportCount = importedEntries.filter((entry) => entry.profileId).length;
+
+  useEffect(() => {
+    try {
+      const result = loadProjectStore(
+        window.localStorage,
+        () => createInitialProjectStore(`project-${crypto.randomUUID()}`),
+      );
+      setProjectStore(result.store);
+      nextCollectionId.current = Math.max(
+        0,
+        ...result.store.projects.flatMap((project) => project.cards.map((card) => card.id + 1)),
+      );
+      setPersistenceMessage(
+        result.loaded ? 'Proyectos recuperados del almacenamiento local.' : 'Lista inicial lista; se guardará al primer cambio.',
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Error desconocido al leer los proyectos locales.';
+      setProjectStore(createInitialProjectStore(`project-${crypto.randomUUID()}`));
+      setPersistenceBlocked(true);
+      setPersistenceError(message);
+      setPersistenceMessage(`No se guardaron los cambios: ${message}`);
+    } finally {
+      setProjectsHydrated(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!projectStore || !shouldAutosaveProjects({
+      hydrated: projectsHydrated,
+      dirty: projectsDirty,
+      persistenceBlocked,
+    })) return;
+
+    try {
+      saveProjectStore(window.localStorage, projectStore);
+      setPersistenceMessage('Guardado localmente en este navegador.');
+      setPersistenceError('');
+      setPersistenceBlocked(false);
+      setProjectsDirty(false);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Error desconocido al guardar los proyectos locales.';
+      setPersistenceError(message);
+      setPersistenceMessage(`No se guardaron los cambios: ${message}`);
+      setPersistenceBlocked(true);
+    }
+  }, [projectStore, projectsHydrated, projectsDirty, persistenceBlocked]);
+
+  const updateProjectStore = (nextStore: ProjectStore) => {
+    setProjectStore(nextStore);
+    setProjectsDirty(true);
+    setPersistenceMessage('Cambios pendientes de guardado local.');
+  };
+
+  const createProjectId = () => `project-${crypto.randomUUID()}`;
 
   const filteredProfiles = useMemo(() => {
     const normalizedQuery = query.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -90,10 +170,12 @@ function App() {
   };
 
   const addProfilesToCollection = (entries: Array<{ profileId: string; groupName?: string }>) => {
-    setCollection((items) => [
-      ...items,
+    if (!projectStore || !activeProject) return;
+    const cards = [
+      ...collection,
       ...entries.map((entry) => ({ id: nextCollectionId.current++, ...entry })),
-    ]);
+    ];
+    updateProjectStore(updateProjectCards(projectStore, activeProject.id, cards));
     const addedNames = entries
       .map(({ profileId }) => catalog.profiles.find((profile) => profile.id === profileId)?.name)
       .filter((name): name is string => Boolean(name));
@@ -118,13 +200,12 @@ function App() {
   };
 
   const moveCollectionItem = (index: number, direction: -1 | 1) => {
-    setCollection((items) => {
-      const target = index + direction;
-      if (target < 0 || target >= items.length) return items;
-      const reordered = [...items];
-      [reordered[index], reordered[target]] = [reordered[target], reordered[index]];
-      return reordered;
-    });
+    if (!projectStore || !activeProject) return;
+    const target = index + direction;
+    if (target < 0 || target >= collection.length) return;
+    const reordered = [...collection];
+    [reordered[index], reordered[target]] = [reordered[target], reordered[index]];
+    updateProjectStore(updateProjectCards(projectStore, activeProject.id, reordered));
   };
 
   useEffect(() => {
@@ -140,11 +221,52 @@ function App() {
     };
   }, [clearConfirmationOpen]);
 
+  useEffect(() => {
+    if (!projectConfirmation) return;
+    cancelProjectActionButtonRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setProjectConfirmation(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [projectConfirmation]);
+
   const clearCollection = () => {
-    if (!collection.length) return;
-    setCollection([]);
+    if (!collection.length || !projectStore || !activeProject) return;
+    updateProjectStore(updateProjectCards(projectStore, activeProject.id, []));
     setCollectionAnnouncement('Se han eliminado todas las fichas de la colección.');
     setClearConfirmationOpen(false);
+  };
+
+  const confirmProjectAction = () => {
+    if (!projectStore || !activeProject) return;
+    if (projectConfirmation === 'delete') {
+      updateProjectStore(deleteProject(projectStore, activeProject.id, createProjectId()));
+      setIsRenamingProject(false);
+      setCollectionAnnouncement(`Proyecto ${activeProject.name} eliminado.`);
+    } else if (projectConfirmation === 'overwrite') {
+      setPersistenceBlocked(false);
+      setProjectsDirty(true);
+      setPersistenceMessage('Reintentando el guardado local…');
+    }
+    setProjectConfirmation(null);
+  };
+
+  const submitNewProject = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!projectStore || !newProjectName.trim()) return;
+    updateProjectStore(createProject(projectStore, { id: createProjectId(), name: newProjectName }));
+    setNewProjectName('');
+    setIsRenamingProject(false);
+    setCollectionAnnouncement(`Proyecto ${newProjectName.trim()} creado.`);
+  };
+
+  const submitRenameProject = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!projectStore || !activeProject || !renameProjectName.trim()) return;
+    updateProjectStore(renameProject(projectStore, activeProject.id, renameProjectName));
+    setIsRenamingProject(false);
+    setCollectionAnnouncement(`Proyecto renombrado a ${renameProjectName.trim()}.`);
   };
 
   return (
@@ -159,6 +281,97 @@ function App() {
         </a>
         <span className="edition-tag">N5 · PILOTO JSA</span>
       </header>
+
+      <section className="project-manager panel-surface" aria-label="Gestión de proyectos">
+        <div className="project-manager-heading">
+          <div>
+            <span className="eyebrow">LISTAS LOCALES</span>
+            <h2>Proyectos</h2>
+          </div>
+          <span className="active-project-label">
+            {activeProject ? `ACTIVO · ${activeProject.name}` : 'Cargando…'}
+          </span>
+        </div>
+        <div className="project-manager-controls">
+          <label className="select-control project-select">
+            <span>Cambiar proyecto</span>
+            <select
+              value={activeProject?.id ?? ''}
+              disabled={!projectsHydrated || !projectStore}
+              onChange={(event) => {
+                if (!projectStore) return;
+                updateProjectStore(setActiveProject(projectStore, event.target.value));
+                setIsRenamingProject(false);
+              }}
+            >
+              {projectStore?.projects.map((project) => (
+                <option key={project.id} value={project.id}>{project.name}</option>
+              ))}
+            </select>
+          </label>
+          <form className="project-create-form" onSubmit={submitNewProject}>
+            <label>
+              <span>Nuevo proyecto</span>
+              <input
+                value={newProjectName}
+                onChange={(event) => setNewProjectName(event.target.value)}
+                maxLength={60}
+                placeholder="Nombre de la lista"
+                disabled={!projectsHydrated}
+              />
+            </label>
+            <button className="action-button primary" type="submit" disabled={!projectsHydrated || !newProjectName.trim()}>
+              Crear
+            </button>
+          </form>
+          {isRenamingProject ? (
+            <form className="project-rename-form" onSubmit={submitRenameProject}>
+              <label>
+                <span>Renombrar proyecto activo</span>
+                <input
+                  autoFocus
+                  value={renameProjectName}
+                  onChange={(event) => setRenameProjectName(event.target.value)}
+                  maxLength={60}
+                  disabled={!activeProject}
+                />
+              </label>
+              <button className="action-button primary" type="submit" disabled={!renameProjectName.trim()}>Guardar nombre</button>
+              <button className="action-button" type="button" onClick={() => setIsRenamingProject(false)}>Cancelar</button>
+            </form>
+          ) : (
+            <div className="project-actions">
+              <button
+                className="action-button"
+                type="button"
+                disabled={!activeProject}
+                onClick={() => {
+                  setRenameProjectName(activeProject?.name ?? '');
+                  setIsRenamingProject(true);
+                }}
+              >
+                Renombrar
+              </button>
+              <button
+                className="action-button clear-collection-button"
+                type="button"
+                disabled={!activeProject}
+                onClick={() => setProjectConfirmation('delete')}
+              >
+                Eliminar proyecto
+              </button>
+            </div>
+          )}
+        </div>
+        <p className={`persistence-message${persistenceError ? ' is-error' : ''}`} role="status">
+          {persistenceMessage}
+          {persistenceError && (
+            <button className="action-button" type="button" onClick={() => setProjectConfirmation('overwrite')}>
+              Reintentar / reemplazar guardado local
+            </button>
+          )}
+        </p>
+      </section>
 
       <section className="intro">
         <div className="eyebrow">ARCHIVO TÁCTICO · FASE 01</div>
@@ -496,7 +709,14 @@ function App() {
                     <div>
                       <button type="button" aria-label={`Mover ${profile.name} arriba`} onClick={() => moveCollectionItem(index, -1)} disabled={index === 0}>↑</button>
                       <button type="button" aria-label={`Mover ${profile.name} abajo`} onClick={() => moveCollectionItem(index, 1)} disabled={index === collection.length - 1}>↓</button>
-                      <button type="button" aria-label={`Eliminar ${profile.name}`} onClick={() => setCollection((items) => items.filter((candidate) => candidate.id !== item.id))}>×</button>
+                      <button type="button" aria-label={`Eliminar ${profile.name}`} onClick={() => {
+                        if (!projectStore || !activeProject) return;
+                        updateProjectStore(updateProjectCards(
+                          projectStore,
+                          activeProject.id,
+                          collection.filter((candidate) => candidate.id !== item.id),
+                        ));
+                      }}>×</button>
                     </div>
                   </div>
                   <button className="collection-card-main" type="button" onClick={() => setSelectedId(profile.id)}>
@@ -552,6 +772,45 @@ function App() {
               </button>
               <button className="action-button destructive" type="button" onClick={clearCollection}>
                 Sí, limpiar fichas
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+      {projectConfirmation && (
+        <div
+          className="dialog-backdrop"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setProjectConfirmation(null);
+          }}
+        >
+          <section
+            className="confirm-dialog"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="project-dialog-title"
+            aria-describedby="project-dialog-description"
+          >
+            <div className="dialog-eyebrow">GESTIONAR PROYECTOS</div>
+            <h2 id="project-dialog-title">
+              {projectConfirmation === 'delete' ? '¿Eliminar este proyecto?' : '¿Reintentar y reemplazar el guardado?'}
+            </h2>
+            <p id="project-dialog-description">
+              {projectConfirmation === 'delete'
+                ? `Se eliminará «${activeProject?.name}» y sus ${collection.length} fichas. Esta acción no se puede deshacer.${projectStore?.projects.length === 1 ? ' Se creará una lista vacía para que puedas continuar.' : ''}`
+                : 'Se intentará guardar el estado actual. Si los datos locales anteriores están dañados o no son compatibles, se reemplazarán y no podrán recuperarse.'}
+            </p>
+            <div className="dialog-actions">
+              <button
+                ref={cancelProjectActionButtonRef}
+                className="action-button"
+                type="button"
+                onClick={() => setProjectConfirmation(null)}
+              >
+                Cancelar
+              </button>
+              <button className="action-button destructive" type="button" onClick={confirmProjectAction}>
+                {projectConfirmation === 'delete' ? 'Sí, eliminar proyecto' : 'Sí, reintentar guardado'}
               </button>
             </div>
           </section>

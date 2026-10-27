@@ -4,7 +4,8 @@
 
 ### Decisión de alcance
 
-- Los perfiles de tropa JSA heredados se aceptan como conjunto de datos válido para avanzar con el MVP, por decisión del propietario del proyecto. No se realizará un cotejo adicional de esos perfiles como requisito funcional. Se conserva su procedencia y el estado de verificación del catálogo para no alterar la trazabilidad.
+- Los perfiles de tropa JSA heredados se utilizan en el flujo MVP por decisión del propietario, pero esto no constituye un cotejo nuevo de sus valores. Se conserva su estado `unverified` y la procedencia heredada.
+- La clasificación de clase de tropa (por ejemplo, Infantería Ligera, Media o Pesada) queda pendiente de modelado. El campo `troopType` existente contiene categorías distintas, como T. Línea, T. Apoyo, REM o TAG; no se debe presentar como equivalente.
 - La disponibilidad sectorial sigue pendiente: no se asignan perfiles a sectoriales ni se habilitan esos filtros sin evidencia específica.
 
 ### Flujo MVP implementado
@@ -13,18 +14,44 @@
 - Pegado de una lista de perfiles por línea o del texto copiado de Infinity Army. El parser reconoce unidades, grupos, armamento y costes CAP/puntos, e ignora título, totales y enlace.
 - En Infinity Army se conservan texto fuente, número de línea, grupo y campos de armamento/coste. Se resuelve por nombre de perfil; cuando hay variantes del mismo nombre, se usan armamento y coste para elegir solo si la mejor coincidencia es inequívoca. Los perfiles sin candidato siguen necesitando selección manual.
 - Las coincidencias resueltas se pueden añadir a una colección de fichas; se conservan los duplicados y grupos, y se pueden eliminar, reordenar o limpiar toda la colección con confirmación. La colección presenta atributos, habilidades/equipo y nombres de armamento, y permite abrir la ficha detallada del perfil.
-- La colección es temporal en memoria. Hay estilos de impresión para la colección, pero aún no hay controles de impresión/PDF, previsualización paginada ni validación de impresión.
+- La revisión permite retirar las coincidencias ya resueltas sin añadirlas a la colección.
+- Hay gestión local de proyectos/listas con creación, cambio, renombrado, eliminación confirmada y autosave versionado en `localStorage`. Cada proyecto conserva sus fichas, orden, identidad, duplicados y grupos; se recupera el proyecto activo al volver a abrir la app. El estado del guardado y los fallos son visibles, y un guardado inválido/incompatible no se sobrescribe sin confirmación. Los datos quedan ligados al navegador y al origen y pueden perderse al limpiar los datos del navegador; no hay sincronización ni copia de seguridad automática. Hay estilos de impresión para la colección, pero aún no hay controles de impresión/PDF, previsualización paginada ni validación de impresión.
 
 ### Deuda técnica y siguientes pasos
 
 1. Probar el parser con más variantes reales de Infinity Army, en especial opciones de equipo, nombres no incluidos en el catálogo y cambios de formato del exportador. El enlace codificado y archivos exportados no se procesan.
-2. Añadir proyectos persistentes, guardado/recuperación y exportación/importación de copias de seguridad.
+2. **Siguiente paso funcional recomendado:** añadir exportación/importación de copias de seguridad de proyectos locales.
 3. Implementar exportación PDF e impresión completa con selección de papel, control de saltos y pruebas en navegador/impresora.
 4. Completar las fichas de colección con la tabla visual de perfiles de armas, ahora disponible en el detalle del perfil.
 5. Incorporar imágenes permitidas y asociadas de forma fiable a unidad/perfil; actualmente se usa un marcador.
 6. Desarrollar las explicaciones didácticas contextuales del modo de aprendizaje.
 7. Añadir pruebas de interfaz en navegador para importación, resolución manual, colección, reordenación, responsive e impresión.
-8. Mantener sectoriales desactivados hasta disponer de asignaciones respaldadas por fuentes.
+8. Modelar la clase de tropa (Infantería Ligera/Media/Pesada, etc.) como dato separado de `troopType`; completar cuando se decidan fuente y alcance de clasificación.
+9. Mantener sectoriales desactivados hasta disponer de asignaciones respaldadas por fuentes.
+10. Configurar y probar el despliegue estático en GitHub Pages; no está publicado todavía.
+
+### Despliegue previsto: GitHub Pages
+
+GitHub Pages es la opción inicial prevista por ser un alojamiento estático y gratuito para sitios de repositorios públicos. Encaja con el piloto actual: React/Vite, catálogos JSON locales y lógica que se ejecuta en el navegador. El despliegue no está configurado todavía.
+
+**Consecuencias para la arquitectura y el uso:**
+
+- Pages sirve HTML, CSS, JavaScript y recursos estáticos; no ejecuta un backend, base de datos, funciones de servidor ni tareas privadas. El catálogo y el código incluidos en el build son descargables por los visitantes. No incluir secretos ni datos que deban mantenerse privados.
+- La persistencia inicial puede ser local en el navegador, pero no sincroniza proyectos entre dispositivos ni usuarios. `localStorage` pertenece al origen del sitio: localhost, el dominio `github.io` y un dominio personalizado son almacenamientos separados. Debe haber exportación/importación de copias de seguridad antes de depender de proyectos locales.
+- Al ser un sitio de proyecto, la URL por defecto incluye el nombre del repositorio (`/<repo>/`). Vite debe compilar con el `base` correcto (actualmente no configurado) y los recursos/rutas deben probarse desde esa subruta, no solo desde la raíz local.
+- GitHub Pages no proporciona fallback de servidor para rutas SPA. Si se añaden rutas, habrá que diseñar la navegación para hosting estático (por ejemplo, hash routing o una solución explícita de fallback) y probar recarga/enlaces directos.
+- Los sitios publicados pueden tener hasta 1 GB; GitHub documenta límites suaves de 100 GB de transferencia mensual y 10 builds por hora (este último no aplica si se publica mediante un workflow personalizado de GitHub Actions). Los despliegues pueden expirar si tardan más de 10 minutos. Son límites holgados para el piloto, pero las imágenes pesadas y un aumento de uso deben vigilarse. Revisar la [documentación vigente de límites de Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
+- GitHub registra las direcciones IP de quienes visitan Pages por razones de seguridad. No se debe presentar la app como anónima respecto al proveedor de hosting. Más información: [qué es GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+
+**Trabajo necesario para publicarla:**
+
+1. Configurar `base` en Vite para el nombre real del repositorio y verificar que funcione en una ruta `/repo/`.
+2. Añadir un workflow de GitHub Actions con permisos mínimos para compilar y publicar el directorio `dist`.
+3. Habilitar GitHub Pages desde ese workflow en la configuración del repositorio.
+4. Probar URL, carga de recursos, refresco, impresión y funcionamiento completo en el sitio publicado; dejar la URL de producción documentada.
+5. Si se configura dominio personalizado, revisar DNS, HTTPS y el cambio de origen para los datos locales guardados.
+
+Si en el futuro se requieren cuentas, sincronización entre dispositivos, listas compartidas o datos privados, GitHub Pages por sí solo no será suficiente: habrá que añadir un backend y alojamiento independiente, o elegir una plataforma que los proporcione.
 
 ## 1. Rol y objetivo
 
@@ -54,7 +81,7 @@ Antes de programar:
 6. Conserva las funcionalidades útiles existentes, salvo que haya una razón justificada para sustituirlas.
 7. Presenta un breve diagnóstico y una arquitectura propuesta antes de iniciar la implementación.
 8. Usa JSA como único catálogo seleccionable en el piloto. Estructura los modelos para ampliar a otras facciones sin simular datos que todavía no existen.
-9. En el piloto actual, acepta los perfiles heredados de JSA como datos válidos por decisión del propietario; su cotejo adicional no bloquea la implementación funcional. Conserva su procedencia y estado de verificación para mantener la trazabilidad, y no inventes relaciones sectoriales.
+9. En el piloto actual, utiliza los perfiles heredados de JSA para el flujo funcional por decisión del propietario, pero conserva su procedencia y estado de verificación; no declares que se han vuelto a cotejar. La clase de tropa y las relaciones sectoriales no deben inferirse si no hay datos respaldados.
 
 No elimines datos ni funcionalidades sin identificar previamente qué se perdería.
 
@@ -351,8 +378,8 @@ Trabaja por fases, con entregables comprobables.
 - Crear el proyecto React.
 - Implementar el catálogo piloto de JSA y la selección de sus perfiles.
 - Habilitar sectoriales únicamente cuando se disponga de una relación de perfiles verificada.
-- Implementar importación de texto pegado, con una entrada por línea, advertencias y resolución manual de coincidencias ambiguas o no encontradas.
-- Utilizar el catálogo JSA heredado aceptado para el MVP; mantener su procedencia y su estado de verificación explícitos, sin bloquear el flujo por un cotejo adicional.
+- Implementar importación de texto pegado, con soporte de texto de Infinity Army, grupos de combate, advertencias y resolución manual de coincidencias ambiguas o no encontradas.
+- Utilizar el catálogo JSA heredado en el flujo MVP; mantener su procedencia y su estado `unverified` explícitos. El cotejo de valores y la clasificación LI/MI/HI quedan fuera del alcance funcional de esta fase.
 - Mostrar las unidades en fichas visuales con imágenes o sustitutos.
 - Incorporar búsqueda, adición, eliminación, reordenación y vista previa de la colección.
 
@@ -371,6 +398,11 @@ Trabaja por fases, con entregables comprobables.
 - Más facciones y perfiles.
 - Más formatos de importación.
 - Mejoras de personalización y accesibilidad.
+
+**Fase 6 — Publicación**
+- Configurar Vite y GitHub Actions para publicar en GitHub Pages.
+- Validar el sitio servido bajo la subruta del repositorio y documentar sus límites.
+- Confirmar que la persistencia local y las copias de seguridad explican el alcance de almacenamiento del navegador.
 
 Al terminar cada fase, ejecuta las pruebas pertinentes, corrige los problemas detectados y documenta qué funciona y qué queda pendiente.
 
