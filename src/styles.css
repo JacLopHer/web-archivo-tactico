@@ -138,15 +138,29 @@ button, select { cursor: pointer; }
 .action-button:disabled { opacity: .45; cursor: not-allowed; }
 .import-review { border-top: 1px solid #293745; }
 .import-review-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px; color: #dce4ea; font-size: 12px; }
+.import-review-actions { display: flex; align-items: center; gap: 8px; }
 .import-entry-list { margin: 0; padding: 0; list-style: none; }
 .import-entry { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(240px, 1fr); align-items: center; gap: 16px; padding: 10px 18px; border-top: 1px solid #23303c; }
 .import-original { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .import-original strong { overflow-wrap: anywhere; color: #edf2f5; font-size: 11px; }
 .import-original span { color: #9cabb8; font-size: 9px; }
+.import-original .import-equipment { color: #bac5ce; line-height: 1.4; }
+.import-original .import-source-line { color: #d3b878; line-height: 1.4; overflow-wrap: anywhere; }
 .import-profile-select select { width: 100%; min-height: 36px; padding: 6px 9px; color: #e8edf2; background: #0e151d; border: 1px solid #2a3948; border-radius: 3px; font-size: 10px; }
 .detail-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 0 0 10px; color: #9eacb9; font-size: 10px; }
 .collection-section { padding-bottom: 15px; }
 .collection-section > .panel-heading { margin-bottom: 15px; }
+.collection-heading-actions { display: flex; align-items: center; gap: 10px; }
+.clear-collection-button { min-height: 32px; padding: 5px 9px; color: #ffc0c7; background: #35232b; border-color: #70404b; }
+.clear-collection-button:hover:not(:disabled) { border-color: #ed6878; }
+.dialog-backdrop { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; padding: 20px; background: #05090dcc; backdrop-filter: blur(4px); }
+.confirm-dialog { width: min(100%, 430px); padding: 25px; color: #eaf0f4; background: linear-gradient(145deg, #1a2733, #111922 75%); border: 1px solid #3b4c5c; border-top: 2px solid var(--accent); border-radius: 4px; box-shadow: 0 24px 80px #000b; }
+.dialog-eyebrow { color: #e9828e; font-size: 9px; font-weight: 700; letter-spacing: .16em; }
+.confirm-dialog h2 { margin: 10px 0 8px; color: #f1f5f7; font: 600 27px/1.1 'Barlow Condensed', sans-serif; }
+.confirm-dialog p { margin: 0; color: #aab7c2; font-size: 12px; line-height: 1.6; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 23px; }
+.dialog-actions .destructive { color: #fff; background: #a43e4d; border-color: #c35363; }
+.dialog-actions .destructive:hover { background: #bd4758; border-color: #e16a78; }
 .collection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr)); gap: 14px; padding: 0 15px; }
 .collection-card { min-width: 0; overflow: hidden; color: #142029; background: #e6eeee; border: 1px solid #aebfbe; border-radius: 3px; }
 .collection-card-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; color: #d9e3e8; background: #172631; font-size: 8px; font-weight: 700; letter-spacing: .1em; }
@@ -189,6 +203,10 @@ button, select { cursor: pointer; }
   .profile-count { display: none; }
   .import-entry { grid-template-columns: 1fr; gap: 8px; padding: 10px 12px; }
   .import-input-footer, .import-review-heading { align-items: flex-start; flex-direction: column; }
+  .import-review-actions { width: 100%; flex-wrap: wrap; }
+  .confirm-dialog { padding: 21px; }
+  .dialog-actions { flex-direction: column-reverse; }
+  .dialog-actions button { width: 100%; }
   .datacard { padding: 0; }
   .card-topline { align-items: flex-start; gap: 8px; }
   .unit-header { grid-template-columns: 64px 1fr; min-height: 66px; }

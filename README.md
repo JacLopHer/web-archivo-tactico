@@ -4,12 +4,12 @@ Aplicación web en React y TypeScript para consultar perfiles y preparar tarjeta
 
 ## Flujo MVP
 
-1. Pega una lista de perfiles JSA en el cuadro de importación, con un perfil por línea.
-2. Analiza la lista. Solo se resuelven automáticamente nombres completos coincidentes con el catálogo (ignorando mayúsculas, acentos y puntuación).
-3. Selecciona manualmente un perfil para cada nombre ambiguo o no reconocido. Las coincidencias parciales no se asignan automáticamente.
-4. Añade los perfiles resueltos a la colección. También puedes añadir perfiles desde el catálogo, abrir su ficha detallada, reordenar o quitar fichas.
+1. Pega una lista de perfiles JSA (un perfil por línea) o el texto copiado de una lista de Infinity Army.
+2. Para Infinity Army, se extraen perfiles, grupos de combate, armamento y costes CAP/puntos. Los perfiles repetidos se conservan; el coste y el armamento ayudan a resolver variantes con el mismo nombre.
+3. Las coincidencias desconocidas o ambiguas siguen requiriendo selección manual. No se asignan coincidencias parciales por aproximación. Puedes añadir las resueltas a la colección o quitarlas de la revisión sin añadirlas.
+4. Añade los perfiles resueltos a la colección. También puedes añadir perfiles desde el catálogo, abrir su ficha detallada, reordenar o quitar fichas. Se conserva el grupo de combate en las fichas importadas. El botón «Limpiar fichas» vacía toda la colección tras confirmación.
 
-La importación todavía no interpreta cabeceras, cantidades, grupos de combate ni archivos de Infinity Army u otros formatos. La colección solo vive en memoria y se pierde al recargar la página. La tabla detallada de armas está disponible al seleccionar una ficha en el catálogo; las tarjetas de colección muestran atributos, habilidades/equipo y nombres de armamento.
+La importación está adaptada al formato de texto copiado de Infinity Army; no lee directamente el enlace codificado ni archivos externos. Las opciones de equipo entre paréntesis y el coste se conservan durante la revisión, pero no cambian los datos del perfil. La colección solo vive en memoria y se pierde al recargar la página. La tabla detallada de armas está disponible al seleccionar una ficha en el catálogo; las tarjetas de colección muestran atributos, habilidades/equipo y nombres de armamento.
 
 ## Desarrollo
 

@@ -10,14 +10,14 @@
 ### Flujo MVP implementado
 
 - Catálogo piloto JSA con búsqueda, ficha de detalle y perfiles de armas separados.
-- Pegado de una lista de perfiles, con una entrada por línea. Se conservan el texto original y el número de línea.
-- Resolución automática solo con coincidencia completa del nombre normalizado (sin distinguir mayúsculas, acentos ni puntuación). Las coincidencias duplicadas y las desconocidas requieren selección manual; no se infieren coincidencias parciales.
-- Las coincidencias resueltas se pueden añadir a una colección de fichas; se pueden eliminar y reordenar. La colección presenta atributos, habilidades/equipo y nombres de armamento, y permite abrir la ficha detallada del perfil.
+- Pegado de una lista de perfiles por línea o del texto copiado de Infinity Army. El parser reconoce unidades, grupos, armamento y costes CAP/puntos, e ignora título, totales y enlace.
+- En Infinity Army se conservan texto fuente, número de línea, grupo y campos de armamento/coste. Se resuelve por nombre de perfil; cuando hay variantes del mismo nombre, se usan armamento y coste para elegir solo si la mejor coincidencia es inequívoca. Los perfiles sin candidato siguen necesitando selección manual.
+- Las coincidencias resueltas se pueden añadir a una colección de fichas; se conservan los duplicados y grupos, y se pueden eliminar, reordenar o limpiar toda la colección con confirmación. La colección presenta atributos, habilidades/equipo y nombres de armamento, y permite abrir la ficha detallada del perfil.
 - La colección es temporal en memoria. Hay estilos de impresión para la colección, pero aún no hay controles de impresión/PDF, previsualización paginada ni validación de impresión.
 
 ### Deuda técnica y siguientes pasos
 
-1. Confirmar con listas reales qué contenido y formato se va a admitir. La importación actual no entiende cabeceras, cantidades, grupos de combate ni formatos de exportación externos.
+1. Probar el parser con más variantes reales de Infinity Army, en especial opciones de equipo, nombres no incluidos en el catálogo y cambios de formato del exportador. El enlace codificado y archivos exportados no se procesan.
 2. Añadir proyectos persistentes, guardado/recuperación y exportación/importación de copias de seguridad.
 3. Implementar exportación PDF e impresión completa con selección de papel, control de saltos y pruebas en navegador/impresora.
 4. Completar las fichas de colección con la tabla visual de perfiles de armas, ahora disponible en el detalle del perfil.

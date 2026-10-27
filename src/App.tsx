@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
-import { parseProfileList } from './domain/listImport.mjs';
+import { parseListImport } from './domain/listImport.mjs';
 import type { JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
 import type { ImportedProfileLine } from './domain/listImport.mjs';
 
@@ -30,9 +30,13 @@ function App() {
   const [selectedSectorial, setSelectedSectorial] = useState('');
   const [listText, setListText] = useState('');
   const [importedEntries, setImportedEntries] = useState<Array<ImportedProfileLine & { id: string }>>([]);
-  const [collection, setCollection] = useState<Array<{ id: number; profileId: string }>>([]);
+  const [importedFormat, setImportedFormat] = useState<'infinity-army' | 'profile-list'>('profile-list');
+  const [collection, setCollection] = useState<Array<{ id: number; profileId: string; groupName?: string }>>([]);
   const [collectionAnnouncement, setCollectionAnnouncement] = useState('');
+  const [clearConfirmationOpen, setClearConfirmationOpen] = useState(false);
   const nextCollectionId = useRef(0);
+  const clearCollectionButtonRef = useRef<HTMLButtonElement>(null);
+  const cancelClearButtonRef = useRef<HTMLButtonElement>(null);
   const selectedProfile = catalog.profiles.find((profile) => profile.id === selectedId);
   const profileWeapons = selectedProfile ? getProfileWeapons(selectedProfile, weaponIndex) : [];
   const resolvedImportCount = importedEntries.filter((entry) => entry.profileId).length;
@@ -69,8 +73,10 @@ function App() {
 
   const analyzeList = () => {
     const timestamp = Date.now();
+    const parsed = parseListImport(listText, catalog.profiles);
+    setImportedFormat(parsed.format);
     setImportedEntries(
-      parseProfileList(listText, catalog.profiles).map((entry) => ({
+      parsed.entries.map((entry) => ({
         ...entry,
         id: `${timestamp}-${entry.lineNumber}`,
       })),
@@ -83,13 +89,13 @@ function App() {
     );
   };
 
-  const addProfilesToCollection = (profileIds: string[]) => {
+  const addProfilesToCollection = (entries: Array<{ profileId: string; groupName?: string }>) => {
     setCollection((items) => [
       ...items,
-      ...profileIds.map((profileId) => ({ id: nextCollectionId.current++, profileId })),
+      ...entries.map((entry) => ({ id: nextCollectionId.current++, ...entry })),
     ]);
-    const addedNames = profileIds
-      .map((profileId) => catalog.profiles.find((profile) => profile.id === profileId)?.name)
+    const addedNames = entries
+      .map(({ profileId }) => catalog.profiles.find((profile) => profile.id === profileId)?.name)
       .filter((name): name is string => Boolean(name));
     setCollectionAnnouncement(
       addedNames.length === 1
@@ -100,7 +106,14 @@ function App() {
 
   const addResolvedImports = () => {
     const resolved = importedEntries.filter((entry) => entry.profileId);
-    addProfilesToCollection(resolved.map((entry) => entry.profileId));
+    addProfilesToCollection(resolved.map((entry) => ({
+      profileId: entry.profileId,
+      groupName: entry.groupName,
+    })));
+    setImportedEntries((entries) => entries.filter((entry) => !entry.profileId));
+  };
+
+  const removeResolvedImports = () => {
     setImportedEntries((entries) => entries.filter((entry) => !entry.profileId));
   };
 
@@ -112,6 +125,26 @@ function App() {
       [reordered[index], reordered[target]] = [reordered[target], reordered[index]];
       return reordered;
     });
+  };
+
+  useEffect(() => {
+    if (!clearConfirmationOpen) return;
+    cancelClearButtonRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setClearConfirmationOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      clearCollectionButtonRef.current?.focus();
+    };
+  }, [clearConfirmationOpen]);
+
+  const clearCollection = () => {
+    if (!collection.length) return;
+    setCollection([]);
+    setCollectionAnnouncement('Se han eliminado todas las fichas de la colección.');
+    setClearConfirmationOpen(false);
   };
 
   return (
@@ -180,21 +213,25 @@ function App() {
         <div className="panel-heading">
           <div>
             <span className="eyebrow">IMPORTAR LISTA</span>
-            <h2 id="import-title">Pega los perfiles, uno por línea</h2>
+            <h2 id="import-title">Pega una lista de perfiles</h2>
           </div>
           <span className="result-count">{importedEntries.length}</span>
         </div>
         <div className="import-input-area">
-          <label htmlFor="profile-list-input">Lista de perfiles JSA</label>
+          <label htmlFor="profile-list-input">Lista de perfiles JSA o exportación de Infinity Army</label>
           <textarea
             id="profile-list-input"
             value={listText}
             onChange={(event) => setListText(event.target.value)}
-            placeholder={'SHINOBU (Teniente)\nDOMARU (AP HMG)\nNINJA'}
+            placeholder={'Pega aquí el texto copiado de Infinity Army o escribe perfiles, uno por línea.'}
             rows={5}
           />
           <div className="import-input-footer">
-            <p>Se comparan nombres completos del catálogo. No se interpreta automáticamente ningún formato externo.</p>
+            <p>
+              {importedFormat === 'infinity-army'
+                ? 'Formato Infinity Army: grupos, coste y armamento se extraen del texto. Revisa las coincidencias antes de añadir.'
+                : 'Para listas simples, escribe un perfil por línea. Los nombres ambiguos requieren selección manual.'}
+            </p>
             <button className="action-button" type="button" onClick={analyzeList} disabled={!listText.trim()}>
               Analizar lista
             </button>
@@ -204,26 +241,51 @@ function App() {
           <div className="import-review">
             <div className="import-review-heading">
               <strong>Revisión de coincidencias</strong>
-              <button
-                className="action-button primary"
-                type="button"
-                onClick={addResolvedImports}
-                disabled={!resolvedImportCount}
-              >
-                Añadir resueltas ({resolvedImportCount})
-              </button>
+              <div className="import-review-actions">
+                <button
+                  className="action-button"
+                  type="button"
+                  onClick={removeResolvedImports}
+                  disabled={!resolvedImportCount}
+                >
+                  Quitar resueltas ({resolvedImportCount})
+                </button>
+                <button
+                  className="action-button primary"
+                  type="button"
+                  onClick={addResolvedImports}
+                  disabled={!resolvedImportCount}
+                >
+                  Añadir resueltas ({resolvedImportCount})
+                </button>
+              </div>
             </div>
             <ul className="import-entry-list">
               {importedEntries.map((entry) => {
                 const profile = catalog.profiles.find((item) => item.id === entry.profileId);
                 const status = profile
-                  ? entry.candidateIds.length > 1 ? 'Coincidencia elegida manualmente' : 'Coincidencia exacta'
+                  ? entry.resolution === 'details'
+                    ? 'Coincidencia por armamento y coste'
+                    : entry.candidateIds.length > 1 ? 'Coincidencia elegida manualmente' : 'Coincidencia exacta'
                   : entry.candidateIds.length > 1 ? 'Nombre ambiguo' : 'Sin coincidencia';
                 return (
                   <li className="import-entry" key={entry.id}>
                     <div className="import-original">
                       <strong>{entry.originalName}</strong>
-                      <span>Línea {entry.lineNumber} · {status}</span>
+                      <span>
+                        {entry.groupName ? `${entry.groupName} · ` : ''}
+                        Línea {entry.lineNumber} · {status}
+                        {entry.points ? ` · ${entry.points} PTS / ${entry.cap} CAP` : ''}
+                      </span>
+                      {entry.rangedEquipment && (
+                        <span className="import-equipment">
+                          CD/EQ: {entry.rangedEquipment}
+                          {entry.meleeEquipment ? ` · CC: ${entry.meleeEquipment}` : ''}
+                        </span>
+                      )}
+                      {importedFormat === 'infinity-army' && !entry.profileId && (
+                        <span className="import-source-line">{entry.sourceLine}</span>
+                      )}
                     </div>
                     <label className="import-profile-select">
                       <span className="sr-only">Perfil para {entry.originalName}</span>
@@ -263,7 +325,7 @@ function App() {
                 className={`profile-option ${selectedId === profile.id ? 'is-selected' : ''}`}
                 key={profile.id}
                 onClick={() => setSelectedId(profile.id)}
-                onDoubleClick={() => addProfilesToCollection([profile.id])}
+                onDoubleClick={() => addProfilesToCollection([{ profileId: profile.id }])}
                 type="button"
               >
                 <span className="profile-avatar" aria-hidden="true">{profile.name.slice(0, 1)}</span>
@@ -286,7 +348,7 @@ function App() {
             <>
             <div className="detail-actions">
               <span>Vista detallada del perfil</span>
-              <button className="action-button primary" type="button" onClick={() => addProfilesToCollection([selectedProfile.id])}>
+              <button className="action-button primary" type="button" onClick={() => addProfilesToCollection([{ profileId: selectedProfile.id }])}>
                 Añadir a la colección
               </button>
             </div>
@@ -409,7 +471,18 @@ function App() {
             <span className="eyebrow">VISTA PREVIA</span>
             <h2 id="collection-title">Colección de fichas</h2>
           </div>
-          <span className="result-count">{collection.length}</span>
+          <div className="collection-heading-actions">
+            <button
+              ref={clearCollectionButtonRef}
+              className="action-button clear-collection-button"
+              type="button"
+              onClick={() => setClearConfirmationOpen(true)}
+              disabled={!collection.length}
+            >
+              Limpiar fichas
+            </button>
+            <span className="result-count">{collection.length}</span>
+          </div>
         </div>
         {collection.length ? (
           <div className="collection-grid">
@@ -419,7 +492,7 @@ function App() {
               return (
                 <article className="collection-card" key={item.id}>
                   <div className="collection-card-toolbar">
-                    <span>FICHA {index + 1}</span>
+                    <span>{item.groupName ? `${item.groupName} · ` : ''}FICHA {index + 1}</span>
                     <div>
                       <button type="button" aria-label={`Mover ${profile.name} arriba`} onClick={() => moveCollectionItem(index, -1)} disabled={index === 0}>↑</button>
                       <button type="button" aria-label={`Mover ${profile.name} abajo`} onClick={() => moveCollectionItem(index, 1)} disabled={index === collection.length - 1}>↓</button>
@@ -449,6 +522,41 @@ function App() {
           <p className="collection-empty">Analiza una lista o añade perfiles del catálogo para preparar tu colección.</p>
         )}
       </section>
+      {clearConfirmationOpen && (
+        <div
+          className="dialog-backdrop"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setClearConfirmationOpen(false);
+          }}
+        >
+          <section
+            className="confirm-dialog"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="clear-dialog-title"
+            aria-describedby="clear-dialog-description"
+          >
+            <div className="dialog-eyebrow">EDITAR COLECCIÓN</div>
+            <h2 id="clear-dialog-title">¿Limpiar todas las fichas?</h2>
+            <p id="clear-dialog-description">
+              Se eliminarán las {collection.length} fichas de esta colección. Esta acción no se puede deshacer.
+            </p>
+            <div className="dialog-actions">
+              <button
+                ref={cancelClearButtonRef}
+                className="action-button"
+                type="button"
+                onClick={() => setClearConfirmationOpen(false)}
+              >
+                Cancelar
+              </button>
+              <button className="action-button destructive" type="button" onClick={clearCollection}>
+                Sí, limpiar fichas
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
       <footer className="app-footer">Catálogo piloto · JSA únicamente · preparado para ampliar con fuentes verificadas</footer>
     </main>
   );
