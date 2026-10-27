@@ -47,6 +47,7 @@ button, select { cursor: pointer; }
 .profile-list { max-height: 690px; overflow: auto; }
 .family-list { max-height: 690px; }
 .family-option { min-height: 43px; padding: 9px 13px; }
+.family-option-icon { flex: 0 0 28px; width: 28px; height: 28px; object-fit: contain; }
 .family-option .profile-summary strong { white-space: normal; }
 .family-variant-count { flex: 0 0 auto; color: #8998a7; font-size: 9px; }
 .variant-list { max-height: 690px; }
@@ -55,8 +56,10 @@ button, select { cursor: pointer; }
 .variant-option { display: flex; align-items: stretch; gap: 6px; padding: 8px; border-bottom: 1px solid #22303c; }
 .variant-option.is-selected { background: #1b2936; box-shadow: inset 3px 0 var(--accent); }
 .variant-option-main { min-width: 0; flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 2px 4px; color: inherit; text-align: left; background: transparent; border: 0; }
+.variant-option-main .variant-profile-title { display: flex; align-items: center; gap: 6px; overflow: visible; }
 .variant-option-main strong { color: #edf2f5; font-size: 11px; }
 .variant-option-main span { overflow: hidden; color: #8998a7; font-size: 9px; line-height: 1.4; text-overflow: ellipsis; }
+.variant-option-main .variant-origin-badge { flex: 0 0 auto; padding: 1px 4px; border: 1px solid #526b79; border-radius: 2px; color: #a9c5d3; font-size: 8px; font-weight: 700; line-height: 1.3; letter-spacing: .04em; }
 .variant-option-main .variant-special-rules { color: #d3b878; white-space: normal; }
 .variant-option-main small { color: #f0c77c; font-size: 9px; }
 .variant-add-button { flex: 0 0 auto; align-self: center; min-height: 30px; padding: 4px 8px; color: var(--teal); background: #142522; border: 1px solid #346b62; border-radius: 3px; font-size: 9px; font-weight: 700; }

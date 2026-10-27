@@ -124,14 +124,21 @@ function getUnitName(profileName) {
   return profileName.replace(/\s*\([^()]*\)\s*$/, '').trim();
 }
 
+const legacyUnitNames = new Set(profiles.map((profile) => getUnitName(profile.name)));
+function getCatalogUnitName(profileName) {
+  const unitName = getUnitName(profileName);
+  const baseName = unitName.replace(/ FTO$/i, '');
+  return unitName.endsWith(' FTO') && legacyUnitNames.has(baseName) ? baseName : unitName;
+}
+
 function getVariantName(profile, unitName) {
-  const suffix = profile.name.slice(unitName.length).trim().replace(/^\(|\)$/g, '').trim();
+  const suffix = profile.name.slice(unitName.length).trim().replace(/^FTO\b/i, '').trim().replace(/^\(|\)$/g, '').trim();
   return suffix || profile.rangedEquipment || profile.meleeEquipment || 'Perfil estándar';
 }
 
 const profilesByUnit = new Map();
 for (const profile of profiles) {
-  const unitName = getUnitName(profile.name);
+  const unitName = getCatalogUnitName(profile.name);
   const unitProfiles = profilesByUnit.get(unitName) ?? [];
   unitProfiles.push(profile);
   profilesByUnit.set(unitName, unitProfiles);

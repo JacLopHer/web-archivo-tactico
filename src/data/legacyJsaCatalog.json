@@ -971,8 +971,8 @@
       ]
     },
     {
-      "id": "legacy-unit-6afc136863cb",
-      "name": "YURIKO ODA FTO",
+      "id": "legacy-unit-1bfb1be5017e",
+      "name": "YURIKO ODA",
       "troopType": "Personaje",
       "stats": {
         "movement": "10-10",
@@ -1003,6 +1003,18 @@
       "verificationStatus": "unverified",
       "profiles": [
         {
+          "id": "legacy-profile-2c1b2c293f0f",
+          "name": "Desp. Avanzado [+20cm]",
+          "armyName": "YURIKO ODA (Desp. Avanzado [+20cm])",
+          "specialRules": [
+            "Desp. Avanzado (+20cm)"
+          ],
+          "rangedEquipment": "Fusil Combi, E/Mitter, Cargas-D, Minas Shock",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0.5",
+          "points": "28"
+        },
+        {
           "id": "legacy-profile-ca86406867e7",
           "name": "Fusil Combi, E/Mitter, Cargas-D, Minas Shock",
           "armyName": "YURIKO ODA FTO",
@@ -1021,51 +1033,6 @@
           "meleeEquipment": "Pistola, Arma CC",
           "cap": "0",
           "points": "23"
-        }
-      ]
-    },
-    {
-      "id": "legacy-unit-1bfb1be5017e",
-      "name": "YURIKO ODA",
-      "troopType": "Personaje",
-      "stats": {
-        "movement": "10-10",
-        "cc": "15",
-        "bs": "12",
-        "physical": "11",
-        "willpower": "13",
-        "armor": "1",
-        "bts": "3",
-        "wounds": "1",
-        "silhouette": "2",
-        "availability": "1"
-      },
-      "woundsLabel": "VITA",
-      "sharedSpecialRules": [
-        "Desactivador",
-        "GizmoKit. Coraje",
-        "Esquivar (+3)",
-        "Esquivar (+2.5cm)",
-        "Ingeniero",
-        "Mimetismo (-3)",
-        "Minador",
-        "Desp. Avanzado (+20cm)"
-      ],
-      "factionId": "jsa",
-      "sectorialIds": [],
-      "edition": "N5",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified",
-      "profiles": [
-        {
-          "id": "legacy-profile-2c1b2c293f0f",
-          "name": "Desp. Avanzado [+20cm]",
-          "armyName": "YURIKO ODA (Desp. Avanzado [+20cm])",
-          "specialRules": [],
-          "rangedEquipment": "Fusil Combi, E/Mitter, Cargas-D, Minas Shock",
-          "meleeEquipment": "Pistola, Arma CC",
-          "cap": "0.5",
-          "points": "28"
         }
       ]
     },
@@ -1857,8 +1824,7 @@
         "Mimetismo (-3)",
         "Shasvastii",
         "Sigilo",
-        "Minador",
-        "Señuelo (2)"
+        "Minador"
       ],
       "factionId": "jsa",
       "sectorialIds": [],
@@ -1870,47 +1836,14 @@
           "id": "legacy-profile-c300e40321cd",
           "name": "Minador, Señuelo [2]",
           "armyName": "AÏDA SWANSON (Minador, Señuelo [2])",
-          "specialRules": [],
+          "specialRules": [
+            "Señuelo (2)"
+          ],
           "rangedEquipment": "Subfusil(+1R), Minas Viral",
           "meleeEquipment": "Pistola Viral, Arma CC Shock(PS=7)",
           "cap": "0.5",
           "points": "24"
-        }
-      ]
-    },
-    {
-      "id": "legacy-unit-c6c9e17b81a4",
-      "name": "AÏDA SWANSON FTO",
-      "troopType": "Personaje",
-      "stats": {
-        "movement": "10-10",
-        "cc": "19",
-        "bs": "12",
-        "physical": "11",
-        "willpower": "13",
-        "armor": "1",
-        "bts": "3",
-        "wounds": "1",
-        "silhouette": "2",
-        "availability": "1"
-      },
-      "woundsLabel": "VITA",
-      "sharedSpecialRules": [
-        "Artes Marciales N2",
-        "Botín",
-        "Coraje",
-        "Desp. Avanzado (+10cm)",
-        "Mimetismo (-3)",
-        "Shasvastii",
-        "Sigilo",
-        "Minador"
-      ],
-      "factionId": "jsa",
-      "sectorialIds": [],
-      "edition": "N5",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified",
-      "profiles": [
+        },
         {
           "id": "legacy-profile-76a72f932f6b",
           "name": "Minador",
@@ -3088,8 +3021,8 @@
       ]
     },
     {
-      "id": "legacy-unit-ae230aadec2a",
-      "name": "YAMABUSHI FTO",
+      "id": "legacy-unit-8c63b05a7f71",
+      "name": "YAMABUSHI",
       "troopType": "T. Mercenaria",
       "stats": {
         "movement": "15-5",
@@ -3122,6 +3055,42 @@
       "verificationStatus": "unverified",
       "profiles": [
         {
+          "id": "legacy-profile-778c8b52f88c",
+          "name": "Camuflaje [1 Uso]",
+          "armyName": "YAMABUSHI (Camuflaje [1 Uso])",
+          "specialRules": [
+            "Camuflaje (1 Uso)"
+          ],
+          "rangedEquipment": "Chain Rifle, Panzerfaust",
+          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
+          "cap": "0",
+          "points": "16"
+        },
+        {
+          "id": "legacy-profile-19854043c8af",
+          "name": "Camuflaje [1 Uso] · Chain Rifle, Arco Táctico, Minas Shock",
+          "armyName": "YAMABUSHI (Camuflaje [1 Uso])",
+          "specialRules": [
+            "Camuflaje (1 Uso)"
+          ],
+          "rangedEquipment": "Chain Rifle, Arco Táctico, Minas Shock",
+          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
+          "cap": "0",
+          "points": "16"
+        },
+        {
+          "id": "legacy-profile-6a3354726221",
+          "name": "Camuflaje [1 Uso] · Chain Rifle, Arco Táctico(+1R), Panzerfaust",
+          "armyName": "YAMABUSHI (Camuflaje [1 Uso])",
+          "specialRules": [
+            "Camuflaje (1 Uso)"
+          ],
+          "rangedEquipment": "Chain Rifle, Arco Táctico(+1R), Panzerfaust",
+          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
+          "cap": "0",
+          "points": "17"
+        },
+        {
           "id": "legacy-profile-e3af426c780e",
           "name": "Chain Rifle, Panzerfaust",
           "armyName": "YAMABUSHI FTO",
@@ -3142,73 +3111,6 @@
           "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
           "cap": "0",
           "points": "16"
-        }
-      ]
-    },
-    {
-      "id": "legacy-unit-8c63b05a7f71",
-      "name": "YAMABUSHI",
-      "troopType": "T. Mercenaria",
-      "stats": {
-        "movement": "15-5",
-        "cc": "23",
-        "bs": "11",
-        "physical": "13",
-        "willpower": "13",
-        "armor": "1",
-        "bts": "3",
-        "wounds": "1",
-        "silhouette": "2",
-        "availability": "2"
-      },
-      "woundsLabel": "VITA",
-      "sharedSpecialRules": [
-        "Artes Marciales N3",
-        "Ataque CC ( Shock )",
-        "Desp. Avanzado ( +10cm )",
-        "Esquivar ( +5cm )",
-        "Frenesí",
-        "Mimetismo ( -3 )",
-        "Sigilo",
-        "Tenaz",
-        "Tropa Religiosa",
-        "Camuflaje (1 Uso)"
-      ],
-      "factionId": "jsa",
-      "sectorialIds": [],
-      "edition": "N5",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified",
-      "profiles": [
-        {
-          "id": "legacy-profile-778c8b52f88c",
-          "name": "Camuflaje [1 Uso]",
-          "armyName": "YAMABUSHI (Camuflaje [1 Uso])",
-          "specialRules": [],
-          "rangedEquipment": "Chain Rifle, Panzerfaust",
-          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
-          "cap": "0",
-          "points": "16"
-        },
-        {
-          "id": "legacy-profile-19854043c8af",
-          "name": "Camuflaje [1 Uso] · Chain Rifle, Arco Táctico, Minas Shock",
-          "armyName": "YAMABUSHI (Camuflaje [1 Uso])",
-          "specialRules": [],
-          "rangedEquipment": "Chain Rifle, Arco Táctico, Minas Shock",
-          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
-          "cap": "0",
-          "points": "16"
-        },
-        {
-          "id": "legacy-profile-6a3354726221",
-          "name": "Camuflaje [1 Uso] · Chain Rifle, Arco Táctico(+1R), Panzerfaust",
-          "armyName": "YAMABUSHI (Camuflaje [1 Uso])",
-          "specialRules": [],
-          "rangedEquipment": "Chain Rifle, Arco Táctico(+1R), Panzerfaust",
-          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
-          "cap": "0",
-          "points": "17"
         }
       ]
     },
@@ -3648,36 +3550,7 @@
           "meleeEquipment": "Arma CC PARA(-3)",
           "cap": "0",
           "points": "17"
-        }
-      ]
-    },
-    {
-      "id": "legacy-unit-f5f7ec5b66e1",
-      "name": "PANGGULING FTO",
-      "troopType": "REM · T. Apoyo",
-      "stats": {
-        "movement": "10-10",
-        "cc": "13",
-        "bs": "11",
-        "physical": "10",
-        "willpower": "13",
-        "armor": "2",
-        "bts": "3",
-        "wounds": "1",
-        "silhouette": "4",
-        "availability": "2"
-      },
-      "woundsLabel": "EST",
-      "sharedSpecialRules": [
-        "Bagaje. Coraje",
-        "Presencia Remota"
-      ],
-      "factionId": "jsa",
-      "sectorialIds": [],
-      "edition": "N5",
-      "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
-      "verificationStatus": "unverified",
-      "profiles": [
+        },
         {
           "id": "legacy-profile-e4c758da1ad5",
           "name": "Repetidor",

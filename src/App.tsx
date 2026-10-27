@@ -297,7 +297,7 @@ function App() {
     return catalogProfiles.filter((profile) => {
       const matchesQuery =
         !normalizedQuery ||
-        `${profile.unitName} ${profile.variantName} ${profile.troopType} ${profile.rangedEquipment} ${profile.meleeEquipment}`
+        `${profile.name} ${profile.unitName} ${profile.variantName} ${profile.troopType} ${profile.rangedEquipment} ${profile.meleeEquipment}`
           .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '')
           .includes(normalizedQuery);
       const matchesSectorial = !sectorial || sectorial.profileIds.includes(profile.id);
@@ -889,9 +889,18 @@ function App() {
                 onClick={() => selectUnit(unit.id)}
                 type="button"
               >
-                <span className="profile-summary"><strong>{unit.name}</strong></span>
-                <span className="family-variant-count">{profileCount} {profileCount === 1 ? 'perfil' : 'perfiles'}</span>
-              </button>
+                        {!brokenImages.has(`i:${unitSlug(unit.name)}`) && (
+                          <img
+                            className="family-option-icon"
+                            src={`${import.meta.env.BASE_URL}${unitIconPath(unit.name)}`}
+                            alt=""
+                            aria-hidden="true"
+                            onError={() => markImageBroken(`i:${unitSlug(unit.name)}`)}
+                          />
+                        )}
+                        <span className="profile-summary"><strong>{unit.name}</strong></span>
+                        <span className="family-variant-count">{profileCount} {profileCount === 1 ? 'perfil' : 'perfiles'}</span>
+                      </button>
               );
             })}
             {filteredProfiles.length === 0 && (
@@ -920,10 +929,14 @@ function App() {
               const equipmentLabel = [profile.rangedEquipment, profile.meleeEquipment].filter(Boolean).join(' · ');
               const showEquipment = !equipmentLabel
                 || equipmentLabel.trim().toLocaleLowerCase() !== profile.variantName.trim().toLocaleLowerCase();
+              const isFtoProfile = profile.name.includes(' FTO');
               return (
               <div className={`variant-option${selectedId === profile.id ? ' is-selected' : ''}`} key={profile.id}>
                 <button className="variant-option-main" type="button" onClick={() => setSelectedId(profile.id)}>
-                  <strong>{profile.variantName}</strong>
+                  <span className="variant-profile-title">
+                    <strong>{profile.variantName}</strong>
+                    {isFtoProfile && <span className="variant-origin-badge" title="Perfil de Fireteam Option">FTO</span>}
+                  </span>
                   {showEquipment && <span>{equipmentLabel || 'Sin armamento registrado'}</span>}
                   {profile.additionalSpecialRules.length > 0 && (
                     <span className="variant-special-rules">

@@ -116,6 +116,24 @@ test('las unidades JSA muestran insignias SVG oficiales donde hay un recurso dis
   assert.match(app, /`units\/icons\/\$\{iconSlug\}\.svg`/);
 });
 
+test('la lista de unidades presenta su insignia a la izquierda del nombre', () => {
+  const rosterStart = app.indexOf('className="roster-panel catalog-families"');
+  const rosterEnd = app.indexOf('className="roster-panel catalog-variants"', rosterStart);
+  const roster = app.slice(rosterStart, rosterEnd);
+  assert.match(roster, /className="family-option-icon"/);
+  assert.match(roster, /className="profile-summary"><strong>\{unit\.name\}<\/strong>/);
+  assert.match(styles, /\.family-option-icon\s*\{[^}]*width:\s*28px[^}]*height:\s*28px/);
+});
+
+test('marca los perfiles FTO dentro de las variantes de su unidad base', () => {
+  const variantsStart = app.indexOf('className="roster-panel catalog-variants"');
+  const variantsEnd = app.indexOf('className="collection-section"', variantsStart);
+  const variants = app.slice(variantsStart, variantsEnd);
+  assert.match(variants, /const isFtoProfile = profile\.name\.includes\(' FTO'\)/);
+  assert.match(variants, /isFtoProfile && <span className="variant-origin-badge"[^>]*>FTO<\/span>/);
+  assert.match(styles, /\.variant-option-main \.variant-origin-badge\s*\{[^}]*font-size:\s*8px/);
+});
+
 test('la vista previa muestra las fichas compactas con las opciones elegidas antes de imprimir', () => {
   assert.match(app, /printPreviewOpen \? 'dialog' : undefined/);
   assert.match(app, /aria-modal=\{printPreviewOpen \|\| undefined\}/);

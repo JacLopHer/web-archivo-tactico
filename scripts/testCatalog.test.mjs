@@ -26,11 +26,35 @@ const stylesheet = await readFile(new URL('../src/styles.css', import.meta.url),
 
 test('el catálogo migrado conserva el inventario heredado', () => {
   assert.equal(catalog.schemaVersion, 2);
-  assert.equal(catalog.units.length, 67);
+  assert.equal(catalog.units.length, 63);
   assert.equal(troopProfiles.length, 181);
   assert.equal(weaponCatalog.profiles.length, 227);
   assert.equal(catalog.references.length, 8);
   assert.equal('profiles' in catalog, false);
+});
+
+test('agrupa los perfiles FTO con su unidad base sin alterar los nombres de importación', () => {
+  for (const [unitName, extraProfileCount] of [
+    ['AÏDA SWANSON', 1],
+    ['PANGGULING', 1],
+    ['YAMABUSHI', 2],
+    ['YURIKO ODA', 2],
+  ]) {
+    const unit = catalog.units.find((candidate) => candidate.name === unitName);
+    assert.ok(unit, `Debe existir la unidad ${unitName}`);
+    assert.equal(catalog.units.some((candidate) => candidate.name === `${unitName} FTO`), false);
+    assert.ok(unit.profiles.filter((profile) => profile.armyName.includes(' FTO')).length === extraProfileCount);
+  }
+
+  assert.ok(catalog.units.some((unit) => unit.name === 'SHIZOKU FTO'));
+  const yamabushi = catalog.units.find((unit) => unit.name === 'YAMABUSHI');
+  assert.ok(yamabushi);
+  assert.ok(!yamabushi.sharedSpecialRules.includes('Camuflaje (1 Uso)'));
+  assert.ok(yamabushi.profiles
+    .filter((profile) => !profile.armyName.includes(' FTO'))
+    .every((profile) => profile.specialRules.includes('Camuflaje (1 Uso)')));
+  assert.match(migrationScript, /function getCatalogUnitName\(profileName\)/);
+  assert.match(migrationScript, /legacyUnitNames\.has\(baseName\)/);
 });
 
 test('cada perfil tiene una identidad única y los diez atributos tipados', () => {
@@ -59,7 +83,15 @@ test('cada perfil tiene una identidad única y los diez atributos tipados', () =
       assert.ok(profile.id.startsWith('legacy-profile-'));
     }
     assert.ok(
-      unit.profiles.every((profile) => profile.armyName.replace(/\s*\([^()]*\)\s*$/, '').trim() === unit.name),
+      unit.profiles.every((profile) => {
+        const sourceUnitName = profile.armyName.replace(/\s*\([^()]*\)\s*$/, '').trim();
+        const baseUnitName = sourceUnitName.replace(/ FTO$/, '');
+        const canonicalUnitName = sourceUnitName.endsWith(' FTO')
+          && catalog.units.some((candidate) => candidate.name === baseUnitName)
+          ? baseUnitName
+          : sourceUnitName;
+        return canonicalUnitName === unit.name;
+      }),
       `${unit.name} profiles must stay grouped under their base unit`,
     );
     assert.ok(unit.profiles.every((profile) =>
