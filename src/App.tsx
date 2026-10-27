@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
-import { createWeaponIndex, getProfileWeapons, getRangeModifiers } from './domain/weaponProfiles.mjs';
-import type { JsaCatalog, TroopProfile } from './types/catalog';
+import weaponProfilesData from './data/weaponProfiles.json';
+import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
+import type { JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
 
 const catalog = catalogData as JsaCatalog;
-const weaponIndex = createWeaponIndex(catalog.weapons);
+const weaponProfiles = weaponProfilesData as WeaponProfilesCatalog;
+const weaponIndex = createWeaponIndex(weaponProfiles.profiles);
 const rangeBands = ['0', '20', '40', '60', '80', '100', '120', '240'];
 
 const statLabels: Array<[keyof TroopProfile['stats'], string]> = [
@@ -231,11 +233,13 @@ function App() {
                                       <span className="weapon-properties">{profile.properties}</span>
                                     )}
                                   </div>
-                                  {getRangeModifiers(profile).length ? (
+                                  {profile.rangeNote ? (
+                                    <div className="range-note">{profile.rangeNote}</div>
+                                  ) : getRangeModifiers(profile).length ? (
                                     <div className="range-track" aria-label={`Modificadores de alcance: ${profile.rangeModifiers}`}>
                                       {getRangeModifiers(profile).map((value, bandIndex) => {
                                         const tone = value === '0' ? 'neutral' : value.startsWith('+') ? 'positive' : value === '-3' ? 'short' : value === '-6' ? 'long' : 'unavailable';
-                                        return <span className={`range-band ${tone}`} key={`${bandIndex}-${value}`}>{value === '--' ? 'X' : value}</span>;
+                                        return <span className={`range-band ${tone}`} key={`${bandIndex}-${value}`}>{getRangeModifierLabel(value)}</span>;
                                       })}
                                     </div>
                                   ) : (

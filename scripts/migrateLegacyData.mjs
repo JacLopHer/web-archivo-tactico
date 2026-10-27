@@ -7,7 +7,15 @@ import vm from 'node:vm';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const sourcePath = resolve(root, 'Ultima versión .html');
 const outputPath = resolve(root, 'src/data/legacyJsaCatalog.json');
+const weaponProfilesPath = resolve(root, 'src/data/weaponProfiles.json');
 const source = await readFile(sourcePath, 'utf8');
+let previousWeaponProfiles;
+
+try {
+  previousWeaponProfiles = JSON.parse(await readFile(weaponProfilesPath, 'utf8'));
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error;
+}
 
 function extractArray(name) {
   const marker = `var ${name}=`;
@@ -51,19 +59,30 @@ function stableId(prefix, values) {
 const legacyProfiles = extractArray('UDB');
 const legacyWeaponRows = extractArray('DB');
 const references = extractArray('REF');
+const legacyWeaponSource = 'Ultima versión .html · JSA CHEAT SHEETS v40';
+const previousWeaponsById = new Map(
+  (previousWeaponProfiles?.profiles ?? []).map((weapon) => [weapon.id, weapon]),
+);
 const statKeys = ['movement', 'cc', 'bs', 'physical', 'willpower', 'armor', 'bts', 'wounds', 'silhouette', 'availability'];
-const weapons = legacyWeaponRows.map(([name, rangeModifiers, damage, burst, ammunition, saveAttribute, saves, properties]) => ({
-  id: stableId('legacy-weapon', [name, rangeModifiers, damage, burst, ammunition, saveAttribute, saves, properties]),
-  name,
-  rangeModifiers,
-  damage,
-  burst,
-  ammunition,
-  saveAttribute,
-  saves,
-  properties,
-  verificationStatus: 'unverified',
-}));
+const weapons = legacyWeaponRows.map(([name, rangeModifiers, damage, burst, ammunition, saveAttribute, saves, properties]) => {
+  const id = stableId('legacy-weapon', [name, rangeModifiers, damage, burst, ammunition, saveAttribute, saves, properties]);
+  const previousWeapon = previousWeaponsById.get(id);
+  return {
+    id,
+    name: previousWeapon?.name ?? name,
+    ...(previousWeapon?.aliases ? { aliases: previousWeapon.aliases } : {}),
+    rangeModifiers,
+    ...(previousWeapon?.rangeNote ? { rangeNote: previousWeapon.rangeNote } : {}),
+    damage,
+    burst,
+    ammunition,
+    saveAttribute,
+    saves,
+    properties,
+    source: previousWeapon?.source ?? legacyWeaponSource,
+    verificationStatus: previousWeapon?.verificationStatus ?? 'unverified',
+  };
+});
 
 const profiles = legacyProfiles.map((profile, index) => {
   const statValues = profile.s.trim().split(/\s+/);
@@ -97,7 +116,7 @@ const catalog = {
     edition: 'N5',
     source: 'Ultima versión .html',
     verificationStatus: 'unverified',
-    note: 'Migración de datos heredados. No presentar perfiles ni reglas como verificados hasta contrastarlos con fuentes de reglas.',
+    note: 'Migración de perfiles de tropas heredados. No presentar perfiles ni disponibilidad sectorial como verificados hasta contrastarlos con fuentes de reglas.',
   },
   sectorials: [
     { id: 'jsa-vanilla', name: 'JSA (genérica)', rosterImage: 'Vanilla_JSA_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
@@ -105,10 +124,22 @@ const catalog = {
     { id: 'jsa-shindenbutai', name: 'Shindenbutai', rosterImage: 'JSA_Shindenbutai_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
   ],
   profiles,
-  weapons,
   references,
+};
+
+const verifiedWeaponCount = weapons.filter((weapon) => weapon.verificationStatus === 'verified').length;
+const weaponCatalog = {
+  schemaVersion: 1,
+  metadata: {
+    edition: 'N5',
+    source: previousWeaponProfiles?.metadata?.source ?? legacyWeaponSource,
+    verificationStatus: verifiedWeaponCount === weapons.length ? 'verified' : 'incomplete',
+    note: `${verifiedWeaponCount} perfiles conservan su verificación; ${weapons.length - verifiedWeaponCount} perfiles siguen pendientes de contraste.`,
+  },
+  profiles: weapons,
 };
 
 await mkdir(dirname(outputPath), { recursive: true });
 await writeFile(outputPath, `${JSON.stringify(catalog, null, 2)}\n`, 'utf8');
-console.log(`Migrados ${profiles.length} perfiles, ${weapons.length} armas y ${references.length} referencias a ${outputPath}.`);
+await writeFile(weaponProfilesPath, `${JSON.stringify(weaponCatalog, null, 2)}\n`, 'utf8');
+console.log(`Migrados ${profiles.length} perfiles, ${weapons.length} perfiles de arma y ${references.length} referencias.`);

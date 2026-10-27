@@ -20,14 +20,14 @@ npm run build
 
 ## Catálogo de datos
 
-El catálogo JSA inicial se migró desde una herramienta local heredada. Sus perfiles, armas y referencias están marcados como **sin verificar** y no deben tratarse como una fuente oficial de reglas. La asignación de perfiles a sectoriales permanece desactivada hasta poder verificarla.
+Los perfiles de tropas JSA y las referencias se migraron desde una herramienta local heredada y siguen **sin verificar**. Los perfiles de armas viven por separado en `src/data/weaponProfiles.json` para que otras facciones puedan reutilizarlos sin duplicar sus datos. Cada perfil conserva su fuente y estado de verificación.
 
-La ficha muestra los perfiles de armamento heredados con modificadores de alcance, PS, R, munición, atributo y número de tiradas de salvación, además de sus propiedades. Los nombres sin coincidencia exacta se mantienen visibles, pero no reciben valores inferidos.
+Se han contrastado 99 perfiles con las páginas impresas 183–190 de la tabla de armas del PDF N5 actualización 5.3; los 129 restantes continúan pendientes. Los modificadores negros de alcance se guardan como `--` y se muestran sin texto. Los perfiles de minas conservan las notas de despliegue y alias históricos del catálogo. Los nombres de armas sin coincidencia exacta se mantienen visibles, pero no reciben valores inferidos. La asignación de perfiles de tropas a sectoriales permanece desactivada hasta poder verificarla.
 
-Para regenerar el catálogo desde el HTML local (no incluido en el repositorio, debe estar disponible en la raíz):
+Para regenerar los perfiles de tropas y la copia heredada de perfiles de armas desde el HTML local (no incluido en el repositorio, debe estar disponible en la raíz):
 
 ```powershell
 npm run migrate:legacy
 ```
 
-El HTML de origen, el PDF de ayuda y las láminas de referencia de facciones son material local y están excluidos de este repositorio.
+La migración conserva el estado y la fuente de perfiles de armas sin cambios, identificados por su ID estable. El HTML de origen, los PDF y las láminas de referencia de facciones son material local y están excluidos de este repositorio.

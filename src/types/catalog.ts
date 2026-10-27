@@ -48,14 +48,28 @@ export interface Faction {
 export interface WeaponProfile {
   id: string;
   name: string;
+  aliases?: string[];
   rangeModifiers: string;
+  rangeNote?: string;
   damage: string;
   burst: string;
   ammunition: string;
   saveAttribute: string;
   saves: string;
   properties: string;
+  source: string;
   verificationStatus: VerificationStatus;
+}
+
+export interface WeaponProfilesCatalog {
+  schemaVersion: number;
+  metadata: {
+    edition: string;
+    source: string;
+    verificationStatus: VerificationStatus;
+    note: string;
+  };
+  profiles: WeaponProfile[];
 }
 
 export interface JsaCatalog {
@@ -69,7 +83,6 @@ export interface JsaCatalog {
   };
   sectorials: Sectorial[];
   profiles: TroopProfile[];
-  weapons: WeaponProfile[];
   references: Array<{
     id: string;
     title: string;

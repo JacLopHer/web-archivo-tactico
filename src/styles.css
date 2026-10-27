@@ -103,6 +103,7 @@ button, select { cursor: pointer; }
 .weapon-category { color: #65777e; font-size: 7px; font-weight: 700; white-space: nowrap; }
 .weapon-properties { color: #65777e; font-size: 7px; line-height: 1.2; overflow-wrap: anywhere; }
 .range-track { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-self: center; min-width: 0; height: 19px; border: 1px solid #35444a; border-radius: 2px; overflow: hidden; }
+.range-note { align-self: center; padding: 2px 4px; font-size: 7px; font-weight: 700; text-align: center; overflow-wrap: anywhere; }
 .range-blank { min-width: 0; }
 .range-band { min-width: 0; display: grid; place-items: center; border-right: 1px solid #ffffff3d; color: #fff; font-size: 9px; font-weight: 800; line-height: 1; text-shadow: 0 1px 2px #0008; }
 .range-band:last-child { border-right: 0; }

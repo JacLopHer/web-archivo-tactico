@@ -66,6 +66,9 @@ test('la tabla de armamento expone alcances y valores de perfil separados', () =
     assert.ok(app.includes(`<span>${column}</span>`), `Falta la columna ${column}.`);
   }
   assert.match(app, /rangeBands\.map\(\(range, index\)/);
+  assert.match(app, /getRangeModifierLabel\(value\)/);
+  assert.match(app, /profile\.rangeNote/);
+  assert.doesNotMatch(app, /value === '--' \? 'X'/);
   assert.match(app, /className="weapon-name-line"/);
   assert.match(app, /className="weapon-properties"/);
   assert.match(app, /className="weapon-category"/);
