@@ -18,7 +18,7 @@
 body { margin: 0; min-width: 340px; min-height: 100vh; background: radial-gradient(ellipse at 75% 0%, #1a2631 0, transparent 38%), #0c1118; }
 button, input, select { font: inherit; }
 button, select { cursor: pointer; }
-.app-shell { width: min(1440px, 100%); margin: 0 auto; padding: 0 42px 32px; }
+.app-shell { width: min(1680px, 100%); margin: 0 auto; padding: 0 42px 32px; }
 .topbar { height: 82px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #25313d; }
 .brand { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
 .brand-mark { width: 39px; height: 39px; display: grid; place-items: center; border: 1px solid #ed5366; border-radius: 50%; color: #ed5366; font-size: 30px; line-height: 1; }
@@ -42,7 +42,7 @@ button, select { cursor: pointer; }
 .data-notice strong { color: #ffe19a; }
 .notice-icon { display: grid; flex: 0 0 21px; height: 21px; place-items: center; border: 1px solid #e8c878; border-radius: 50%; font-weight: 700; }
 .profile-count { color: #c8b87f; white-space: nowrap; }
-.workspace { display: grid; grid-template-columns: minmax(320px, .78fr) minmax(0, 1.45fr); gap: 18px; align-items: start; }
+.workspace { display: grid; grid-template-columns: minmax(340px, .78fr) minmax(0, 1.6fr); gap: 18px; align-items: start; }
 .roster-panel, .datacard { background: var(--surface); border: 1px solid #293745; }
 .panel-heading { display: flex; justify-content: space-between; align-items: center; padding: 18px 18px 14px; border-bottom: 1px solid #293745; }
 .panel-heading h2 { font: 600 26px/1 'Barlow Condensed', sans-serif; margin: 6px 0 0; }
@@ -55,42 +55,82 @@ button, select { cursor: pointer; }
 .profile-summary { min-width: 0; flex: 1; }
 .profile-summary strong, .profile-summary small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .profile-summary strong { font-size: 12px; font-weight: 600; }
-.profile-summary small { margin-top: 4px; color: #8998a7; font-size: 10px; }
+.profile-summary small { margin-top: 3px; color: #8998a7; font-size: 10px; }
+.profile-summary .profile-equipment { color: #647584; font-size: 9px; }
 .profile-cost { color: #f0c77c; font: 600 16px 'Barlow Condensed', sans-serif; text-align: right; }
 .profile-cost small { display: block; color: #8392a0; font: 8px 'DM Sans', sans-serif; }
-.datacard { padding: 24px; }
-.card-topline { display: flex; justify-content: space-between; align-items: center; color: #9cabb8; font-size: 10px; letter-spacing: .11em; }
-.card-topline i { padding: 0 5px; color: var(--accent); font-style: normal; }
-.unverified-badge { border: 1px solid #776441; padding: 5px 7px; color: #eacb89; font-size: 8px; }
-.card-title-row { display: flex; justify-content: space-between; align-items: end; padding: 22px 0 18px; }
-.card-kicker { color: var(--teal); font-size: 9px; letter-spacing: .14em; }
-.card-title-row h2 { margin: 5px 0 0; font: 700 clamp(28px, 4vw, 42px)/1 'Barlow Condensed', sans-serif; }
-.cost-block { text-align: right; }
-.cost-block strong { display: block; color: #f0c77c; font: 600 28px/1 'Barlow Condensed', sans-serif; }
-.cost-block span { color: #91a0ad; font-size: 8px; letter-spacing: .12em; }
-.stat-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid #30404e; }
-.stat { min-height: 65px; padding: 10px 5px; display: grid; place-content: center; text-align: center; border-right: 1px solid #30404e; border-bottom: 1px solid #30404e; }
-.stat:nth-child(5n) { border-right: 0; }
-.stat:nth-child(n+6) { border-bottom: 0; }
-.stat span { color: #95a5b2; font-size: 8px; letter-spacing: .06em; }
-.stat strong { margin-top: 5px; color: #f1f3f5; font: 600 19px/1 'Barlow Condensed', sans-serif; }
+.datacard { overflow: hidden; background: #e6eeee; border: 1px solid #aebfbe; border-radius: 3px; color: #131b21; box-shadow: 0 12px 32px #0005; }
+.unit-header { display: grid; grid-template-columns: 84px 1fr; min-height: 80px; background: linear-gradient(180deg, #f8fbf8, #dce8e7); border-bottom: 2px solid #9cadad; }
+.unit-portrait { position: relative; z-index: 1; align-self: center; justify-self: center; display: grid; width: 76px; height: 76px; place-items: center; margin: 2px 0; border: 5px solid #e8eeee; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #263b45, #080d11 68%); box-shadow: 0 3px 12px #0008, 0 0 0 1px #98a7a7; color: #f3f5f2; font: 600 38px/1 'Barlow Condensed', sans-serif; }
+.unit-portrait span { transform: translateY(-5px); }
+.unit-portrait small { position: absolute; bottom: 4px; padding: 2px 6px; border-radius: 10px; color: #fff; background: #273b45; font: 700 8px 'DM Sans', sans-serif; letter-spacing: .14em; }
+.unit-heading { min-width: 0; display: flex; align-items: center; }
+.unit-name-row { min-width: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 14px 8px 4px; }
+.card-kicker { color: #536873; font-size: 8px; font-weight: 700; letter-spacing: .16em; }
+.unit-name-row h2 { flex: 0 1 auto; min-width: 0; margin: 0; color: #10191e; font: 700 27px/.98 'Barlow Condensed', sans-serif; white-space: nowrap; }
+.unverified-badge { flex: 0 0 auto; margin-top: 4px; border: 1px solid #9d7c3d; padding: 4px 6px; color: #69501f; background: #f7edce; font-size: 7px; font-weight: 700; letter-spacing: .06em; }
+.unit-type-row { min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 14px; color: #324650; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.unit-edition { color: #65777e; }
+.unit-cost { margin-left: auto; }
+.unit-cost strong { color: #17252a; font-size: inherit; }
+.unit-cap { color: #667780; }
+.unit-cap strong { color: #25373e; font-size: inherit; }
+.stat-grid { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); margin-left: 81px; background: #c4c6c7; border-bottom: 1px solid #8e999b; }
+.stat { min-width: 0; min-height: 51px; padding: 4px 2px 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-right: 1px solid #a5abad; }
+.stat:last-child { border-right: 0; }
+.stat span { color: #35434a; font-size: 9px; font-weight: 700; line-height: 1.1; }
+.stat strong { margin-top: 3px; color: #161d21; font: 700 14px/1 'Barlow Condensed', sans-serif; white-space: nowrap; }
+.skills-band { min-height: 66px; padding: 10px 14px 12px 55px; background: linear-gradient(105deg, #347e7b, #5ab9ae); color: #fff; }
+.skills-band-title { margin-bottom: 4px; color: #dcfffa; font-size: 8px; font-weight: 700; letter-spacing: .12em; }
+.skills-band p { margin: 0; font-size: 11px; font-weight: 500; line-height: 1.5; }
+.card-lower { padding: 0 19px 15px; background: #121b22; color: #e0e7eb; }
+.weapon-section { padding: 17px 0 12px; }
+.weapon-section-heading { display: flex; align-items: flex-end; gap: 12px; margin-bottom: 10px; }
+.weapon-table-scroll { width: 100%; overflow-x: auto; }
+.weapon-table { min-width: 535px; color: #172027; background: #f0f3f3; font-size: 9px; }
+.weapon-table-head, .weapon-main-row { display: grid; grid-template-columns: minmax(112px, 1.15fr) minmax(190px, 2fr) 34px 30px 42px 34px 34px; align-items: stretch; }
+.weapon-table-head { min-height: 25px; align-items: center; color: #f4f6f7; background: #172631; font-size: 8px; font-weight: 700; text-align: center; letter-spacing: .04em; }
+.weapon-table-head > span:first-child { padding-left: 8px; text-align: left; }
+.range-head { position: relative; align-self: stretch; }
+.range-head span { position: absolute; top: 50%; color: #eef4f7; font-size: 7px; transform: translate(-50%, -50%); }
+.range-head span:first-child { transform: translate(0, -50%); }
+.range-head span:last-child { transform: translate(-100%, -50%); }
+.weapon-entry:nth-child(odd) { background: #e3e9e9; }
+.weapon-main-row { min-height: 25px; border-bottom: 1px solid #c7d0d1; }
+.weapon-name-cell { min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 3px 4px 3px 7px; }
+.weapon-name-line { min-width: 0; display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 5px; row-gap: 1px; }
+.weapon-name { overflow-wrap: anywhere; color: #174e6e; font-size: 9px; line-height: 1.1; }
+.weapon-category { color: #65777e; font-size: 7px; font-weight: 700; white-space: nowrap; }
+.weapon-properties { color: #65777e; font-size: 7px; line-height: 1.2; overflow-wrap: anywhere; }
+.range-track { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-self: center; min-width: 0; height: 19px; border: 1px solid #35444a; border-radius: 2px; overflow: hidden; }
+.range-blank { min-width: 0; }
+.range-band { min-width: 0; display: grid; place-items: center; border-right: 1px solid #ffffff3d; color: #fff; font-size: 9px; font-weight: 800; line-height: 1; text-shadow: 0 1px 2px #0008; }
+.range-band:last-child { border-right: 0; }
+.range-band.neutral { background: #087ba8; }
+.range-band.positive { background: #56a848; }
+.range-band.short { background: #ffbf22; color: #1b2024; text-shadow: none; }
+.range-band.long { background: #d72e3c; }
+.range-band.unavailable { background: #212a30; }
+.weapon-value { display: grid; place-items: center; min-width: 0; padding: 2px; border-left: 1px solid #d5dddd; font-size: 9px; font-weight: 700; text-align: center; overflow-wrap: anywhere; }
+.weapon-unmatched { display: flex; flex-direction: column; gap: 3px; padding: 6px 8px; border-bottom: 1px solid #c7d0d1; color: #775a23; }
+.weapon-unmatched strong { font-size: 9px; }
+.weapon-unmatched span { color: #786741; font-size: 8px; line-height: 1.4; }
+.empty-weapons { color: #9cabb7; font-size: 10px; }
 .card-section { padding: 17px 0 14px; }
 .section-title { color: var(--teal); font-size: 9px; font-weight: 700; letter-spacing: .12em; }
 .card-section p { color: #d3dae0; font-size: 12px; line-height: 1.65; margin: 8px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .equipment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; border-top: 1px solid #2c3946; border-bottom: 1px solid #2c3946; }
 .equipment-grid .card-section + .card-section { border-left: 1px solid #2c3946; padding-left: 18px; }
-.card-footer { display: flex; flex-wrap: wrap; gap: 18px; padding-top: 16px; color: #93a2af; font-size: 10px; }
-.card-footer strong { color: #f0c77c; }
-.verification-note { margin: 16px 0 0; padding-top: 11px; border-top: 1px solid #2c3946; color: #82909c; font-size: 10px; line-height: 1.5; }
 .empty-state, .empty-detail { padding: 35px 20px; color: #94a3b0; text-align: center; font-size: 12px; }
 .app-footer { padding-top: 24px; color: #64727f; text-align: center; font-size: 10px; letter-spacing: .04em; }
 
-@media (max-width: 850px) {
+@media (max-width: 1020px) {
   .app-shell { padding: 0 22px 28px; }
   .catalog-controls { grid-template-columns: 1fr 1fr; }
   .search-control { grid-column: 1 / -1; }
   .workspace { grid-template-columns: 1fr; }
-  .profile-list { max-height: 320px; }
+  .profile-list { max-height: 360px; }
+  .detail-panel { min-width: 0; }
 }
 
 @media (max-width: 520px) {
@@ -103,9 +143,14 @@ button, select { cursor: pointer; }
   .profile-count { display: none; }
   .datacard { padding: 17px 13px; }
   .card-topline { align-items: flex-start; gap: 8px; }
-  .stat { min-height: 58px; }
-  .stat span { font-size: 7px; }
-  .equipment-grid { grid-template-columns: 1fr; gap: 0; }
-  .equipment-grid .card-section + .card-section { border-left: 0; border-top: 1px solid #2c3946; padding-left: 0; }
-  .card-footer { gap: 10px; }
+  .unit-header { grid-template-columns: 64px 1fr; min-height: 66px; }
+  .unit-portrait { width: 58px; height: 58px; border-width: 4px; font-size: 28px; }
+  .unit-name-row { align-items: flex-start; flex-direction: column; gap: 5px; padding: 8px; }
+  .unit-name-row h2 { font-size: 22px; }
+  .unit-type-row { justify-content: flex-start; flex-wrap: wrap; gap: 5px 9px; }
+  .stat-grid { margin-left: 0; }
+  .stat { min-height: 52px; padding-right: 1px; padding-left: 1px; }
+  .stat span { font-size: 6px; }
+  .stat strong { font-size: 11px; }
+  .skills-band { padding-left: 14px; }
 }

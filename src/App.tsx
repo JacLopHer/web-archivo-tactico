@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
+import { createWeaponIndex, getProfileWeapons, getRangeModifiers } from './domain/weaponProfiles.mjs';
 import type { JsaCatalog, TroopProfile } from './types/catalog';
 
 const catalog = catalogData as JsaCatalog;
+const weaponIndex = createWeaponIndex(catalog.weapons);
+const rangeBands = ['0', '20', '40', '60', '80', '100', '120', '240'];
 
 const statLabels: Array<[keyof TroopProfile['stats'], string]> = [
   ['movement', 'MOV'],
@@ -30,6 +33,7 @@ function App() {
   const [selectedId, setSelectedId] = useState(catalog.profiles[0]?.id ?? '');
   const [selectedSectorial, setSelectedSectorial] = useState('');
   const selectedProfile = catalog.profiles.find((profile) => profile.id === selectedId);
+  const profileWeapons = selectedProfile ? getProfileWeapons(selectedProfile, weaponIndex) : [];
 
   const filteredProfiles = useMemo(() => {
     const normalizedQuery = normalize(query.trim());
@@ -139,10 +143,11 @@ function App() {
                 onClick={() => setSelectedId(profile.id)}
                 type="button"
               >
-                <span className="profile-avatar">{profile.name.slice(0, 1)}</span>
+                <span className="profile-avatar" aria-hidden="true">{profile.name.slice(0, 1)}</span>
                 <span className="profile-summary">
                   <strong>{profile.name}</strong>
-                  <small>{profile.troopType} · {profile.rangedEquipment || profile.meleeEquipment || 'Sin armamento registrado'}</small>
+                  <small>{profile.troopType}</small>
+                  <small className="profile-equipment">{profile.rangedEquipment || profile.meleeEquipment || 'Sin armamento registrado'}</small>
                 </span>
                 <span className="profile-cost">{profile.points}<small>PTS</small></span>
               </button>
@@ -156,20 +161,27 @@ function App() {
         <section className="detail-panel" aria-label="Ficha del perfil seleccionado">
           {selectedProfile ? (
             <article className="datacard">
-              <div className="card-topline">
-                <span>JSA <i>/</i> {selectedProfile.troopType}</span>
-                <span className="unverified-badge">SIN VERIFICAR</span>
-              </div>
-              <div className="card-title-row">
-                <div>
-                  <div className="card-kicker">PERFIL DE UNIDAD</div>
-                  <h2>{selectedProfile.name}</h2>
+              <header className="unit-header">
+                <div
+                  className="unit-portrait"
+                  role="img"
+                  aria-label={`Marcador provisional; imagen no disponible para ${selectedProfile.name}`}
+                >
+                  <span>{selectedProfile.name.slice(0, 1)}</span>
+                  <small>JSA</small>
                 </div>
-                <div className="cost-block">
-                  <strong>{selectedProfile.points}</strong>
-                  <span>PUNTOS</span>
+                <div className="unit-heading">
+                  <div className="unit-name-row">
+                    <h2>{selectedProfile.name}</h2>
+                    <div className="unit-type-row">
+                      <span>{selectedProfile.troopType}</span>
+                      <span className="unit-edition">{selectedProfile.edition}</span>
+                      <span className="unit-cost"><strong>{selectedProfile.points}</strong> PTS</span>
+                      <span className="unit-cap">CAP <strong>{selectedProfile.cap}</strong></span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </header>
               <div className="stat-grid">
                 {statLabels.map(([key, label]) => (
                   <div className="stat" key={key}>
@@ -178,28 +190,79 @@ function App() {
                   </div>
                 ))}
               </div>
-              <div className="card-section">
-                <div className="section-title">HABILIDADES Y EQUIPO</div>
+              <div className="skills-band">
+                <div className="skills-band-title">HABILIDADES ESP.</div>
                 <p>{selectedProfile.skillsAndEquipment || 'No registrado en la fuente heredada.'}</p>
               </div>
-              <div className="equipment-grid">
-                <div className="card-section">
-                  <div className="section-title">ARMAMENTO CD / EQUIPO</div>
-                  <p>{selectedProfile.rangedEquipment || 'No registrado.'}</p>
-                </div>
-                <div className="card-section">
-                  <div className="section-title">ARMAMENTO CC</div>
-                  <p>{selectedProfile.meleeEquipment || 'No registrado.'}</p>
-                </div>
+              <div className="card-lower">
+                <section className="weapon-section" aria-label="Perfiles de armamento">
+                  <div className="weapon-section-heading">
+                    <div className="section-title">PERFILES DE ARMAMENTO</div>
+                  </div>
+                  {profileWeapons.length ? (
+                    <div className="weapon-table-scroll">
+                      <div className="weapon-table">
+                        <div className="weapon-table-head">
+                          <span>ARMA</span>
+                          <div className="range-head" aria-label="Distancias en centímetros">
+                            {rangeBands.map((range, index) => (
+                              <span key={range} style={{ left: `${(index / (rangeBands.length - 1)) * 100}%` }}>
+                                {range}
+                              </span>
+                            ))}
+                          </div>
+                          <span>PS</span>
+                          <span>R</span>
+                          <span>MUN</span>
+                          <span>TS</span>
+                          <span>Nº</span>
+                        </div>
+                        {profileWeapons.map(({ name, category, profile }, index) => (
+                          <div className="weapon-entry" key={`${name}-${index}`}>
+                            {profile ? (
+                              <>
+                                <div className="weapon-main-row">
+                                  <div className="weapon-name-cell">
+                                    <div className="weapon-name-line">
+                                      <strong className="weapon-name">{name}</strong>
+                                      <span className="weapon-category">{category}</span>
+                                    </div>
+                                    {profile.properties && (
+                                      <span className="weapon-properties">{profile.properties}</span>
+                                    )}
+                                  </div>
+                                  {getRangeModifiers(profile).length ? (
+                                    <div className="range-track" aria-label={`Modificadores de alcance: ${profile.rangeModifiers}`}>
+                                      {getRangeModifiers(profile).map((value, bandIndex) => {
+                                        const tone = value === '0' ? 'neutral' : value.startsWith('+') ? 'positive' : value === '-3' ? 'short' : value === '-6' ? 'long' : 'unavailable';
+                                        return <span className={`range-band ${tone}`} key={`${bandIndex}-${value}`}>{value === '--' ? 'X' : value}</span>;
+                                      })}
+                                    </div>
+                                  ) : (
+                                    <div className="range-blank" aria-label="Sin perfil de alcance" />
+                                  )}
+                                  <span className="weapon-value">{profile.damage}</span>
+                                  <span className="weapon-value">{profile.burst}</span>
+                                  <span className="weapon-value">{profile.ammunition}</span>
+                                  <span className="weapon-value">{profile.saveAttribute}</span>
+                                  <span className="weapon-value">{profile.saves}</span>
+                                </div>
+                              </>
+                            ) : (
+                              <div className="weapon-unmatched">
+                                <strong>{name}</strong>
+                                <span>Sin perfil coincidente en el catálogo heredado; no se muestran valores inferidos.</span>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="empty-weapons">Este perfil no tiene armamento registrado en la fuente heredada.</p>
+                  )}
+                </section>
               </div>
-              <footer className="card-footer">
-                <span>CAP <strong>{selectedProfile.cap}</strong></span>
-                <span>{selectedProfile.edition}</span>
-                <span>Fuente: {selectedProfile.source}</span>
-              </footer>
-              <p className="verification-note">
-                Esta ficha reproduce datos heredados para revisión. No debe usarse como referencia oficial de reglas hasta su verificación.
-              </p>
             </article>
           ) : (
             <div className="empty-detail">Selecciona un perfil para consultar su ficha.</div>
