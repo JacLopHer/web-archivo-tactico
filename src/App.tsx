@@ -142,6 +142,11 @@ const unitIconSlugByName: Record<string, string> = {
   'O-YOROI': 'o-yoroi-kidobutai',
   'MECHAZOID': 'mechazoid-sokorentai',
   'TRIPHAMMER': 'triphammers-repurposed-industrial-tags',
+  'TURTLEMEK': 'turtlemek-ancillary-remote-unit',
+  'METSUKE': 'metsuke-officers',
+  'SĀCHĀ': 'sacha-xenotech-hunters',
+  'RUBY MONDAY': 'kazuraba-ruby-monday',
+  'KOBARUTO': 'kobaruto-hojo-bot',
 };
 
 const sectorialIconSlug: Record<string, string> = {
