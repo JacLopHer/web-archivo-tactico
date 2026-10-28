@@ -85,8 +85,17 @@ test('aplica las clases de las páginas individuales de Human Sphere', () => {
   }
 });
 
+test('Ruby Monday (IP) y Kobaruto (REM) se clasifican por confirmación del propietario', () => {
+  for (const [unit, troopClass] of [['RUBY MONDAY', 'Heavy Infantry'], ['KOBARUTO', 'Remotes']]) {
+    const assignment = mapping.assignments.get(unit);
+    assert.equal(assignment.troopClass, troopClass, unit);
+    assert.equal(assignment.source, 'Confirmación expresa del propietario, 2026-10-28');
+    assert.equal(assignment.verificationStatus, 'verified');
+  }
+});
+
 test('informa unidades fuera de la tabla y entradas sin unidad correspondiente', () => {
-  assert.deepEqual(mapping.unclassifiedUnits, ['RUBY MONDAY', 'KOBARUTO']);
+  assert.deepEqual(mapping.unclassifiedUnits, []);
   assert.deepEqual(mapping.unmatchedTableEntries, [
     'Taguraida',
     'Yáokòng (Wèibīng y Hùsòng)',

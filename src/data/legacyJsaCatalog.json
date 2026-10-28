@@ -81,7 +81,8 @@
         "legacy-unit-bc0041ad234b",
         "legacy-unit-9310317f95ea",
         "legacy-unit-b81a3672549e",
-        "legacy-unit-4f67c0ce8ec9"
+        "legacy-unit-4f67c0ce8ec9",
+        "legacy-unit-971116bf1fe9"
       ]
     },
     {
@@ -120,6 +121,7 @@
         "legacy-unit-9a4b653942af",
         "legacy-unit-008cf4ba4561",
         "legacy-unit-5e08fd45dbad",
+        "legacy-unit-b942318c62f1",
         "legacy-unit-a40784d72750"
       ]
     },
@@ -129,13 +131,6 @@
         "legacy-unit-fa676f38f6ad",
         "legacy-unit-885d8c0e9f82",
         "legacy-unit-a6786e2ea06f"
-      ]
-    },
-    {
-      "troopClass": "unclassified",
-      "unitIds": [
-        "legacy-unit-971116bf1fe9",
-        "legacy-unit-b942318c62f1"
       ]
     }
   ],
@@ -3645,9 +3640,9 @@
           "points": "19"
         }
       ],
-      "troopClass": "unclassified",
-      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
-      "troopClassVerificationStatus": "incomplete"
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Confirmación expresa del propietario, 2026-10-28",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-947552d18bec",
@@ -4189,9 +4184,9 @@
           "points": "3"
         }
       ],
-      "troopClass": "unclassified",
-      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
-      "troopClassVerificationStatus": "incomplete"
+      "troopClass": "Remotes",
+      "troopClassSource": "Confirmación expresa del propietario, 2026-10-28",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-885d8c0e9f82",

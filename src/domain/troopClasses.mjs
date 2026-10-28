@@ -121,6 +121,18 @@ const tableEntries = [
     catalogUnits: ['IOANN BANN'],
     source: 'Confirmación expresa del propietario, 2026-10-28',
   },
+  {
+    name: 'Ruby Monday',
+    troopClass: 'Heavy Infantry',
+    catalogUnits: ['RUBY MONDAY'],
+    source: 'Confirmación expresa del propietario, 2026-10-28',
+  },
+  {
+    name: 'Kobaruto',
+    troopClass: 'Remotes',
+    catalogUnits: ['KOBARUTO'],
+    source: 'Confirmación expresa del propietario, 2026-10-28',
+  },
   ...[
     ['Warcor', 'Light Infantry', 'WARCOR', 'Warcor'],
     ['Monstrucker', 'Light Infantry', 'MONSTRUCKER', 'Monstrucker'],
