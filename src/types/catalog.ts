@@ -74,8 +74,9 @@ export interface Sectorial {
   id: string;
   name: string;
   rosterImage: string;
-  profileIds: string[];
-  verificationStatus: 'unmapped' | 'mapped';
+  unitIds: string[];
+  source: string;
+  verificationStatus: 'unmapped' | 'unit-level' | 'mapped';
 }
 
 export interface Faction {

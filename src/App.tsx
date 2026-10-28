@@ -311,7 +311,7 @@ function App() {
         `${profile.name} ${profile.unitName} ${profile.variantName} ${profile.troopType} ${getTroopClassLabel(profile.troopClass)} ${profile.rangedEquipment} ${profile.meleeEquipment}`
           .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '')
           .includes(normalizedQuery);
-      const matchesSectorial = !sectorial || sectorial.profileIds.includes(profile.id);
+      const matchesSectorial = !sectorial || sectorial.unitIds.includes(profile.unitId);
       const matchesTroopClass = !selectedTroopClass || profile.troopClass === selectedTroopClass;
       return matchesQuery && matchesSectorial && matchesTroopClass;
     });
@@ -352,8 +352,8 @@ function App() {
     setSelectedSectorial(value);
     if (!value) return;
     const sectorial = catalog.sectorials.find((item) => item.id === value);
-    if (sectorial && !sectorial.profileIds.includes(selectedId)) {
-      const firstProfile = catalogProfiles.find((profile) => sectorial.profileIds.includes(profile.id));
+    if (sectorial && !sectorial.unitIds.includes(selectedUnitId)) {
+      const firstProfile = catalogProfiles.find((profile) => sectorial.unitIds.includes(profile.unitId));
       if (firstProfile) {
         setSelectedUnitId(firstProfile.unitId);
         setSelectedId(firstProfile.id);
@@ -863,10 +863,11 @@ function App() {
                 <option
                   key={sectorial.id}
                   value={sectorial.id}
-                  disabled={sectorial.verificationStatus !== 'mapped'}
+                  disabled={sectorial.verificationStatus === 'unmapped'}
                 >
                   {sectorial.name}
-                  {sectorial.verificationStatus !== 'mapped' ? ' · datos pendientes' : ''}
+                  {sectorial.verificationStatus === 'unmapped' ? ' · datos pendientes' : ''}
+                  {sectorial.verificationStatus === 'unit-level' ? ' · por unidad' : ''}
                 </option>
               ))}
             </select>

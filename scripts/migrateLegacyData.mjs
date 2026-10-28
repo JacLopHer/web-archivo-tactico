@@ -4,6 +4,11 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import { buildTroopClassAssignments, troopClasses } from '../src/domain/troopClasses.mjs';
+import {
+  buildSectorialAvailability,
+  sectorialAvailabilitySource,
+  sectorialRosters,
+} from '../src/domain/sectorialAvailability.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const sourcePath = resolve(root, 'Ultima versión .html');
@@ -209,20 +214,37 @@ const troopClassGroups = troopClasses
   }))
   .filter((group) => group.unitIds.length > 0);
 
+const sectorialAvailability = buildSectorialAvailability(units.map((unit) => unit.name));
+const unitsByName = new Map(units.map((unit) => [unit.name, unit]));
+for (const unit of units) {
+  unit.sectorialIds = sectorialRosters
+    .filter(({ id }) => sectorialAvailability.unitsBySectorial.get(id).has(unit.name))
+    .map(({ id }) => id);
+}
+
 const catalog = {
-  schemaVersion: 4,
+  schemaVersion: 5,
   faction: { id: 'jsa', name: 'Japanese Secessionist Army', shortName: 'JSA' },
   metadata: {
     edition: 'N5',
     source: 'Ultima versión .html',
     verificationStatus: 'unverified',
-    note: 'Unidades y perfiles de tropas migrados desde datos heredados. Los atributos y reglas compartidos se guardan en la unidad; cada perfil conserva su equipo y reglas diferenciales. No presentar perfiles ni disponibilidad sectorial como verificados hasta contrastarlos con fuentes de reglas.',
+    note: 'Unidades y perfiles de tropas migrados desde datos heredados. Los atributos y reglas compartidos se guardan en la unidad; cada perfil conserva su equipo y reglas diferenciales. La disponibilidad sectorial se asigna por unidad (no por perfil) según los rosters N5 v4; los perfiles heredan la de su unidad.',
   },
   sectorials: [
-    { id: 'jsa-vanilla', name: 'JSA (genérica)', rosterImage: 'Vanilla_JSA_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
-    { id: 'jsa-oban', name: 'Oban', rosterImage: 'JSA_Oban_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
-    { id: 'jsa-shindenbutai', name: 'Shindenbutai', rosterImage: 'JSA_Shindenbutai_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
-  ],
+    { id: 'jsa-vanilla', name: 'JSA (genérica)' },
+    { id: 'jsa-oban', name: 'Oban' },
+    { id: 'jsa-shindenbutai', name: 'Shindenbutai' },
+  ].map((sectorial) => {
+    const roster = sectorialRosters.find(({ id }) => id === sectorial.id);
+    return {
+      ...sectorial,
+      rosterImage: roster.image,
+      unitIds: [...sectorialAvailability.unitsBySectorial.get(sectorial.id)].map((name) => unitsByName.get(name).id),
+      source: sectorialAvailabilitySource,
+      verificationStatus: 'unit-level',
+    };
+  }),
   troopClassGroups,
   units,
   references,
@@ -245,6 +267,8 @@ await writeFile(outputPath, `${JSON.stringify(catalog, null, 2)}\n`, 'utf8');
 await writeFile(weaponProfilesPath, `${JSON.stringify(weaponCatalog, null, 2)}\n`, 'utf8');
 console.log(`Migrados ${units.length} unidades con ${profiles.length} perfiles, ${weapons.length} perfiles de arma y ${references.length} referencias.`);
 console.log(`Unidades sin clase asignada: ${troopClassMapping.unclassifiedUnits.length ? troopClassMapping.unclassifiedUnits.join(', ') : 'ninguna'}.`);
+console.log(`Unidades sin sectorial (no figuran en los rosters): ${sectorialAvailability.unlistedUnits.length ? sectorialAvailability.unlistedUnits.join(', ') : 'ninguna'}.`);
+console.log(`Entradas de roster sin unidad en el catálogo: ${sectorialAvailability.unmatchedRosterEntries.length ? sectorialAvailability.unmatchedRosterEntries.join(', ') : 'ninguna'}.`);
 console.log(`Entradas de la tabla sin unidad en el catálogo: ${troopClassMapping.unmatchedTableEntries.length ? troopClassMapping.unmatchedTableEntries.join(', ') : 'ninguna'}.`);
 console.log(`Unidades con clases contradictorias: ${troopClassMapping.ambiguousUnits.length
   ? troopClassMapping.ambiguousUnits.map(({ unitName, tableClasses }) => `${unitName} (${tableClasses.join(' / ')})`).join(', ')

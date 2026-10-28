@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 5,
   "faction": {
     "id": "jsa",
     "name": "Japanese Secessionist Army",
@@ -9,29 +9,158 @@
     "edition": "N5",
     "source": "Ultima versión .html",
     "verificationStatus": "unverified",
-    "note": "Unidades y perfiles de tropas migrados desde datos heredados. Los atributos y reglas compartidos se guardan en la unidad; cada perfil conserva su equipo y reglas diferenciales. No presentar perfiles ni disponibilidad sectorial como verificados hasta contrastarlos con fuentes de reglas."
+    "note": "Unidades y perfiles de tropas migrados desde datos heredados. Los atributos y reglas compartidos se guardan en la unidad; cada perfil conserva su equipo y reglas diferenciales. La disponibilidad sectorial se asigna por unidad (no por perfil) según los rosters N5 v4; los perfiles heredan la de su unidad."
   },
   "sectorials": [
     {
       "id": "jsa-vanilla",
       "name": "JSA (genérica)",
       "rosterImage": "Vanilla_JSA_v4.JPG",
-      "profileIds": [],
-      "verificationStatus": "unmapped"
+      "unitIds": [
+        "legacy-unit-438d355a2e81",
+        "legacy-unit-aacfae2b3165",
+        "legacy-unit-e4dc3959d52a",
+        "legacy-unit-1dbcaf987c0f",
+        "legacy-unit-3e95d4e49590",
+        "legacy-unit-547642b81ada",
+        "legacy-unit-be3eb0eb510c",
+        "legacy-unit-7bfd6dc5f8cc",
+        "legacy-unit-1eca51c89ed8",
+        "legacy-unit-1bfb1be5017e",
+        "legacy-unit-433c0674ff5f",
+        "legacy-unit-603d2977842d",
+        "legacy-unit-d14df21f0387",
+        "legacy-unit-c194d0ddab3e",
+        "legacy-unit-2a153b00361c",
+        "legacy-unit-09ffc160e942",
+        "legacy-unit-a62f8444f3d3",
+        "legacy-unit-bc0041ad234b",
+        "legacy-unit-b81a3672549e",
+        "legacy-unit-9f78915b0ad6",
+        "legacy-unit-24b5afac7f3f",
+        "legacy-unit-1046b2d44e9d",
+        "legacy-unit-4f67c0ce8ec9",
+        "legacy-unit-828474f9a363",
+        "legacy-unit-9310317f95ea",
+        "legacy-unit-fa676f38f6ad",
+        "legacy-unit-c1eaa6962131",
+        "legacy-unit-885d8c0e9f82",
+        "legacy-unit-786380518116",
+        "legacy-unit-b942318c62f1",
+        "legacy-unit-947552d18bec",
+        "legacy-unit-9a6ae0a3cebb",
+        "legacy-unit-aa81d4df1e15",
+        "legacy-unit-9a4b653942af",
+        "legacy-unit-5ff23a2a6cc7",
+        "legacy-unit-008cf4ba4561",
+        "legacy-unit-3c274cb23e9b",
+        "legacy-unit-5e08fd45dbad",
+        "legacy-unit-4a16d27ee7de",
+        "legacy-unit-a1c99b080e92",
+        "legacy-unit-3002d16ffabd",
+        "legacy-unit-1c94af1ab90c",
+        "legacy-unit-a50df33849ac",
+        "legacy-unit-0c7c639bd69c",
+        "legacy-unit-44ff759735b9",
+        "legacy-unit-55500f00e700",
+        "legacy-unit-92adf1e2b28a"
+      ],
+      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen.",
+      "verificationStatus": "unit-level"
     },
     {
       "id": "jsa-oban",
       "name": "Oban",
       "rosterImage": "JSA_Oban_v4.JPG",
-      "profileIds": [],
-      "verificationStatus": "unmapped"
+      "unitIds": [
+        "legacy-unit-438d355a2e81",
+        "legacy-unit-e4dc3959d52a",
+        "legacy-unit-1dbcaf987c0f",
+        "legacy-unit-3e95d4e49590",
+        "legacy-unit-7bfd6dc5f8cc",
+        "legacy-unit-1eca51c89ed8",
+        "legacy-unit-1bfb1be5017e",
+        "legacy-unit-52601cd63852",
+        "legacy-unit-433c0674ff5f",
+        "legacy-unit-603d2977842d",
+        "legacy-unit-d14df21f0387",
+        "legacy-unit-9a8c0ffe402c",
+        "legacy-unit-bc0041ad234b",
+        "legacy-unit-b81a3672549e",
+        "legacy-unit-9f78915b0ad6",
+        "legacy-unit-24b5afac7f3f",
+        "legacy-unit-828474f9a363",
+        "legacy-unit-9310317f95ea",
+        "legacy-unit-fa676f38f6ad",
+        "legacy-unit-c1eaa6962131",
+        "legacy-unit-b942318c62f1",
+        "legacy-unit-947552d18bec",
+        "legacy-unit-9a6ae0a3cebb",
+        "legacy-unit-aa81d4df1e15",
+        "legacy-unit-9a4b653942af",
+        "legacy-unit-5ff23a2a6cc7",
+        "legacy-unit-008cf4ba4561",
+        "legacy-unit-3c274cb23e9b",
+        "legacy-unit-5e08fd45dbad",
+        "legacy-unit-4a16d27ee7de",
+        "legacy-unit-a50df33849ac",
+        "legacy-unit-0c7c639bd69c",
+        "legacy-unit-44ff759735b9",
+        "legacy-unit-55500f00e700",
+        "legacy-unit-9d9c09ddfe11",
+        "legacy-unit-34d66a090d6d",
+        "legacy-unit-392c6cd71e92"
+      ],
+      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen.",
+      "verificationStatus": "unit-level"
     },
     {
       "id": "jsa-shindenbutai",
       "name": "Shindenbutai",
       "rosterImage": "JSA_Shindenbutai_v4.JPG",
-      "profileIds": [],
-      "verificationStatus": "unmapped"
+      "unitIds": [
+        "legacy-unit-aacfae2b3165",
+        "legacy-unit-547642b81ada",
+        "legacy-unit-be3eb0eb510c",
+        "legacy-unit-7bfd6dc5f8cc",
+        "legacy-unit-1eca51c89ed8",
+        "legacy-unit-1bfb1be5017e",
+        "legacy-unit-433c0674ff5f",
+        "legacy-unit-514d261568cd",
+        "legacy-unit-6f7114ffe1a5",
+        "legacy-unit-3fd633805627",
+        "legacy-unit-12f7b9c91168",
+        "legacy-unit-2a153b00361c",
+        "legacy-unit-09ffc160e942",
+        "legacy-unit-a62f8444f3d3",
+        "legacy-unit-1046b2d44e9d",
+        "legacy-unit-4f67c0ce8ec9",
+        "legacy-unit-971116bf1fe9",
+        "legacy-unit-885d8c0e9f82",
+        "legacy-unit-786380518116",
+        "legacy-unit-b942318c62f1",
+        "legacy-unit-a6786e2ea06f",
+        "legacy-unit-a40784d72750",
+        "legacy-unit-947552d18bec",
+        "legacy-unit-9a6ae0a3cebb",
+        "legacy-unit-aa81d4df1e15",
+        "legacy-unit-9a4b653942af",
+        "legacy-unit-5ff23a2a6cc7",
+        "legacy-unit-008cf4ba4561",
+        "legacy-unit-3c274cb23e9b",
+        "legacy-unit-5e08fd45dbad",
+        "legacy-unit-4a16d27ee7de",
+        "legacy-unit-a1c99b080e92",
+        "legacy-unit-3002d16ffabd",
+        "legacy-unit-1c94af1ab90c",
+        "legacy-unit-44ff759735b9",
+        "legacy-unit-92adf1e2b28a",
+        "legacy-unit-9d9c09ddfe11",
+        "legacy-unit-34d66a090d6d",
+        "legacy-unit-8c63b05a7f71"
+      ],
+      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen.",
+      "verificationStatus": "unit-level"
     }
   ],
   "troopClassGroups": [
@@ -166,7 +295,10 @@
         "Trepar Plus"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -230,7 +362,11 @@
         "Trepar Plus"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -334,7 +470,10 @@
         "Trepar Plus"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -408,7 +547,10 @@
         "Terreno (Total)"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -481,7 +623,10 @@
         "Tropa Religiosa"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -541,7 +686,10 @@
         "Terreno (Total)"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -613,7 +761,11 @@
         "Terreno (Total)"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -658,7 +810,10 @@
         "Mimetismo (-3)"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -733,7 +888,10 @@
         "Hacker (UPGRADE: Control Total (TS-2))"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -784,7 +942,10 @@
         "Coraje"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -895,7 +1056,10 @@
         "Sexto Sentido"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -972,7 +1136,10 @@
         "Coraje"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1133,7 +1300,11 @@
         "Minador"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1197,7 +1368,11 @@
         "Médico"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1240,7 +1415,11 @@
         "Desactivador"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1301,7 +1480,11 @@
         "Reportero"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1358,7 +1541,10 @@
         "Operativo Especialista"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1403,7 +1589,10 @@
         "Observador de Artillería"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1649,7 +1838,10 @@
         "Súper-Salto ( Retropropulsión )"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1732,7 +1924,10 @@
         "Sigilo"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1796,7 +1991,9 @@
         "Tenaz"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1854,7 +2051,9 @@
         "Súper-Salto ( Retropropulsión )"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1927,7 +2126,9 @@
         "Trepar Plus"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2005,7 +2206,9 @@
         "Minador"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2062,7 +2265,9 @@
         "Trepar Plus"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2108,7 +2313,10 @@
         "Minador"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2163,7 +2371,10 @@
         "Tropa Religiosa"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2255,7 +2466,10 @@
         "Señuelo (1)"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2332,7 +2546,10 @@
         "Trepar Plus"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2418,7 +2635,9 @@
         "Tropa Religiosa"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2476,7 +2695,10 @@
         "Tropa Religiosa"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2520,7 +2742,10 @@
         "Presencia Remota"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2596,7 +2821,10 @@
         "Suboficial"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2665,7 +2893,10 @@
         "Trepar Plus"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2726,7 +2957,10 @@
         "Sin Cobertura"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2836,7 +3070,10 @@
         "Sigilo"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2951,7 +3188,10 @@
         "Sigilo"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3009,7 +3249,10 @@
         "Sigilo"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3098,7 +3341,10 @@
         "Sigilo"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3153,7 +3399,9 @@
         "Terreno ( Total )"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3278,7 +3526,9 @@
         "Tropa Religiosa"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3373,7 +3623,10 @@
         "Sin Incapacidad por Herida"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3432,7 +3685,10 @@
         "Tropa Religiosa"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3480,7 +3736,10 @@
         "Sin Incapacidad por Herida. ⚠ NOTA: Solo puede haber 1 Yojimbo en cada Lista de Ejército"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3528,7 +3787,10 @@
         "Sin Incapacidad por Herida. ⚠ NOTA: Solo puede haber 1 Yojimbo en cada Lista de Ejército"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3576,7 +3838,9 @@
         "Súper-Salto"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3624,7 +3888,9 @@
         "Trepar Plus"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3667,7 +3933,11 @@
         "Reacción Total"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3730,7 +4000,11 @@
         "Presencia Remota"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3772,7 +4046,11 @@
         "Presencia Remota"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3847,7 +4125,11 @@
         "Presencia Remota"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3902,7 +4184,11 @@
         "Presencia Remota"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3955,7 +4241,11 @@
         "Presencia Remota"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -3997,7 +4287,11 @@
         "Presencia Remota"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -4050,7 +4344,11 @@
         "Periférico ( Servidor )"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -4099,7 +4397,10 @@
         "Sigilo"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -4156,7 +4457,11 @@
         "Periférico ( Auxiliar )"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -4218,7 +4523,10 @@
         "Tropa Religiosa"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -4293,7 +4601,9 @@
         "Sentido Táctico"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -4368,7 +4678,9 @@
         "Periférico ( Auxiliar )"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",

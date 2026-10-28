@@ -25,7 +25,7 @@ const migrationScript = await readFile(
 const stylesheet = await readFile(new URL('../src/styles.css', import.meta.url), 'utf8');
 
 test('el catálogo migrado conserva el inventario heredado', () => {
-  assert.equal(catalog.schemaVersion, 4);
+  assert.equal(catalog.schemaVersion, 5);
   assert.equal(catalog.units.length, 63);
   assert.equal(troopProfiles.length, 181);
   assert.equal(weaponCatalog.profiles.length, 227);
@@ -374,12 +374,25 @@ test('actualiza los campos que diferían entre el HTML y las páginas del PDF', 
   assert.equal(profileByName.get('Uragan MRL (Modo Expansivo)').rangeModifiers, '-3,+3,0,0,-6,--,--');
 });
 
-test('no se asigna disponibilidad sectorial sin datos de pertenencia', () => {
-  assert.ok(catalog.sectorials.length > 0);
-  assert.ok(
-    catalog.sectorials.every(
-      (sectorial) => sectorial.verificationStatus === 'unmapped' && sectorial.profileIds.length === 0,
-    ),
-  );
-  assert.ok(catalog.units.every((unit) => unit.sectorialIds.length === 0));
+test('la disponibilidad sectorial se asigna por unidad con fuente y sin tocar perfiles', () => {
+  const unitById = new Map(catalog.units.map((unit) => [unit.id, unit]));
+  const bySectorial = Object.fromEntries(catalog.sectorials.map((s) => [s.id, new Set(s.unitIds.map((id) => unitById.get(id).name))]));
+  assert.equal(catalog.sectorials.length, 3);
+  for (const sectorial of catalog.sectorials) {
+    assert.equal(sectorial.verificationStatus, 'unit-level');
+    assert.ok(sectorial.source && sectorial.rosterImage);
+    assert.equal(new Set(sectorial.unitIds).size, sectorial.unitIds.length);
+    assert.ok(sectorial.unitIds.every((id) => unitById.has(id)), sectorial.id);
+    assert.ok(!('profileIds' in sectorial));
+  }
+  for (const unit of catalog.units) {
+    const expected = catalog.sectorials.filter((s) => s.unitIds.includes(unit.id)).map((s) => s.id);
+    assert.deepEqual(unit.sectorialIds, expected, unit.name);
+  }
+  // Decisiones del propietario: la imagen v4 prevalece sobre Human Sphere.
+  assert.ok(bySectorial['jsa-shindenbutai'].has('IOANN BANN'));
+  assert.ok(!bySectorial['jsa-oban'].has('SĀCHĀ'));
+  assert.ok(bySectorial['jsa-shindenbutai'].has('SĀCHĀ'));
+  assert.ok(bySectorial['jsa-oban'].has('YUAN YUAN') && !bySectorial['jsa-vanilla'].has('YUAN YUAN'));
+  assert.ok(!bySectorial['jsa-oban'].has('SENKU') && bySectorial['jsa-vanilla'].has('SENKU'));
 });
