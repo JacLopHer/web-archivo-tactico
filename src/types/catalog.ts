@@ -50,6 +50,9 @@ export interface TroopVariant {
   meleeEquipment: string;
   cap: string;
   points: string;
+  sectorialIds?: string[];
+  infinityArmyOptionId?: number;
+  orders?: string[];
 }
 
 export interface TroopUnit {
@@ -68,12 +71,19 @@ export interface TroopUnit {
   source: string;
   verificationStatus: VerificationStatus;
   profiles: TroopVariant[];
+  infinityArmyId?: number;
+  officialName?: string;
+  requestedName?: string;
+  characteristics?: string[];
+  availabilityBySectorial?: Record<string, string>;
+  characteristicsBySectorial?: Record<string, string[]>;
 }
 
 export interface Sectorial {
   id: string;
   name: string;
-  rosterImage: string;
+  factionId?: string;
+  rosterImage?: string;
   unitIds: string[];
   source: string;
   verificationStatus: 'unmapped' | 'unit-level' | 'mapped';
@@ -96,7 +106,7 @@ export interface FactionDirectory {
   };
   factions: Array<Faction & {
     armyName: string;
-    catalogStatus: 'metadata-only';
+    catalogStatus: 'metadata-only' | 'partial';
     iconStatus: 'awaiting-authorized-asset';
     sectorials: Array<{
       id: string;
@@ -131,6 +141,23 @@ export interface WeaponProfilesCatalog {
     note: string;
   };
   profiles: WeaponProfile[];
+}
+
+export interface ExtraFactionsCatalog {
+  schemaVersion: number;
+  factions: Faction[];
+  metadata: {
+    edition: string;
+    source: string;
+    sourceUrl: string;
+    checkedAt: string;
+    verificationStatus: VerificationStatus;
+    editionNote: string;
+    note: string;
+  };
+  sectorials: Sectorial[];
+  troopClassGroups: Array<{ troopClass: TroopClass; unitIds: string[] }>;
+  units: TroopUnit[];
 }
 
 export interface JsaCatalog {

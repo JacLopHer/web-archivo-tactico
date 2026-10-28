@@ -1,0 +1,1907 @@
+{
+  "schemaVersion": 1,
+  "factions": [
+    {
+      "id": "nomads",
+      "name": "Nómadas",
+      "shortName": "NOM"
+    },
+    {
+      "id": "aleph",
+      "name": "Aleph",
+      "shortName": "ALEPH"
+    }
+  ],
+  "metadata": {
+    "edition": "N5",
+    "source": "Infinity Army",
+    "sourceUrl": "https://infinityuniverse.com/army/infinity",
+    "checkedAt": "2026-10-28",
+    "verificationStatus": "verified",
+    "editionNote": "Infinity Army no expone un campo de edición en su API; se asume la edición vigente (N5), coherente con la wiki oficial (aviso N5.3). Los datos no se mezclan con otras ediciones.",
+    "note": "Catálogo parcial: solo las unidades solicitadas, con todos los perfiles que Infinity Army devuelve para cada ejército. Atributos, habilidades, equipo y armas están en español, tal como los exporta Infinity Army. La disponibilidad (AVA) y los perfiles se registran por sectorial; 255 equivale a disponibilidad ilimitada en Infinity Army. Las fichas de armas no se han volcado a weaponProfiles.json (pendiente)."
+  },
+  "sectorials": [
+    {
+      "id": "nomads-generic",
+      "factionId": "nomads",
+      "name": "Nomads",
+      "unitIds": [
+        "ia-296",
+        "ia-1891",
+        "ia-1893",
+        "ia-1895"
+      ],
+      "source": "Infinity Army: la unidad figura en el listado del ejército/sectorial (api.corvusbelli.com/army/units). Solo se muestran las unidades añadidas en esta fase.",
+      "verificationStatus": "unit-level"
+    },
+    {
+      "id": "nomads-corregidor",
+      "factionId": "nomads",
+      "name": "Corregidor Jurisdictional Command",
+      "unitIds": [
+        "ia-296",
+        "ia-400",
+        "ia-1891",
+        "ia-1893",
+        "ia-1895"
+      ],
+      "source": "Infinity Army: la unidad figura en el listado del ejército/sectorial (api.corvusbelli.com/army/units). Solo se muestran las unidades añadidas en esta fase.",
+      "verificationStatus": "unit-level"
+    },
+    {
+      "id": "nomads-bakunin",
+      "factionId": "nomads",
+      "name": "Bakunin Jurisdictional Command",
+      "unitIds": [
+        "ia-296"
+      ],
+      "source": "Infinity Army: la unidad figura en el listado del ejército/sectorial (api.corvusbelli.com/army/units). Solo se muestran las unidades añadidas en esta fase.",
+      "verificationStatus": "unit-level"
+    },
+    {
+      "id": "nomads-tunguska",
+      "factionId": "nomads",
+      "name": "Tunguska Jurisdictional Command",
+      "unitIds": [
+        "ia-296"
+      ],
+      "source": "Infinity Army: la unidad figura en el listado del ejército/sectorial (api.corvusbelli.com/army/units). Solo se muestran las unidades añadidas en esta fase.",
+      "verificationStatus": "unit-level"
+    },
+    {
+      "id": "aleph-generic",
+      "factionId": "aleph",
+      "name": "Aleph",
+      "unitIds": [
+        "ia-1898",
+        "ia-584",
+        "ia-59",
+        "ia-1128",
+        "ia-1899"
+      ],
+      "source": "Infinity Army: la unidad figura en el listado del ejército/sectorial (api.corvusbelli.com/army/units). Solo se muestran las unidades añadidas en esta fase.",
+      "verificationStatus": "unit-level"
+    },
+    {
+      "id": "aleph-steel-phalanx",
+      "factionId": "aleph",
+      "name": "Steel Phalanx",
+      "unitIds": [],
+      "source": "Infinity Army: la unidad figura en el listado del ejército/sectorial (api.corvusbelli.com/army/units). Solo se muestran las unidades añadidas en esta fase.",
+      "verificationStatus": "unmapped"
+    },
+    {
+      "id": "aleph-oss",
+      "factionId": "aleph",
+      "name": "Operations Subsection of the S.S.S. (OSS)",
+      "unitIds": [
+        "ia-1898",
+        "ia-584",
+        "ia-59",
+        "ia-1128",
+        "ia-1899"
+      ],
+      "source": "Infinity Army: la unidad figura en el listado del ejército/sectorial (api.corvusbelli.com/army/units). Solo se muestran las unidades añadidas en esta fase.",
+      "verificationStatus": "unit-level"
+    }
+  ],
+  "troopClassGroups": [
+    {
+      "troopClass": "Light Infantry",
+      "unitIds": [
+        "ia-296",
+        "ia-1128"
+      ]
+    },
+    {
+      "troopClass": "Skirmishers",
+      "unitIds": [
+        "ia-400",
+        "ia-59"
+      ]
+    },
+    {
+      "troopClass": "Heavy Infantry",
+      "unitIds": [
+        "ia-1891",
+        "ia-584"
+      ]
+    },
+    {
+      "troopClass": "Medium Infantry",
+      "unitIds": [
+        "ia-1893",
+        "ia-1895"
+      ]
+    },
+    {
+      "troopClass": "Remotes",
+      "unitIds": [
+        "ia-1898",
+        "ia-1899"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": "ia-296",
+      "infinityArmyId": 296,
+      "name": "ALGUACIL",
+      "officialName": "Corregidor Alguaciles",
+      "requestedName": "Alguacil",
+      "troopType": "T. Línea",
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 1): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "10-10",
+        "cc": "14",
+        "bs": "11",
+        "physical": "10",
+        "willpower": "13",
+        "armor": "1",
+        "bts": "0",
+        "wounds": "1",
+        "silhouette": "2",
+        "availability": "5"
+      },
+      "woundsLabel": "VITA",
+      "sharedSpecialRules": [],
+      "characteristics": [
+        "Petaca",
+        "Regular",
+        "No Impetuoso"
+      ],
+      "availabilityBySectorial": {
+        "nomads-generic": "5",
+        "nomads-corregidor": "255",
+        "nomads-bakunin": "2",
+        "nomads-tunguska": "2"
+      },
+      "characteristicsBySectorial": {
+        "nomads-generic": [
+          "Petaca",
+          "Regular",
+          "No Impetuoso"
+        ],
+        "nomads-corregidor": [
+          "Petaca",
+          "Regular",
+          "No Impetuoso"
+        ],
+        "nomads-bakunin": [
+          "Petaca",
+          "Regular",
+          "No Impetuoso"
+        ],
+        "nomads-tunguska": [
+          "Petaca",
+          "Regular",
+          "No Impetuoso"
+        ]
+      },
+      "factionId": "nomads",
+      "sectorialIds": [
+        "nomads-generic",
+        "nomads-corregidor",
+        "nomads-bakunin",
+        "nomads-tunguska"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 296: Corregidor Alguaciles",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-296-1-1",
+          "infinityArmyOptionId": 1,
+          "name": "Fusil Combi",
+          "armyName": "ALGUACIL",
+          "specialRules": [],
+          "rangedEquipment": "Fusil Combi",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "10",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor",
+            "nomads-bakunin",
+            "nomads-tunguska"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-2",
+          "infinityArmyOptionId": 2,
+          "name": "Ametralladora",
+          "armyName": "ALGUACIL",
+          "specialRules": [],
+          "rangedEquipment": "Ametralladora",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "1",
+          "points": "18",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor",
+            "nomads-bakunin",
+            "nomads-tunguska"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-5",
+          "infinityArmyOptionId": 5,
+          "name": "Lanzamisiles",
+          "armyName": "ALGUACIL",
+          "specialRules": [],
+          "rangedEquipment": "Lanzamisiles",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "1.5",
+          "points": "15",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor",
+            "nomads-bakunin",
+            "nomads-tunguska"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-6",
+          "infinityArmyOptionId": 6,
+          "name": "Fusil Combi · Hacker, Disp. Hacker",
+          "armyName": "ALGUACIL",
+          "specialRules": [
+            "Hacker",
+            "Disp. Hacker"
+          ],
+          "rangedEquipment": "Fusil Combi",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0.5",
+          "points": "15",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor",
+            "nomads-bakunin",
+            "nomads-tunguska"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-8",
+          "infinityArmyOptionId": 8,
+          "name": "Fusil Combi, Pulso Flash · Observador de Artillería, Repetidor de Posición",
+          "armyName": "ALGUACIL",
+          "specialRules": [
+            "Observador de Artillería",
+            "Repetidor de Posición"
+          ],
+          "rangedEquipment": "Fusil Combi, Pulso Flash",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "12",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor",
+            "nomads-bakunin",
+            "nomads-tunguska"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-9",
+          "infinityArmyOptionId": 9,
+          "name": "Fusil Combi · Sanitario, MediKit",
+          "armyName": "ALGUACIL",
+          "specialRules": [
+            "Sanitario",
+            "MediKit"
+          ],
+          "rangedEquipment": "Fusil Combi",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "12",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor",
+            "nomads-bakunin",
+            "nomads-tunguska"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-10",
+          "infinityArmyOptionId": 10,
+          "name": "Fusil Combi · Teniente",
+          "armyName": "ALGUACIL (Teniente)",
+          "specialRules": [
+            "Teniente"
+          ],
+          "rangedEquipment": "Fusil Combi",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "10",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor",
+            "nomads-bakunin",
+            "nomads-tunguska"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "LIEUTENANT:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-11",
+          "infinityArmyOptionId": 11,
+          "name": "Fusil Combi · Commlink (+1), Operativo Especialista",
+          "armyName": "ALGUACIL",
+          "specialRules": [
+            "Commlink (+1)",
+            "Operativo Especialista"
+          ],
+          "rangedEquipment": "Fusil Combi",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "12",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor",
+            "nomads-bakunin",
+            "nomads-tunguska"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-12",
+          "infinityArmyOptionId": 12,
+          "name": "Subfusil, Contender · PB=3",
+          "armyName": "ALGUACIL GATTA",
+          "specialRules": [
+            "PB=3"
+          ],
+          "rangedEquipment": "Subfusil, Contender",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "10",
+          "sectorialIds": [
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-13",
+          "infinityArmyOptionId": 13,
+          "name": "Subfusil, E/Mitter · PB=3",
+          "armyName": "ALGUACIL GATTA",
+          "specialRules": [
+            "PB=3"
+          ],
+          "rangedEquipment": "Subfusil, E/Mitter",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "10",
+          "sectorialIds": [
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-296-1-14",
+          "infinityArmyOptionId": 14,
+          "name": "Subfusil, Fusil Lanzaadhesivo, Minas PARA · PB=3",
+          "armyName": "ALGUACIL GATTA",
+          "specialRules": [
+            "PB=3"
+          ],
+          "rangedEquipment": "Subfusil, Fusil Lanzaadhesivo, Minas PARA",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "10",
+          "sectorialIds": [
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-400",
+      "infinityArmyId": 400,
+      "name": "BANDIDO",
+      "officialName": "Corregidor Bandits",
+      "requestedName": "Bandido",
+      "troopType": "T. Ent. Especial",
+      "troopClass": "Skirmishers",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 6): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "10-10",
+        "cc": "22",
+        "bs": "12",
+        "physical": "13",
+        "willpower": "12",
+        "armor": "1",
+        "bts": "3",
+        "wounds": "1",
+        "silhouette": "2",
+        "availability": "2"
+      },
+      "woundsLabel": "VITA",
+      "sharedSpecialRules": [
+        "Artes Marciales N2",
+        "Ataque Sorpresa (-3)",
+        "Camuflaje",
+        "Coraje",
+        "Mimetismo (-3)",
+        "Sigilo",
+        "Terreno (Total)",
+        "Ataque CD (+1DE)",
+        "Infiltración (ReRoll)",
+        "Bangbomb (+4)"
+      ],
+      "characteristics": [
+        "Petaca",
+        "Irregular",
+        "No Impetuoso"
+      ],
+      "availabilityBySectorial": {
+        "nomads-corregidor": "2"
+      },
+      "characteristicsBySectorial": {
+        "nomads-corregidor": [
+          "Petaca",
+          "Irregular",
+          "No Impetuoso"
+        ]
+      },
+      "factionId": "nomads",
+      "sectorialIds": [
+        "nomads-corregidor"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 400: Corregidor Bandits",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-400-1-3",
+          "infinityArmyOptionId": 3,
+          "name": "Escopeta Ligera, Fusil Lanzaadhesivo",
+          "armyName": "BANDIDO",
+          "specialRules": [],
+          "rangedEquipment": "Escopeta Ligera, Fusil Lanzaadhesivo",
+          "meleeEquipment": "Pistola de Abordaje, Arma CC DA (PS=6)",
+          "cap": "0",
+          "points": "23",
+          "sectorialIds": [
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "IRREGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-400-1-5",
+          "infinityArmyOptionId": 5,
+          "name": "Escopeta Ligera, Fusil Lanzaadhesivo · Hacker, Disp. Hacker",
+          "armyName": "BANDIDO",
+          "specialRules": [
+            "Hacker",
+            "Disp. Hacker"
+          ],
+          "rangedEquipment": "Escopeta Ligera, Fusil Lanzaadhesivo",
+          "meleeEquipment": "Cargas-D, Pistola de Abordaje, Arma CC DA (PS=6)",
+          "cap": "0.5",
+          "points": "28",
+          "sectorialIds": [
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "IRREGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-400-1-6",
+          "infinityArmyOptionId": 6,
+          "name": "Escopeta Ligera, Fusil Lanzaadhesivo · Hacker, Disp. Hacker Asesino",
+          "armyName": "BANDIDO",
+          "specialRules": [
+            "Hacker",
+            "Disp. Hacker Asesino"
+          ],
+          "rangedEquipment": "Escopeta Ligera, Fusil Lanzaadhesivo",
+          "meleeEquipment": "Cargas-D, Pistola de Abordaje, Arma CC DA (PS=6)",
+          "cap": "0",
+          "points": "26",
+          "sectorialIds": [
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "IRREGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-400-1-7",
+          "infinityArmyOptionId": 7,
+          "name": "Subfusil · Minador, Repetidor de Posición",
+          "armyName": "BANDIDO",
+          "specialRules": [
+            "Minador",
+            "Repetidor de Posición"
+          ],
+          "rangedEquipment": "Subfusil",
+          "meleeEquipment": "Pistola de Abordaje, Arma CC DA (PS=6), Minas Shock",
+          "cap": "0.5",
+          "points": "25",
+          "sectorialIds": [
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "IRREGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-400-1-8",
+          "infinityArmyOptionId": 8,
+          "name": "Escopeta Ligera, Fusil Lanzaadhesivo, Pulso Flash · Observador de Artillería",
+          "armyName": "BANDIDO",
+          "specialRules": [
+            "Observador de Artillería"
+          ],
+          "rangedEquipment": "Escopeta Ligera, Fusil Lanzaadhesivo, Pulso Flash",
+          "meleeEquipment": "Pistola de Abordaje, Arma CC DA (PS=6)",
+          "cap": "0",
+          "points": "24",
+          "sectorialIds": [
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "IRREGULAR:1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-1891",
+      "infinityArmyId": 1891,
+      "name": "BEARCAT",
+      "officialName": "Bearcats, Airborne Heavy Regiment",
+      "requestedName": "Bearcat",
+      "troopType": "T. Veterana",
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 3): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "15-5",
+        "cc": "15",
+        "bs": "13",
+        "physical": "13",
+        "willpower": "13",
+        "armor": "3",
+        "bts": "3",
+        "wounds": "1",
+        "silhouette": "2",
+        "availability": "1"
+      },
+      "woundsLabel": "VITA",
+      "sharedSpecialRules": [
+        "Fogueado",
+        "Inmunidad (Shock)",
+        "Paracaidista",
+        "Salto de Combate",
+        "Sin Incapacidad por Herida",
+        "Súper-Salto (Retropropulsión)"
+      ],
+      "characteristics": [
+        "Petaca",
+        "Regular",
+        "No Impetuoso",
+        "Hackeable"
+      ],
+      "availabilityBySectorial": {
+        "nomads-generic": "1",
+        "nomads-corregidor": "3"
+      },
+      "characteristicsBySectorial": {
+        "nomads-generic": [
+          "Petaca",
+          "Regular",
+          "No Impetuoso",
+          "Hackeable"
+        ],
+        "nomads-corregidor": [
+          "Petaca",
+          "Regular",
+          "No Impetuoso",
+          "Hackeable",
+          "Surface"
+        ]
+      },
+      "factionId": "nomads",
+      "sectorialIds": [
+        "nomads-generic",
+        "nomads-corregidor"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 1891: Bearcats, Airborne Heavy Regiment",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-1891-1-1",
+          "infinityArmyOptionId": 1,
+          "name": "Escopeta de Abordaje (+1R) · Hacker, Disp. Hacker Asesino (UPGRADE: Firewall (-3))",
+          "armyName": "BEARCAT",
+          "specialRules": [
+            "Hacker",
+            "Disp. Hacker Asesino (UPGRADE: Firewall (-3))"
+          ],
+          "rangedEquipment": "Escopeta de Abordaje (+1R)",
+          "meleeEquipment": "Cargas-D, Pistola de Abordaje (+1R), Arma CC",
+          "cap": "0",
+          "points": "30",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1891-1-2",
+          "infinityArmyOptionId": 2,
+          "name": "Subfusil AP, Fusil Lanzaadhesivo · Hacker, Disp. Hacker Asesino (UPGRADE: Firewall (-3))",
+          "armyName": "BEARCAT",
+          "specialRules": [
+            "Hacker",
+            "Disp. Hacker Asesino (UPGRADE: Firewall (-3))"
+          ],
+          "rangedEquipment": "Subfusil AP, Fusil Lanzaadhesivo",
+          "meleeEquipment": "Cargas-D, Pistola de Abordaje (+1R), Arma CC",
+          "cap": "0",
+          "points": "29",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1891-1-3",
+          "infinityArmyOptionId": 3,
+          "name": "Subfusil AP · Ingeniero, Desactivador, GizmoKit",
+          "armyName": "BEARCAT",
+          "specialRules": [
+            "Ingeniero",
+            "Desactivador",
+            "GizmoKit"
+          ],
+          "rangedEquipment": "Subfusil AP",
+          "meleeEquipment": "Cargas-D, Pistola de Abordaje (+1R), Arma CC",
+          "cap": "0",
+          "points": "28",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1891-1-4",
+          "infinityArmyOptionId": 4,
+          "name": "Spitfire · Operativo Especialista",
+          "armyName": "BEARCAT",
+          "specialRules": [
+            "Operativo Especialista"
+          ],
+          "rangedEquipment": "Spitfire",
+          "meleeEquipment": "Cargas-D, Pistola de Abordaje (+1R), Arma CC",
+          "cap": "1.5",
+          "points": "35",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1891-1-5",
+          "infinityArmyOptionId": 5,
+          "name": "Subfusil AP · Sanitario, MediKit, Repetidor de Posición",
+          "armyName": "BEARCAT",
+          "specialRules": [
+            "Sanitario",
+            "MediKit",
+            "Repetidor de Posición"
+          ],
+          "rangedEquipment": "Subfusil AP",
+          "meleeEquipment": "Pistola de Abordaje (+1R), Arma CC",
+          "cap": "0",
+          "points": "27",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-1893",
+      "infinityArmyId": 1893,
+      "name": "TERRITORIAL",
+      "officialName": "Territorials, Territorial Domination Unit",
+      "requestedName": "Territorial",
+      "troopType": "T. Veterana",
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 2): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "10-10",
+        "cc": "14",
+        "bs": "13",
+        "physical": "11",
+        "willpower": "13",
+        "armor": "3",
+        "bts": "3",
+        "wounds": "1",
+        "silhouette": "2",
+        "availability": "2"
+      },
+      "woundsLabel": "VITA",
+      "sharedSpecialRules": [
+        "Inmunidad (Shock)",
+        "Inmunidad (Críticos)",
+        "Intuición de Combate",
+        "Sentido Táctico",
+        "Puntería",
+        "Terreno (Total)"
+      ],
+      "characteristics": [
+        "Petaca",
+        "No Impetuoso",
+        "No Hackeable"
+      ],
+      "availabilityBySectorial": {
+        "nomads-generic": "2",
+        "nomads-corregidor": "3"
+      },
+      "characteristicsBySectorial": {
+        "nomads-generic": [
+          "Petaca",
+          "No Impetuoso",
+          "No Hackeable"
+        ],
+        "nomads-corregidor": [
+          "Petaca",
+          "Regular",
+          "No Impetuoso",
+          "No Hackeable",
+          "Surface"
+        ]
+      },
+      "factionId": "nomads",
+      "sectorialIds": [
+        "nomads-generic",
+        "nomads-corregidor"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 1893: Territorials, Territorial Domination Unit",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-1893-1-1",
+          "infinityArmyOptionId": 1,
+          "name": "Subfusil AP, E/Mitter, Panzerfaust · Ingeniero, Desactivador, GizmoKit",
+          "armyName": "TERRITORIAL",
+          "specialRules": [
+            "Ingeniero",
+            "Desactivador",
+            "GizmoKit"
+          ],
+          "rangedEquipment": "Subfusil AP, E/Mitter, Panzerfaust",
+          "meleeEquipment": "Cargas-D, Pistola Pesada AP, Arma CC",
+          "cap": "0",
+          "points": "28",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "TACTICAL:1"
+          ]
+        },
+        {
+          "id": "ia-1893-1-2",
+          "infinityArmyOptionId": 2,
+          "name": "Escopeta de Abordaje (+1R), Panzerfaust · Operativo Especialista, GizmoKit",
+          "armyName": "TERRITORIAL",
+          "specialRules": [
+            "Operativo Especialista",
+            "GizmoKit"
+          ],
+          "rangedEquipment": "Escopeta de Abordaje (+1R), Panzerfaust",
+          "meleeEquipment": "Cargas-D, Pistola Pesada AP, Arma CC",
+          "cap": "0",
+          "points": "26",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "TACTICAL:1"
+          ]
+        },
+        {
+          "id": "ia-1893-1-3",
+          "infinityArmyOptionId": 3,
+          "name": "Red Fury AP · Operativo Especialista",
+          "armyName": "TERRITORIAL",
+          "specialRules": [
+            "Operativo Especialista"
+          ],
+          "rangedEquipment": "Red Fury AP",
+          "meleeEquipment": "Cargas-D, Pistola Pesada AP, Arma CC",
+          "cap": "1.5",
+          "points": "32",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "TACTICAL:1"
+          ]
+        },
+        {
+          "id": "ia-1893-1-4",
+          "infinityArmyOptionId": 4,
+          "name": "Fusil de Precisión AP · Visor X",
+          "armyName": "TERRITORIAL",
+          "specialRules": [
+            "Visor X"
+          ],
+          "rangedEquipment": "Fusil de Precisión AP",
+          "meleeEquipment": "Pistola Pesada AP, Arma CC",
+          "cap": "0",
+          "points": "29",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "TACTICAL:1"
+          ]
+        },
+        {
+          "id": "ia-1893-1-5",
+          "infinityArmyOptionId": 5,
+          "name": "Red Fury AP · Teniente, Operativo Especialista",
+          "armyName": "TERRITORIAL (Teniente)",
+          "specialRules": [
+            "Teniente",
+            "Operativo Especialista"
+          ],
+          "rangedEquipment": "Red Fury AP",
+          "meleeEquipment": "Cargas-D, Pistola Pesada AP, Arma CC",
+          "cap": "1.5",
+          "points": "32",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "TACTICAL:1",
+            "LIEUTENANT:1"
+          ]
+        },
+        {
+          "id": "ia-1893-1-6",
+          "infinityArmyOptionId": 6,
+          "name": "Subfusil AP, E/Mitter, Panzerfaust · Teniente, Ingeniero, Desactivador, GizmoKit",
+          "armyName": "TERRITORIAL (Teniente)",
+          "specialRules": [
+            "Teniente",
+            "Ingeniero",
+            "Desactivador",
+            "GizmoKit"
+          ],
+          "rangedEquipment": "Subfusil AP, E/Mitter, Panzerfaust",
+          "meleeEquipment": "Cargas-D, Pistola Pesada AP, Arma CC",
+          "cap": "0",
+          "points": "28",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "TACTICAL:1",
+            "LIEUTENANT:1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-1895",
+      "infinityArmyId": 1895,
+      "name": "VIGILANTE",
+      "officialName": "Vigilantes, Tactical Support and Surveillance Special Group",
+      "requestedName": "Vigilante",
+      "troopType": "T. Ent. Especial",
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 2): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "10-10",
+        "cc": "16",
+        "bs": "12",
+        "physical": "11",
+        "willpower": "13",
+        "armor": "3",
+        "bts": "6",
+        "wounds": "1",
+        "silhouette": "2",
+        "availability": "2"
+      },
+      "woundsLabel": "VITA",
+      "sharedSpecialRules": [
+        "Ataque Sorpresa (-3)",
+        "Camuflaje",
+        "Contrainteligencia",
+        "Desp. Avanzado (+20cm)",
+        "Inmunidad (Shock)",
+        "Mimetismo (-3)",
+        "Sigilo",
+        "Terreno (Total)"
+      ],
+      "characteristics": [
+        "Petaca",
+        "Regular",
+        "No Impetuoso",
+        "No Hackeable"
+      ],
+      "availabilityBySectorial": {
+        "nomads-generic": "2",
+        "nomads-corregidor": "2"
+      },
+      "characteristicsBySectorial": {
+        "nomads-generic": [
+          "Petaca",
+          "Regular",
+          "No Impetuoso",
+          "No Hackeable"
+        ],
+        "nomads-corregidor": [
+          "Petaca",
+          "Regular",
+          "No Impetuoso",
+          "No Hackeable",
+          "Surface"
+        ]
+      },
+      "factionId": "nomads",
+      "sectorialIds": [
+        "nomads-generic",
+        "nomads-corregidor"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 1895: Vigilantes, Tactical Support and Surveillance Special Group",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-1895-1-1",
+          "infinityArmyOptionId": 1,
+          "name": "Subfusil AP, Pulso Flash (+2R), Cibermina · Sensor, Hacker, Disp. Hacker",
+          "armyName": "VIGILANTE",
+          "specialRules": [
+            "Sensor",
+            "Hacker",
+            "Disp. Hacker"
+          ],
+          "rangedEquipment": "Subfusil AP, Pulso Flash (+2R), Cibermina",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0.5",
+          "points": "25",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1895-1-2",
+          "infinityArmyOptionId": 2,
+          "name": "Fusil MULTI, Lanzallamas Ligero · Hacker, Disp. Hacker Asesino",
+          "armyName": "VIGILANTE",
+          "specialRules": [
+            "Hacker",
+            "Disp. Hacker Asesino"
+          ],
+          "rangedEquipment": "Fusil MULTI, Lanzallamas Ligero",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "28",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1895-1-3",
+          "infinityArmyOptionId": 3,
+          "name": "Fusil MULTI, Lanzallamas Ligero · Minador, Operativo Especialista",
+          "armyName": "VIGILANTE",
+          "specialRules": [
+            "Minador",
+            "Operativo Especialista"
+          ],
+          "rangedEquipment": "Fusil MULTI, Lanzallamas Ligero",
+          "meleeEquipment": "Cargas-D, Minas AP, Pistola, Arma CC",
+          "cap": "0.5",
+          "points": "28",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1895-1-4",
+          "infinityArmyOptionId": 4,
+          "name": "Fusil MULTI, Lanzallamas Ligero · Operativo Especialista",
+          "armyName": "VIGILANTE",
+          "specialRules": [
+            "Operativo Especialista"
+          ],
+          "rangedEquipment": "Fusil MULTI, Lanzallamas Ligero",
+          "meleeEquipment": "Cargas-D, Torreta Artillada (F. Combi), Pistola, Arma CC",
+          "cap": "0",
+          "points": "29",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1895-1-5",
+          "infinityArmyOptionId": 5,
+          "name": "Escopeta de Abordaje (+1R), E/Mitter, Pulso Flash · Observador de Artillería",
+          "armyName": "VIGILANTE",
+          "specialRules": [
+            "Observador de Artillería"
+          ],
+          "rangedEquipment": "Escopeta de Abordaje (+1R), E/Mitter, Pulso Flash",
+          "meleeEquipment": "Cargas-D, Pistola, Arma CC",
+          "cap": "0",
+          "points": "26",
+          "sectorialIds": [
+            "nomads-generic",
+            "nomads-corregidor"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-1898",
+      "infinityArmyId": 1898,
+      "name": "DIKPALA",
+      "officialName": "Dikpala Tacbots",
+      "requestedName": "Tactbot Dikpala",
+      "troopType": "REM · T. Línea",
+      "troopClass": "Remotes",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 5): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "15-10",
+        "cc": "13",
+        "bs": "11",
+        "physical": "10",
+        "willpower": "13",
+        "armor": "0",
+        "bts": "3",
+        "wounds": "1",
+        "silhouette": "2",
+        "availability": "255"
+      },
+      "woundsLabel": "EST",
+      "sharedSpecialRules": [
+        "Presencia Remota",
+        "Coraje",
+        "Mimetismo (-3)",
+        "ECM: Hacker (-3)"
+      ],
+      "characteristics": [
+        "Regular",
+        "No Impetuoso",
+        "Hackeable"
+      ],
+      "availabilityBySectorial": {
+        "aleph-generic": "255",
+        "aleph-oss": "255"
+      },
+      "characteristicsBySectorial": {
+        "aleph-generic": [
+          "Regular",
+          "No Impetuoso",
+          "Hackeable"
+        ],
+        "aleph-oss": [
+          "Regular",
+          "No Impetuoso",
+          "Hackeable"
+        ]
+      },
+      "factionId": "aleph",
+      "sectorialIds": [
+        "aleph-generic",
+        "aleph-oss"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 1898: Dikpala Tacbots",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-1898-1-1",
+          "infinityArmyOptionId": 1,
+          "name": "Fusil Combi",
+          "armyName": "DIKPALA",
+          "specialRules": [],
+          "rangedEquipment": "Fusil Combi",
+          "meleeEquipment": "Arma CC PARA (-3)",
+          "cap": "0",
+          "points": "13",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1898-1-2",
+          "infinityArmyOptionId": 2,
+          "name": "Ametralladora",
+          "armyName": "DIKPALA",
+          "specialRules": [],
+          "rangedEquipment": "Ametralladora",
+          "meleeEquipment": "Arma CC PARA (-3)",
+          "cap": "1",
+          "points": "21",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1898-1-3",
+          "infinityArmyOptionId": 3,
+          "name": "Fusil de Francotirador MULTI",
+          "armyName": "DIKPALA",
+          "specialRules": [],
+          "rangedEquipment": "Fusil de Francotirador MULTI",
+          "meleeEquipment": "Arma CC PARA (-3)",
+          "cap": "1",
+          "points": "19",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1898-1-4",
+          "infinityArmyOptionId": 4,
+          "name": "Fusil Combi · Commlink, Operativo Especialista",
+          "armyName": "DIKPALA",
+          "specialRules": [
+            "Commlink",
+            "Operativo Especialista"
+          ],
+          "rangedEquipment": "Fusil Combi",
+          "meleeEquipment": "Arma CC PARA (-3)",
+          "cap": "0",
+          "points": "15",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1898-1-5",
+          "infinityArmyOptionId": 5,
+          "name": "Subfusil, Akrylat-Kanone · Repetidor",
+          "armyName": "DIKPALA",
+          "specialRules": [
+            "Repetidor"
+          ],
+          "rangedEquipment": "Subfusil, Akrylat-Kanone",
+          "meleeEquipment": "Arma CC PARA (-3)",
+          "cap": "0",
+          "points": "13",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1898-1-6",
+          "infinityArmyOptionId": 6,
+          "name": "Fusil Combi · Sanitario, MediKit",
+          "armyName": "DIKPALA",
+          "specialRules": [
+            "Sanitario",
+            "MediKit"
+          ],
+          "rangedEquipment": "Fusil Combi",
+          "meleeEquipment": "Arma CC PARA (-3)",
+          "cap": "0",
+          "points": "15",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-584",
+      "infinityArmyId": 584,
+      "name": "ASURA",
+      "officialName": "Asuras",
+      "requestedName": "Asura",
+      "troopType": "T. Élite",
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 3): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "15-5",
+        "cc": "20",
+        "bs": "14",
+        "physical": "14",
+        "willpower": "15",
+        "armor": "5",
+        "bts": "6",
+        "wounds": "2",
+        "silhouette": "2",
+        "availability": "2"
+      },
+      "woundsLabel": "VITA",
+      "sharedSpecialRules": [
+        "Coraje",
+        "Sin Incapacidad por Herida",
+        "ECM: Hacker (-3)",
+        "Visor Multiespectral N3"
+      ],
+      "characteristics": [
+        "Regular",
+        "No Impetuoso",
+        "Petaca 2.0",
+        "Hackeable"
+      ],
+      "availabilityBySectorial": {
+        "aleph-generic": "2",
+        "aleph-oss": "4"
+      },
+      "characteristicsBySectorial": {
+        "aleph-generic": [
+          "Regular",
+          "No Impetuoso",
+          "Petaca 2.0",
+          "Hackeable"
+        ],
+        "aleph-oss": [
+          "Regular",
+          "No Impetuoso",
+          "Petaca 2.0",
+          "Hackeable"
+        ]
+      },
+      "factionId": "aleph",
+      "sectorialIds": [
+        "aleph-generic",
+        "aleph-oss"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 584: Asuras",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-584-1-2",
+          "infinityArmyOptionId": 2,
+          "name": "Spitfire AP, Pulzar",
+          "armyName": "ASURA",
+          "specialRules": [],
+          "rangedEquipment": "Spitfire AP, Pulzar",
+          "meleeEquipment": "Pistola MULTI, Arma CC AP (PS=6)",
+          "cap": "1.5",
+          "points": "61",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-584-1-3",
+          "infinityArmyOptionId": 3,
+          "name": "Fusil de Precisión MULTI, Pulzar · Hacker, Disp. Hacker Plus (UPGRADE: Trinity (+1DE))",
+          "armyName": "ASURA",
+          "specialRules": [
+            "Hacker",
+            "Disp. Hacker Plus (UPGRADE: Trinity (+1DE))"
+          ],
+          "rangedEquipment": "Fusil de Precisión MULTI, Pulzar",
+          "meleeEquipment": "Pistola MULTI, Arma CC AP (PS=6)",
+          "cap": "0.5",
+          "points": "63",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-584-1-5",
+          "infinityArmyOptionId": 5,
+          "name": "Spitfire AP, Pulzar · Teniente (+1 Orden)",
+          "armyName": "ASURA (Teniente)",
+          "specialRules": [
+            "Teniente (+1 Orden)"
+          ],
+          "rangedEquipment": "Spitfire AP, Pulzar",
+          "meleeEquipment": "Pistola MULTI, Arma CC AP (PS=6)",
+          "cap": "1",
+          "points": "65",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "LIEUTENANT:2"
+          ]
+        },
+        {
+          "id": "ia-584-1-6",
+          "infinityArmyOptionId": 6,
+          "name": "Fusil de Precisión MULTI, Pulzar · Teniente (+1 Orden), Hacker, Disp. Hacker Plus (UPGRADE: Trinity (+1DE))",
+          "armyName": "ASURA (Teniente)",
+          "specialRules": [
+            "Teniente (+1 Orden)",
+            "Hacker",
+            "Disp. Hacker Plus (UPGRADE: Trinity (+1DE))"
+          ],
+          "rangedEquipment": "Fusil de Precisión MULTI, Pulzar",
+          "meleeEquipment": "Pistola MULTI, Arma CC AP (PS=6)",
+          "cap": "0",
+          "points": "67",
+          "sectorialIds": [
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "LIEUTENANT:2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-59",
+      "infinityArmyId": 59,
+      "name": "NAGA",
+      "officialName": "Nagas",
+      "requestedName": "Naga",
+      "troopType": "T. Ent. Especial",
+      "troopClass": "Skirmishers",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 6): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "10-10",
+        "cc": "16",
+        "bs": "12",
+        "physical": "12",
+        "willpower": "14",
+        "armor": "1",
+        "bts": "0",
+        "wounds": "1",
+        "silhouette": "2",
+        "availability": "2"
+      },
+      "woundsLabel": "VITA",
+      "sharedSpecialRules": [
+        "Ataque Sorpresa (-3)",
+        "Coraje",
+        "Camuflaje",
+        "Infiltración",
+        "Mimetismo (-3)",
+        "Sigilo",
+        "Tenaz",
+        "Terreno (Total)"
+      ],
+      "characteristics": [
+        "Regular",
+        "No Impetuoso",
+        "Petaca 2.0"
+      ],
+      "availabilityBySectorial": {
+        "aleph-generic": "2",
+        "aleph-oss": "3"
+      },
+      "characteristicsBySectorial": {
+        "aleph-generic": [
+          "Regular",
+          "No Impetuoso",
+          "Petaca 2.0"
+        ],
+        "aleph-oss": [
+          "Regular",
+          "No Impetuoso",
+          "Petaca 2.0"
+        ]
+      },
+      "factionId": "aleph",
+      "sectorialIds": [
+        "aleph-generic",
+        "aleph-oss"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 59: Nagas",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-59-1-3",
+          "infinityArmyOptionId": 3,
+          "name": "Fusil de Francotirador MULTI, Nanopulser · Ataque CD (+1DE)",
+          "armyName": "NAGA",
+          "specialRules": [
+            "Ataque CD (+1DE)"
+          ],
+          "rangedEquipment": "Fusil de Francotirador MULTI, Nanopulser",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "1.5",
+          "points": "29",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-59-1-4",
+          "infinityArmyOptionId": 4,
+          "name": "Escopeta de Abordaje, Nanopulser, Minas Shock · Minador",
+          "armyName": "NAGA",
+          "specialRules": [
+            "Minador"
+          ],
+          "rangedEquipment": "Escopeta de Abordaje, Nanopulser, Minas Shock",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0.5",
+          "points": "25",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-59-1-5",
+          "infinityArmyOptionId": 5,
+          "name": "Subfusil AP, Nanopulser · Hacker, Disp. Hacker Asesino",
+          "armyName": "NAGA",
+          "specialRules": [
+            "Hacker",
+            "Disp. Hacker Asesino"
+          ],
+          "rangedEquipment": "Subfusil AP, Nanopulser",
+          "meleeEquipment": "Cargas-D, Minas E/M, Pistola, Arma CC",
+          "cap": "0",
+          "points": "27",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-59-1-6",
+          "infinityArmyOptionId": 6,
+          "name": "Subfusil AP, Nanopulser · Hacker, Disp. Hacker (UPGRADE: Carbonita (+1DE)), Repetidor de Posición",
+          "armyName": "NAGA",
+          "specialRules": [
+            "Hacker",
+            "Disp. Hacker (UPGRADE: Carbonita (+1DE))",
+            "Repetidor de Posición"
+          ],
+          "rangedEquipment": "Subfusil AP, Nanopulser",
+          "meleeEquipment": "Cargas-D, Pistola, Arma CC",
+          "cap": "0.5",
+          "points": "29",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-59-1-7",
+          "infinityArmyOptionId": 7,
+          "name": "Subfusil AP, Nanopulser, Pulso Flash · Observador de Artillería, Repetidor de Posición",
+          "armyName": "NAGA",
+          "specialRules": [
+            "Observador de Artillería",
+            "Repetidor de Posición"
+          ],
+          "rangedEquipment": "Subfusil AP, Nanopulser, Pulso Flash",
+          "meleeEquipment": "Cargas-D, Pistola, Arma CC",
+          "cap": "0",
+          "points": "25",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-59-1-8",
+          "infinityArmyOptionId": 8,
+          "name": "Subfusil AP, Nanopulser, Minas Monofilo · Minador",
+          "armyName": "NAGA",
+          "specialRules": [
+            "Minador"
+          ],
+          "rangedEquipment": "Subfusil AP, Nanopulser, Minas Monofilo",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0.5",
+          "points": "26",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-1128",
+      "infinityArmyId": 1128,
+      "name": "SHUKRA",
+      "officialName": "Shukra Consultants",
+      "requestedName": "Shukra",
+      "troopType": "T. Ent. Especial",
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 1): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "10-10",
+        "cc": "16",
+        "bs": "12",
+        "physical": "11",
+        "willpower": "14",
+        "armor": "1",
+        "bts": "3",
+        "wounds": "1",
+        "silhouette": "2",
+        "availability": "1"
+      },
+      "woundsLabel": "VITA",
+      "sharedSpecialRules": [
+        "Contrainteligencia",
+        "Coraje",
+        "Descubrir (+3)",
+        "Visor Biométrico"
+      ],
+      "characteristics": [
+        "Regular",
+        "No Impetuoso",
+        "Petaca 2.0"
+      ],
+      "availabilityBySectorial": {
+        "aleph-generic": "1",
+        "aleph-oss": "2"
+      },
+      "characteristicsBySectorial": {
+        "aleph-generic": [
+          "Regular",
+          "No Impetuoso",
+          "Petaca 2.0"
+        ],
+        "aleph-oss": [
+          "Regular",
+          "No Impetuoso",
+          "Petaca 2.0"
+        ]
+      },
+      "factionId": "aleph",
+      "sectorialIds": [
+        "aleph-generic",
+        "aleph-oss"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 1128: Shukra Consultants",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-1128-1-1",
+          "infinityArmyOptionId": 1,
+          "name": "Escopeta de Abordaje · Cadena de Mando",
+          "armyName": "SHUKRA",
+          "specialRules": [
+            "Cadena de Mando"
+          ],
+          "rangedEquipment": "Escopeta de Abordaje",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "21",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1128-1-2",
+          "infinityArmyOptionId": 2,
+          "name": "Fusil MULTI, Nanopulser · Cadena de Mando",
+          "armyName": "SHUKRA",
+          "specialRules": [
+            "Cadena de Mando"
+          ],
+          "rangedEquipment": "Fusil MULTI, Nanopulser",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "26",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1128-1-3",
+          "infinityArmyOptionId": 3,
+          "name": "Fusil MULTI, Nanopulser · Teniente, Strategos N1",
+          "armyName": "SHUKRA (Teniente)",
+          "specialRules": [
+            "Teniente",
+            "Strategos N1"
+          ],
+          "rangedEquipment": "Fusil MULTI, Nanopulser",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0",
+          "points": "24",
+          "sectorialIds": [
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1",
+            "LIEUTENANT:1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ia-1899",
+      "infinityArmyId": 1899,
+      "name": "SHARVARA",
+      "officialName": "Sharvara HoundBots",
+      "requestedName": "Sharvara",
+      "troopType": "REM · T. Línea",
+      "troopClass": "Remotes",
+      "troopClassSource": "Infinity Army, tipo de tropa del perfil (id 5): https://infinityuniverse.com/army/infinity",
+      "troopClassVerificationStatus": "verified",
+      "stats": {
+        "movement": "15-15",
+        "cc": "22",
+        "bs": "11",
+        "physical": "12",
+        "willpower": "12",
+        "armor": "0",
+        "bts": "3",
+        "wounds": "1",
+        "silhouette": "3",
+        "availability": "1"
+      },
+      "woundsLabel": "EST",
+      "sharedSpecialRules": [
+        "Presencia Remota",
+        "Ataque CC (-6)",
+        "Coraje",
+        "Desp. Avanzado (+10cm)",
+        "Esquivar (+3)",
+        "Esquivar (+5cm)",
+        "Guerrero Nato",
+        "Mimetismo (-3)",
+        "Sigilo",
+        "Súper-Salto"
+      ],
+      "characteristics": [
+        "Regular",
+        "No Impetuoso",
+        "Hackeable"
+      ],
+      "availabilityBySectorial": {
+        "aleph-generic": "1",
+        "aleph-oss": "2"
+      },
+      "characteristicsBySectorial": {
+        "aleph-generic": [
+          "Regular",
+          "No Impetuoso",
+          "Hackeable"
+        ],
+        "aleph-oss": [
+          "Regular",
+          "No Impetuoso",
+          "Hackeable"
+        ]
+      },
+      "factionId": "aleph",
+      "sectorialIds": [
+        "aleph-generic",
+        "aleph-oss"
+      ],
+      "edition": "N5",
+      "source": "Infinity Army (api.corvusbelli.com, versión 7.26246.158), unidad 1899: Sharvara HoundBots",
+      "verificationStatus": "verified",
+      "profiles": [
+        {
+          "id": "ia-1899-1-1",
+          "infinityArmyOptionId": 1,
+          "name": "Escopeta Ligera, Riotstopper Pesado, E/Marat",
+          "armyName": "SHARVARA",
+          "specialRules": [],
+          "rangedEquipment": "Escopeta Ligera, Riotstopper Pesado, E/Marat",
+          "meleeEquipment": "Arma CC DA (PS=7), Arma CC PARA",
+          "cap": "0",
+          "points": "17",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1899-1-2",
+          "infinityArmyOptionId": 2,
+          "name": "Fusil Lanzaadhesivo, Escopeta Ligera, E/Marat",
+          "armyName": "SHARVARA",
+          "specialRules": [],
+          "rangedEquipment": "Fusil Lanzaadhesivo, Escopeta Ligera, E/Marat",
+          "meleeEquipment": "Arma CC DA (PS=7), Arma CC PARA",
+          "cap": "0",
+          "points": "19",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        },
+        {
+          "id": "ia-1899-1-3",
+          "infinityArmyOptionId": 3,
+          "name": "Fusil Lanzaadhesivo, Riotstopper Pesado, E/Marat",
+          "armyName": "SHARVARA",
+          "specialRules": [],
+          "rangedEquipment": "Fusil Lanzaadhesivo, Riotstopper Pesado, E/Marat",
+          "meleeEquipment": "Arma CC DA (PS=7), Arma CC PARA",
+          "cap": "0",
+          "points": "15",
+          "sectorialIds": [
+            "aleph-generic",
+            "aleph-oss"
+          ],
+          "orders": [
+            "REGULAR:1"
+          ]
+        }
+      ]
+    }
+  ]
+}
