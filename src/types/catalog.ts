@@ -85,6 +85,27 @@ export interface Faction {
   shortName: string;
 }
 
+export interface FactionDirectory {
+  schemaVersion: number;
+  metadata: {
+    source: string;
+    sourceUrl: string;
+    checkedAt: string;
+    verificationStatus: VerificationStatus;
+    note: string;
+  };
+  factions: Array<Faction & {
+    armyName: string;
+    catalogStatus: 'metadata-only';
+    iconStatus: 'awaiting-authorized-asset';
+    sectorials: Array<{
+      id: string;
+      name: string;
+      kind: 'generic' | 'sectorial';
+    }>;
+  }>;
+}
+
 export interface WeaponProfile {
   id: string;
   name: string;

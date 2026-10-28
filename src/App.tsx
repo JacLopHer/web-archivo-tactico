@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
+import factionDirectoryData from './data/factionDirectory.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
 import { PRINT_LAYOUTS, getCellSizeMm, paginateEntries } from './domain/printLayout.mjs';
@@ -20,12 +21,13 @@ import {
   shouldAutosaveProjects,
   updateProjectCards,
 } from './domain/projects.mjs';
-import type { JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
+import type { FactionDirectory, JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
 import type { TroopClass } from './domain/troopClasses.mjs';
 import type { ImportedProfileLine } from './domain/listImport.mjs';
 import type { ProjectStore } from './domain/projects.mjs';
 
 const catalog = catalogData as JsaCatalog;
+const factionDirectory = factionDirectoryData as FactionDirectory;
 for (const unit of catalog.units) assertValidTroopClass(unit.name, unit.troopClass);
 const weaponProfiles = weaponProfilesData as WeaponProfilesCatalog;
 const catalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
@@ -846,6 +848,42 @@ function App() {
             </select>
           </div>
         </label>
+      </section>
+
+      <section className="upcoming-factions" aria-labelledby="upcoming-factions-title">
+        <div className="upcoming-factions-heading">
+          <div>
+            <span className="eyebrow">AMPLIACIÓN DEL CATÁLOGO</span>
+            <h2 id="upcoming-factions-title">En preparación</h2>
+          </div>
+          <a href={factionDirectory.metadata.sourceUrl} target="_blank" rel="noreferrer">
+            Fuente: {factionDirectory.metadata.source}
+          </a>
+        </div>
+        <div className="upcoming-factions-grid">
+          {factionDirectory.factions.map((faction) => (
+            <article className="upcoming-faction" key={faction.id}>
+              <div className="upcoming-faction-heading">
+                <span className="upcoming-faction-mark" aria-hidden="true">{faction.shortName}</span>
+                <div>
+                  <h3>{faction.name}</h3>
+                  <span>Unidades pendientes</span>
+                </div>
+              </div>
+              <ul>
+                {faction.sectorials.map((sectorial) => (
+                  <li key={sectorial.id}>
+                    <span>
+                      {sectorial.name}
+                      {sectorial.kind === 'generic' ? ' · genérica' : ''}
+                    </span>
+                    <span className="upcoming-status">Próximamente</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
       </section>
 
       <div className="workspace">

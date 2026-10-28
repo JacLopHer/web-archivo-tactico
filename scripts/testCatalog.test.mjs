@@ -5,6 +5,9 @@ import test from 'node:test';
 const catalog = JSON.parse(
   await readFile(new URL('../src/data/legacyJsaCatalog.json', import.meta.url), 'utf8'),
 );
+const factionDirectory = JSON.parse(
+  await readFile(new URL('../src/data/factionDirectory.json', import.meta.url), 'utf8'),
+);
 const troopProfiles = catalog.units.flatMap((unit) =>
   unit.profiles.map((profile) => ({
     ...unit,
@@ -31,6 +34,45 @@ test('el catálogo migrado conserva el inventario heredado', () => {
   assert.equal(weaponCatalog.profiles.length, 228);
   assert.equal(catalog.references.length, 8);
   assert.equal('profiles' in catalog, false);
+});
+
+test('el directorio de facciones registra ejércitos oficiales sin inventar unidades', () => {
+  assert.equal(factionDirectory.metadata.source, 'Infinity Army');
+  assert.equal(factionDirectory.metadata.verificationStatus, 'verified');
+  assert.deepEqual(
+    factionDirectory.factions.map(({ id }) => id),
+    ['nomads', 'aleph'],
+  );
+  assert.deepEqual(
+    factionDirectory.factions.flatMap(({ sectorials }) => sectorials.map(({ id }) => id)),
+    [
+      'nomads-generic',
+      'nomads-corregidor',
+      'nomads-bakunin',
+      'nomads-tunguska',
+      'aleph-generic',
+      'aleph-steel-phalanx',
+      'aleph-oss',
+    ],
+  );
+  assert.deepEqual(
+    factionDirectory.factions.flatMap(({ sectorials }) => sectorials.map(({ name }) => name)),
+    [
+      'Nomads',
+      'Corregidor Jurisdictional Command',
+      'Bakunin Jurisdictional Command',
+      'Tunguska Jurisdictional Command',
+      'Aleph',
+      'Steel Phalanx',
+      'Operations Subsection of the S.S.S. (OSS)',
+    ],
+  );
+  assert.ok(factionDirectory.factions.every((faction) =>
+    faction.catalogStatus === 'metadata-only'
+      && faction.iconStatus === 'awaiting-authorized-asset'
+      && !('units' in faction)
+      && faction.sectorials.every((sectorial) => !('unitIds' in sectorial)),
+  ));
 });
 
 test('agrupa los perfiles FTO con su unidad base sin alterar los nombres de importación', () => {

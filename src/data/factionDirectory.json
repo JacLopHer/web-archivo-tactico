@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "metadata": {
+    "source": "Infinity Army",
+    "sourceUrl": "https://infinityuniverse.com/army/",
+    "checkedAt": "2026-10-28",
+    "verificationStatus": "verified",
+    "note": "La verificación cubre los nombres de facción y ejércitos disponibles en Infinity Army; no incluye unidades ni disponibilidad de perfiles."
+  },
+  "factions": [
+    {
+      "id": "nomads",
+      "name": "Nómadas",
+      "armyName": "Nomads",
+      "shortName": "NOM",
+      "catalogStatus": "metadata-only",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        { "id": "nomads-generic", "name": "Nomads", "kind": "generic" },
+        { "id": "nomads-corregidor", "name": "Corregidor Jurisdictional Command", "kind": "sectorial" },
+        { "id": "nomads-bakunin", "name": "Bakunin Jurisdictional Command", "kind": "sectorial" },
+        { "id": "nomads-tunguska", "name": "Tunguska Jurisdictional Command", "kind": "sectorial" }
+      ]
+    },
+    {
+      "id": "aleph",
+      "name": "Aleph",
+      "armyName": "Aleph",
+      "shortName": "ALEPH",
+      "catalogStatus": "metadata-only",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        { "id": "aleph-generic", "name": "Aleph", "kind": "generic" },
+        { "id": "aleph-steel-phalanx", "name": "Steel Phalanx", "kind": "sectorial" },
+        { "id": "aleph-oss", "name": "Operations Subsection of the S.S.S. (OSS)", "kind": "sectorial" }
+      ]
+    }
+  ]
+}
