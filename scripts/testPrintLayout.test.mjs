@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { paginateCompactEntries } from '../src/domain/printLayout.mjs';
+import { PRINT_LAYOUTS, getCellSizeMm, paginateCompactEntries, paginateEntries } from '../src/domain/printLayout.mjs';
 
 const entries = (groups) => groups.map((groupName, index) => ({
   item: { id: index, groupName },
@@ -32,4 +32,33 @@ test('conserva fichas repetidas y rechaza límites de página no válidos', () =
 
   assert.deepEqual(pages, [[repeated, repeated]]);
   assert.throws(() => paginateCompactEntries([repeated], 0), RangeError);
+});
+
+test('la cuadrícula detallada es de 3 fichas por A4 y la compacta de 10', () => {
+  assert.equal(PRINT_LAYOUTS.detailed.cols * PRINT_LAYOUTS.detailed.rows, 3);
+  assert.equal(PRINT_LAYOUTS.compact.cols * PRINT_LAYOUTS.compact.rows, 10);
+  for (const layout of Object.values(PRINT_LAYOUTS)) {
+    const cell = getCellSizeMm(layout);
+    const totalHeight = cell.height * layout.rows + layout.gapMm * (layout.rows - 1) + 2 * layout.marginMm;
+    const totalWidth = cell.width * layout.cols + layout.gapMm * (layout.cols - 1) + 2 * layout.marginMm;
+    assert.ok(Math.abs(totalHeight - 297) < 1e-9);
+    assert.ok(Math.abs(totalWidth - 210) < 1e-9);
+  }
+});
+
+test('paginateEntries agrupa de 3 en 3 y respeta los modos de salto', () => {
+  const cards = entries([...Array(5).fill('A'), ...Array(2).fill('B')]);
+
+  assert.deepEqual(paginateEntries(cards, 3, 'automatic').map((page) => page.length), [3, 2, 2]);
+  assert.deepEqual(paginateEntries(cards, 3, 'group').map((page) => page.length), [3, 2, 2]);
+  assert.deepEqual(paginateEntries(cards, 3, 'card').map((page) => page.length), Array(7).fill(1));
+  assert.deepEqual(paginateEntries([], 3), []);
+  assert.deepEqual(paginateEntries(entries(['A']), 3).map((page) => page.length), [1]);
+});
+
+test('colecciones de 20+ fichas sin grupo ocupan hojas completas de 10 o de 3', () => {
+  const cards = entries(Array(23).fill(undefined));
+
+  assert.deepEqual(paginateEntries(cards, 10).map((page) => page.length), [10, 10, 3]);
+  assert.deepEqual(paginateEntries(cards, 3).map((page) => page.length), [3, 3, 3, 3, 3, 3, 3, 2]);
 });

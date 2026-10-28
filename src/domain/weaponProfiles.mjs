@@ -57,13 +57,34 @@ export function getRangeModifierLabel(value) {
   return value === '--' ? '' : value;
 }
 
+// Equipo automático y periféricos: no son armas y no tienen perfil de arma.
+const EQUIPMENT_ONLY = /^(ECM\b|Cobertura Desplegable|KOBARUTO|TURTLEMEK)/i;
+
+function findWeapon(index, name) {
+  const exact = index.get(normalize(name));
+  if (exact) return { profile: exact };
+
+  // El arma siempre es la base; el modificador (+1DE, PS=6, -3, Shock...) se muestra solo como texto.
+  const match = name.match(/^(.*\S)\s*[([]([^)\]]*)[)\]]$/);
+  if (match) {
+    const base = index.get(normalize(match[1]));
+    if (base) return { profile: base, modifier: match[2].trim() };
+  }
+
+  // Si el arma solo existe por modos, se devuelve una fila por cada modo.
+  const modePrefix = `${normalize(match ? match[1] : name)}modo`;
+  const modes = [...new Set(index.values())].filter((weapon) => normalize(weapon.name).startsWith(modePrefix));
+  return modes.length ? { modes, modifier: match?.[2].trim() } : {};
+}
+
 export function getProfileWeapons(profile, index) {
   return [
     ...splitEquipmentNames(profile.rangedEquipment).map((name) => ({ name, category: 'CD / EQ' })),
     ...splitEquipmentNames(profile.meleeEquipment).map((name) => ({ name, category: 'CC' })),
-  ].map(({ name, category }) => ({
-    name,
-    category,
-    profile: index.get(normalize(name)),
-  }));
+  ].flatMap(({ name, category }) => {
+    const { profile: found, modes, modifier } = findWeapon(index, name);
+    if (modes) return modes.map((weapon) => ({ name: weapon.name, category, profile: weapon, modifier }));
+    if (!found && EQUIPMENT_ONLY.test(name)) return [{ name, category, profile: undefined, equipment: true }];
+    return [{ name, category, profile: found, modifier }];
+  });
 }

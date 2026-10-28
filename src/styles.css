@@ -158,6 +158,9 @@ button, select { cursor: pointer; }
 .weapon-unmatched { display: flex; flex-direction: column; gap: 3px; padding: 6px 8px; border-bottom: 1px solid #c7d0d1; color: #775a23; }
 .weapon-unmatched strong { font-size: 9px; }
 .weapon-unmatched span { color: #786741; font-size: 8px; line-height: 1.4; }
+.weapon-equipment { display: flex; align-items: baseline; gap: 6px; padding: 5px 8px; border-bottom: 1px solid #c7d0d1; color: #26363d; }
+.weapon-equipment strong { font-size: 9px; }
+.weapon-equipment span, .weapon-modifier { color: #5b6b73; font-size: 8px; }
 .empty-weapons { color: #9cabb7; font-size: 10px; }
 .card-section { padding: 17px 0 14px; }
 .section-title { color: var(--teal); font-size: 9px; font-weight: 700; letter-spacing: .12em; }
@@ -297,17 +300,11 @@ button, select { cursor: pointer; }
 .app-shell.print-preview-open .collection-count .action-button { min-height: 30px; padding: 4px 8px; font-size: 10px; }
 .app-shell.print-preview-open .collection-controls { flex: 0 0 auto; }
 .app-shell.print-preview-open .collection-list { width: calc(210mm + 16mm); max-width: 100%; max-height: none; flex: 1 1 auto; margin: 0 auto; overflow: auto; padding: 8mm; background: #c8ced1; }
-.app-shell.print-preview-open .print-preview-page { width: 210mm; min-height: 297mm; margin: 0 auto 8mm; padding: 10mm; list-style: none; background: #fff; box-shadow: 0 2mm 5mm #0004; }
-.app-shell.print-layout-compact.print-preview-open .print-preview-page { display: block; width: 210mm; height: 297mm; min-height: 0; padding: 6mm; }
-.app-shell.print-preview-open .print-preview-page-entries { margin: 0; padding: 0; list-style: none; }
-.app-shell.print-layout-compact.print-preview-open .print-preview-page-entries { height: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(5, minmax(0, 1fr)); gap: 2mm; }
-.app-shell.print-preview-open .collection-entry { display: flex; justify-content: center; padding-bottom: 4mm; border: 0; background: transparent; }
-.app-shell.print-layout-compact.print-preview-open .collection-entry { position: relative; min-height: 0; display: block; overflow: hidden; padding: 0; }
-.app-shell.print-preview-open .collection-entry + .collection-entry { padding-top: 4mm; }
-.app-shell.print-layout-compact.print-preview-open .collection-entry + .collection-entry { padding-top: 0; }
+.app-shell.print-preview-open .print-preview-page { display: block; width: 210mm; height: 297mm; min-height: 0; margin: 0 auto 8mm; padding: var(--print-margin, 6mm); list-style: none; background: #fff; box-shadow: 0 2mm 5mm #0004; }
+.app-shell.print-preview-open .print-preview-page-entries { height: 100%; display: grid; grid-template-columns: repeat(var(--print-cols, 2), minmax(0, 1fr)); grid-template-rows: repeat(var(--print-rows, 5), minmax(0, 1fr)); gap: var(--print-gap, 2mm); margin: 0; padding: 0; list-style: none; }
+.app-shell.print-preview-open .collection-entry { position: relative; min-height: 0; display: block; overflow: hidden; padding: 0; border: 0; background: transparent; }
 .app-shell.print-preview-open .collection-entry-summary { display: none; }
-.app-shell.print-preview-open .collection-print-card { display: block; width: 150mm; max-width: 100%; box-shadow: 0 2mm 5mm #0004; }
-.app-shell.print-layout-compact.print-preview-open .collection-print-card { position: absolute; top: 50%; left: 50%; display: block; width: 150mm; max-width: none; margin: 0; transform: translate(-50%, -50%) scale(var(--compact-card-scale, .48)); transform-origin: center; box-shadow: 0 1mm 2mm #0004; }
+.app-shell.print-preview-open .collection-print-card { position: relative; box-sizing: border-box; display: block; width: 150mm; max-width: none; margin: 0; zoom: var(--compact-card-scale, 1); box-shadow: 0 1mm 2mm #0004; }
 .app-shell.print-preview-open .collection-print-meta { padding: 1.5mm 2mm; font-size: 6.5pt; }
 /* Modo compacto: la ficha se maqueta a tamaño de celda (sin reducir 150mm → ~0.5) para que la letra sea legible. */
 .app-shell.print-layout-compact .collection-print-card .collection-print-meta,
@@ -412,11 +409,11 @@ button, select { cursor: pointer; }
   .app-shell.print-preview-open .collection-list { width: 100%; padding: 5mm; }
   .app-shell.print-layout-compact.print-preview-open .collection-list { width: 100%; padding: 3mm; }
   .app-shell.print-preview-open .print-preview-page { width: 100%; }
-  .app-shell.print-layout-compact.print-preview-open .print-preview-page { width: 100%; }
 }
 
 @media print {
   body { min-width: 0; color: #000; background: #fff !important; }
+  :root, html { background: #fff; }
   .app-shell { width: 100%; max-width: none; padding: 0; }
   .topbar, .project-manager, .catalog-controls, .list-import, .catalog-families, .catalog-variants, .app-footer { display: none !important; }
   .app-shell.print-preview-open { position: static; z-index: auto; }
@@ -428,20 +425,13 @@ button, select { cursor: pointer; }
   .collection-count, .collection-controls { display: none !important; }
   .print-preview-description { display: none !important; }
   .collection-list { max-height: none; overflow: visible; margin: 0; padding: 0; }
-  .app-shell.print-preview-open .collection-list { display: contents; width: auto; max-width: none; padding: 0; background: #fff; }
-  .app-shell.print-layout-compact.print-preview-open .collection-list { display: block; width: auto; padding: 0; }
-  .app-shell.print-preview-open .print-preview-page { display: contents; width: auto; min-height: 0; margin: 0; padding: 0; background: transparent; box-shadow: none; }
-  .app-shell.print-layout-compact.print-preview-open .print-preview-page { display: block; width: auto; height: calc(297mm - 12mm); min-height: 0; margin: 0; padding: 0; break-after: page; page-break-after: always; }
-  .app-shell.print-layout-compact.print-preview-open .print-preview-page:last-child { break-after: auto; page-break-after: auto; }
-  .app-shell.print-preview-open .print-preview-page-entries { display: contents; }
-  .app-shell.print-layout-compact.print-preview-open .print-preview-page-entries { height: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(5, minmax(0, 1fr)); gap: 2mm; }
-  .app-shell.print-layout-compact.print-preview-open .collection-section > .panel-heading { display: none !important; }
-  .app-shell.print-preview-open .collection-section > .panel-heading .eyebrow { display: none; }
+  .app-shell.print-preview-open .collection-list { display: block; width: auto; max-width: none; padding: 0; background: #fff; }
+  .app-shell.print-preview-open .print-preview-page { display: block; width: auto; height: calc(297mm - 2 * var(--print-margin, 6mm)); min-height: 0; margin: 0; padding: 0; background: transparent; box-shadow: none; overflow: hidden; break-after: page; page-break-after: always; }
+  .app-shell.print-preview-open .print-preview-page:last-child { break-after: auto; page-break-after: auto; }
+  .app-shell.print-preview-open .collection-section > .panel-heading { display: none !important; }
   .collection-entry, .app-shell.print-preview-open .collection-entry { display: block; width: 100%; overflow: visible; padding: 0; border: 0; background: transparent; break-inside: avoid; page-break-inside: avoid; }
-  .app-shell.print-layout-compact.print-preview-open .collection-entry { position: relative; height: 100%; overflow: hidden; }
-  .app-shell.print-layout-compact.print-preview-open .collection-print-card { position: absolute; top: 50%; left: 50%; display: block; width: 150mm; max-width: none; margin: 0; transform: translate(-50%, -50%) scale(var(--compact-card-scale, .48)); transform-origin: center; box-shadow: none; }
-  .app-shell:not(.print-layout-compact) .collection-entry.starts-card[data-page-breaks="card"] { break-before: page; page-break-before: always; }
-  .app-shell:not(.print-layout-compact) .collection-entry.starts-group[data-page-breaks="group"] { break-before: page; page-break-before: always; }
+  .app-shell.print-preview-open .collection-entry { position: relative; height: 100%; overflow: hidden; }
+  .app-shell.print-preview-open .collection-print-card { position: relative; box-sizing: border-box; display: block; width: 150mm; max-width: none; margin: 0; zoom: var(--compact-card-scale, 1); box-shadow: none; }
   .collection-entry-summary { display: none !important; }
   .collection-print-card { display: block; width: 150mm; max-width: 100%; margin: 0 auto; box-shadow: none; break-inside: avoid; page-break-inside: avoid; }
   .app-shell.print-preview-open .collection-print-card { box-shadow: none; }

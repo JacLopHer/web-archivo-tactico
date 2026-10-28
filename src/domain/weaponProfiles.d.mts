@@ -7,4 +7,4 @@ export function getRangeModifierLabel(value: string): string;
 export function getProfileWeapons(
   profile: TroopProfile,
   index: Map<string, WeaponProfile>,
-): Array<{ name: string; category: string; profile: WeaponProfile | undefined }>;
+): Array<{ name: string; category: string; profile: WeaponProfile | undefined; modifier?: string; equipment?: boolean }>;

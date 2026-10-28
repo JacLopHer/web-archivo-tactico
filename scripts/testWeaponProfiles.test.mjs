@@ -58,9 +58,40 @@ test('resuelve perfiles coincidentes y mantiene explícitos los no encontrados',
   assert.equal(mono.profile.verificationStatus, 'verified');
 
   const unmatchedProfile = troopProfiles.find((item) => item.rangedEquipment.includes('Arco Táctico(+1DE)'));
-  const unmatched = getProfileWeapons(unmatchedProfile, weaponIndex)
-    .find((weapon) => weapon.name === 'Arco Táctico(+1DE)');
-  assert.equal(unmatched.profile, undefined);
+  const withModifier = getProfileWeapons(unmatchedProfile, weaponIndex)
+    .find((weapon) => weapon.modifier === '+1DE');
+  assert.equal(withModifier.profile.name, 'Arco Táctico');
+});
+
+test('los modificadores se muestran como texto sobre el arma base y los modos generan una fila cada uno', () => {
+  const lookup = (equipment, melee = '') => getProfileWeapons({ rangedEquipment: equipment, meleeEquipment: melee }, weaponIndex);
+
+  const grenades = lookup('Granadas(PS=6)')[0];
+  assert.equal(grenades.profile.name, 'Granadas');
+  assert.equal(grenades.modifier, 'PS=6');
+  assert.equal(lookup('Arco Táctico(+1R)')[0].profile.name, 'Arco Táctico(+1R)');
+  assert.equal(lookup('', 'Arma CC PARA(-3)')[0].profile.name, 'Arma CC PARA');
+
+  const modes = lookup('Ametralladora MULTI');
+  assert.deepEqual(modes.map((weapon) => weapon.name), [
+    'Ametralladora MULTI (Modo AP)',
+    'Ametralladora MULTI (Modo Shock)',
+    'Ametralladora MULTI (Modo Antimaterial)',
+  ]);
+  assert.equal(lookup('Flammenspeer').length, 2);
+  assert.equal(lookup('Pistola de Abordaje').length, 2);
+});
+
+test('el equipo automático y los periféricos se marcan como equipo y no como armas sin perfil', () => {
+  const items = getProfileWeapons({ rangedEquipment: 'ECM: Hacker [-6], Cobertura Desplegable, KOBARUTO, TURTLEMEK', meleeEquipment: '' }, weaponIndex);
+  assert.equal(items.length, 4);
+  assert.ok(items.every((item) => item.equipment && !item.profile));
+});
+
+test('todas las armas del catálogo se resuelven o son equipo', () => {
+  const unresolved = troopProfiles.flatMap((item) => getProfileWeapons(item, weaponIndex))
+    .filter((weapon) => !weapon.profile && !weapon.equipment);
+  assert.deepEqual(unresolved, []);
 });
 
 test('cada perfil de arma conserva siete bandas de alcance cuando es a distancia', () => {

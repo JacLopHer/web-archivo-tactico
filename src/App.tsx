@@ -3,7 +3,7 @@ import type { ChangeEvent, FormEvent } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
-import { paginateCompactEntries } from './domain/printLayout.mjs';
+import { PRINT_LAYOUTS, getCellSizeMm, paginateEntries } from './domain/printLayout.mjs';
 import { assertValidTroopClass, getTroopClassLabel, getTroopClassShortLabel } from './domain/troopClasses.mjs';
 import { parseListImport } from './domain/listImport.mjs';
 import {
@@ -174,11 +174,10 @@ function App() {
     unresolved: Array<ImportedProfileLine & { id: string }>;
   } | null>(null);
   const [pageBreakMode, setPageBreakMode] = useState<'automatic' | 'group' | 'card'>('automatic');
-  const [printLayout, setPrintLayout] = useState<'detailed' | 'compact'>('detailed');
+  const [printLayout, setPrintLayout] = useState<'detailed' | 'compact'>('compact');
   const [brokenImages, setBrokenImages] = useState<Set<string>>(() => new Set());
   const markImageBroken = (key: string) => setBrokenImages((current) => (current.has(key) ? current : new Set(current).add(key)));
   const [printPreviewOpen, setPrintPreviewOpen] = useState(false);
-  const [previewEntryHeights, setPreviewEntryHeights] = useState<Record<number, number>>({});
   const [clipboardBusy, setClipboardBusy] = useState(false);
   const [clipboardFeedback, setClipboardFeedback] = useState<{ message: string; isError: boolean } | null>(null);
   const [projectStore, setProjectStore] = useState<ProjectStore | null>(null);
@@ -223,33 +222,11 @@ function App() {
       startsGroup: Boolean(index > 0 && item.groupName && item.groupName !== collection[index - 1]?.groupName),
     };
   }).filter((entry): entry is typeof entry & { profile: TroopProfile } => Boolean(entry.profile));
-  const previewPages = useMemo(() => {
-    if (printLayout === 'compact') {
-      if (pageBreakMode === 'card') return collectionEntries.map((entry) => [entry]);
-      return paginateCompactEntries(collectionEntries);
-    }
-
-    const pages: Array<typeof collectionEntries> = [[]];
-    const availableHeight = 297 - 20 - 12;
-    let usedHeight = 0;
-
-    collectionEntries.forEach((entry, entryIndex) => {
-      const entryHeight = previewEntryHeights[entry.item.id] ?? 85;
-      const startsPage = entryIndex > 0 && (
-        (pageBreakMode === 'card')
-        || (pageBreakMode === 'group' && entry.startsGroup)
-        || usedHeight + entryHeight > availableHeight
-      );
-      if (startsPage) {
-        pages.push([]);
-        usedHeight = 0;
-      }
-      pages[pages.length - 1].push(entry);
-      usedHeight += entryHeight;
-    });
-
-    return pages;
-  }, [collectionEntries, pageBreakMode, printLayout, previewEntryHeights]);
+  const printGrid = PRINT_LAYOUTS[printLayout];
+  const previewPages = useMemo(
+    () => paginateEntries(collectionEntries, printGrid.cols * printGrid.rows, pageBreakMode),
+    [collectionEntries, pageBreakMode, printGrid],
+  );
 
   useEffect(() => {
     try {
@@ -495,44 +472,35 @@ function App() {
   }, [printPreviewOpen]);
 
   useLayoutEffect(() => {
-    if (!printPreviewOpen || !collectionListRef.current) return;
-    if (printLayout === 'compact') {
-      const mmPerPixel = 25.4 / 96;
-      const cellWidth = (210 - 12 - 2) / 2;
-      const cellHeight = (297 - 12 - 4 * 2) / 5;
-      const cards = Array.from(collectionListRef.current.querySelectorAll<HTMLElement>('.collection-print-card'));
-      cards.forEach((card) => {
-        card.style.width = '';
-        card.style.minHeight = '';
+    const list = collectionListRef.current;
+    if (!printPreviewOpen || !list) return;
+    const mmPerPixel = 25.4 / 96;
+    const { width: cellWidth, height: cellHeight } = getCellSizeMm(printGrid);
+    const cellHeightPx = cellHeight / mmPerPixel;
+    // Cada ficha se escala por separado hasta caber en su celda (máx. 1), así una ficha larga no reduce las demás.
+    // Con zoom la ficha se maqueta más ancha al reducirse, así que se reajusta hasta que quepa.
+    const fitCards = () => {
+      list.querySelectorAll<HTMLElement>('.collection-print-card').forEach((card) => {
+        const applyScale = (scale: number) => {
+          card.style.setProperty('--compact-card-scale', String(scale));
+          card.style.width = `${cellWidth / scale / mmPerPixel}px`;
+          card.style.minHeight = `${cellHeightPx / scale}px`;
+        };
+        const height = () => card.getBoundingClientRect().height;
+        let scale = 1;
+        applyScale(scale);
+        for (let attempt = 0; attempt < 12 && height() > cellHeightPx + 0.5; attempt += 1) {
+          scale = Math.max(0.2, scale * ((cellHeightPx - 3) / height()));
+          applyScale(scale);
+        }
       });
-      if (!cards.length) return;
-      // La ficha se maqueta al ancho real de la celda; solo se reduce si la más alta no cabe.
-      cards.forEach((card) => { card.style.width = `${cellWidth / mmPerPixel}px`; });
-      const tallest = Math.max(...cards.map((card) => card.offsetHeight)) * mmPerPixel;
-      if (!tallest) return;
-      const scale = Math.min(1, cellHeight / tallest);
-      cards.forEach((card) => {
-        card.style.setProperty('--compact-card-scale', String(scale));
-        card.style.width = `${cellWidth / scale / mmPerPixel}px`;
-        card.style.minHeight = `${cellHeight / scale / mmPerPixel}px`;
-      });
-      return;
-    }
-    const pixelsPerMillimeter = 96 / 25.4;
-    const measurements = Array.from(
-      collectionListRef.current.querySelectorAll<HTMLElement>('.collection-entry'),
-    ).map((entry) => {
-      const id = Number(entry.dataset.collectionId);
-      const card = entry.querySelector<HTMLElement>('.collection-print-card');
-      const height = card ? card.getBoundingClientRect().height / pixelsPerMillimeter + 8 : 85;
-      return [id, height] as const;
-    });
-
-    setPreviewEntryHeights((current) => {
-      if (measurements.every(([id, height]) => Math.abs((current[id] ?? 0) - height) < 0.5)) return current;
-      return Object.fromEntries(measurements);
-    });
-  }, [brokenImages, collection, pageBreakMode, printLayout, printPreviewOpen]);
+    };
+    fitCards();
+    // Las miniaturas y las fuentes cargan después y cambian la altura de las fichas.
+    list.addEventListener('load', fitCards, true);
+    void document.fonts?.ready.then(fitCards);
+    return () => list.removeEventListener('load', fitCards, true);
+  }, [brokenImages, collection, pageBreakMode, printGrid, printPreviewOpen]);
 
   useEffect(() => {
     if (!projectConfirmation) return;
@@ -1038,7 +1006,7 @@ function App() {
           aria-modal={printPreviewOpen || undefined}
           aria-describedby={printPreviewOpen ? 'print-preview-description' : undefined}
         >
-          <style>{`@page { size: A4 portrait; margin: ${printLayout === 'compact' ? '6mm' : '10mm'}; }`}</style>
+          <style>{`@page { size: A4 portrait; margin: ${printGrid.marginMm}mm; } :root { --print-cols: ${printGrid.cols}; --print-rows: ${printGrid.rows}; --print-margin: ${printGrid.marginMm}mm; --print-gap: ${printGrid.gapMm}mm; }`}</style>
           <p className="sr-only" aria-live="polite">{collectionAnnouncement}</p>
           <div className="panel-heading collection-panel-heading">
             <div>
@@ -1063,8 +1031,9 @@ function App() {
           {printPreviewOpen && (
             <p className="print-preview-description" id="print-preview-description">
               {printLayout === 'compact'
-                ? `Formato compacto: la misma ficha completa con atributos, reglas y tablas de armas, reducida en dos columnas por cinco filas para hasta 10 por hoja. Cada grupo de hasta 10 va en su propia hoja y los grupos más grandes                 se reparten. Papel A4 vertical.`
-                                : `Vista detallada según los saltos seleccionados. El ajuste final puede variar ligeramente según el navegador y la impresora. Papel A4.`}
+                ? 'Formato compacto: la ficha completa reducida en dos columnas por cinco filas, 10 por hoja A4 vertical. Cada grupo empieza en hoja nueva y los grupos de más de 10 se reparten.'
+                : 'Formato detallado: 3 fichas por hoja A4 vertical, cada una en un tercio exacto de la página. Si una ficha ocupa menos, el resto del tercio queda vacío dentro de su marco; si ocupa más, se reduce. Cada grupo empieza en hoja nueva.'}
+              {' '}El ajuste final puede variar ligeramente según el navegador y la impresora.
             </p>
           )}
           <div className="collection-controls">
@@ -1074,8 +1043,8 @@ function App() {
                 value={printLayout}
                 onChange={(event) => setPrintLayout(event.target.value === 'compact' ? 'compact' : 'detailed')}
               >
-                <option value="detailed">Detallado</option>
                 <option value="compact">Compacto · 10 por hoja</option>
+                <option value="detailed">Detallado · 3 por hoja</option>
               </select>
             </label>
             <label className="print-control">
@@ -1233,7 +1202,7 @@ function App() {
                                   <span>TS</span>
                                   <span>Nº</span>
                                 </div>
-                                {profileWeapons.map(({ name, category, profile: weaponProfile }, weaponPosition) => (
+                                {profileWeapons.map(({ name, category, profile: weaponProfile, modifier, equipment }, weaponPosition) => (
                                   <div className="weapon-entry" key={`${name}-${weaponPosition}`}>
                                     {weaponProfile ? (
                                       <div className="weapon-main-row">
@@ -1241,6 +1210,7 @@ function App() {
                                           <div className="weapon-name-line">
                                             <strong className="weapon-name">{name}</strong>
                                             <span className="weapon-category">{category}</span>
+                                            {modifier && !name.includes(modifier) && <span className="weapon-modifier">({modifier})</span>}
                                           </div>
                                           {weaponProfile.properties && (
                                             <span className="weapon-properties">{weaponProfile.properties}</span>
@@ -1263,6 +1233,11 @@ function App() {
                                         <span className="weapon-value">{weaponProfile.ammunition}</span>
                                         <span className="weapon-value">{weaponProfile.saveAttribute}</span>
                                         <span className="weapon-value">{weaponProfile.saves}</span>
+                                      </div>
+                                    ) : equipment ? (
+                                      <div className="weapon-equipment">
+                                        <strong>{name}</strong>
+                                        <span>Equipo</span>
                                       </div>
                                     ) : (
                                       <div className="weapon-unmatched">
