@@ -42,7 +42,13 @@ export const troopClassSource =
 
 const tableEntries = [
   { name: 'Aragoto', troopClass: 'Light Infantry', catalogUnits: ['ARAGOTO'] },
-  { name: 'Kaizoku Spec-Ops', troopClass: 'Light Infantry', catalogUnits: ['KAIZOKU'] },
+  {
+    name: 'Kaizoku Spec-Ops',
+    troopClass: 'Medium Infantry',
+    catalogUnits: ['KAIZOKU'],
+    // La tabla de Human Sphere la da como IL; Infinity Army lista el perfil inicial como IM (el mejorado es IP, no modelado).
+    source: 'Infinity Army, Kaizoku Spec-Ops (perfil inicial IM): https://infinityuniverse.com/army/infinity/jsa/kaizoku-spec-ops',
+  },
   { name: 'Keisotsu Butai', troopClass: 'Light Infantry', catalogUnits: ['KEISOTSU'] },
   { name: 'Kempeitai', troopClass: 'Light Infantry', catalogUnits: ['KEMPEI'] },
   { name: 'Kuroshi Rider', troopClass: 'Light Infantry', catalogUnits: ['KUROSHI RIDER'] },

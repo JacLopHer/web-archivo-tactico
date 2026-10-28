@@ -150,9 +150,24 @@ for (const profile of profiles) {
   profilesByUnit.set(unitName, unitProfiles);
 }
 
+// La hoja heredada mezcla las reglas del perfil inicial y del mejorado de Kaizoku Spec-Ops.
+// Se conserva solo el perfil inicial (Infinity Army, unidad 1924: Coraje, Infinity Spec-Ops, Inmunidad (Shock), Terreno (Total)).
+const initialProfileRulesOverrides = new Map([
+  ['KAIZOKU', ['Coraje', 'Infinity Spec-Ops', 'Inmunidad (Shock)', 'Terreno (Total)']],
+]);
+const improvedProfileNote = /\s*\.?\s*⚠ PERFIL MEJORADO.*$/;
+
 const units = [...profilesByUnit].map(([name, unitProfiles]) => {
   const firstProfile = unitProfiles[0];
-  const sharedSpecialRules = firstProfile.rules.filter((rule) =>
+  const overriddenRules = initialProfileRulesOverrides.get(name);
+  if (overriddenRules) {
+    for (const profile of unitProfiles) {
+      profile.rules = profile.rules
+        .map((rule) => rule.replace(improvedProfileNote, '').trim())
+        .filter((rule) => rule && !overriddenRules.includes(rule));
+    }
+  }
+  const sharedSpecialRules = overriddenRules ?? firstProfile.rules.filter((rule) =>
     unitProfiles.every((profile) => profile.rules.includes(rule)),
   );
   const usedNames = new Set();

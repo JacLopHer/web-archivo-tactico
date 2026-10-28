@@ -94,6 +94,13 @@ test('Ruby Monday (IP) y Kobaruto (REM) se clasifican por confirmación del prop
   }
 });
 
+test('Kaizoku Spec-Ops se clasifica como IM según su perfil inicial en Infinity Army', () => {
+  const assignment = mapping.assignments.get('KAIZOKU');
+  assert.equal(assignment.troopClass, 'Medium Infantry');
+  assert.match(assignment.source, /infinityuniverse\.com\/army\/infinity\/jsa\/kaizoku-spec-ops/);
+  assert.equal(assignment.verificationStatus, 'verified');
+});
+
 test('informa unidades fuera de la tabla y entradas sin unidad correspondiente', () => {
   assert.deepEqual(mapping.unclassifiedUnits, []);
   assert.deepEqual(mapping.unmatchedTableEntries, [

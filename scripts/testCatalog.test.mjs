@@ -394,5 +394,16 @@ test('la disponibilidad sectorial se asigna por unidad con fuente y sin tocar pe
   assert.ok(!bySectorial['jsa-oban'].has('SĀCHĀ'));
   assert.ok(bySectorial['jsa-shindenbutai'].has('SĀCHĀ'));
   assert.ok(bySectorial['jsa-oban'].has('YUAN YUAN') && !bySectorial['jsa-vanilla'].has('YUAN YUAN'));
+  for (const sectorial of Object.values(bySectorial)) {
+    for (const unit of ['KAIZOKU', 'ATOMU SPECBOT_1', 'ATOMU SPECBOT_2']) assert.ok(sectorial.has(unit), unit);
+  }
+  for (const sectorial of Object.values(bySectorial)) {
+    for (const unit of ['AÏDA SWANSON', 'SAMSA', 'MIYAMOTO MUSHASHI', 'YOJIMBO', 'YOJIMBO MOTORIZADO']) assert.ok(sectorial.has(unit), unit);
+  }
+  const kaizoku = catalog.units.find((unit) => unit.name === 'KAIZOKU');
+  assert.deepEqual(kaizoku.sharedSpecialRules, ['Coraje', 'Infinity Spec-Ops', 'Inmunidad (Shock)', 'Terreno (Total)']);
+  for (const profile of kaizoku.profiles) {
+    assert.ok(!profile.specialRules.some((rule) => /MEJORADO|SpecBall/.test(rule)), profile.name);
+  }
   assert.ok(!bySectorial['jsa-oban'].has('SENKU') && bySectorial['jsa-vanilla'].has('SENKU'));
 });

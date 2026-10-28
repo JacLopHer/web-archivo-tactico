@@ -28,12 +28,14 @@
         "legacy-unit-1eca51c89ed8",
         "legacy-unit-1bfb1be5017e",
         "legacy-unit-433c0674ff5f",
+        "legacy-unit-514d261568cd",
         "legacy-unit-603d2977842d",
         "legacy-unit-d14df21f0387",
         "legacy-unit-c194d0ddab3e",
         "legacy-unit-2a153b00361c",
         "legacy-unit-09ffc160e942",
         "legacy-unit-a62f8444f3d3",
+        "legacy-unit-9a8c0ffe402c",
         "legacy-unit-bc0041ad234b",
         "legacy-unit-b81a3672549e",
         "legacy-unit-9f78915b0ad6",
@@ -63,9 +65,14 @@
         "legacy-unit-0c7c639bd69c",
         "legacy-unit-44ff759735b9",
         "legacy-unit-55500f00e700",
-        "legacy-unit-92adf1e2b28a"
+        "legacy-unit-92adf1e2b28a",
+        "legacy-unit-9d9c09ddfe11",
+        "legacy-unit-34d66a090d6d",
+        "legacy-unit-3218020ec6cd",
+        "legacy-unit-58d022628b38",
+        "legacy-unit-2079f950d9c7"
       ],
-      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen.",
+      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen. Los Spec-Ops (Kaizoku y Atomu), ausentes de las imágenes, y los mercenarios (Aïda Swanson, Samsa, Miyamoto Mushashi y Yojimbo) proceden de Infinity Army, donde figuran en los tres ejércitos.",
       "verificationStatus": "unit-level"
     },
     {
@@ -82,6 +89,7 @@
         "legacy-unit-1bfb1be5017e",
         "legacy-unit-52601cd63852",
         "legacy-unit-433c0674ff5f",
+        "legacy-unit-514d261568cd",
         "legacy-unit-603d2977842d",
         "legacy-unit-d14df21f0387",
         "legacy-unit-9a8c0ffe402c",
@@ -109,9 +117,12 @@
         "legacy-unit-55500f00e700",
         "legacy-unit-9d9c09ddfe11",
         "legacy-unit-34d66a090d6d",
-        "legacy-unit-392c6cd71e92"
+        "legacy-unit-392c6cd71e92",
+        "legacy-unit-3218020ec6cd",
+        "legacy-unit-58d022628b38",
+        "legacy-unit-2079f950d9c7"
       ],
-      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen.",
+      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen. Los Spec-Ops (Kaizoku y Atomu), ausentes de las imágenes, y los mercenarios (Aïda Swanson, Samsa, Miyamoto Mushashi y Yojimbo) proceden de Infinity Army, donde figuran en los tres ejércitos.",
       "verificationStatus": "unit-level"
     },
     {
@@ -133,6 +144,7 @@
         "legacy-unit-2a153b00361c",
         "legacy-unit-09ffc160e942",
         "legacy-unit-a62f8444f3d3",
+        "legacy-unit-9a8c0ffe402c",
         "legacy-unit-1046b2d44e9d",
         "legacy-unit-4f67c0ce8ec9",
         "legacy-unit-971116bf1fe9",
@@ -154,12 +166,16 @@
         "legacy-unit-3002d16ffabd",
         "legacy-unit-1c94af1ab90c",
         "legacy-unit-44ff759735b9",
+        "legacy-unit-55500f00e700",
         "legacy-unit-92adf1e2b28a",
         "legacy-unit-9d9c09ddfe11",
         "legacy-unit-34d66a090d6d",
-        "legacy-unit-8c63b05a7f71"
+        "legacy-unit-8c63b05a7f71",
+        "legacy-unit-3218020ec6cd",
+        "legacy-unit-58d022628b38",
+        "legacy-unit-2079f950d9c7"
       ],
-      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen.",
+      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen. Los Spec-Ops (Kaizoku y Atomu), ausentes de las imágenes, y los mercenarios (Aïda Swanson, Samsa, Miyamoto Mushashi y Yojimbo) proceden de Infinity Army, donde figuran en los tres ejércitos.",
       "verificationStatus": "unit-level"
     }
   ],
@@ -178,7 +194,6 @@
         "legacy-unit-433c0674ff5f",
         "legacy-unit-786380518116",
         "legacy-unit-c1eaa6962131",
-        "legacy-unit-3218020ec6cd",
         "legacy-unit-be3eb0eb510c",
         "legacy-unit-52601cd63852",
         "legacy-unit-6f7114ffe1a5",
@@ -189,6 +204,7 @@
     {
       "troopClass": "Medium Infantry",
       "unitIds": [
+        "legacy-unit-3218020ec6cd",
         "legacy-unit-547642b81ada",
         "legacy-unit-09ffc160e942",
         "legacy-unit-d14df21f0387",
@@ -1633,14 +1649,14 @@
         "Coraje",
         "Infinity Spec-Ops",
         "Inmunidad (Shock)",
-        "Ataque CC (Shock)",
-        "Berserk (+3)",
-        "Coraje",
-        "Esquivar (5cm)",
         "Terreno (Total)"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1650,7 +1666,9 @@
           "name": "Ametralladora, Cargas-D",
           "armyName": "KAIZOKU",
           "specialRules": [
-            "Terreno (Total). ⚠ PERFIL MEJORADO (SpecBall): MOV 15-5 CC 21 CD 13 FIS 14 VOL 13 BLI 3 PB 3 VITA 2"
+            "Ataque CC (Shock)",
+            "Berserk (+3)",
+            "Esquivar (5cm)"
           ],
           "rangedEquipment": "Ametralladora, Cargas-D",
           "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
@@ -1662,7 +1680,9 @@
           "name": "Mk12(AP), Cargas-D",
           "armyName": "KAIZOKU",
           "specialRules": [
-            "Terreno (Total). ⚠ PERFIL MEJORADO (SpecBall): MOV 15-5 CC 21 CD 13 FIS 14 VOL 13 BLI 3 PB 3 VITA 2"
+            "Ataque CC (Shock)",
+            "Berserk (+3)",
+            "Esquivar (5cm)"
           ],
           "rangedEquipment": "Mk12(AP), Cargas-D",
           "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
@@ -1674,7 +1694,10 @@
           "name": "Operativo Especialista",
           "armyName": "KAIZOKU (Operativo Especialista)",
           "specialRules": [
-            "Operativo Especialista. ⚠ PERFIL MEJORADO (SpecBall): MOV 15-5 CC 21 CD 13 FIS 14 VOL 13 BLI 3 PB 3 VITA 2"
+            "Operativo Especialista",
+            "Ataque CC (Shock)",
+            "Berserk (+3)",
+            "Esquivar (5cm)"
           ],
           "rangedEquipment": "Fusil MULTI, Cargas-D | GizmoKit",
           "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
@@ -1686,7 +1709,10 @@
           "name": "Hacker, Disp. Hacker",
           "armyName": "KAIZOKU (Hacker, Disp. Hacker)",
           "specialRules": [
-            "Hacker. ⚠ PERFIL MEJORADO (SpecBall): MOV 15-5 CC 21 CD 13 FIS 14 VOL 13 BLI 3 PB 3 VITA 2"
+            "Hacker",
+            "Ataque CC (Shock)",
+            "Berserk (+3)",
+            "Esquivar (5cm)"
           ],
           "rangedEquipment": "Subfusil AP, Panzerfaust, Cargas-D",
           "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
@@ -1698,7 +1724,10 @@
           "name": "Observador de Artillería",
           "armyName": "KAIZOKU (Observador de Artillería)",
           "specialRules": [
-            "Observador de Artillería. ⚠ PERFIL MEJORADO (SpecBall): MOV 15-5 CC 21 CD 13 FIS 14 VOL 13 BLI 3 PB 3 VITA 2"
+            "Observador de Artillería",
+            "Ataque CC (Shock)",
+            "Berserk (+3)",
+            "Esquivar (5cm)"
           ],
           "rangedEquipment": "Fusil MULTI, Pulso Flash, Cargas-D",
           "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
@@ -1710,7 +1739,10 @@
           "name": "Sanitario",
           "armyName": "KAIZOKU (Sanitario)",
           "specialRules": [
-            "Sanitario. ⚠ PERFIL MEJORADO (SpecBall): MOV 15-5 CC 21 CD 13 FIS 14 VOL 13 BLI 3 PB 3 VITA 2"
+            "Sanitario",
+            "Ataque CC (Shock)",
+            "Berserk (+3)",
+            "Esquivar (5cm)"
           ],
           "rangedEquipment": "Subfusil AP, Panzerfaust, Cargas-D | MediKit",
           "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
@@ -1718,8 +1750,8 @@
           "points": "17"
         }
       ],
-      "troopClass": "Light Infantry",
-      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Infinity Army, Kaizoku Spec-Ops (perfil inicial IM): https://infinityuniverse.com/army/infinity/jsa/kaizoku-spec-ops",
       "troopClassVerificationStatus": "verified"
     },
     {
@@ -1746,7 +1778,11 @@
         "Terreno (Total)"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -1791,7 +1827,11 @@
         "Observador de Artillería"
       ],
       "factionId": "jsa",
-      "sectorialIds": [],
+      "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
+      ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
       "verificationStatus": "unverified",
@@ -2207,6 +2247,8 @@
       ],
       "factionId": "jsa",
       "sectorialIds": [
+        "jsa-vanilla",
+        "jsa-oban",
         "jsa-shindenbutai"
       ],
       "edition": "N5",
@@ -3625,7 +3667,8 @@
       "factionId": "jsa",
       "sectorialIds": [
         "jsa-vanilla",
-        "jsa-oban"
+        "jsa-oban",
+        "jsa-shindenbutai"
       ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
@@ -3737,6 +3780,7 @@
       ],
       "factionId": "jsa",
       "sectorialIds": [
+        "jsa-vanilla",
         "jsa-oban",
         "jsa-shindenbutai"
       ],
@@ -3788,6 +3832,7 @@
       ],
       "factionId": "jsa",
       "sectorialIds": [
+        "jsa-vanilla",
         "jsa-oban",
         "jsa-shindenbutai"
       ],
@@ -3839,7 +3884,9 @@
       ],
       "factionId": "jsa",
       "sectorialIds": [
-        "jsa-oban"
+        "jsa-vanilla",
+        "jsa-oban",
+        "jsa-shindenbutai"
       ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
