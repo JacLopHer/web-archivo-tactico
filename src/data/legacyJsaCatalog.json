@@ -28,14 +28,12 @@
         "legacy-unit-1eca51c89ed8",
         "legacy-unit-1bfb1be5017e",
         "legacy-unit-433c0674ff5f",
-        "legacy-unit-514d261568cd",
         "legacy-unit-603d2977842d",
         "legacy-unit-d14df21f0387",
         "legacy-unit-c194d0ddab3e",
         "legacy-unit-2a153b00361c",
         "legacy-unit-09ffc160e942",
         "legacy-unit-a62f8444f3d3",
-        "legacy-unit-9a8c0ffe402c",
         "legacy-unit-bc0041ad234b",
         "legacy-unit-b81a3672549e",
         "legacy-unit-9f78915b0ad6",
@@ -66,13 +64,11 @@
         "legacy-unit-44ff759735b9",
         "legacy-unit-55500f00e700",
         "legacy-unit-92adf1e2b28a",
-        "legacy-unit-9d9c09ddfe11",
-        "legacy-unit-34d66a090d6d",
         "legacy-unit-3218020ec6cd",
         "legacy-unit-58d022628b38",
         "legacy-unit-2079f950d9c7"
       ],
-      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen. Los Spec-Ops (Kaizoku y Atomu), ausentes de las imágenes, y los mercenarios (Aïda Swanson, Samsa, Miyamoto Mushashi y Yojimbo) proceden de Infinity Army, donde figuran en los tres ejércitos.",
+      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen. Los Spec-Ops (Kaizoku y Atomu), ausentes de las imágenes, proceden de Infinity Army, donde son idénticos en los tres ejércitos. Los mercenarios siguen las imágenes, confirmadas por el propietario en Infinity Army (2026-10-28).",
       "verificationStatus": "unit-level"
     },
     {
@@ -89,7 +85,6 @@
         "legacy-unit-1bfb1be5017e",
         "legacy-unit-52601cd63852",
         "legacy-unit-433c0674ff5f",
-        "legacy-unit-514d261568cd",
         "legacy-unit-603d2977842d",
         "legacy-unit-d14df21f0387",
         "legacy-unit-9a8c0ffe402c",
@@ -122,7 +117,7 @@
         "legacy-unit-58d022628b38",
         "legacy-unit-2079f950d9c7"
       ],
-      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen. Los Spec-Ops (Kaizoku y Atomu), ausentes de las imágenes, y los mercenarios (Aïda Swanson, Samsa, Miyamoto Mushashi y Yojimbo) proceden de Infinity Army, donde figuran en los tres ejércitos.",
+      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen. Los Spec-Ops (Kaizoku y Atomu), ausentes de las imágenes, proceden de Infinity Army, donde son idénticos en los tres ejércitos. Los mercenarios siguen las imágenes, confirmadas por el propietario en Infinity Army (2026-10-28).",
       "verificationStatus": "unit-level"
     },
     {
@@ -144,7 +139,6 @@
         "legacy-unit-2a153b00361c",
         "legacy-unit-09ffc160e942",
         "legacy-unit-a62f8444f3d3",
-        "legacy-unit-9a8c0ffe402c",
         "legacy-unit-1046b2d44e9d",
         "legacy-unit-4f67c0ce8ec9",
         "legacy-unit-971116bf1fe9",
@@ -166,7 +160,6 @@
         "legacy-unit-3002d16ffabd",
         "legacy-unit-1c94af1ab90c",
         "legacy-unit-44ff759735b9",
-        "legacy-unit-55500f00e700",
         "legacy-unit-92adf1e2b28a",
         "legacy-unit-9d9c09ddfe11",
         "legacy-unit-34d66a090d6d",
@@ -175,7 +168,7 @@
         "legacy-unit-58d022628b38",
         "legacy-unit-2079f950d9c7"
       ],
-      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen. Los Spec-Ops (Kaizoku y Atomu), ausentes de las imágenes, y los mercenarios (Aïda Swanson, Samsa, Miyamoto Mushashi y Yojimbo) proceden de Infinity Army, donde figuran en los tres ejércitos.",
+      "source": "Unit I.D. Assistant N5 v4 (ITS 18, oct. 2026): imágenes de roster de Vanilla, Oban y Shindenbutai en «1 N5 Versions (v4)/11_JSA». Contrastado con las categorías de Human Sphere; ante discrepancia prevalece la imagen. Los Spec-Ops (Kaizoku y Atomu), ausentes de las imágenes, proceden de Infinity Army, donde son idénticos en los tres ejércitos. Los mercenarios siguen las imágenes, confirmadas por el propietario en Infinity Army (2026-10-28).",
       "verificationStatus": "unit-level"
     }
   ],
@@ -2247,8 +2240,6 @@
       ],
       "factionId": "jsa",
       "sectorialIds": [
-        "jsa-vanilla",
-        "jsa-oban",
         "jsa-shindenbutai"
       ],
       "edition": "N5",
@@ -3667,8 +3658,7 @@
       "factionId": "jsa",
       "sectorialIds": [
         "jsa-vanilla",
-        "jsa-oban",
-        "jsa-shindenbutai"
+        "jsa-oban"
       ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",
@@ -3780,7 +3770,6 @@
       ],
       "factionId": "jsa",
       "sectorialIds": [
-        "jsa-vanilla",
         "jsa-oban",
         "jsa-shindenbutai"
       ],
@@ -3832,7 +3821,6 @@
       ],
       "factionId": "jsa",
       "sectorialIds": [
-        "jsa-vanilla",
         "jsa-oban",
         "jsa-shindenbutai"
       ],
@@ -3884,9 +3872,7 @@
       ],
       "factionId": "jsa",
       "sectorialIds": [
-        "jsa-vanilla",
-        "jsa-oban",
-        "jsa-shindenbutai"
+        "jsa-oban"
       ],
       "edition": "N5",
       "source": "Ultima versión .html · JSA CHEAT SHEETS v40",

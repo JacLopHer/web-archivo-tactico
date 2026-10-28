@@ -397,9 +397,10 @@ test('la disponibilidad sectorial se asigna por unidad con fuente y sin tocar pe
   for (const sectorial of Object.values(bySectorial)) {
     for (const unit of ['KAIZOKU', 'ATOMU SPECBOT_1', 'ATOMU SPECBOT_2']) assert.ok(sectorial.has(unit), unit);
   }
-  for (const sectorial of Object.values(bySectorial)) {
-    for (const unit of ['AÏDA SWANSON', 'SAMSA', 'MIYAMOTO MUSHASHI', 'YOJIMBO', 'YOJIMBO MOTORIZADO']) assert.ok(sectorial.has(unit), unit);
-  }
+  assert.deepEqual(['jsa-vanilla', 'jsa-oban', 'jsa-shindenbutai'].map((id) => bySectorial[id].has('AÏDA SWANSON')), [false, false, true]);
+  assert.deepEqual(['jsa-vanilla', 'jsa-oban', 'jsa-shindenbutai'].map((id) => bySectorial[id].has('SAMSA')), [false, true, false]);
+  assert.deepEqual(['jsa-vanilla', 'jsa-oban', 'jsa-shindenbutai'].map((id) => bySectorial[id].has('MIYAMOTO MUSHASHI')), [true, true, false]);
+  assert.deepEqual(['jsa-vanilla', 'jsa-oban', 'jsa-shindenbutai'].map((id) => bySectorial[id].has('YOJIMBO')), [false, true, true]);
   const kaizoku = catalog.units.find((unit) => unit.name === 'KAIZOKU');
   assert.deepEqual(kaizoku.sharedSpecialRules, ['Coraje', 'Infinity Spec-Ops', 'Inmunidad (Shock)', 'Terreno (Total)']);
   for (const profile of kaizoku.profiles) {
