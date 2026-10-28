@@ -7,7 +7,7 @@ Aplicación web en React y TypeScript para consultar perfiles y preparar tarjeta
 1. Copia una lista de perfiles JSA o una lista de Infinity Army en el portapapeles y pulsa «Importar lista»; la app la lee y analiza directamente.
 2. Para Infinity Army, se extraen perfiles, grupos de combate, armamento y costes CAP/puntos. Antes de importar se muestra una confirmación con el recuento de unidades validadas y no validadas.
 3. Al aceptar, las coincidencias seguras se añaden a la lista conservando grupos y duplicados. Las unidades ambiguas o no incluidas en el catálogo se omiten con un aviso para añadirlas manualmente desde el catálogo.
-4. El catálogo organiza las unidades y sus perfiles en dos pasos: selecciona una unidad (por ejemplo, Ninja), elige una variante por su equipo y reglas propias, y añádela a la lista. La lista conserva grupos, orden y duplicados; permite reordenar o quitar fichas. «Limpiar» vacía la lista tras confirmación.
+4. El catálogo organiza las unidades y sus perfiles en tres pasos: elige una clase de tropa (IL, IM, IP, BAT, WB, REM, TAG; cada una con su color), selecciona una unidad (por ejemplo, Ninja), elige una variante por su equipo y reglas propias, y añádela a la lista. La lista conserva grupos, orden y duplicados; permite reordenar o quitar fichas. «Limpiar» vacía la lista tras confirmación. El buscador localiza unidades de cualquier clase sin pasar por el selector de clases, y el panel de perfiles muestra el icono de la unidad.
 5. Crea y cambia entre proyectos, renómbralos o elimínalos con confirmación. El proyecto activo se guarda automáticamente en el almacenamiento local del navegador.
 6. Descarga una copia de seguridad JSON de tus proyectos o añade proyectos de un archivo de copia como copias, sin reemplazar los que ya tienes.
 
@@ -19,6 +19,7 @@ Las insignias SVG de unidades se guardan localmente en `public/units/icons/` y s
 
 - **Siguiente paso funcional recomendado:** seguir probando el importador con listas reales de Infinity Army y ampliar las pruebas de interfaz.
 - Las copias de seguridad JSON descargan y recuperan los proyectos y sus listas personales (nombres, fichas, orden y grupos), por ejemplo al cambiar de navegador o si se borran los datos locales. La importación añade copias y no reemplaza los proyectos existentes. No incluyen el catálogo de perfiles o armas; ese catálogo se mantiene actualizado por separado.
+- **Pendiente de datos:** Ruby Monday y Kobaruto no tienen clase de tropa (no figuran en Human Sphere); hay que confirmarla con el propietario. Los sectoriales siguen desactivados.
 - **Rediseño visual futuro:** el diseño gráfico actual no convence al propietario y deberá replantearse más adelante. No es el siguiente paso; primero se priorizan las funciones pendientes.
 
 ## Despliegue

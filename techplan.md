@@ -10,7 +10,7 @@
 
 ### Flujo MVP implementado
 
-- Catálogo piloto JSA con búsqueda, ficha de detalle y perfiles de armas separados.
+- Catálogo piloto JSA con búsqueda, ficha de detalle y perfiles de armas separados. Las unidades se exploran por clase de tropa (selector con color por clase y `troopClassGroups` en el catálogo, schemaVersion 4); el panel de perfiles muestra el icono de la unidad.
 - Importación directa desde el portapapeles mediante el botón «Importar lista» (requiere permiso del navegador). El parser acepta etiquetas BBCode e imágenes del texto copiado de Infinity Army; reconoce unidades, grupos, armamento y costes CAP/puntos, e ignora título, totales y enlace.
 - En Infinity Army se conservan texto fuente, número de línea, grupo y campos de armamento/coste. Se resuelve por nombre de perfil; cuando hay variantes del mismo nombre, se usan armamento y coste para elegir solo si la mejor coincidencia es inequívoca. Los perfiles sin candidato siguen necesitando selección manual.
 - Antes de añadir una lista importada, se muestra un modal de confirmación con recuentos diferenciados de unidades validadas y no validadas. Cada coincidencia válida debe añadirse como una ficha independiente: los duplicados son legítimos en una lista y se conservan, sin deduplicarlos ni tratarlos como error. Las unidades ambiguas o no reconocidas se omiten con un aviso claro y el usuario las añade manualmente desde el catálogo. Las fichas de colección se pueden eliminar, reordenar o limpiar con confirmación; presentan atributos, habilidades/equipo y nombres de armamento y permiten abrir la ficha detallada.
@@ -19,10 +19,11 @@
 
 ### Deuda técnica y siguientes pasos
 
-**Hecho:** ajuste del importador (duplicados conservados, validadas añadidas, no validadas con aviso y alta manual desde el catálogo), impresión/exportación a PDF básica, armamento en las fichas impresas y despliegue en GitHub Pages.
+**Hecho:** modelado de la clase de tropa y navegación por clases, ajuste del importador (duplicados conservados, validadas añadidas, no validadas con aviso y alta manual desde el catálogo), impresión/exportación a PDF básica, armamento en las fichas impresas y despliegue en GitHub Pages.
 
 **Backlog, por orden de prioridad:**
 
+0. **Clase de tropa pendiente:** Ruby Monday y Kobaruto sin clase (confirmar con el propietario).
 1. **Sectoriales:** se mantienen desactivados hasta disponer de asignaciones respaldadas por fuentes.
 2. **Refinar impresión y PDF.** Pulir diseño, paginación y saltos de página (papel siempre A4) y comprobar el resultado real en papel y en PDF.
 3. **Pruebas de interfaz en navegador.** Cubrir importación, colección, reordenación, responsive e impresión; se hacen ahora.
