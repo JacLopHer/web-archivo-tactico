@@ -28,7 +28,7 @@ test('el catálogo migrado conserva el inventario heredado', () => {
   assert.equal(catalog.schemaVersion, 5);
   assert.equal(catalog.units.length, 63);
   assert.equal(troopProfiles.length, 181);
-  assert.equal(weaponCatalog.profiles.length, 227);
+  assert.equal(weaponCatalog.profiles.length, 228);
   assert.equal(catalog.references.length, 8);
   assert.equal('profiles' in catalog, false);
 });
@@ -185,7 +185,7 @@ test('distingue los perfiles cotejados con el PDF y las variantes confirmadas po
     ]),
   );
 
-  assert.equal(verifiedWeapons.length, 227);
+  assert.equal(verifiedWeapons.length, 228);
   assert.equal(unverifiedWeapons.length, 0);
   assert.equal(
     verifiedWeapons.filter((weapon) => weapon.source.startsWith('Tablas de referencia rápida')).length,
@@ -193,7 +193,7 @@ test('distingue los perfiles cotejados con el PDF y las variantes confirmadas po
   );
   assert.deepEqual(pdfSourceCounts, expectedSourceCounts);
   assert.equal(weaponCatalog.metadata.verificationStatus, 'verified');
-  assert.equal(weaponCatalog.metadata.note, '227 perfiles conservan su verificación; 0 perfiles siguen pendientes de contraste.');
+  assert.equal(weaponCatalog.metadata.note, '228 perfiles conservan su verificación; 0 perfiles siguen pendientes de contraste.');
   assert.ok(unverifiedWeapons.every((weapon) => weapon.source.includes('Ultima versión .html')));
 });
 
@@ -274,7 +274,7 @@ test('valida los perfiles (+1R) sin reinterpretar ni modificar sus datos', () =>
 
 test('valida las variantes Arma CC con PS como Prueba de Salvación', () => {
   const variants = weaponCatalog.profiles.filter((weapon) => /^Arma CC .+\(PS=\d+\)$/.test(weapon.name));
-  assert.equal(variants.length, 24);
+  assert.equal(variants.length, 25);
   assert.ok(variants.every((weapon) => weapon.verificationStatus === 'verified'));
   assert.ok(
     variants
@@ -404,6 +404,7 @@ test('la disponibilidad sectorial se asigna por unidad con fuente y sin tocar pe
   const kaizoku = catalog.units.find((unit) => unit.name === 'KAIZOKU');
   assert.deepEqual(kaizoku.sharedSpecialRules, ['Coraje', 'Infinity Spec-Ops', 'Inmunidad (Shock)', 'Terreno (Total)']);
   for (const profile of kaizoku.profiles) {
+    assert.ok(profile.meleeEquipment.includes('E/M(PS=6)') && !profile.meleeEquipment.includes('PS=8'), profile.name);
     assert.ok(!profile.specialRules.some((rule) => /MEJORADO|SpecBall/.test(rule)), profile.name);
   }
   assert.ok(!bySectorial['jsa-oban'].has('SENKU') && bySectorial['jsa-vanilla'].has('SENKU'));

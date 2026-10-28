@@ -1664,7 +1664,7 @@
             "Esquivar (5cm)"
           ],
           "rangedEquipment": "Ametralladora, Cargas-D",
-          "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
+          "meleeEquipment": "Pistola, Arma CC E/M(PS=6)",
           "cap": "1",
           "points": "26"
         },
@@ -1678,7 +1678,7 @@
             "Esquivar (5cm)"
           ],
           "rangedEquipment": "Mk12(AP), Cargas-D",
-          "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
+          "meleeEquipment": "Pistola, Arma CC E/M(PS=6)",
           "cap": "0",
           "points": "24"
         },
@@ -1693,7 +1693,7 @@
             "Esquivar (5cm)"
           ],
           "rangedEquipment": "Fusil MULTI, Cargas-D | GizmoKit",
-          "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
+          "meleeEquipment": "Pistola, Arma CC E/M(PS=6)",
           "cap": "0",
           "points": "21"
         },
@@ -1708,7 +1708,7 @@
             "Esquivar (5cm)"
           ],
           "rangedEquipment": "Subfusil AP, Panzerfaust, Cargas-D",
-          "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
+          "meleeEquipment": "Pistola, Arma CC E/M(PS=6)",
           "cap": "0.5",
           "points": "20"
         },
@@ -1723,7 +1723,7 @@
             "Esquivar (5cm)"
           ],
           "rangedEquipment": "Fusil MULTI, Pulso Flash, Cargas-D",
-          "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
+          "meleeEquipment": "Pistola, Arma CC E/M(PS=6)",
           "cap": "0",
           "points": "21"
         },
@@ -1738,7 +1738,7 @@
             "Esquivar (5cm)"
           ],
           "rangedEquipment": "Subfusil AP, Panzerfaust, Cargas-D | MediKit",
-          "meleeEquipment": "Pistola, Arma CC E/M(PS=8)",
+          "meleeEquipment": "Pistola, Arma CC E/M(PS=6)",
           "cap": "0",
           "points": "17"
         }

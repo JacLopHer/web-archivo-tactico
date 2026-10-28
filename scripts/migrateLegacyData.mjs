@@ -160,6 +160,10 @@ const improvedProfileNote = /\s*\.?\s*⚠ PERFIL MEJORADO.*$/;
 const units = [...profilesByUnit].map(([name, unitProfiles]) => {
   const firstProfile = unitProfiles[0];
   const overriddenRules = initialProfileRulesOverrides.get(name);
+  if (name === 'KAIZOKU') {
+    // Infinity Army y el propietario confirman PS=6; la hoja heredada decía PS=8.
+    for (const profile of unitProfiles) profile.meleeEquipment = profile.meleeEquipment.replace('E/M(PS=8)', 'E/M(PS=6)');
+  }
   if (overriddenRules) {
     for (const profile of unitProfiles) {
       profile.rules = profile.rules

@@ -4,7 +4,7 @@
     "edition": "N5",
     "source": "Tablas de referencia rápida N5, actualización 5.3, tabla de armas",
     "verificationStatus": "verified",
-    "note": "227 perfiles conservan su verificación; 0 perfiles siguen pendientes de contraste."
+    "note": "228 perfiles conservan su verificación; 0 perfiles siguen pendientes de contraste."
   },
   "profiles": [
     {
@@ -2949,6 +2949,19 @@
       "saves": "1",
       "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
       "source": "Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil Combi, p. 186.",
+      "verificationStatus": "verified"
+    },
+    {
+      "id": "weapon-cc-em-ps6",
+      "name": "Arma CC E/M(PS=6)",
+      "rangeModifiers": "",
+      "damage": "6",
+      "burst": "1",
+      "ammunition": "E/M",
+      "saveAttribute": "PB/2",
+      "saves": "2",
+      "properties": "CC, [**]",
+      "source": "Confirmado por el propietario (2026-10-28) con la exportación de Infinity Army de Kaizoku Spec-Ops: PS identifica la Prueba de Salvación de la variante (PS=6).",
       "verificationStatus": "verified"
     },
     {
