@@ -979,7 +979,16 @@ function App() {
               const isFtoProfile = profile.name.includes(' FTO');
               return (
               <div className={`variant-option${selectedId === profile.id ? ' is-selected' : ''}`} key={profile.id}>
-                <button className="variant-option-main" type="button" onClick={() => setSelectedId(profile.id)}>
+                <button
+                  className="variant-option-main"
+                  type="button"
+                  title="Doble clic para añadir a la lista"
+                  onClick={() => setSelectedId(profile.id)}
+                  onDoubleClick={() => {
+                    setSelectedId(profile.id);
+                    addProfilesToCollection([{ profileId: profile.id }]);
+                  }}
+                >
                   <span className="variant-profile-title">
                     <strong>{profile.variantName}</strong>
                     {isFtoProfile && <span className="variant-origin-badge" title="Perfil de Fireteam Option">FTO</span>}

@@ -72,7 +72,7 @@ test('el espacio de trabajo separa unidades, perfiles y añadidos en tres column
 
 test('las variantes se añaden individualmente y la colección lista conserva el orden y grupos', () => {
   assert.match(app, /addProfilesToCollection\(\[\{ profileId: profile\.id \}\]\)/);
-  assert.doesNotMatch(app, /onDoubleClick/);
+  assert.match(app, /onDoubleClick=\{\(\) => \{\s*setSelectedId\(profile\.id\);\s*addProfilesToCollection/);
   assert.match(app, /key=\{item\.id\}/);
   assert.match(app, /item\.groupName.*FICHA \{index \+ 1\}/);
   assert.match(app, /moveCollectionItem\(index, -1\)/);
