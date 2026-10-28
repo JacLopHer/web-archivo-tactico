@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
+import { buildTroopClassAssignments, troopClasses } from '../src/domain/troopClasses.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const sourcePath = resolve(root, 'Ultima versión .html');
@@ -192,8 +193,24 @@ const units = [...profilesByUnit].map(([name, unitProfiles]) => {
   };
 });
 
+const troopClassMapping = buildTroopClassAssignments(units.map((unit) => unit.name));
+for (const unit of units) {
+  const assignment = troopClassMapping.assignments.get(unit.name);
+  if (!assignment) throw new Error(`No se pudo asignar la clase de tropa para "${unit.name}".`);
+  unit.troopClass = assignment.troopClass;
+  unit.troopClassSource = assignment.source;
+  unit.troopClassVerificationStatus = assignment.verificationStatus;
+}
+
+const troopClassGroups = troopClasses
+  .map((troopClass) => ({
+    troopClass,
+    unitIds: units.filter((unit) => unit.troopClass === troopClass).map((unit) => unit.id),
+  }))
+  .filter((group) => group.unitIds.length > 0);
+
 const catalog = {
-  schemaVersion: 2,
+  schemaVersion: 4,
   faction: { id: 'jsa', name: 'Japanese Secessionist Army', shortName: 'JSA' },
   metadata: {
     edition: 'N5',
@@ -206,6 +223,7 @@ const catalog = {
     { id: 'jsa-oban', name: 'Oban', rosterImage: 'JSA_Oban_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
     { id: 'jsa-shindenbutai', name: 'Shindenbutai', rosterImage: 'JSA_Shindenbutai_v4.JPG', profileIds: [], verificationStatus: 'unmapped' },
   ],
+  troopClassGroups,
   units,
   references,
 };
@@ -226,3 +244,8 @@ await mkdir(dirname(outputPath), { recursive: true });
 await writeFile(outputPath, `${JSON.stringify(catalog, null, 2)}\n`, 'utf8');
 await writeFile(weaponProfilesPath, `${JSON.stringify(weaponCatalog, null, 2)}\n`, 'utf8');
 console.log(`Migrados ${units.length} unidades con ${profiles.length} perfiles, ${weapons.length} perfiles de arma y ${references.length} referencias.`);
+console.log(`Unidades sin clase asignada: ${troopClassMapping.unclassifiedUnits.length ? troopClassMapping.unclassifiedUnits.join(', ') : 'ninguna'}.`);
+console.log(`Entradas de la tabla sin unidad en el catálogo: ${troopClassMapping.unmatchedTableEntries.length ? troopClassMapping.unmatchedTableEntries.join(', ') : 'ninguna'}.`);
+console.log(`Unidades con clases contradictorias: ${troopClassMapping.ambiguousUnits.length
+  ? troopClassMapping.ambiguousUnits.map(({ unitName, tableClasses }) => `${unitName} (${tableClasses.join(' / ')})`).join(', ')
+  : 'ninguna'}.`);

@@ -5,7 +5,7 @@
 ### Decisión de alcance
 
 - Los perfiles de tropa JSA heredados se utilizan en el flujo MVP por decisión del propietario, pero esto no constituye un cotejo nuevo de sus valores. Se conserva su estado `unverified` y la procedencia heredada.
-- La clasificación de clase de tropa (por ejemplo, Infantería Ligera, Media o Pesada) queda pendiente de modelado. El campo `troopType` existente contiene categorías distintas, como T. Línea, T. Apoyo, REM o TAG; no se debe presentar como equivalente.
+- La clase de tropa se modela separada de `troopType` (categorías distintas como T. Línea, T. Apoyo, REM o TAG). Se asigna mediante correspondencias explícitas con la tabla «Japanese Secessionist Army Units» de [Human Sphere](https://www.human-sphere.com/Japanese_Secessionist_Army), con fuente y estado propios; los perfiles heredan la clase de su unidad. Las etiquetas visibles siguen la nomenclatura del propietario: IL, IM, IP, REM, TAG, BAT — Batidor y WB — Warband. Ioann Bann se clasifica como Warband por confirmación expresa del propietario (2026-10-28). Warcor, Monstrucker, Aïda Swanson y Sāchā (IL), Yuan Yuan (WB), Samsa y Raiden (IM, perfil N5), Triphammer (TAG) y Turtlemek (REM) se clasifican según sus páginas individuales de Human Sphere, que constan como fuente de cada unidad. Ruby Monday y Kobaruto siguen sin clasificar. El catálogo incluye `troopClassGroups` (clase → unidades) y la sección Unidades muestra primero las clases; al elegir una se listan sus unidades y el buscador sigue localizando cualquier unidad. Las unidades sin coincidencia y las entradas de tabla sin unidad se notifican al migrar; los proyectos no guardan este dato derivado.
 - La disponibilidad sectorial sigue pendiente: no se asignan perfiles a sectoriales ni se habilitan esos filtros sin evidencia específica.
 
 ### Flujo MVP implementado
@@ -13,27 +13,29 @@
 - Catálogo piloto JSA con búsqueda, ficha de detalle y perfiles de armas separados.
 - Importación directa desde el portapapeles mediante el botón «Importar lista» (requiere permiso del navegador). El parser acepta etiquetas BBCode e imágenes del texto copiado de Infinity Army; reconoce unidades, grupos, armamento y costes CAP/puntos, e ignora título, totales y enlace.
 - En Infinity Army se conservan texto fuente, número de línea, grupo y campos de armamento/coste. Se resuelve por nombre de perfil; cuando hay variantes del mismo nombre, se usan armamento y coste para elegir solo si la mejor coincidencia es inequívoca. Los perfiles sin candidato siguen necesitando selección manual.
-- Antes de añadir una lista importada, se muestra un modal de confirmación con recuentos diferenciados de unidades validadas y no validadas. Cada coincidencia válida debe añadirse como una ficha independiente: los duplicados son legítimos en una lista y se conservan, sin deduplicarlos ni tratarlos como error. Actualmente, las unidades ambiguas o no reconocidas quedan en una sección de revisión; el ajuste pendiente es sustituirla por un error claro y dejar que el usuario las añada manualmente desde el catálogo. Las fichas de colección se pueden eliminar, reordenar o limpiar con confirmación; presentan atributos, habilidades/equipo y nombres de armamento y permiten abrir la ficha detallada.
+- Antes de añadir una lista importada, se muestra un modal de confirmación con recuentos diferenciados de unidades validadas y no validadas. Cada coincidencia válida debe añadirse como una ficha independiente: los duplicados son legítimos en una lista y se conservan, sin deduplicarlos ni tratarlos como error. Las unidades ambiguas o no reconocidas se omiten con un aviso claro y el usuario las añade manualmente desde el catálogo. Las fichas de colección se pueden eliminar, reordenar o limpiar con confirmación; presentan atributos, habilidades/equipo y nombres de armamento y permiten abrir la ficha detallada.
 - Hay gestión local de proyectos/listas con creación, cambio, renombrado, eliminación confirmada y autosave versionado en `localStorage`. Cada proyecto conserva sus fichas, orden, identidad, duplicados y grupos; se recupera el proyecto activo al volver a abrir la app. El estado del guardado y los fallos son visibles, y un guardado inválido/incompatible no se sobrescribe sin confirmación. Los datos quedan ligados al navegador y al origen y pueden perderse al limpiar los datos del navegador; no hay sincronización.
-- La app permite descargar copias de seguridad JSON de proyectos y listas personales, y añadir proyectos desde esas copias sin reemplazar los existentes. La importación valida estructura, versión y perfiles contra el catálogo actual; no se incluye el catálogo en el archivo. Hay estilos de impresión para la colección, pero aún no hay controles de impresión/PDF, previsualización paginada ni validación de impresión.
+- La app permite descargar copias de seguridad JSON de proyectos y listas personales, y añadir proyectos desde esas copias sin reemplazar los existentes. La importación valida estructura, versión y perfiles contra el catálogo actual; no se incluye el catálogo en el archivo. La impresión/exportación a PDF de la colección ya existe (incluido el armamento en las fichas impresas); falta refinarla y validar el resultado real en papel y PDF.
 
 ### Deuda técnica y siguientes pasos
 
-1. Alinear la interfaz del importador con el criterio del propietario: conservar cada repetición de perfil como una ficha distinta; añadir las unidades validadas al aceptar; mostrar un error claro por las no validadas y dejar que el usuario las añada desde el catálogo, sin cola de revisión manual del importador. Mantener la confirmación y sus recuentos. Añadir pruebas de interfaz solo donde aporten cobertura útil a este flujo.
-2. **Siguiente prioridad funcional: impresión y exportación a PDF.** Implementar controles para imprimir/exportar la colección, elegir el formato de impresión (el papel es siempre A4) y controlar los saltos de página; comprobar la paginación, los estilos y el resultado en navegador y en papel/PDF. Revisar primero los estilos de impresión existentes y escoger la solución más simple compatible con el proyecto.
-3. Probar el parser con más variantes reales de Infinity Army y cambios de formato del exportador, comprobando que las resoluciones siempre utilicen perfiles y armas del catálogo. Mantener el catálogo actualizado cuando se publiquen perfiles nuevos; no se admitirán opciones ajenas al catálogo. El enlace codificado y archivos exportados no se procesan.
-4. Completar las fichas de colección con la tabla visual de perfiles de armas, ahora disponible en el detalle del perfil.
-5. Incorporar imágenes permitidas y asociadas de forma fiable a unidad/perfil; actualmente se usa un marcador.
-6. Desarrollar las explicaciones didácticas contextuales del modo de aprendizaje.
-7. Añadir pruebas de interfaz en navegador para importación, colección, reordenación, responsive e impresión, según sean útiles para verificar esos flujos.
-8. Modelar la clase de tropa (Infantería Ligera/Media/Pesada, etc.) como dato separado de `troopType`; completar cuando se decidan fuente y alcance de clasificación.
-9. Mantener sectoriales desactivados hasta disponer de asignaciones respaldadas por fuentes.
-10. Configurar y probar el despliegue estático en GitHub Pages; no está publicado todavía.
-11. **A más largo plazo:** replantear el diseño gráfico de la aplicación. El diseño visual actual no convence al propietario; dejar el rediseño para después de atender las prioridades funcionales y de datos.
+**Hecho:** ajuste del importador (duplicados conservados, validadas añadidas, no validadas con aviso y alta manual desde el catálogo), impresión/exportación a PDF básica, armamento en las fichas impresas y despliegue en GitHub Pages.
+
+**Backlog, por orden de prioridad:**
+
+1. **Sectoriales:** se mantienen desactivados hasta disponer de asignaciones respaldadas por fuentes.
+2. **Refinar impresión y PDF.** Pulir diseño, paginación y saltos de página (papel siempre A4) y comprobar el resultado real en papel y en PDF.
+3. **Pruebas de interfaz en navegador.** Cubrir importación, colección, reordenación, responsive e impresión; se hacen ahora.
+4. **Rediseño visual:** replantear el diseño gráfico, que no convence al propietario. Solo después de terminar las mejoras funcionales.
+5. **Imágenes de unidad/perfil:** incorporar imágenes permitidas y asociadas de forma fiable; hoy se usa un marcador.
+6. **Modo de aprendizaje:** explicaciones didácticas contextuales. Para el final del proyecto.
+7. **QA del importador (último):** probar variantes adicionales y cambios de formato de Infinity Army, comprobando que las resoluciones usen siempre perfiles y armas del catálogo. Ya se han probado listas reales; esto queda como control de calidad. Mantener el catálogo al día; no se admiten opciones ajenas a él. El enlace codificado y los archivos exportados no se procesan.
+
+Descartado: mostrar la tabla de armas en las fichas de la colección en pantalla; solo se muestra en la impresión y en el detalle del perfil del catálogo.
 
 ### Despliegue previsto: GitHub Pages
 
-GitHub Pages es la opción inicial prevista por ser un alojamiento estático y gratuito para sitios de repositorios públicos. Encaja con el piloto actual: React/Vite, catálogos JSON locales y lógica que se ejecuta en el navegador. La configuración local de Vite y el workflow de publicación están preparados; Pages ya está configurado para publicar mediante GitHub Actions, pero aún no se ha publicado el sitio.
+GitHub Pages es la opción inicial prevista por ser un alojamiento estático y gratuito para sitios de repositorios públicos. Encaja con el piloto actual: React/Vite, catálogos JSON locales y lógica que se ejecuta en el navegador. La configuración de Vite y el workflow de publicación están listos, Pages publica mediante GitHub Actions y el despliegue ya se ha realizado.
 
 **Consecuencias para la arquitectura y el uso:**
 
@@ -49,7 +51,7 @@ GitHub Pages es la opción inicial prevista por ser un alojamiento estático y g
 1. **Preparado localmente:** configurar `base` en Vite para `/web-archivo-tactico/`; la build y la carga desde esa subruta se han verificado en local.
 2. **Preparado localmente:** el workflow de GitHub Actions ejecuta las pruebas y la build, y publica `dist` al hacer push a `main` o lanzarlo manualmente.
 3. **Configurado en GitHub:** Pages utiliza GitHub Actions como fuente de publicación.
-4. **Pendiente:** subir el workflow a `main`, esperar a que pasen las pruebas y se complete el primer despliegue; después probar la URL, la carga de recursos, el refresco, la impresión y el funcionamiento completo.
+4. **Hecho:** workflow subido y primer despliegue realizado. Sigue pendiente comprobar en la URL pública la carga de recursos, el refresco, la impresión y el funcionamiento completo.
 5. Si se configura dominio personalizado, revisar DNS, HTTPS y el cambio de origen para los datos locales guardados.
 
 Si en el futuro se requieren cuentas, sincronización entre dispositivos, listas compartidas o datos privados, GitHub Pages por sí solo no será suficiente: habrá que añadir un backend y alojamiento independiente, o elegir una plataforma que los proporcione.

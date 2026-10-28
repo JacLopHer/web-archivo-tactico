@@ -4,6 +4,7 @@ import catalogData from './data/legacyJsaCatalog.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
 import { paginateCompactEntries } from './domain/printLayout.mjs';
+import { assertValidTroopClass, getTroopClassLabel, getTroopClassShortLabel } from './domain/troopClasses.mjs';
 import { parseListImport } from './domain/listImport.mjs';
 import {
   createInitialProjectStore,
@@ -20,10 +21,12 @@ import {
   updateProjectCards,
 } from './domain/projects.mjs';
 import type { JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
+import type { TroopClass } from './domain/troopClasses.mjs';
 import type { ImportedProfileLine } from './domain/listImport.mjs';
 import type { ProjectStore } from './domain/projects.mjs';
 
 const catalog = catalogData as JsaCatalog;
+for (const unit of catalog.units) assertValidTroopClass(unit.name, unit.troopClass);
 const weaponProfiles = weaponProfilesData as WeaponProfilesCatalog;
 const catalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
   unit.profiles.map((profile) => ({
@@ -33,6 +36,9 @@ const catalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
     unitId: unit.id,
     unitName: unit.name,
     troopType: unit.troopType,
+    troopClass: unit.troopClass,
+    troopClassSource: unit.troopClassSource,
+    troopClassVerificationStatus: unit.troopClassVerificationStatus,
     stats: unit.stats,
     woundsLabel: unit.woundsLabel,
     sharedSpecialRules: unit.sharedSpecialRules,
@@ -153,6 +159,7 @@ const unitIconPath = (name: string) => {
 
 function App() {
   const [query, setQuery] = useState('');
+  const [selectedTroopClass, setSelectedTroopClass] = useState<TroopClass | ''>('');
   const [selectedId, setSelectedId] = useState(catalogProfiles[0]?.id ?? '');
   const [selectedUnitId, setSelectedUnitId] = useState(catalog.units[0]?.id ?? '');
   const [selectedSectorial, setSelectedSectorial] = useState('');
@@ -301,18 +308,26 @@ function App() {
     return catalogProfiles.filter((profile) => {
       const matchesQuery =
         !normalizedQuery ||
-        `${profile.name} ${profile.unitName} ${profile.variantName} ${profile.troopType} ${profile.rangedEquipment} ${profile.meleeEquipment}`
+        `${profile.name} ${profile.unitName} ${profile.variantName} ${profile.troopType} ${getTroopClassLabel(profile.troopClass)} ${profile.rangedEquipment} ${profile.meleeEquipment}`
           .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '')
           .includes(normalizedQuery);
       const matchesSectorial = !sectorial || sectorial.profileIds.includes(profile.id);
-      return matchesQuery && matchesSectorial;
+      const matchesTroopClass = !selectedTroopClass || profile.troopClass === selectedTroopClass;
+      return matchesQuery && matchesSectorial && matchesTroopClass;
     });
-  }, [query, selectedSectorial]);
+  }, [query, selectedSectorial, selectedTroopClass]);
 
   const filteredUnits = catalog.units.filter((unit) =>
     filteredProfiles.some((profile) => profile.unitId === unit.id),
   );
   const unitProfiles = filteredProfiles.filter((profile) => profile.unitId === selectedUnitId);
+  const showClassPicker = !selectedTroopClass && !query.trim();
+  const classPickerGroups = catalog.troopClassGroups
+    .map((group) => ({
+      troopClass: group.troopClass,
+      unitCount: group.unitIds.filter((unitId) => filteredUnits.some((unit) => unit.id === unitId)).length,
+    }))
+    .filter((group) => group.unitCount > 0);
 
   useEffect(() => {
     if (!filteredUnits.some((unit) => unit.id === selectedUnitId)) {
@@ -865,9 +880,11 @@ function App() {
             <div>
               <span className="eyebrow">JAPANESE SECESSIONIST ARMY</span>
               <h2>Unidades</h2>
-              <small className="profile-list-hint">Selecciona una unidad para ver sus perfiles</small>
+              <small className="profile-list-hint">
+                {showClassPicker ? 'Elige una clase de tropa o busca por nombre' : 'Selecciona una unidad para ver sus perfiles'}
+              </small>
             </div>
-            <span className="result-count">{filteredUnits.length}</span>
+            <span className="result-count">{showClassPicker ? classPickerGroups.length : filteredUnits.length}</span>
           </div>
           <label className="search-control unit-search">
             <span>Buscar unidad, perfil o armamento</span>
@@ -878,8 +895,28 @@ function App() {
               placeholder="Ej. Ninja, Domaru, Spitfire…"
             />
           </label>
+          {selectedTroopClass && (
+            <div className="troop-class-current" data-troop-class={selectedTroopClass}>
+              <button type="button" className="troop-class-back" onClick={() => setSelectedTroopClass('')}>← Clases</button>
+              <span className="troop-class-badge">{getTroopClassShortLabel(selectedTroopClass)}</span>
+              <strong>{getTroopClassLabel(selectedTroopClass)}</strong>
+            </div>
+          )}
           <div className="profile-list family-list">
-            {filteredUnits.map((unit) => {
+            {showClassPicker && classPickerGroups.map((group) => (
+              <button
+                className="profile-option family-option troop-class-option"
+                data-troop-class={group.troopClass}
+                key={group.troopClass}
+                onClick={() => setSelectedTroopClass(group.troopClass)}
+                type="button"
+              >
+                <span className="troop-class-badge">{getTroopClassShortLabel(group.troopClass)}</span>
+                <span className="profile-summary"><strong>{getTroopClassLabel(group.troopClass).replace(/^\S+ — /, '')}</strong></span>
+                <span className="family-variant-count">{group.unitCount} {group.unitCount === 1 ? 'unidad' : 'unidades'}</span>
+              </button>
+            ))}
+            {!showClassPicker && filteredUnits.map((unit) => {
               const profileCount = filteredProfiles.filter((profile) => profile.unitId === unit.id).length;
               return (
               <button
@@ -902,7 +939,7 @@ function App() {
                       </button>
               );
             })}
-            {filteredProfiles.length === 0 && (
+            {!showClassPicker && filteredProfiles.length === 0 && (
               <div className="empty-state">No hay perfiles que coincidan con esa búsqueda.</div>
             )}
           </div>
@@ -912,7 +949,18 @@ function App() {
           <div className="panel-heading">
             <div>
               <span className="eyebrow">PERFILES DISPONIBLES</span>
-              <h2>{selectedUnit?.name || 'Selecciona una unidad'}</h2>
+              <div className="variants-title">
+                {selectedUnit && !brokenImages.has(`i:${unitSlug(selectedUnit.name)}`) && (
+                  <img
+                    className="variants-unit-icon"
+                    src={`${import.meta.env.BASE_URL}${unitIconPath(selectedUnit.name)}`}
+                    alt=""
+                    aria-hidden="true"
+                    onError={() => markImageBroken(`i:${unitSlug(selectedUnit.name)}`)}
+                  />
+                )}
+                <h2>{selectedUnit?.name || 'Selecciona una unidad'}</h2>
+              </div>
               <small className="profile-list-hint">Elige una variante y añádela a la lista</small>
             </div>
             <span className="result-count">{unitProfiles.length}</span>
@@ -937,6 +985,9 @@ function App() {
                     {isFtoProfile && <span className="variant-origin-badge" title="Perfil de Fireteam Option">FTO</span>}
                   </span>
                   {showEquipment && <span>{equipmentLabel || 'Sin armamento registrado'}</span>}
+                  <span className="catalog-troop-class">
+                    Clase de tropa: {getTroopClassShortLabel(profile.troopClass)}
+                  </span>
                   {profile.additionalSpecialRules.length > 0 && (
                     <span className="variant-special-rules">
                       Reglas del perfil: {profile.additionalSpecialRules.join(' · ')}
@@ -1070,6 +1121,7 @@ function App() {
                           />
                         )}
                         <strong>{profile.unitName}</strong>
+                        <span className="collection-entry-class">{getTroopClassShortLabel(profile.troopClass)}</span>
                         <span title={[profile.rangedEquipment, profile.meleeEquipment].filter(Boolean).join(' · ')}>
                           {[profile.rangedEquipment, profile.meleeEquipment].filter(Boolean).join(' · ') || 'Sin armamento registrado'}
                         </span>
@@ -1122,6 +1174,7 @@ function App() {
                               </div>
                             )}
                             <div className="unit-type-row">
+                              <span className="unit-class">{getTroopClassShortLabel(profile.troopClass)}</span>
                               <span>{profile.troopType}</span>
                               <span className="unit-edition">{profile.edition}</span>
                               <span className="unit-cost"><strong>{profile.points}</strong> PTS</span>

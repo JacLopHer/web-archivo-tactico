@@ -1,3 +1,5 @@
+import type { TroopClass } from '../domain/troopClasses.mjs';
+
 export type VerificationStatus = 'unverified' | 'verified' | 'incomplete';
 
 export interface TroopStats {
@@ -20,6 +22,9 @@ export interface TroopProfile {
   unitId: string;
   unitName: string;
   troopType: string;
+  troopClass: TroopClass;
+  troopClassSource: string;
+  troopClassVerificationStatus: 'verified' | 'incomplete';
   stats: TroopStats;
   woundsLabel: string;
   sharedSpecialRules: string[];
@@ -51,6 +56,9 @@ export interface TroopUnit {
   id: string;
   name: string;
   troopType: string;
+  troopClass: TroopClass;
+  troopClassSource: string;
+  troopClassVerificationStatus: 'verified' | 'incomplete';
   stats: TroopStats;
   woundsLabel: string;
   sharedSpecialRules: string[];
@@ -113,6 +121,7 @@ export interface JsaCatalog {
     note: string;
   };
   sectorials: Sectorial[];
+  troopClassGroups: Array<{ troopClass: TroopClass; unitIds: string[] }>;
   units: TroopUnit[];
   references: Array<{
     id: string;

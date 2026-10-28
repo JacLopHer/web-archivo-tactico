@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 4,
   "faction": {
     "id": "jsa",
     "name": "Japanese Secessionist Army",
@@ -32,6 +32,111 @@
       "rosterImage": "JSA_Shindenbutai_v4.JPG",
       "profileIds": [],
       "verificationStatus": "unmapped"
+    }
+  ],
+  "troopClassGroups": [
+    {
+      "troopClass": "Light Infantry",
+      "unitIds": [
+        "legacy-unit-1dbcaf987c0f",
+        "legacy-unit-3e95d4e49590",
+        "legacy-unit-aacfae2b3165",
+        "legacy-unit-e4dc3959d52a",
+        "legacy-unit-438d355a2e81",
+        "legacy-unit-1bfb1be5017e",
+        "legacy-unit-7bfd6dc5f8cc",
+        "legacy-unit-1eca51c89ed8",
+        "legacy-unit-433c0674ff5f",
+        "legacy-unit-786380518116",
+        "legacy-unit-c1eaa6962131",
+        "legacy-unit-3218020ec6cd",
+        "legacy-unit-be3eb0eb510c",
+        "legacy-unit-52601cd63852",
+        "legacy-unit-6f7114ffe1a5",
+        "legacy-unit-514d261568cd",
+        "legacy-unit-3fd633805627"
+      ]
+    },
+    {
+      "troopClass": "Medium Infantry",
+      "unitIds": [
+        "legacy-unit-547642b81ada",
+        "legacy-unit-09ffc160e942",
+        "legacy-unit-d14df21f0387",
+        "legacy-unit-603d2977842d",
+        "legacy-unit-2a153b00361c",
+        "legacy-unit-c194d0ddab3e",
+        "legacy-unit-a62f8444f3d3",
+        "legacy-unit-12f7b9c91168",
+        "legacy-unit-9a8c0ffe402c"
+      ]
+    },
+    {
+      "troopClass": "Heavy Infantry",
+      "unitIds": [
+        "legacy-unit-9f78915b0ad6",
+        "legacy-unit-828474f9a363",
+        "legacy-unit-24b5afac7f3f",
+        "legacy-unit-1046b2d44e9d",
+        "legacy-unit-bc0041ad234b",
+        "legacy-unit-9310317f95ea",
+        "legacy-unit-b81a3672549e",
+        "legacy-unit-4f67c0ce8ec9"
+      ]
+    },
+    {
+      "troopClass": "Skirmishers",
+      "unitIds": [
+        "legacy-unit-0c7c639bd69c",
+        "legacy-unit-4a16d27ee7de",
+        "legacy-unit-a1c99b080e92",
+        "legacy-unit-3002d16ffabd",
+        "legacy-unit-1c94af1ab90c",
+        "legacy-unit-a50df33849ac",
+        "legacy-unit-44ff759735b9"
+      ]
+    },
+    {
+      "troopClass": "Warbands",
+      "unitIds": [
+        "legacy-unit-392c6cd71e92",
+        "legacy-unit-8c63b05a7f71",
+        "legacy-unit-55500f00e700",
+        "legacy-unit-92adf1e2b28a",
+        "legacy-unit-9d9c09ddfe11",
+        "legacy-unit-34d66a090d6d"
+      ]
+    },
+    {
+      "troopClass": "Remotes",
+      "unitIds": [
+        "legacy-unit-58d022628b38",
+        "legacy-unit-2079f950d9c7",
+        "legacy-unit-947552d18bec",
+        "legacy-unit-9a6ae0a3cebb",
+        "legacy-unit-5ff23a2a6cc7",
+        "legacy-unit-aa81d4df1e15",
+        "legacy-unit-3c274cb23e9b",
+        "legacy-unit-9a4b653942af",
+        "legacy-unit-008cf4ba4561",
+        "legacy-unit-5e08fd45dbad",
+        "legacy-unit-a40784d72750"
+      ]
+    },
+    {
+      "troopClass": "TAGs",
+      "unitIds": [
+        "legacy-unit-fa676f38f6ad",
+        "legacy-unit-885d8c0e9f82",
+        "legacy-unit-a6786e2ea06f"
+      ]
+    },
+    {
+      "troopClass": "unclassified",
+      "unitIds": [
+        "legacy-unit-971116bf1fe9",
+        "legacy-unit-b942318c62f1"
+      ]
     }
   ],
   "units": [
@@ -93,7 +198,10 @@
           "cap": "0.5",
           "points": "44"
         }
-      ]
+      ],
+      "troopClass": "Skirmishers",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-4a16d27ee7de",
@@ -198,7 +306,10 @@
           "cap": "0.5",
           "points": "30"
         }
-      ]
+      ],
+      "troopClass": "Skirmishers",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-a1c99b080e92",
@@ -267,7 +378,10 @@
           "cap": "0",
           "points": "25"
         }
-      ]
+      ],
+      "troopClass": "Skirmishers",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-3002d16ffabd",
@@ -338,7 +452,10 @@
           "cap": "0.5",
           "points": "23"
         }
-      ]
+      ],
+      "troopClass": "Skirmishers",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-1c94af1ab90c",
@@ -394,7 +511,10 @@
           "cap": "0",
           "points": "15"
         }
-      ]
+      ],
+      "troopClass": "Skirmishers",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-a50df33849ac",
@@ -463,7 +583,10 @@
           "cap": "1",
           "points": "30"
         }
-      ]
+      ],
+      "troopClass": "Skirmishers",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-44ff759735b9",
@@ -510,7 +633,10 @@
           "cap": "0",
           "points": "33"
         }
-      ]
+      ],
+      "troopClass": "Skirmishers",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-1dbcaf987c0f",
@@ -586,7 +712,10 @@
           "cap": "0",
           "points": "19"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-3e95d4e49590",
@@ -634,7 +763,10 @@
           "cap": "0",
           "points": "20"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-aacfae2b3165",
@@ -740,7 +872,10 @@
           "cap": "0.5",
           "points": "9"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-e4dc3959d52a",
@@ -816,7 +951,10 @@
           "cap": "1",
           "points": "22"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-438d355a2e81",
@@ -968,7 +1106,10 @@
           "cap": "0.5",
           "points": "9"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-1bfb1be5017e",
@@ -1003,18 +1144,6 @@
       "verificationStatus": "unverified",
       "profiles": [
         {
-          "id": "legacy-profile-2c1b2c293f0f",
-          "name": "Desp. Avanzado [+20cm]",
-          "armyName": "YURIKO ODA (Desp. Avanzado [+20cm])",
-          "specialRules": [
-            "Desp. Avanzado (+20cm)"
-          ],
-          "rangedEquipment": "Fusil Combi, E/Mitter, Cargas-D, Minas Shock",
-          "meleeEquipment": "Pistola, Arma CC",
-          "cap": "0.5",
-          "points": "28"
-        },
-        {
           "id": "legacy-profile-ca86406867e7",
           "name": "Fusil Combi, E/Mitter, Cargas-D, Minas Shock",
           "armyName": "YURIKO ODA FTO",
@@ -1033,8 +1162,23 @@
           "meleeEquipment": "Pistola, Arma CC",
           "cap": "0",
           "points": "23"
+        },
+        {
+          "id": "legacy-profile-2c1b2c293f0f",
+          "name": "Desp. Avanzado [+20cm]",
+          "armyName": "YURIKO ODA (Desp. Avanzado [+20cm])",
+          "specialRules": [
+            "Desp. Avanzado (+20cm)"
+          ],
+          "rangedEquipment": "Fusil Combi, E/Mitter, Cargas-D, Minas Shock",
+          "meleeEquipment": "Pistola, Arma CC",
+          "cap": "0.5",
+          "points": "28"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-7bfd6dc5f8cc",
@@ -1073,7 +1217,10 @@
           "cap": "0",
           "points": "14"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-1eca51c89ed8",
@@ -1133,7 +1280,10 @@
           "cap": "0",
           "points": "17"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-433c0674ff5f",
@@ -1183,7 +1333,10 @@
           "cap": "0",
           "points": "3"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Página individual de Human Sphere: https://www.human-sphere.com/Warcor",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-786380518116",
@@ -1225,7 +1378,10 @@
           "cap": "0",
           "points": "12"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-c1eaa6962131",
@@ -1267,7 +1423,10 @@
           "cap": "0",
           "points": "11"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-3218020ec6cd",
@@ -1374,7 +1533,10 @@
           "cap": "0",
           "points": "17"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-58d022628b38",
@@ -1415,7 +1577,10 @@
           "cap": "-",
           "points": "7"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-2079f950d9c7",
@@ -1457,7 +1622,10 @@
           "cap": "-",
           "points": "7"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-547642b81ada",
@@ -1537,7 +1705,10 @@
           "cap": "0",
           "points": "19"
         }
-      ]
+      ],
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-be3eb0eb510c",
@@ -1596,7 +1767,10 @@
           "cap": "0",
           "points": "23"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-52601cd63852",
@@ -1654,7 +1828,10 @@
           "cap": "0",
           "points": "26"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-392c6cd71e92",
@@ -1727,7 +1904,10 @@
           "cap": "0",
           "points": "11"
         }
-      ]
+      ],
+      "troopClass": "Warbands",
+      "troopClassSource": "Página individual de Human Sphere: https://www.human-sphere.com/Yuan_Yuan",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-6f7114ffe1a5",
@@ -1797,7 +1977,10 @@
           "cap": "0",
           "points": "16"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Página individual de Human Sphere: https://www.human-sphere.com/Monstrucker",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-514d261568cd",
@@ -1854,7 +2037,10 @@
           "cap": "0",
           "points": "21"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Página individual de Human Sphere: https://www.human-sphere.com/Aida_Swanson",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-3fd633805627",
@@ -1896,7 +2082,10 @@
           "cap": "0",
           "points": "6"
         }
-      ]
+      ],
+      "troopClass": "Light Infantry",
+      "troopClassSource": "Página individual de Human Sphere: https://www.human-sphere.com/S%C4%81ch%C4%81",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-09ffc160e942",
@@ -1949,7 +2138,10 @@
           "cap": "2",
           "points": "33"
         }
-      ]
+      ],
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army · Página individual de Human Sphere: https://www.human-sphere.com/Raiden",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-d14df21f0387",
@@ -2039,7 +2231,10 @@
           "cap": "1",
           "points": "29"
         }
-      ]
+      ],
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-603d2977842d",
@@ -2108,7 +2303,10 @@
           "cap": "0.5",
           "points": "25"
         }
-      ]
+      ],
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-2a153b00361c",
@@ -2194,7 +2392,10 @@
           "cap": "0",
           "points": "22"
         }
-      ]
+      ],
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-c194d0ddab3e",
@@ -2247,7 +2448,10 @@
           "cap": "0",
           "points": "16"
         }
-      ]
+      ],
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-a62f8444f3d3",
@@ -2292,7 +2496,10 @@
           "cap": "0",
           "points": "30"
         }
-      ]
+      ],
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-9f78915b0ad6",
@@ -2363,7 +2570,10 @@
           "cap": "0",
           "points": "31"
         }
-      ]
+      ],
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-828474f9a363",
@@ -2426,7 +2636,10 @@
           "cap": "1",
           "points": "50"
         }
-      ]
+      ],
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-24b5afac7f3f",
@@ -2482,7 +2695,10 @@
           "cap": "0",
           "points": "47"
         }
-      ]
+      ],
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-1046b2d44e9d",
@@ -2592,7 +2808,10 @@
           "cap": "+1",
           "points": "39"
         }
-      ]
+      ],
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-bc0041ad234b",
@@ -2703,7 +2922,10 @@
           "cap": "1.5",
           "points": "35"
         }
-      ]
+      ],
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-9310317f95ea",
@@ -2761,7 +2983,10 @@
           "cap": "0",
           "points": "28"
         }
-      ]
+      ],
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-b81a3672549e",
@@ -2846,7 +3071,10 @@
           "cap": "0",
           "points": "19"
         }
-      ]
+      ],
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-4f67c0ce8ec9",
@@ -2900,7 +3128,10 @@
           "cap": "1.5",
           "points": "33"
         }
-      ]
+      ],
+      "troopClass": "Heavy Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-12f7b9c91168",
@@ -3018,7 +3249,10 @@
           "cap": "1",
           "points": "29"
         }
-      ]
+      ],
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-8c63b05a7f71",
@@ -3055,6 +3289,28 @@
       "verificationStatus": "unverified",
       "profiles": [
         {
+          "id": "legacy-profile-e3af426c780e",
+          "name": "Chain Rifle, Panzerfaust",
+          "armyName": "YAMABUSHI FTO",
+          "specialRules": [],
+          "rangedEquipment": "Chain Rifle, Panzerfaust",
+          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
+          "cap": "0",
+          "points": "15"
+        },
+        {
+          "id": "legacy-profile-98a6e63d5859",
+          "name": "Sanitario",
+          "armyName": "YAMABUSHI FTO (Sanitario)",
+          "specialRules": [
+            "Sanitario"
+          ],
+          "rangedEquipment": "Chain Rifle, Arco Táctico | MediKit",
+          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
+          "cap": "0",
+          "points": "16"
+        },
+        {
           "id": "legacy-profile-778c8b52f88c",
           "name": "Camuflaje [1 Uso]",
           "armyName": "YAMABUSHI (Camuflaje [1 Uso])",
@@ -3089,30 +3345,11 @@
           "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
           "cap": "0",
           "points": "17"
-        },
-        {
-          "id": "legacy-profile-e3af426c780e",
-          "name": "Chain Rifle, Panzerfaust",
-          "armyName": "YAMABUSHI FTO",
-          "specialRules": [],
-          "rangedEquipment": "Chain Rifle, Panzerfaust",
-          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
-          "cap": "0",
-          "points": "15"
-        },
-        {
-          "id": "legacy-profile-98a6e63d5859",
-          "name": "Sanitario",
-          "armyName": "YAMABUSHI FTO (Sanitario)",
-          "specialRules": [
-            "Sanitario"
-          ],
-          "rangedEquipment": "Chain Rifle, Arco Táctico | MediKit",
-          "meleeEquipment": "Pistola Pesada, Arma CC DA(PS=4)",
-          "cap": "0",
-          "points": "16"
         }
-      ]
+      ],
+      "troopClass": "Warbands",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-55500f00e700",
@@ -3156,7 +3393,10 @@
           "cap": "0",
           "points": "21"
         }
-      ]
+      ],
+      "troopClass": "Warbands",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-92adf1e2b28a",
@@ -3212,7 +3452,10 @@
           "cap": "0",
           "points": "30"
         }
-      ]
+      ],
+      "troopClass": "Warbands",
+      "troopClassSource": "Confirmación expresa del propietario, 2026-10-28",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-9d9c09ddfe11",
@@ -3257,7 +3500,10 @@
           "cap": "0",
           "points": "19"
         }
-      ]
+      ],
+      "troopClass": "Warbands",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-34d66a090d6d",
@@ -3302,7 +3548,10 @@
           "cap": "0",
           "points": "20"
         }
-      ]
+      ],
+      "troopClass": "Warbands",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-9a8c0ffe402c",
@@ -3347,7 +3596,10 @@
           "cap": "0",
           "points": "26"
         }
-      ]
+      ],
+      "troopClass": "Medium Infantry",
+      "troopClassSource": "Página individual de Human Sphere: https://www.human-sphere.com/Samsa",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-971116bf1fe9",
@@ -3392,7 +3644,10 @@
           "cap": "0",
           "points": "19"
         }
-      ]
+      ],
+      "troopClass": "unclassified",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "incomplete"
     },
     {
       "id": "legacy-unit-947552d18bec",
@@ -3452,7 +3707,10 @@
           "cap": "0",
           "points": "16"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-9a6ae0a3cebb",
@@ -3492,7 +3750,10 @@
           "cap": "0",
           "points": "7"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-5ff23a2a6cc7",
@@ -3561,7 +3822,10 @@
           "cap": "0",
           "points": "12"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-aa81d4df1e15",
@@ -3613,7 +3877,10 @@
           "cap": "0",
           "points": "17"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-3c274cb23e9b",
@@ -3665,7 +3932,10 @@
           "cap": "0",
           "points": "20"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-9a4b653942af",
@@ -3705,7 +3975,10 @@
           "cap": "1.5",
           "points": "16"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-008cf4ba4561",
@@ -3754,7 +4027,10 @@
           "cap": "0.5",
           "points": "21"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-5e08fd45dbad",
@@ -3794,7 +4070,10 @@
           "cap": "0",
           "points": "3"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-fa676f38f6ad",
@@ -3852,7 +4131,10 @@
           "cap": "1.5",
           "points": "78"
         }
-      ]
+      ],
+      "troopClass": "TAGs",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-b942318c62f1",
@@ -3906,7 +4188,10 @@
           "cap": "-",
           "points": "3"
         }
-      ]
+      ],
+      "troopClass": "unclassified",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "incomplete"
     },
     {
       "id": "legacy-unit-885d8c0e9f82",
@@ -3975,7 +4260,10 @@
           "cap": "1.5",
           "points": "69"
         }
-      ]
+      ],
+      "troopClass": "TAGs",
+      "troopClassSource": "Japanese Secessionist Army Units, Human Sphere: https://www.human-sphere.com/Japanese_Secessionist_Army",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-a6786e2ea06f",
@@ -4055,7 +4343,10 @@
           "cap": "0",
           "points": "48"
         }
-      ]
+      ],
+      "troopClass": "TAGs",
+      "troopClassSource": "Página individual de Human Sphere: https://www.human-sphere.com/Triphammer",
+      "troopClassVerificationStatus": "verified"
     },
     {
       "id": "legacy-unit-a40784d72750",
@@ -4097,7 +4388,10 @@
           "cap": "-",
           "points": "4"
         }
-      ]
+      ],
+      "troopClass": "Remotes",
+      "troopClassSource": "Página individual de Human Sphere: https://www.human-sphere.com/Triphammer",
+      "troopClassVerificationStatus": "verified"
     }
   ],
   "references": [

@@ -35,6 +35,25 @@ button, select { cursor: pointer; }
 .eyebrow { color: var(--teal); font-size: 10px; font-weight: 700; letter-spacing: .15em; }
 .catalog-controls { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(220px, .9fr); gap: 12px; margin-bottom: 14px; }
 .unit-search { padding: 10px 12px; border-bottom: 1px solid #293745; }
+.troop-class-current { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid #293745; color: #e8edf2; font-size: 11px; }
+.troop-class-back { color: var(--teal); background: none; border: 1px solid #2a3948; border-radius: 3px; padding: 5px 9px; cursor: pointer; font-size: 10px; }
+[data-troop-class] { --class-color: #8998a7; }
+[data-troop-class="Light Infantry"] { --class-color: #4da3ff; }
+[data-troop-class="Medium Infantry"] { --class-color: #f0b84a; }
+[data-troop-class="Heavy Infantry"] { --class-color: #e5604d; }
+[data-troop-class="Skirmishers"] { --class-color: #5fd16f; }
+[data-troop-class="Warbands"] { --class-color: #b678e8; }
+[data-troop-class="Remotes"] { --class-color: #36d6d6; }
+[data-troop-class="TAGs"] { --class-color: #ff8a3d; }
+.troop-class-option { border-left: 4px solid var(--class-color); background: linear-gradient(90deg, color-mix(in srgb, var(--class-color) 14%, transparent), transparent 70%); }
+.troop-class-option:hover { background: linear-gradient(90deg, color-mix(in srgb, var(--class-color) 26%, transparent), transparent 80%); }
+.troop-class-badge { flex: 0 0 auto; min-width: 40px; padding: 5px 6px; text-align: center; color: #0c141b; background: var(--class-color); border-radius: 3px; font-size: 11px; font-weight: 800; letter-spacing: .04em; }
+.troop-class-option .profile-summary strong { color: #eef2f6; }
+.troop-class-current { border-left: 4px solid var(--class-color); }
+.troop-class-current .troop-class-badge { min-width: 0; font-size: 10px; }
+.variants-title { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+.variants-title h2 { margin: 0; }
+.variants-unit-icon { flex: 0 0 auto; width: 34px; height: 34px; object-fit: contain; }
 .select-control, .search-control { display: flex; flex-direction: column; gap: 7px; color: #9eacb9; font-size: 10px; letter-spacing: .04em; }
 .select-control select, .search-control input { height: 42px; width: 100%; color: #e8edf2; background: var(--surface); border: 1px solid #2a3948; border-radius: 3px; padding: 0 12px; outline: none; }
 .select-control select:focus, .search-control input:focus { border-color: var(--teal); }
@@ -65,6 +84,7 @@ button, select { cursor: pointer; }
 .variant-option-main span { overflow: hidden; color: #8998a7; font-size: 9px; line-height: 1.4; text-overflow: ellipsis; }
 .variant-option-main .variant-origin-badge { flex: 0 0 auto; padding: 1px 4px; border: 1px solid #526b79; border-radius: 2px; color: #a9c5d3; font-size: 8px; font-weight: 700; line-height: 1.3; letter-spacing: .04em; }
 .variant-option-main .variant-special-rules { color: #d3b878; white-space: normal; }
+.variant-option-main .catalog-troop-class { color: var(--teal); }
 .variant-option-main small { color: #f0c77c; font-size: 9px; }
 .variant-add-button { flex: 0 0 auto; align-self: center; min-height: 30px; padding: 4px 8px; color: var(--teal); background: #142522; border: 1px solid #346b62; border-radius: 3px; font-size: 9px; font-weight: 700; }
 .variant-add-button:hover { border-color: var(--teal); }
@@ -91,6 +111,7 @@ button, select { cursor: pointer; }
 .unit-name-row h2 { flex: 0 1 auto; min-width: 0; margin: 0; color: #10191e; font: 700 27px/.98 'Barlow Condensed', sans-serif; white-space: nowrap; }
 .unverified-badge { flex: 0 0 auto; margin-top: 4px; border: 1px solid #9d7c3d; padding: 4px 6px; color: #69501f; background: #f7edce; font-size: 7px; font-weight: 700; letter-spacing: .06em; }
 .unit-type-row { min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: 14px; color: #324650; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.unit-type-row .unit-class { color: #14715f; }
 .unit-edition { color: #65777e; }
 .unit-cost { margin-left: auto; }
 .unit-cost strong { color: #17252a; font-size: inherit; }
@@ -225,6 +246,7 @@ button, select { cursor: pointer; }
 .collection-entry-name { min-width: 0; display: flex; align-items: center; gap: 6px; }
 .collection-entry-name strong { flex: 0 0 auto; max-width: 45%; overflow: hidden; color: #edf2f5; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
 .collection-entry-name span { min-width: 0; overflow: hidden; color: #9aa8b7; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.collection-entry-name .collection-entry-class { flex: 0 0 auto; padding: 2px 4px; border: 1px solid #41645e; color: #87cdbd; font-size: 8px; }
 .collection-entry-points { flex: 0 0 auto; color: #f0c77c; font-size: 9px; font-weight: 700; }
 .collection-entry-actions { display: flex; gap: 3px; }
 .collection-entry-actions button { width: 23px; height: 22px; padding: 0; color: #e5edf1; background: #243746; border: 1px solid #445563; border-radius: 2px; font-size: 13px; }

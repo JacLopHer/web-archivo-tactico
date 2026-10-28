@@ -25,7 +25,7 @@ const migrationScript = await readFile(
 const stylesheet = await readFile(new URL('../src/styles.css', import.meta.url), 'utf8');
 
 test('el catálogo migrado conserva el inventario heredado', () => {
-  assert.equal(catalog.schemaVersion, 2);
+  assert.equal(catalog.schemaVersion, 4);
   assert.equal(catalog.units.length, 63);
   assert.equal(troopProfiles.length, 181);
   assert.equal(weaponCatalog.profiles.length, 227);
@@ -104,6 +104,37 @@ test('los perfiles de tropas heredados no se presentan como verificados', () => 
   assert.ok(catalog.units.every((unit) => unit.verificationStatus === 'unverified'));
   assert.equal(catalog.metadata.verificationStatus, 'unverified');
   assert.equal('weapons' in catalog, false);
+});
+
+test('cada perfil hereda clase, fuente y estado de verificación de su unidad', () => {
+  for (const unit of catalog.units) {
+    assert.ok(unit.troopClass, `Falta troopClass en ${unit.name}`);
+    assert.ok(unit.troopClassSource);
+    assert.ok(['verified', 'incomplete'].includes(unit.troopClassVerificationStatus));
+    for (const profile of unit.profiles) {
+      const derivedProfile = troopProfiles.find((candidate) => candidate.id === profile.id);
+      assert.equal(derivedProfile.troopClass, unit.troopClass);
+      assert.equal(derivedProfile.troopClassSource, unit.troopClassSource);
+      assert.equal(derivedProfile.troopClassVerificationStatus, unit.troopClassVerificationStatus);
+    }
+  }
+  const ioann = catalog.units.find((unit) => unit.name === 'IOANN BANN');
+  assert.ok(ioann);
+  assert.equal(ioann.troopClass, 'Warbands');
+  assert.equal(ioann.troopClassSource, 'Confirmación expresa del propietario, 2026-10-28');
+});
+
+test('los grupos por clase cubren cada unidad exactamente una vez y coinciden con su clase', () => {
+  const seen = new Map();
+  for (const group of catalog.troopClassGroups) {
+    assert.ok(group.unitIds.length > 0, `Grupo vacío: ${group.troopClass}`);
+    for (const unitId of group.unitIds) {
+      assert.equal(seen.has(unitId), false, `Unidad duplicada: ${unitId}`);
+      seen.set(unitId, group.troopClass);
+    }
+  }
+  assert.equal(seen.size, catalog.units.length);
+  for (const unit of catalog.units) assert.equal(seen.get(unit.id), unit.troopClass);
 });
 
 test('Ninja conserva atributos y reglas comunes con cada equipo y regla de perfil separado', () => {

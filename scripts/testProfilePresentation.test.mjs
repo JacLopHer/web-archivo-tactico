@@ -126,6 +126,17 @@ test('la lista de unidades presenta su insignia a la izquierda del nombre', () =
   assert.match(styles, /\.family-option-icon\s*\{[^}]*width:\s*28px[^}]*height:\s*28px/);
 });
 
+test('la clase de tropa se presenta en catálogo, colección y ficha sin sustituir troopType', () => {
+  assert.match(app, /Clase de tropa: \{getTroopClassShortLabel\(profile\.troopClass\)\}/);
+  assert.match(app, /className="collection-entry-class">\{getTroopClassShortLabel\(profile\.troopClass\)\}/);
+  assert.match(app, /className="unit-class">\{getTroopClassShortLabel\(profile\.troopClass\)\}/);
+  assert.match(app, /<span>\{profile\.troopType\}<\/span>/);
+  assert.match(app, /showClassPicker/);
+  assert.match(app, /catalog\.troopClassGroups/);
+  assert.match(app, /profile\.troopClass === selectedTroopClass/);
+  assert.match(styles, /\.unit-type-row \.unit-class/);
+});
+
 test('marca los perfiles FTO dentro de las variantes de su unidad base', () => {
   const variantsStart = app.indexOf('className="roster-panel catalog-variants"');
   const variantsEnd = app.indexOf('className="collection-section"', variantsStart);
