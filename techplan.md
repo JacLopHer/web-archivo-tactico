@@ -26,7 +26,7 @@
 0. **Clase de tropa:** completa (Ruby Monday IP y Kobaruto REM confirmados por el propietario).
 1. **Sectoriales:** hecho por unidad (Vanilla, Oban y Shindenbutai, rosters N5 v4, `src/domain/sectorialAvailability.mjs`). Pendiente: disponibilidad por perfil dentro de cada unidad (requiere Infinity Army) y decidir Kaizoku y Atomu Specbot.
 2. **Refinar impresión y PDF.** Pulir diseño, paginación y saltos de página (papel siempre A4) y comprobar el resultado real en papel y en PDF.
-3. **Pruebas de interfaz en navegador.** Cubrir importación, colección, reordenación, responsive e impresión; se hacen ahora.
+3. **Pruebas de interfaz en navegador:** hechas con Playwright (Chromium) contra el servidor local: selector de clases, icono de la cabecera de perfiles, filtro de sectoriales, importación desde el portapapeles, colección (alta manual, persistencia al recargar), reordenación, vista previa detallada y compacta, PDF A4 en modo impresión y ausencia de desbordamiento horizontal a 375, 768 y 1280 px. Se corrigió el recorte de la hoja A4 en la vista previa en pantalla. Las pruebas no están en el repositorio; queda pendiente decidir si se incorporan como pruebas end-to-end y comprobar el resultado en papel real.
 4. **Rediseño visual:** replantear el diseño gráfico, que no convence al propietario. Solo después de terminar las mejoras funcionales.
 5. **Imágenes de unidad/perfil:** incorporar imágenes permitidas y asociadas de forma fiable; hoy se usa un marcador.
 6. **Modo de aprendizaje:** explicaciones didácticas contextuales. Para el final del proyecto.

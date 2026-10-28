@@ -296,7 +296,7 @@ button, select { cursor: pointer; }
 .app-shell.print-preview-open .collection-count { gap: 8px; }
 .app-shell.print-preview-open .collection-count .action-button { min-height: 30px; padding: 4px 8px; font-size: 10px; }
 .app-shell.print-preview-open .collection-controls { flex: 0 0 auto; }
-.app-shell.print-preview-open .collection-list { width: 210mm; max-width: 100%; max-height: none; flex: 1 1 auto; margin: 0 auto; overflow: auto; padding: 8mm; background: #c8ced1; }
+.app-shell.print-preview-open .collection-list { width: calc(210mm + 16mm); max-width: 100%; max-height: none; flex: 1 1 auto; margin: 0 auto; overflow: auto; padding: 8mm; background: #c8ced1; }
 .app-shell.print-preview-open .print-preview-page { width: 210mm; min-height: 297mm; margin: 0 auto 8mm; padding: 10mm; list-style: none; background: #fff; box-shadow: 0 2mm 5mm #0004; }
 .app-shell.print-layout-compact.print-preview-open .print-preview-page { display: block; width: 210mm; height: 297mm; min-height: 0; padding: 6mm; }
 .app-shell.print-preview-open .print-preview-page-entries { margin: 0; padding: 0; list-style: none; }
