@@ -30,6 +30,7 @@ const extraProfiles = extraCatalog.units.flatMap((unit) =>
     rangedEquipment: profile.rangedEquipment,
     meleeEquipment: profile.meleeEquipment,
     importNames: profile.importNames,
+    sectorialIds: profile.sectorialIds ?? unit.sectorialIds,
   })),
 );
 
@@ -118,6 +119,66 @@ test('resuelve perfiles JAZZ FTO presentes en el roster aunque estén deshabilit
 
   assert.deepEqual(result.entries.map((entry) => entry.profileId), [jazzFto.id, jazzFto.id]);
   assert.ok(result.entries.every((entry) => entry.resolution === 'exact'));
+});
+
+test('resuelve la lista de Bakunin: perfil por sectorial del logotipo y línea «3X» sin armas de disparo', () => {
+  const result = parseListImport([
+    '[imglogoarmy=14]https://assets.corvusbelli.net/army/img/logo/factions/bakunin.svg[/imglogoarmy][b] [/b]',
+    'GRUPO 1',
+    '[imglogoarmy=14]https://assets.corvusbelli.net/army/img/logo/units/bakunin-ueberfallkommando-1-1.svg[/imglogoarmy] [b]QUIMERA[/b] Fusil Combi, Nanopulser, Granadas Eclipse / Pistola, Arma CC Viral(PS=6). (0 | [b]19[/b])',
+    ' [img]https://assets.corvusbelli.com/army/img/print/sep.gif[/img] [imglogoarmy=14]https://assets.corvusbelli.net/army/img/logo/units/bakunin-ueberfallkommando-2-1.svg[/imglogoarmy] [b]3X PÚPNIK[/b] Arma CC DA(PS=7). (0 | [b]3[/b])',
+    '[b]BRAN DO CASTRO[/b] Subfusil, Granadas E/M / Pistola de Abordaje, Arma CC DA(PS=6). (0 | [b]27[/b])',
+    '[b]BRAN DO CASTRO[/b] Escopeta de Abordaje / Pistola de Abordaje, Arma CC DA(PS=6). (0 | [b]27[/b])',
+  ].join('\n'), extraProfiles);
+
+  assert.equal(result.entries.length, 4);
+  assert.ok(result.entries.every((entry) => entry.profileId), 'todas las entradas se resuelven');
+  const [quimera, pupnik] = result.entries;
+  assert.deepEqual(extraProfiles.find((profile) => profile.id === quimera.profileId).sectorialIds, ['nomads-bakunin']);
+  assert.equal(pupnik.quantity, 3);
+  assert.equal(pupnik.resolution, 'exact');
+  assert.equal(extraProfiles.find((profile) => profile.id === pupnik.profileId).name, 'PÚPNIK');
+});
+
+test('sin logotipo de sectorial, un perfil idéntico repetido por sectorial sigue siendo ambiguo', () => {
+  const result = parseListImport(
+    '[b]QUIMERA[/b] Fusil Combi, Nanopulser, Granadas Eclipse / Pistola, Arma CC Viral(PS=6). (0 | [b]19[/b])',
+    extraProfiles,
+  );
+  assert.equal(result.entries[0].resolution, 'ambiguous');
+  assert.equal(result.entries[0].profileId, '');
+});
+
+const factionLogoSlugs = {
+  'nomads-generic': 'nomads',
+  'nomads-corregidor': 'corregidor',
+  'nomads-bakunin': 'bakunin',
+  'nomads-tunguska': 'tunguska',
+  'aleph-generic': 'aleph',
+  'aleph-steel-phalanx': 'steel-phalanx',
+  'aleph-oss': 'operations',
+};
+
+test('con el logotipo de cada sectorial, los perfiles divididos por sectorial nunca se resuelven a otro sectorial', () => {
+  const split = extraProfiles.filter((profile) => /-v[a-f0-9]+$/.test(profile.id));
+  assert.ok(split.length > 0);
+  let checked = 0;
+  for (const profile of split) {
+    for (const sectorialId of profile.sectorialIds) {
+      const slug = factionLogoSlugs[sectorialId];
+      assert.ok(slug, `logotipo conocido para ${sectorialId}`);
+      const result = parseListImport([
+        `[imglogoarmy=14]https://assets.corvusbelli.net/army/img/logo/factions/${slug}.svg[/imglogoarmy]`,
+        `[b]${profile.name}[/b] ${profile.rangedEquipment} / ${profile.meleeEquipment}. (${profile.cap} | [b]${profile.points}[/b])`,
+      ].join('\n'), extraProfiles);
+      const resolved = extraProfiles.find(({ id }) => id === result.entries[0]?.profileId);
+      if (resolved) {
+        assert.ok(resolved.sectorialIds.includes(sectorialId), `${profile.id} en ${sectorialId} resuelve a ${resolved.id}`);
+        checked += 1;
+      }
+    }
+  }
+  assert.ok(checked > 0);
 });
 
 const armyProfiles = [

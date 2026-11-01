@@ -435,6 +435,8 @@ for (const faction of factions) {
         name: groupName,
         officialName: referenceEnglishGroup.isc || englishIsc,
         requestedName: groupName,
+        ...(englishIsc.trim().toLowerCase() !== (referenceEnglishGroup.isc || englishIsc).trim().toLowerCase()
+          ? { rosterName: englishIsc.trim() } : {}),
         troopType: `${troopTypePrefix[primaryBase.type] ?? ''}${categories.get(referenceGroup.category) ?? troopClassLabel}`,
         troopClass,
         troopClassSource: `Infinity Army, tipo ${troopTypes.get(primaryBase.type)} (id ${primaryBase.type}): ${sourceUrl}`,
@@ -572,7 +574,8 @@ async function downloadIcon(url, path) {
   if (!content.toString('utf8').includes('<svg')) throw new Error(`El recurso no contiene SVG válido: ${url}`);
   try {
     const existing = await readFile(destination);
-    if (!existing.equals(content)) {
+    const normalizeSvg = (buffer) => buffer.toString('utf8').split(/\r?\n/).map((line) => line.trimEnd()).join('\n').trimEnd();
+    if (normalizeSvg(existing) !== normalizeSvg(content)) {
       throw new Error(`El icono existente difiere de Infinity Army; requiere revisión manual: ${path}`);
     }
   } catch (error) {

@@ -3,6 +3,7 @@ import type { TroopProfile } from '../types/catalog';
 export interface ImportedProfileLine {
   originalName: string;
   displayName?: string;
+  quantity?: number;
   lineNumber: number;
   candidateIds: string[];
   profileId: string;

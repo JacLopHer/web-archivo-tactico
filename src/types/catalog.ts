@@ -21,6 +21,8 @@ export interface TroopProfile {
   variantName: string;
   unitId: string;
   unitName: string;
+  unitOfficialName?: string;
+  unitRosterName?: string;
   troopType: string;
   troopClass: TroopClass;
   troopClassSource: string;
@@ -91,6 +93,7 @@ export interface TroopUnit {
   infinityArmyGroupId?: number;
   officialName?: string;
   requestedName?: string;
+  rosterName?: string;
   iconPath?: string;
   iconSource?: string;
   iconPathsBySectorial?: Record<string, string | undefined>;

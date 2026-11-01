@@ -60,14 +60,23 @@ function findProfileName(rawName, profiles) {
   };
 }
 
-function chooseCandidate(candidates, entry) {
+// Un perfil idéntico puede existir una vez por sectorial; el logotipo de la lista indica cuál corresponde.
+function matchesSectorialHint(profile, hint) {
+  if (!hint) return false;
+  return (profile.sectorialIds ?? []).some((id) => id === `${hint}-generic`
+    || id.endsWith(`-${hint}`)
+    || (hint === 'operations' && id === 'aleph-oss'));
+}
+
+function chooseCandidate(candidates, entry, sectorialHint) {
   if (candidates.length <= 1) return candidates[0];
 
   const importedEquipment = normalizeEquipmentName(`${entry.rangedEquipment} ${entry.meleeEquipment}`);
+  const unitPoints = Number(entry.points) / (entry.quantity ?? 1);
   const ranked = candidates
     .map((profile) => {
       let score = 0;
-      score += Number(profile.points) === Number(entry.points) ? 4 : -4;
+      score += Number(profile.points) === unitPoints ? 4 : -4;
       score += normalizeProfileName(profile.cap) === normalizeProfileName(entry.cap) ? 2 : -2;
       const equipment = [profile.rangedEquipment, profile.meleeEquipment]
         .flatMap((value) => value.split(/[|,]/))
@@ -78,9 +87,11 @@ function chooseCandidate(candidates, entry) {
     })
     .sort((left, right) => right.score - left.score);
 
-  return ranked[0].score > 0 && ranked[0].score > ranked[1].score
-    ? ranked[0].profile
-    : undefined;
+  if (ranked[0].score <= 0) return undefined;
+  const tied = ranked.filter(({ score }) => score === ranked[0].score);
+  if (tied.length === 1) return tied[0].profile;
+  const byHint = tied.filter(({ profile }) => matchesSectorialHint(profile, sectorialHint));
+  return byHint.length === 1 ? byHint[0].profile : undefined;
 }
 
 export function parseProfileList(text, profiles) {
@@ -104,8 +115,7 @@ export function parseProfileList(text, profiles) {
 }
 
 function isArmyUnitLine(line) {
-  return /\(\s*[+-]?\d+(?:[.,]\d+)?\s*\|\s*\d+\s*\)\s*\.?\s*$/.test(line)
-    && line.includes('/');
+  return /\(\s*[+-]?\d+(?:[.,]\d+)?\s*\|\s*\d+\s*\)\s*\.?\s*$/.test(line);
 }
 
 function stripArmyMarkup(line) {
@@ -121,16 +131,20 @@ function getDisplayName(rawLine) {
   return boldName?.replace(/\s+/g, ' ').trim();
 }
 
-function parseArmyUnitLine(line, lineNumber, groupName, profiles, rawLine) {
+function parseArmyUnitLine(line, lineNumber, groupName, profiles, rawLine, sectorialHint) {
   const costMatch = line.match(/\(\s*([+-]?\d+(?:[.,]\d+)?)\s*\|\s*(\d+)\s*\)\s*\.?\s*$/);
   const sides = line.slice(0, costMatch.index).split(/\s+\/\s+/);
-  const rawRangedEquipment = sides[0].trim();
+  // «3X NOMBRE»: la lista indica el coste total de las N unidades.
+  const quantityMatch = sides[0].match(/^\s*(\d+)\s*[xX]\s+/);
+  const quantity = quantityMatch ? Number(quantityMatch[1]) : undefined;
+  const rawRangedEquipment = sides[0].slice(quantityMatch?.[0].length ?? 0).trim();
   const meleeEquipment = sides.slice(1).join('/').trim();
   const { profileName, remaining, candidates } = findProfileName(rawRangedEquipment, profiles);
   const displayName = getDisplayName(rawLine);
   const entry = {
     originalName: profileName || rawRangedEquipment,
     ...(displayName ? { displayName } : {}),
+    ...(quantity && quantity > 1 ? { quantity } : {}),
     lineNumber,
     groupName,
     sourceLine: line.trim(),
@@ -139,7 +153,7 @@ function parseArmyUnitLine(line, lineNumber, groupName, profiles, rawLine) {
     cap: costMatch[1].replace(',', '.'),
     points: costMatch[2],
   };
-  const selected = chooseCandidate(candidates, entry);
+  const selected = chooseCandidate(candidates, entry, sectorialHint);
   const candidateIds = selected ? [selected.id] : candidates.map((profile) => profile.id);
   const resolution = selected
     ? candidates.length === 1 ? 'exact' : 'details'
@@ -156,6 +170,7 @@ function parseArmyUnitLine(line, lineNumber, groupName, profiles, rawLine) {
 export function parseInfinityArmyList(text, profiles) {
   const entries = [];
   let groupName = '';
+  const sectorialHint = text.match(/\/logo\/factions\/([a-z0-9-]+)\.svg/i)?.[1].toLowerCase();
 
   text.split(/\r?\n/).forEach((rawLine, index) => {
     const line = stripArmyMarkup(rawLine);
@@ -163,7 +178,7 @@ export function parseInfinityArmyList(text, profiles) {
     if (groupMatch) {
       groupName = `Grupo ${groupMatch[1]}`;
     } else if (isArmyUnitLine(line)) {
-      entries.push(parseArmyUnitLine(line, index + 1, groupName, profiles, rawLine));
+      entries.push(parseArmyUnitLine(line, index + 1, groupName, profiles, rawLine, sectorialHint));
     }
   });
 

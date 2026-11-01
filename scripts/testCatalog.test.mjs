@@ -152,6 +152,16 @@ test('el catálogo completo conserva las diez unidades iniciales y cubre los sie
   assert.ok(multiProfileBases.every((unit) => unit.baseProfileMappingStatus === 'incomplete'));
 });
 
+test('conserva el nombre de caja del roster para localizar unidades divididas en grupos', () => {
+  const byId = new Map(extraCatalog.units.map((unit) => [unit.id, unit]));
+  assert.equal(byId.get('ia-422').rosterName, 'Bakunin Überfallkommando');
+  assert.equal(byId.get('ia-422-g2').rosterName, 'Bakunin Überfallkommando');
+  assert.equal(byId.get('ia-422').sectorialIds.includes('nomads-bakunin'), true);
+  for (const unit of extraCatalog.units) {
+    if (unit.rosterName) assert.notEqual(unit.rosterName.toLowerCase(), unit.officialName.trim().toLowerCase(), unit.id);
+  }
+});
+
 test('la disponibilidad se verifica por unidad y por perfil, sin heredar asignaciones de otro sectorial', () => {
   const byName = new Map(extraCatalog.units.map((unit) => [unit.name, unit]));
   assert.deepEqual(byName.get('ALGUACIL').sectorialIds, [

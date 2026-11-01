@@ -57,6 +57,8 @@ const allCatalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
     variantName: profile.name,
     unitId: unit.id,
     unitName: unit.name,
+    unitOfficialName: unit.officialName,
+    unitRosterName: unit.rosterName,
     troopType: unit.troopType,
     troopClass: unit.troopClass,
     troopClassSource: unit.troopClassSource,
@@ -328,7 +330,7 @@ function App() {
       const matchesFaction = profile.factionId === selectedFactionId;
       const matchesQuery =
         !normalizedQuery ||
-        `${profile.name} ${profile.unitName} ${profile.variantName} ${profile.troopType} ${getTroopClassLabel(profile.troopClass)} ${profile.rangedEquipment} ${profile.meleeEquipment}`
+        `${profile.name} ${profile.unitName} ${profile.unitOfficialName ?? ''} ${profile.unitRosterName ?? ''} ${profile.variantName} ${profile.troopType} ${getTroopClassLabel(profile.troopClass)} ${profile.rangedEquipment} ${profile.meleeEquipment}`
           .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '')
           .includes(normalizedQuery);
       const matchesSectorial = !sectorial || (profile.sectorialIds
