@@ -9,6 +9,151 @@
   },
   "factions": [
     {
+      "id": "panoceania",
+      "name": "PanOceanía",
+      "armyName": "PanOceania",
+      "shortName": "PAN",
+      "catalogStatus": "complete",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        {
+          "id": "panoceania-generic",
+          "name": "PanOceania",
+          "kind": "generic"
+        },
+        {
+          "id": "panoceania-shock-army-of-acontecimento",
+          "name": "Shock Army of Acontecimento",
+          "kind": "sectorial"
+        },
+        {
+          "id": "panoceania-military-orders",
+          "name": "Military Orders",
+          "kind": "sectorial"
+        },
+        {
+          "id": "panoceania-neoterran-capitaline-army",
+          "name": "Neoterran Capitaline Army",
+          "kind": "sectorial"
+        },
+        {
+          "id": "panoceania-varuna-immediate-reaction-division",
+          "name": "Varuna Immediate Reaction Division",
+          "kind": "sectorial"
+        },
+        {
+          "id": "panoceania-svalarheima-s-winter-force",
+          "name": "Svalarheima's Winter Force",
+          "kind": "sectorial"
+        },
+        {
+          "id": "panoceania-kestrel-colonial-force",
+          "name": "Kestrel Colonial Force",
+          "kind": "sectorial"
+        }
+      ]
+    },
+    {
+      "id": "yu-jing",
+      "name": "Yu Jing",
+      "armyName": "Yu Jing",
+      "shortName": "YJ",
+      "catalogStatus": "complete",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        {
+          "id": "yu-jing-generic",
+          "name": "Yu Jing",
+          "kind": "generic"
+        },
+        {
+          "id": "yu-jing-imperial-service",
+          "name": "Imperial Service",
+          "kind": "sectorial"
+        },
+        {
+          "id": "yu-jing-invincible-army",
+          "name": "Invincible Army",
+          "kind": "sectorial"
+        },
+        {
+          "id": "yu-jing-white-banner",
+          "name": "White Banner",
+          "kind": "sectorial"
+        }
+      ]
+    },
+    {
+      "id": "ariadna",
+      "name": "Ariadna",
+      "armyName": "Ariadna",
+      "shortName": "ARI",
+      "catalogStatus": "complete",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        {
+          "id": "ariadna-generic",
+          "name": "Ariadna",
+          "kind": "generic"
+        },
+        {
+          "id": "ariadna-caledonian-highlander-army",
+          "name": "Caledonian Highlander Army",
+          "kind": "sectorial"
+        },
+        {
+          "id": "ariadna-force-de-reponse-rapide-merovingienne",
+          "name": "Force de Réponse Rapide Merovingienne",
+          "kind": "sectorial"
+        },
+        {
+          "id": "ariadna-usariadna",
+          "name": "USAriadna Ranger Force",
+          "kind": "sectorial"
+        },
+        {
+          "id": "ariadna-tartary",
+          "name": "Tartary Army Corps",
+          "kind": "sectorial"
+        },
+        {
+          "id": "ariadna-kosmoflot",
+          "name": "Kosmoflot",
+          "kind": "sectorial"
+        }
+      ]
+    },
+    {
+      "id": "haqqislam",
+      "name": "Haqqislam",
+      "armyName": "Haqqislam",
+      "shortName": "HAQ",
+      "catalogStatus": "complete",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        {
+          "id": "haqqislam-generic",
+          "name": "Haqqislam",
+          "kind": "generic"
+        },
+        {
+          "id": "haqqislam-hassassin-bahram",
+          "name": "Hassassin Bahram",
+          "kind": "sectorial"
+        },
+        {
+          "id": "haqqislam-qapu-khalqi",
+          "name": "Qapu Khalqi",
+          "kind": "sectorial"
+        },
+        {
+          "id": "haqqislam-ramah-taskforce",
+          "name": "Ramah Taskforce",
+          "kind": "sectorial"
+        }
+      ]
+    },
+    {
       "id": "nomads",
       "name": "Nómadas",
       "armyName": "Nomads",
@@ -16,10 +161,26 @@
       "catalogStatus": "complete",
       "iconStatus": "awaiting-authorized-asset",
       "sectorials": [
-        { "id": "nomads-generic", "name": "Nomads", "kind": "generic" },
-        { "id": "nomads-corregidor", "name": "Corregidor Jurisdictional Command", "kind": "sectorial" },
-        { "id": "nomads-bakunin", "name": "Bakunin Jurisdictional Command", "kind": "sectorial" },
-        { "id": "nomads-tunguska", "name": "Tunguska Jurisdictional Command", "kind": "sectorial" }
+        {
+          "id": "nomads-generic",
+          "name": "Nomads",
+          "kind": "generic"
+        },
+        {
+          "id": "nomads-corregidor",
+          "name": "Corregidor Jurisdictional Command",
+          "kind": "sectorial"
+        },
+        {
+          "id": "nomads-bakunin",
+          "name": "Bakunin Jurisdictional Command",
+          "kind": "sectorial"
+        },
+        {
+          "id": "nomads-tunguska",
+          "name": "Tunguska Jurisdictional Command",
+          "kind": "sectorial"
+        }
       ]
     },
     {
@@ -30,9 +191,136 @@
       "catalogStatus": "complete",
       "iconStatus": "awaiting-authorized-asset",
       "sectorials": [
-        { "id": "aleph-generic", "name": "Aleph", "kind": "generic" },
-        { "id": "aleph-steel-phalanx", "name": "Steel Phalanx", "kind": "sectorial" },
-        { "id": "aleph-oss", "name": "Operations Subsection of the S.S.S. (OSS)", "kind": "sectorial" }
+        {
+          "id": "aleph-generic",
+          "name": "Aleph",
+          "kind": "generic"
+        },
+        {
+          "id": "aleph-steel-phalanx",
+          "name": "Steel Phalanx",
+          "kind": "sectorial"
+        },
+        {
+          "id": "aleph-oss",
+          "name": "Operations Subsection of the S.S.S. (OSS)",
+          "kind": "sectorial"
+        }
+      ]
+    },
+    {
+      "id": "combined-army",
+      "name": "Ejército Combinado",
+      "armyName": "Combined Army",
+      "shortName": "CA",
+      "catalogStatus": "complete",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        {
+          "id": "combined-army-generic",
+          "name": "Combined Army",
+          "kind": "generic"
+        },
+        {
+          "id": "combined-army-morat",
+          "name": "Morat Aggression Forces",
+          "kind": "sectorial"
+        },
+        {
+          "id": "combined-army-shasvastii",
+          "name": "Shasvastii Expeditionary Force",
+          "kind": "sectorial"
+        },
+        {
+          "id": "combined-army-onyx",
+          "name": "Onyx Contact Force",
+          "kind": "sectorial"
+        },
+        {
+          "id": "combined-army-next-wave",
+          "name": "Next Wave",
+          "kind": "sectorial"
+        }
+      ]
+    },
+    {
+      "id": "tohaa",
+      "name": "Tohaa",
+      "armyName": "Tohaa",
+      "shortName": "TOH",
+      "catalogStatus": "complete",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        {
+          "id": "tohaa-generic",
+          "name": "Tohaa",
+          "kind": "generic"
+        }
+      ]
+    },
+    {
+      "id": "o-12",
+      "name": "O-12",
+      "armyName": "O-12",
+      "shortName": "O-12",
+      "catalogStatus": "complete",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        {
+          "id": "o-12-generic",
+          "name": "O-12",
+          "kind": "generic"
+        },
+        {
+          "id": "o-12-starmada",
+          "name": "Starmada, Bureau Aegis Naval Police Department",
+          "kind": "sectorial"
+        },
+        {
+          "id": "o-12-torchlight-brigade",
+          "name": "Torchlight Brigade",
+          "kind": "sectorial"
+        }
+      ]
+    },
+    {
+      "id": "non-aligned",
+      "name": "Ejércitos No Alineados",
+      "armyName": "Non-Aligned Armies",
+      "shortName": "NA2",
+      "catalogStatus": "complete",
+      "iconStatus": "awaiting-authorized-asset",
+      "sectorials": [
+        {
+          "id": "non-aligned-generic",
+          "name": "Non-Aligned Armies",
+          "kind": "generic"
+        },
+        {
+          "id": "non-aligned-druze",
+          "name": "Druze Bayram Security",
+          "kind": "sectorial"
+        },
+        {
+          "id": "non-aligned-ikari",
+          "name": "Ikari Company",
+          "kind": "sectorial"
+        },
+        {
+          "id": "non-aligned-starco-free-company-of-the-star",
+          "name": "Starco. Free Company of the Star",
+          "kind": "sectorial"
+        },
+        {
+          "id": "non-aligned-dahshat",
+          "name": "Dahshat Company",
+          "kind": "sectorial"
+        },
+        {
+          "id": "non-aligned-white-company",
+          "name": "White Company",
+          "kind": "sectorial"
+        }
       ]
     }
   ]

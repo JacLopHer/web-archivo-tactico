@@ -18,14 +18,14 @@
     "sourceUrl": "https://infinityuniverse.com/army/infinity",
     "checkedAt": "2026-11-01",
     "verificationStatus": "verified",
-    "editionNote": "Los perfiles se consultaron en los rosters actuales de Infinity Army (Nomads 7.26246.158; Aleph 7.26246.159), edición vigente N5.3. La API no expone un campo de edición; no se combinaron fuentes ni reglas de otra edición.",
+    "editionNote": "Los perfiles se consultaron en los rosters actuales de Infinity Army (nomads 7.26246.158; aleph 7.26246.159), edición vigente N5.3. La API no expone un campo de edición; no se combinaron fuentes ni reglas de otra edición.",
     "apiVersions": {
       "nomads": "7.26246.158",
       "aleph": "7.26246.159"
     },
     "editionSourceUrl": "https://infinityuniverse.com/blog/infinity-rules-update-5-3",
     "iconSource": "Infinity Army (assets.corvusbelli.net/army/img/logo/units); autorización de uso indicada por el propietario el 2026-11-01.",
-    "note": "Catálogo completo de las unidades de los siete ejércitos consultados: 177 grupos/unidades de Nómadas y 149 de Aleph. Se incluyen 115 fichas de arma; 7 dato(s) de munición no están resueltos y quedan marcados como incompletos. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
+    "note": "Catálogo completo de las unidades de los 7 ejércitos consultados (Nómadas y Aleph): 177 grupos/unidades de Nómadas y 149 grupos/unidades de Aleph. Se incluyen 115 fichas de arma; 7 dato(s) de munición no están resueltos y quedan marcados como incompletos. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
   },
   "sectorials": [
     {

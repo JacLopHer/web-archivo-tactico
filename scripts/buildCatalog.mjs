@@ -1,11 +1,19 @@
-// Genera el catálogo completo de Nómadas y Aleph desde los siete rosters de Infinity Army.
+// Genera el catálogo de un conjunto de ejércitos (scripts/catalogSets.mjs) desde los rosters de Infinity Army.
+// Uso: node scripts/buildCatalog.mjs <conjunto>
 // Conserva las variantes por sectorial y no completa datos ausentes por suposición.
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { basename, resolve } from 'node:path';
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { basename, dirname, resolve } from 'node:path';
+import { catalogSets, factionDirectoryOrder } from './catalogSets.mjs';
+
+const setKey = process.argv[2];
+const catalogSet = catalogSets[setKey];
+if (!catalogSet) {
+  throw new Error(`Conjunto desconocido «${setKey ?? ''}». Disponibles: ${Object.keys(catalogSets).join(', ')}`);
+}
 
 const root = resolve(import.meta.dirname, '..');
-const outputPath = resolve(root, 'src/data/nomadsAlephCatalog.json');
+const outputPath = resolve(root, catalogSet.output);
 const iconDirectory = resolve(root, 'public/units/icons');
 const API = 'https://api.corvusbelli.com/army';
 const ICON_HOST = 'assets.corvusbelli.net';
@@ -13,30 +21,38 @@ const ICON_PATH_PREFIX = '/army/img/logo/units/';
 const headers = { Origin: 'https://infinityuniverse.com', Referer: 'https://infinityuniverse.com/' };
 const checkedAt = new Date().toISOString().slice(0, 10);
 
-const armies = [
-  { armyId: 501, factionId: 'nomads', sectorialId: 'nomads-generic' },
-  { armyId: 502, factionId: 'nomads', sectorialId: 'nomads-corregidor' },
-  { armyId: 503, factionId: 'nomads', sectorialId: 'nomads-bakunin' },
-  { armyId: 504, factionId: 'nomads', sectorialId: 'nomads-tunguska' },
-  { armyId: 701, factionId: 'aleph', sectorialId: 'aleph-generic' },
-  { armyId: 702, factionId: 'aleph', sectorialId: 'aleph-steel-phalanx' },
-  { armyId: 703, factionId: 'aleph', sectorialId: 'aleph-oss' },
-];
+async function getJson(path) {
+  const response = await fetch(`${API}/${path}`, { headers });
+  if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
+  return response.json();
+}
 
-const factions = [
-  { id: 'nomads', name: 'Nómadas', shortName: 'NOM' },
-  { id: 'aleph', name: 'Aleph', shortName: 'ALEPH' },
-];
+const [metadata, englishMetadata] = await Promise.all([
+  getJson('infinity/es/metadata'),
+  getJson('infinity/en/metadata'),
+]);
 
-const sectorialMeta = {
-  'nomads-generic': { factionId: 'nomads', name: 'Nomads' },
-  'nomads-corregidor': { factionId: 'nomads', name: 'Corregidor Jurisdictional Command' },
-  'nomads-bakunin': { factionId: 'nomads', name: 'Bakunin Jurisdictional Command' },
-  'nomads-tunguska': { factionId: 'nomads', name: 'Tunguska Jurisdictional Command' },
-  'aleph-generic': { factionId: 'aleph', name: 'Aleph' },
-  'aleph-steel-phalanx': { factionId: 'aleph', name: 'Steel Phalanx' },
-  'aleph-oss': { factionId: 'aleph', name: 'Operations Subsection of the S.S.S. (OSS)' },
-};
+// El primer sectorial de cada facción es la vainilla; los demás usan el slug del logotipo (el que lee el importador).
+const armies = [];
+const factions = [];
+const sectorialMeta = {};
+for (const faction of catalogSet.factions) {
+  factions.push({ id: faction.id, name: faction.name, shortName: faction.shortName });
+  const entries = faction.sectorials ?? faction.armyIds.map((armyId, index) => {
+    const army = metadata.factions.find((candidate) => candidate.id === armyId);
+    const english = englishMetadata.factions.find((candidate) => candidate.id === armyId);
+    if (!army || !english) throw new Error(`${faction.id}: el ejército ${armyId} no existe en los metadatos`);
+    return {
+      armyId,
+      id: index === 0 ? `${faction.id}-generic` : `${faction.id}-${army.slug}`,
+      name: english.name.replace(/\s+/g, ' ').trim(),
+    };
+  });
+  for (const { armyId, id, name } of entries) {
+    armies.push({ armyId, factionId: faction.id, sectorialId: id });
+    sectorialMeta[id] = { factionId: faction.id, name };
+  }
+}
 
 const troopClassByType = {
   1: 'Light Infantry',
@@ -50,16 +66,9 @@ const troopClassByType = {
 };
 const troopTypePrefix = { 4: 'TAG · ', 5: 'REM · ', 8: 'VH · ' };
 
-async function getJson(path) {
-  const response = await fetch(`${API}/${path}`, { headers });
-  if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
-  return response.json();
-}
-
-const [metadata, ...armyData] = await Promise.all([
-  getJson('infinity/es/metadata'),
-  ...armies.flatMap(({ armyId }) => [getJson(`units/es/${armyId}`), getJson(`units/en/${armyId}`)]),
-]);
+const armyData = await Promise.all(
+  armies.flatMap(({ armyId }) => [getJson(`units/es/${armyId}`), getJson(`units/en/${armyId}`)]),
+);
 
 armies.forEach((army, index) => {
   army.es = armyData[index * 2];
@@ -108,6 +117,16 @@ for (const army of armies) {
   for (const type of army.es.filters.type ?? []) troopTypes.set(type.id, type.name);
   for (const peripheral of army.es.filters.peripheral ?? []) peripherals.set(peripheral.id, peripheral.name);
 }
+// Armas sin nombre en los metadatos: se identifican por ID y el perfil queda incompleto (no se inventa su nombre).
+for (const army of armies) {
+  for (const unit of army.es.units) {
+    for (const group of unit.profileGroups) {
+      for (const { id } of [...group.profiles, ...group.options].flatMap((entry) => entry.weapons ?? [])) {
+        if (Number.isInteger(id) && !weaponNames.has(id)) weaponNames.set(id, `Arma Infinity Army ${id}`);
+      }
+    }
+  }
+}
 
 const required = (value, label) => {
   if (value === undefined || value === null) throw new Error(`Falta ${label}`);
@@ -145,6 +164,14 @@ const canonical = (value) => {
 const signature = (value) => JSON.stringify(canonical(value));
 const shortHash = (value) => createHash('sha256').update(value).digest('hex').slice(0, 10);
 const sourceUrl = 'https://infinityuniverse.com/army/infinity';
+// Compara los datos base tal como se muestran: ignora el valor `order` (solo ordena) y la cantidad implícita.
+const orderedEntries = (list) => ordered(list).map(({ order, ...entry }) => canonical(entry));
+const renderedBaseSignature = (profiles) => signature(profiles.map(({ ava, chars, logo, skills, equip, weapons, ...rest }) => ({
+  ...rest,
+  skills: orderedEntries(skills),
+  equip: orderedEntries(equip),
+  weapons: orderedEntries(weapons),
+})));
 const factionsById = new Map(factions.map((faction) => [faction.id, faction]));
 
 function getIconPath(url) {
@@ -276,7 +303,51 @@ const sharedAcrossFactions = new Set(
   [...factionsByArmyUnitId].filter(([, factionIds]) => factionIds.length > 1).map(([id]) => id),
 );
 
+// Estabilidad de IDs: se reutilizan los ya publicados; los nuevos llevan prefijo de facción si el ID de
+// Infinity Army ya lo usa otra facción (en este conjunto o en otro archivo de catálogo).
+const catalogFiles = [resolve(root, 'src/data/nomadsAlephCatalog.json')];
+try {
+  catalogFiles.push(...(await readdir(resolve(root, 'src/data/armies')))
+    .filter((name) => name.endsWith('.json')).map((name) => resolve(root, 'src/data/armies', name)));
+} catch (error) {
+  if (error.code !== 'ENOENT') throw error;
+}
+const publishedUnitIds = new Map();
+const foreignArmyIds = new Set();
+const foreignUnitIds = new Set();
+for (const file of catalogFiles) {
+  let previous;
+  try {
+    previous = JSON.parse(await readFile(file, 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') continue;
+    throw error;
+  }
+  for (const unit of previous.units) {
+    if (file === outputPath) {
+      publishedUnitIds.set(
+        `${unit.factionId}:${unit.infinityArmyId}:${unit.infinityArmyGroupId ?? 1}:${unit.infinityArmyBaseVariant ?? ''}`,
+        unit.id,
+      );
+    } else {
+      foreignArmyIds.add(unit.infinityArmyId);
+      foreignUnitIds.add(unit.id);
+    }
+  }
+}
+function unitIdFor(factionId, infinityArmyId, groupId, variantTag = '') {
+  const published = publishedUnitIds.get(`${factionId}:${infinityArmyId}:${groupId}:${variantTag}`);
+  if (published) return published;
+  const base = sharedAcrossFactions.has(infinityArmyId) || foreignArmyIds.has(infinityArmyId)
+    ? `ia-${factionId}-${infinityArmyId}`
+    : `ia-${infinityArmyId}`;
+  const id = `${groupId === 1 ? base : `${base}-g${groupId}`}${variantTag ? `-b${variantTag}` : ''}`;
+  if (foreignUnitIds.has(id)) throw new Error(`El ID de unidad ${id} ya existe en otro catálogo`);
+  return id;
+}
+
 const units = [];
+const baseSplitReport = [];
 const unitIdsBySectorial = new Map(Object.keys(sectorialMeta).map((id) => [id, []]));
 const report = [];
 for (const faction of factions) {
@@ -285,13 +356,30 @@ for (const faction of factions) {
     const englishIsc = appearances[0].englishUnit.isc;
     const groupIds = [...new Set(appearances.flatMap(({ unit }) => unit.profileGroups.map((group) => group.id)))];
     for (const groupId of groupIds) {
-      const groupAppearances = appearances.flatMap(({ army, unit, englishUnit }) => {
+      const allGroupAppearances = appearances.flatMap(({ army, unit, englishUnit }) => {
         const group = unit.profileGroups.find((candidate) => candidate.id === groupId);
         if (!group) return [];
         const englishGroup = englishUnit.profileGroups.find((candidate) => candidate.id === groupId);
         if (!englishGroup) throw new Error(`${army.sectorialId}: falta el grupo inglés ${infinityArmyId}/${groupId}`);
         return [{ army, unit, englishUnit, group, englishGroup }];
       });
+      // Los perfiles base distintos entre sectoriales no se mezclan: solo se separan si la configuración lo autoriza.
+      const partitionMap = new Map();
+      for (const appearance of allGroupAppearances) {
+        const baseSignature = renderedBaseSignature(appearance.group.profiles);
+        partitionMap.set(baseSignature, [...(partitionMap.get(baseSignature) ?? []), appearance]);
+      }
+      const partitions = [...partitionMap.entries()].sort(([, left], [, right]) =>
+        Number(right.some(({ army }) => army.sectorialId.endsWith('generic')))
+        - Number(left.some(({ army }) => army.sectorialId.endsWith('generic'))));
+      if (partitions.length > 1) {
+        const splitKey = `${faction.id}:${infinityArmyId}:${groupId}`;
+        const detail = `${englishIsc}, grupo ${groupId}: los perfiles base difieren entre sectoriales (${partitions
+          .map(([, list]) => list.map(({ army }) => army.sectorialId).join('+')).join(' | ')})`;
+        if (!(catalogSet.allowBaseSplits ?? []).includes(splitKey)) throw new Error(`${detail}; clave ${splitKey}`);
+        baseSplitReport.push(`${splitKey} ${detail}`);
+      }
+      for (const [partitionIndex, [partitionSignature, groupAppearances]] of partitions.entries()) {
       const reference = groupAppearances.find(({ army }) => army.sectorialId.endsWith('generic')) ?? groupAppearances[0];
       const { group: referenceGroup, englishGroup: referenceEnglishGroup, unit: referenceUnit } = reference;
       if (!referenceGroup.options.length) {
@@ -304,24 +392,21 @@ for (const faction of factions) {
       const troopClass = troopClassFor(primaryBase, englishIsc);
       const troopClassLabel = required(troopTypes.get(primaryBase.type), `tipo de tropa ${primaryBase.type}`);
       const groupName = referenceGroup.options[0].name.trim();
-      const factionUnitId = sharedAcrossFactions.has(infinityArmyId)
-        ? `ia-${faction.id}-${infinityArmyId}`
-        : `ia-${infinityArmyId}`;
-      const unitId = groupId === 1 ? factionUnitId : `${factionUnitId}-g${groupId}`;
+      const variantTag = partitionIndex === 0 ? '' : shortHash(partitionSignature).slice(0, 6);
+      const unitId = unitIdFor(faction.id, infinityArmyId, groupId, variantTag);
       const availabilityBySectorial = {};
       const characteristicsBySectorial = {};
       const iconPathsBySectorial = {};
       const baseProfileIconPathsBySectorial = baseProfiles.map(() => ({}));
       const profileVariants = new Map();
       const iconPath = getIconPath(primaryBase.logo);
-      const groupBaseSignature = signature(baseProfiles.map(({ ava, chars, logo, ...rest }) => rest));
+      const groupBaseSignature = partitionSignature;
 
       for (const { army, unit, group, englishGroup } of groupAppearances) {
         if (group.profiles.length !== baseProfiles.length) {
           throw new Error(`${unit.isc}, grupo ${groupId}: cambia el número de perfiles base en ${army.sectorialId}`);
         }
-        const comparableBaseProfiles = group.profiles.map(({ ava, chars, logo, ...rest }) => rest);
-        if (signature(comparableBaseProfiles) !== groupBaseSignature) {
+        if (renderedBaseSignature(group.profiles) !== groupBaseSignature) {
           throw new Error(`${unit.isc}, grupo ${groupId}: los perfiles base difieren en ${army.sectorialId}`);
         }
         const sectorialBase = group.profiles[0];
@@ -432,6 +517,7 @@ for (const faction of factions) {
         id: unitId,
         infinityArmyId,
         ...(groupId !== 1 ? { infinityArmyGroupId: groupId } : {}),
+        ...(variantTag ? { infinityArmyBaseVariant: variantTag } : {}),
         name: groupName,
         officialName: referenceEnglishGroup.isc || englishIsc,
         requestedName: groupName,
@@ -468,6 +554,7 @@ for (const faction of factions) {
       units.push(unit);
       for (const sectorialId of unit.sectorialIds) unitIdsBySectorial.get(sectorialId).push(unit.id);
       report.push(`${faction.id}/${unit.name} (${unit.officialName}): ${profiles.length} perfiles; ${unit.sectorialIds.join(', ')}`);
+      }
     }
   }
 }
@@ -566,7 +653,18 @@ const assetSource = 'Infinity Army (assets.corvusbelli.net/army/img/logo/units);
 
 async function downloadIcon(url, path) {
   const destination = resolve(root, 'public', path);
-  let response = await fetch(url);
+  let response;
+  for (let attempt = 1; ; attempt += 1) {
+    try {
+      // assets.corvusbelli.com sirve los mismos SVG; solo se usa para descargar si .net no responde (--icon-mirror).
+      const downloadUrl = process.argv.includes('--icon-mirror') ? url.replace(ICON_HOST, 'assets.corvusbelli.com') : url;
+      response = await fetch(downloadUrl, { signal: AbortSignal.timeout(30000) });
+      break;
+    } catch (error) {
+      if (attempt === 5) throw error;
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, 1000 * attempt));
+    }
+  }
   if (!response.ok) throw new Error(`No se pudo descargar icono ${url}: HTTP ${response.status}`);
   const contentType = response.headers.get('content-type') ?? '';
   if (!contentType.includes('image/svg+xml')) throw new Error(`Tipo de contenido inesperado para ${url}: ${contentType}`);
@@ -585,7 +683,7 @@ async function downloadIcon(url, path) {
 }
 
 await mkdir(iconDirectory, { recursive: true });
-const pendingIcons = [...iconPaths.entries()];
+const pendingIcons = process.argv.includes('--skip-icons') ? [] : [...iconPaths.entries()];
 const workerCount = Math.min(8, pendingIcons.length);
 await Promise.all(Array.from({ length: workerCount }, async () => {
   while (pendingIcons.length) {
@@ -620,11 +718,12 @@ const catalog = {
     sourceUrl,
     checkedAt,
     verificationStatus: 'verified',
-    editionNote: `Los perfiles se consultaron en los rosters actuales de Infinity Army (Nomads ${apiVersions.nomads}; Aleph ${apiVersions.aleph}), edición vigente N5.3. La API no expone un campo de edición; no se combinaron fuentes ni reglas de otra edición.`,
+    editionNote: `Los perfiles se consultaron en los rosters actuales de Infinity Army (${Object.entries(apiVersions).map(([id, version]) => `${id} ${version}`).join('; ')}), edición vigente N5.3. La API no expone un campo de edición; no se combinaron fuentes ni reglas de otra edición.`,
     apiVersions,
+    ...(baseSplitReport.length ? { baseProfileSplits: baseSplitReport } : {}),
     editionSourceUrl: 'https://infinityuniverse.com/blog/infinity-rules-update-5-3',
     iconSource: assetSource,
-    note: `Catálogo completo de las unidades de los siete ejércitos consultados: ${units.filter((unit) => unit.factionId === 'nomads').length} grupos/unidades de Nómadas y ${units.filter((unit) => unit.factionId === 'aleph').length} de Aleph. Se incluyen ${supplementalWeapons.length} fichas de arma; ${weaponIdsWithPendingData.size} dato(s) de munición no están resueltos y quedan marcados como incompletos. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita.`,
+    note: `Catálogo completo de las unidades de los ${armies.length} ejércitos consultados (${catalogSet.label}): ${factions.map((faction) => `${units.filter((unit) => unit.factionId === faction.id).length} grupos/unidades de ${faction.name}`).join(' y ')}. Se incluyen ${supplementalWeapons.length} fichas de arma; ${weaponIdsWithPendingData.size} dato(s) de munición no están resueltos y quedan marcados como incompletos. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita.`,
   },
   sectorials,
   troopClassGroups: classGroups,
@@ -635,12 +734,12 @@ const catalog = {
 function validateExistingCatalog(existing) {
   if (!existing?.units?.length) return;
   const currentUnits = new Map(units.map((unit) => [
-    `${unit.factionId}:${unit.infinityArmyId}:${unit.infinityArmyGroupId ?? 1}`,
+    `${unit.factionId}:${unit.infinityArmyId}:${unit.infinityArmyGroupId ?? 1}:${unit.infinityArmyBaseVariant ?? ''}`,
     unit,
   ]));
   for (const previous of existing.units) {
     const next = currentUnits.get(
-      `${previous.factionId}:${previous.infinityArmyId}:${previous.infinityArmyGroupId ?? 1}`,
+      `${previous.factionId}:${previous.infinityArmyId}:${previous.infinityArmyGroupId ?? 1}:${previous.infinityArmyBaseVariant ?? ''}`,
     );
     if (!next) throw new Error(`La expansión eliminaría la unidad existente ${previous.id}; revisión manual requerida`);
     const stableUnitFields = ['name', 'troopType', 'troopClass', 'stats', 'woundsLabel', 'sharedSpecialRules', 'factionId', 'sectorialIds'];
@@ -669,6 +768,33 @@ try {
   if (error.code !== 'ENOENT') throw error;
 }
 
+const directoryPath = resolve(root, 'src/data/factionDirectory.json');
+const directory = JSON.parse(await readFile(directoryPath, 'utf8'));
+for (const faction of factions) {
+  const factionSectorials = Object.entries(sectorialMeta).filter(([, meta]) => meta.factionId === faction.id);
+  const genericArmy = armies.find((army) => army.factionId === faction.id);
+  const entry = {
+    id: faction.id,
+    name: faction.name,
+    armyName: englishMetadata.factions.find((candidate) => candidate.id === genericArmy.armyId).name,
+    shortName: faction.shortName,
+    catalogStatus: 'complete',
+    iconStatus: 'awaiting-authorized-asset',
+    sectorials: factionSectorials.map(([id, meta], index) => ({
+      id,
+      name: meta.name,
+      kind: index === 0 ? 'generic' : 'sectorial',
+    })),
+  };
+  const index = directory.factions.findIndex((candidate) => candidate.id === faction.id);
+  if (index === -1) directory.factions.push(entry);
+  else directory.factions[index] = { ...directory.factions[index], ...entry };
+}
+directory.factions.sort((left, right) => factionDirectoryOrder.indexOf(left.id) - factionDirectoryOrder.indexOf(right.id));
+directory.metadata.checkedAt = checkedAt;
+await writeFile(directoryPath, `${JSON.stringify(directory, null, 2)}\n`, 'utf8');
+
+await mkdir(dirname(outputPath), { recursive: true });
 await writeFile(outputPath, `${JSON.stringify(catalog, null, 2)}\n`, 'utf8');
 console.log(report.join('\n'));
 console.log(`Unidades/grupos: ${units.length}; perfiles: ${units.reduce((count, unit) => count + unit.profiles.length, 0)}; SVG oficiales: ${iconUrls.size}`);

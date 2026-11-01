@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
-import extraFactionsData from './data/nomadsAlephCatalog.json';
+import { extraFactionsCatalog } from './data/extraCatalogs';
 import factionDirectoryData from './data/factionDirectory.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
@@ -22,13 +22,12 @@ import {
   shouldAutosaveProjects,
   updateProjectCards,
 } from './domain/projects.mjs';
-import type { ExtraFactionsCatalog, FactionDirectory, JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
+import type { FactionDirectory, JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
 import type { TroopClass } from './domain/troopClasses.mjs';
 import type { ImportedProfileLine } from './domain/listImport.mjs';
 import type { ProjectStore } from './domain/projects.mjs';
 
 const jsaCatalog = catalogData as JsaCatalog;
-const extraFactionsCatalog = extraFactionsData as ExtraFactionsCatalog;
 const catalog = {
   ...jsaCatalog,
   factions: [jsaCatalog.faction, ...extraFactionsCatalog.factions],
@@ -705,7 +704,7 @@ function App() {
           <div className="header-copy">
             <span className="eyebrow">ARCHIVO TÁCTICO · FASE 01</span>
             <h1>Tu fuerza, <span>ficha a ficha.</span></h1>
-            <p>Consulta perfiles verificados de JSA, Nómadas y Aleph y prepara tus próximas listas.</p>
+            <p>Consulta perfiles de JSA y de los ejércitos genéricos de Infinity N5 con sus sectoriales, y prepara tus próximas listas.</p>
           </div>
         </div>
         <span className="edition-tag">N5 · CATÁLOGO PARCIAL</span>
@@ -1565,7 +1564,7 @@ function App() {
           </section>
         </div>
       )}
-      <footer className="app-footer">Catálogo N5 parcial · disponibilidad sectorial verificada en Infinity Army</footer>
+      <footer className="app-footer">Catálogo N5 · sin compañías, Spec-Ops ni Team-Ops · disponibilidad sectorial verificada en Infinity Army</footer>
     </main>
   );
 }

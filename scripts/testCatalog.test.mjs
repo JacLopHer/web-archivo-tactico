@@ -44,10 +44,10 @@ test('el directorio identifica el catálogo completo y conserva las siete listas
   assert.equal(factionDirectory.metadata.verificationStatus, 'verified');
   assert.deepEqual(
     factionDirectory.factions.map(({ id }) => id),
-    ['nomads', 'aleph'],
+    ['panoceania', 'yu-jing', 'ariadna', 'haqqislam', 'nomads', 'aleph', 'combined-army', 'tohaa', 'o-12', 'non-aligned'],
   );
   assert.deepEqual(
-    factionDirectory.factions.flatMap(({ sectorials }) => sectorials.map(({ id }) => id)),
+    factionDirectory.factions.filter(({ id }) => ['nomads', 'aleph'].includes(id)).flatMap(({ sectorials }) => sectorials.map(({ id }) => id)),
     [
       'nomads-generic',
       'nomads-corregidor',
@@ -59,7 +59,7 @@ test('el directorio identifica el catálogo completo y conserva las siete listas
     ],
   );
   assert.deepEqual(
-    factionDirectory.factions.flatMap(({ sectorials }) => sectorials.map(({ name }) => name)),
+    factionDirectory.factions.filter(({ id }) => ['nomads', 'aleph'].includes(id)).flatMap(({ sectorials }) => sectorials.map(({ name }) => name)),
     [
       'Nomads',
       'Corregidor Jurisdictional Command',

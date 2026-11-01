@@ -1,6 +1,6 @@
 # Infinity Datacards
 
-Aplicación web en React y TypeScript para consultar perfiles y preparar tarjetas de Infinity. El catálogo incluye JSA y los rosters completos N5 de Nómadas y Aleph, con disponibilidad por los siete ejércitos consultada directamente en Infinity Army.
+Aplicación web en React y TypeScript para consultar perfiles y preparar tarjetas de Infinity. El catálogo incluye JSA y los rosters N5 de PanOceanía, Yu Jing, Ariadna, Haqqislam, Nómadas, Aleph, Ejército Combinado, Tohaa, O-12 y Non-Aligned con sus sectoriales, con disponibilidad consultada directamente en Infinity Army.
 
 ## Flujo MVP
 
@@ -23,6 +23,19 @@ Los iconos SVG oficiales de unidad enlazados por Infinity Army se guardan localm
 - `npm run catalog:nomads-aleph` consulta los siete rosters en español e inglés, verifica versiones, IDs, traducciones y referencias antes de regenerar. El proceso protege el contenido previo contra cambios no revisados y descarga los iconos SVG enlazados por los propios perfiles, sin sobrescribir recursos locales distintos.
 - Hay 115 fichas de arma. Siete quedan marcadas como incompletas porque la API no expone nombre de munición o ficha de arma; doce grupos contienen varios perfiles base cuyo vínculo con cada opción de equipo no está explícito. Esos datos se conservan y se señalan, sin inferir asociaciones ni completar valores.
 - Se descargaron 249 iconos SVG de unidad con la autorización indicada por el propietario; los iconos de facción permanecen genéricos. `src/data/factionDirectory.json` marca Nómadas y Aleph como catálogo completo para los siete rosters.
+
+## Ampliación a los ejércitos genéricos N5
+
+- `src/data/armies/*.json` añade PanOceanía (199 unidades / 767 perfiles, 7 sectoriales), Yu Jing (154 / 520, 4), Ariadna (157 / 521, 6), Haqqislam (154 / 508, 4), Ejército Combinado (190 / 643, 5), Tohaa (102 / 266, 1), O-12 (139 / 431, 3) y Non-Aligned (195 / 636, mercenarios genéricos más Druze, Ikari, Starco, Dahshat y White Company). Se cargan de forma diferida (`src/data/extraCatalogs.ts`).
+- `npm run catalog:build` regenera todo; `node scripts/buildCatalog.mjs <conjunto> [--skip-icons] [--icon-mirror]` genera uno (`scripts/catalogSets.mjs`). `--icon-mirror` descarga los SVG de `assets.corvusbelli.com` (bytes idénticos) cuando `assets.corvusbelli.net` no responde, y conserva la URL `.net` como procedencia.
+- Los perfiles con datos que la API no ofrece (arma sin nombre, etc.) se marcan `incomplete` y `disabled`, pero siguen siendo importables. Si los perfiles base de una unidad difieren entre sectoriales, el generador falla salvo que esté en `allowBaseSplits`: Moblots (Ariadna 233, FRRM), Shihab (Haqqislam 316) y Khawarijs (Haqqislam 303, RTF) se separan en unidades `-b<hash>`.
+- **Fuera de esta fase:** compañías (`x99`), refuerzos contratados (998/999), Spec-Ops y Team-Ops propios de facción (están en los rosters pero se tratan como perfiles normales; sin tratamiento de mejoras). Las banderas «discontinued» de la API se ignoran: los rosters existen y coinciden con las imágenes N5 v4.
+- Importación: `matchesSectorialHint` usa los slugs de logotipo confirmados en los metadatos; `non-aligned-armies` → `non-aligned-generic` y `operations` → `aleph-oss` son excepciones. `scripts/testArmyCatalogs.test.mjs` cubre identidad, datos obligatorios, fuente, edición, disponibilidad, iconos, JSA intacto e importación por sectorial.
+- Cotejo con las imágenes N5 v4 (solo referencia local): ninguna unidad dibujada falta en los rosters, salvo en `combined-army-generic` (Pandora, solo en Next Wave, y Umbra Samaritans, solo en Onyx y marcada fuera de producción) y `yu-jing-imperial-service` (Yudbots, sin ID). El roster añade respecto a las imágenes mercenarios, Spec-Ops/Team-Ops, Lazhari (Haqqislam), Krakot (CA genérico), Yáozǎo (Yu Jing ISS), Cadin (Ariadna genérico) y Firebat (O-12 Starmada). No se copian asignaciones sin fuente. Hay unidades con dos IDs oficiales (p. ej. 1275/11275 Libertos) que la imagen dibuja una vez; el importador las deja ambiguas. Starco: la imagen (06/26) muestra 4 Zonds y el roster 5. No hay imagen de non-aligned genérico.
+
+- **Perfiles incompletos (pendiente, a resolver más adelante):** 243 referencias de arma usan la munición id 0, que no existe en `ammunitions` de los metadatos (17 armas/equipos: MediKit, Dazer, Cibermina, Drop Bears, Disco Baller, Dispersador de Minas…); las armas 144, 209, 215, 219, 222 y 228 no están en los metadatos (ES/EN/FR/DE; IT y PT no responden); y 11 perfiles (Hawkwood 11556/1556, Zulú-Cobra 1216) traen entradas de arma vacías `{}` en el roster. No se infirió nada: esos perfiles siguen `incomplete` y `disabled` (no se muestran en el catálogo, aunque son importables), de modo que algunas unidades enteras, sobre todo Remotos, no aparecen en la UI. Si se decide tratar la munición id 0 como «sin munición», basta cambiar la regla en `buildCatalog.mjs` y regenerar.
+- **Unidades con dos IDs oficiales indistinguibles en la UI:** p. ej. Libertos 1275 y 11275 aparecen como dos tarjetas «LIBERTO» iguales en Yu Jing; no se fusionan porque son IDs distintos de la fuente.
+- **Verificación en navegador (Playwright, 01-11-2026):** las 11 facciones y todos sus sectoriales se pueden seleccionar; los recuentos por clase coinciden con el catálogo salvo las unidades con todos sus perfiles deshabilitados; búsqueda y alta de ficha, importación de una lista con logotipo `qapu-khalqi` y línea «3X», persistencia al recargar y copia de seguridad funcionan.
 
 ## Pendiente y siguiente paso
 

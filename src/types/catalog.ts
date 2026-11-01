@@ -91,6 +91,7 @@ export interface TroopUnit {
   profiles: TroopVariant[];
   infinityArmyId?: number;
   infinityArmyGroupId?: number;
+  infinityArmyBaseVariant?: string;
   officialName?: string;
   requestedName?: string;
   rosterName?: string;
@@ -200,6 +201,7 @@ export interface ExtraFactionsCatalog {
     editionSourceUrl: string;
     iconSource?: string;
     apiVersions: Record<string, string>;
+    baseProfileSplits?: string[];
     note: string;
   };
   sectorials: Sectorial[];

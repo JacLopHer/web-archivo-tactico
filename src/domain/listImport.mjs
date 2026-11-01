@@ -60,12 +60,18 @@ function findProfileName(rawName, profiles) {
   };
 }
 
+// Excepciones: el slug del logotipo no coincide con el ID local del sectorial.
+const sectorialHintAliases = {
+  operations: 'aleph-oss',
+  'non-aligned-armies': 'non-aligned-generic',
+};
+
 // Un perfil idéntico puede existir una vez por sectorial; el logotipo de la lista indica cuál corresponde.
 function matchesSectorialHint(profile, hint) {
   if (!hint) return false;
   return (profile.sectorialIds ?? []).some((id) => id === `${hint}-generic`
     || id.endsWith(`-${hint}`)
-    || (hint === 'operations' && id === 'aleph-oss'));
+    || id === sectorialHintAliases[hint]);
 }
 
 function chooseCandidate(candidates, entry, sectorialHint) {

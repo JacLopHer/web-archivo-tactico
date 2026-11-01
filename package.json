@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "test": "node --test",
     "migrate:legacy": "node scripts/migrateLegacyData.mjs",
-    "catalog:nomads-aleph": "node scripts/buildNomadsAlephCatalog.mjs"
+    "catalog:nomads-aleph": "node scripts/buildCatalog.mjs nomads-aleph",
+    "catalog:build": "node scripts/buildCatalog.mjs"
   },
   "keywords": [],
   "author": "",

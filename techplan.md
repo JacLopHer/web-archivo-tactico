@@ -55,6 +55,16 @@ La impresión A4 está validada por el propietario en papel real (28-10-2026); n
 
 Descartado: mostrar la tabla de armas en las fichas de la colección en pantalla; solo se muestra en la impresión y en el detalle del perfil del catálogo.
 
+### Ampliación a los ejércitos genéricos N5
+
+Mismo método con `scripts/buildCatalog.mjs` + `scripts/catalogSets.mjs` (el generador de Nómadas/Aleph se generalizó y su salida no cambió salvo el texto de las notas). IDs de ejército reales (metadatos `infinity/es/metadata`): PanOceanía 101–107, Yu Jing 201/202/204/205, Ariadna 301–306, Haqqislam 401–404, Ejército Combinado 601–605, Tohaa 801, O-12 1001–1003, Non-Aligned 901/902/904/905/908/909. Total: 1.616 unidades y 5.316 perfiles con IDs únicos en todos los archivos; 911 iconos SVG (307 preexistentes idénticos).
+
+Decisiones: (1) los mercenarios genéricos (Non-Aligned) y los cinco sectoriales de mercenarios entran; las compañías `x99`, refuerzos 998/999 y las Spec-Ops/Team-Ops como mecánica quedan fuera de esta fase. (2) Divergencia de perfil base entre sectoriales: error del generador salvo lista `allowBaseSplits` (3 casos), que genera unidades separadas `-b<hash>`. (3) Armas sin nombre en metadatos (p. ej. Tohaa 219) → nombre «Arma Infinity Army <id>» y perfil incompleto/deshabilitado. (4) `assets.corvusbelli.net` no respondió; se descargó de `.com` (idénticos byte a byte), registrando `.net`. (5) El código del catálogo se carga por archivo con `import.meta.glob` para evitar un único bundle de ~2,5 MB. (6) Sin imagen N5 v4 para Non-Aligned genérico.
+
+Cotejo con imágenes N5 v4: sin sobrantes ni faltantes salvo Pandora y Umbra Samaritans (CA genérico), Yudbots (Yu Jing ISS) y un Zond de Starco; véase el README. Los pares con ID <10000 y ≥10000 (Warcors 50/10050, Libertos 1275/11275…) son unidades oficiales distintas. **Pendiente:** verificación visual en navegador por facción, tratamiento de Spec-Ops/Team-Ops y compañías, y fichas de arma/perfiles incompletos (Ariadna 20, CA 56, Haqqislam 37, Non-Aligned 43, O-12 22, PanOceanía 46, Tohaa 14, Yu Jing 26) cuando la fuente los aporte.
+
+**Pendiente acordado (01-11-2026):** los perfiles incompletos por munición id 0 (243 referencias, 17 armas/equipos), armas ausentes de los metadatos (144, 209, 215, 219, 222, 228) y entradas de arma vacías (Hawkwood, Zulú-Cobra) se dejan documentados y sin inferir; se resolverán más adelante. Verificado en navegador: selección de las 11 facciones y sectoriales, búsqueda, alta, importación con logotipo y «3X», persistencia y copia de seguridad.
+
 ### Despliegue previsto: GitHub Pages
 
 GitHub Pages es la opción inicial prevista por ser un alojamiento estático y gratuito para sitios de repositorios públicos. Encaja con el piloto actual: React/Vite, catálogos JSON locales y lógica que se ejecuta en el navegador. La configuración de Vite y el workflow de publicación están listos, Pages publica mediante GitHub Actions y el despliegue ya se ha realizado.
