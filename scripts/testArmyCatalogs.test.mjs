@@ -37,6 +37,13 @@ const expectedFactions = {
 
 // Logotipo de facción (infinity/es/metadata → factions[].slug) de cada sectorial.
 const factionLogoSlugs = {
+  'nomads-generic': 'nomads',
+  'nomads-corregidor': 'corregidor',
+  'nomads-bakunin': 'bakunin',
+  'nomads-tunguska': 'tunguska',
+  'aleph-generic': 'aleph',
+  'aleph-steel-phalanx': 'steel-phalanx',
+  'aleph-oss': 'operations',
   'panoceania-generic': 'panoceania',
   'panoceania-shock-army-of-acontecimento': 'shock-army-of-acontecimento',
   'panoceania-military-orders': 'military-orders',
@@ -138,6 +145,7 @@ test('los sectoriales listan exactamente las unidades que los declaran y coincid
     for (const faction of catalog.factions) {
       const entry = directory.factions.find(({ id }) => id === faction.id);
       assert.ok(entry, `${faction.id} en el directorio`);
+      assert.equal(entry.iconStatus, 'verified');
       assert.deepEqual(
         entry.sectorials.map(({ id }) => id),
         catalog.sectorials.filter((sectorial) => sectorial.factionId === faction.id).map(({ id }) => id),
@@ -146,8 +154,13 @@ test('los sectoriales listan exactamente las unidades que los declaran y coincid
       assert.ok(entry.sectorials.slice(1).every(({ kind }) => kind === 'sectorial'));
     }
   }
-  assert.deepEqual(Object.keys(factionLogoSlugs).sort(), allSectorials.map(({ id }) => id)
-    .filter((id) => !id.startsWith('nomads-') && !id.startsWith('aleph-')).sort());
+  assert.deepEqual(Object.keys(factionLogoSlugs).sort(), allSectorials.map(({ id }) => id).sort());
+  assert.deepEqual(
+    Object.fromEntries(allSectorials.map(({ id }) => [id, directory.logos.sectorials[id]])),
+    factionLogoSlugs,
+  );
+  assert.equal(factionLogoSlugs['non-aligned-generic'], 'non-aligned-armies');
+  assert.equal(factionLogoSlugs['aleph-oss'], 'operations');
 });
 
 test('los perfiles divididos por variante solo se listan en los sectoriales donde existen', () => {
@@ -206,6 +219,42 @@ test('los iconos enlazados existen localmente con su fuente oficial', async () =
   assert.ok(icons.size > 500);
   for (const path of icons) {
     await access(new URL(`../public/${path}`, import.meta.url));
+  }
+});
+
+test('cada facción y sectorial tiene un logotipo oficial local o un marcador explícito', async () => {
+  const expectedFactionIds = [...directory.factions.map(({ id }) => id), legacy.faction.id].sort();
+  const expectedSectorialIds = [
+    ...allSectorials.map(({ id }) => id),
+    ...legacy.sectorials.map(({ id }) => id),
+  ].sort();
+  assert.deepEqual(Object.keys(directory.logos.factions).sort(), expectedFactionIds);
+  assert.deepEqual(Object.keys(directory.logos.sectorials).sort(), expectedSectorialIds);
+  assert.equal(directory.logos.metadataUrl, 'https://api.corvusbelli.com/army/infinity/es/metadata');
+
+  for (const [kind, mappings] of [
+    ['facción', directory.logos.factions],
+    ['sectorial', directory.logos.sectorials],
+  ]) {
+    for (const [id, slug] of Object.entries(mappings)) {
+      if (slug === null) continue;
+      assert.match(slug, /^[a-z0-9-]+$/, `${kind} ${id}: slug de metadata`);
+      const asset = directory.logos.assets[slug];
+      assert.ok(asset, `${kind} ${id}: registro de logo ${slug}`);
+      assert.match(asset.officialUrl, new RegExp(`/logo/factions/${slug}\\.svg$`));
+      if (asset.verificationStatus === 'missing') {
+        assert.equal(asset.path, null, `${kind} ${id}: marcador explícito`);
+        assert.equal(asset.sourceUrl, null);
+        continue;
+      }
+
+      assert.equal(asset.verificationStatus, 'verified', `${kind} ${id}`);
+      assert.equal(asset.path, `factions/${slug}.svg`);
+      assert.match(asset.sourceUrl, /^https:\/\/assets\.corvusbelli\.(?:net|com)\/army\/img\/logo\/factions\/.+\.svg$/);
+      const svg = await readFile(new URL(`../public/${asset.path}`, import.meta.url), 'utf8');
+      assert.match(svg, /<svg(?:\s|>)/i, `${slug}: raíz SVG`);
+      assert.match(svg, /<\/svg\s*>/i, `${slug}: cierre SVG`);
+    }
   }
 });
 

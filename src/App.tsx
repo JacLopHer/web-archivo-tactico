@@ -181,10 +181,17 @@ const unitIconSlugByName: Record<string, string> = {
   'KOBARUTO': 'kobaruto-hojo-bot',
 };
 
-const sectorialIconSlug: Record<string, string> = {
-  'jsa-vanilla': 'jsa',
-  'jsa-oban': 'oban',
-  'jsa-shindenbutai': 'shindenbutai',
+const factionLogoPath = (factionId: string) => {
+  const slug = factionDirectory.logos.factions[factionId];
+  return slug
+    ? factionDirectory.logos.assets[slug]?.path ?? 'units/factions/generic.svg'
+    : 'units/factions/generic.svg';
+};
+const sectorialLogoPath = (sectorialId: string, factionId: string) => {
+  const slug = factionDirectory.logos.sectorials[sectorialId];
+  return slug
+    ? factionDirectory.logos.assets[slug]?.path ?? factionLogoPath(factionId)
+    : factionLogoPath(factionId);
 };
 
 const unitIconPath = (name: string, iconPath?: string) => {
@@ -701,13 +708,18 @@ function App() {
               <small>DATACARDS</small>
             </span>
           </a>
+          <img
+            className="header-faction-logo"
+            src={`${import.meta.env.BASE_URL}${factionLogoPath(selectedFactionId)}`}
+            alt=""
+            aria-hidden="true"
+          />
           <div className="header-copy">
             <span className="eyebrow">ARCHIVO TÁCTICO · FASE 01</span>
             <h1>Tu fuerza, <span>ficha a ficha.</span></h1>
             <p>Consulta perfiles de JSA y de los ejércitos genéricos de Infinity N5 con sus sectoriales, y prepara tus próximas listas.</p>
           </div>
         </div>
-        <span className="edition-tag">N5 · CATÁLOGO PARCIAL</span>
       </header>
 
       <section className="project-manager panel-surface" aria-label="Gestión de proyectos">
@@ -885,7 +897,7 @@ function App() {
         <label className="select-control">
           <span>Facción</span>
           <div className="select-with-icon">
-              <img className="select-icon" src={`${import.meta.env.BASE_URL}units/factions/${selectedFactionId === 'jsa' ? 'jsa' : 'generic'}.svg`} alt="" aria-hidden="true" />
+              <img className="select-icon" src={`${import.meta.env.BASE_URL}${factionLogoPath(selectedFactionId)}`} alt="" aria-hidden="true" />
               <select value={selectedFactionId} onChange={(event) => selectFaction(event.target.value)} aria-label="Facción">
                 {catalog.factions.map((faction) => (
                   <option key={faction.id} value={faction.id}>{faction.name}</option>
@@ -896,9 +908,9 @@ function App() {
         <label className="select-control">
           <span>Sectorial</span>
           <div className="select-with-icon">
-            <img className="select-icon" src={`${import.meta.env.BASE_URL}units/factions/${sectorialIconSlug[selectedSectorial] ?? 'generic'}.svg`} alt="" aria-hidden="true" />
+            <img className="select-icon" src={`${import.meta.env.BASE_URL}${selectedSectorial ? sectorialLogoPath(selectedSectorial, selectedFactionId) : factionLogoPath(selectedFactionId)}`} alt="" aria-hidden="true" />
             <select value={selectedSectorial} onChange={(event) => selectSectorial(event.target.value)}>
-              <option value="">Catálogo {selectedFaction.name} · sin filtrar sectorial</option>
+              <option value="">Todos los sectoriales</option>
               {factionSectorials.map((sectorial) => (
                 <option
                   key={sectorial.id}
@@ -913,52 +925,6 @@ function App() {
             </select>
           </div>
         </label>
-      </section>
-
-      <section className="upcoming-factions" aria-labelledby="upcoming-factions-title">
-        <div className="upcoming-factions-heading">
-          <div>
-            <span className="eyebrow">AMPLIACIÓN DEL CATÁLOGO</span>
-            <h2 id="upcoming-factions-title">Facciones incluidas</h2>
-          </div>
-          <a href={factionDirectory.metadata.sourceUrl} target="_blank" rel="noreferrer">
-            Fuente: {factionDirectory.metadata.source}
-          </a>
-        </div>
-        <div className="upcoming-factions-grid">
-          {factionDirectory.factions.map((faction) => (
-            <article className="upcoming-faction" key={faction.id}>
-              <div className="upcoming-faction-heading">
-                <span className="upcoming-faction-mark" aria-hidden="true">{faction.shortName}</span>
-                <div>
-                  <h3>{faction.name}</h3>
-                  <span>
-                    {catalog.units.filter((unit) => unit.factionId === faction.id).length} unidades · {
-                      factionDirectory.factions.find((entry) => entry.id === faction.id)?.catalogStatus === 'complete'
-                        ? 'catálogo completo'
-                        : 'catálogo parcial'
-                    }
-                  </span>
-                </div>
-              </div>
-              <ul>
-                {faction.sectorials.map((sectorial) => (
-                  <li key={sectorial.id}>
-                    <span>
-                      {sectorial.name}
-                      {sectorial.kind === 'generic' ? ' · genérica' : ''}
-                    </span>
-                    <span className="upcoming-status">
-                      {(catalog.sectorials.find((entry) => entry.id === sectorial.id)?.unitIds.length ?? 0) > 0
-                        ? `${catalog.sectorials.find((entry) => entry.id === sectorial.id)?.unitIds.length} unidades`
-                        : 'Pendiente'}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
       </section>
 
       <div className="workspace">
@@ -1280,10 +1246,20 @@ function App() {
                         <div
                           className="unit-portrait"
                           role="img"
-                          aria-label={`Icono de ${profile.unitName}`}
+                          aria-label={`Icono de ${profile.unitName} y logotipo de ${catalog.factions.find((faction) => faction.id === profile.factionId)?.name ?? profile.factionId}`}
                         >
                           <span>{profile.unitName.slice(0, 1)}</span>
-                          <small>{catalog.factions.find((faction) => faction.id === profile.factionId)?.shortName ?? profile.factionId}</small>
+                          <img
+                            className="faction-logo-badge"
+                            src={`${import.meta.env.BASE_URL}${sectorialLogoPath(
+                              selectedSectorial && profile.sectorialIds.includes(selectedSectorial)
+                                ? selectedSectorial
+                                : profile.factionId,
+                              profile.factionId,
+                            )}`}
+                            alt=""
+                            aria-hidden="true"
+                          />
                           {!brokenImages.has(unitIconKey(profile.unitId, profile.unitName, selectedSectorial)) && (
                             <img
                               className="unit-icon"

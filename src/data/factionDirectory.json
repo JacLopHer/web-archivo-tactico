@@ -5,7 +5,7 @@
     "sourceUrl": "https://infinityuniverse.com/army/infinity",
     "checkedAt": "2026-11-01",
     "verificationStatus": "verified",
-    "note": "El catálogo de Nómadas y Aleph cubre todos los perfiles de sus siete rosters en Infinity Army. Los iconos de unidad autorizados están en nomadsAlephCatalog.json; los iconos de facción siguen usando el marcador genérico."
+    "note": "El catálogo de Nómadas y Aleph cubre todos los perfiles de sus siete rosters en Infinity Army. Los iconos de unidad autorizados están en nomadsAlephCatalog.json. Las facciones y sectoriales se registran desde infinity/es/metadata; sus logotipos SVG oficiales se verifican y guardan localmente cuando están disponibles."
   },
   "factions": [
     {
@@ -14,7 +14,7 @@
       "armyName": "PanOceania",
       "shortName": "PAN",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "panoceania-generic",
@@ -59,7 +59,7 @@
       "armyName": "Yu Jing",
       "shortName": "YJ",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "yu-jing-generic",
@@ -89,7 +89,7 @@
       "armyName": "Ariadna",
       "shortName": "ARI",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "ariadna-generic",
@@ -129,7 +129,7 @@
       "armyName": "Haqqislam",
       "shortName": "HAQ",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "haqqislam-generic",
@@ -159,7 +159,7 @@
       "armyName": "Nomads",
       "shortName": "NOM",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "nomads-generic",
@@ -189,7 +189,7 @@
       "armyName": "Aleph",
       "shortName": "ALEPH",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "aleph-generic",
@@ -214,7 +214,7 @@
       "armyName": "Combined Army",
       "shortName": "CA",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "combined-army-generic",
@@ -249,7 +249,7 @@
       "armyName": "Tohaa",
       "shortName": "TOH",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "tohaa-generic",
@@ -264,7 +264,7 @@
       "armyName": "O-12",
       "shortName": "O-12",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "o-12-generic",
@@ -289,7 +289,7 @@
       "armyName": "Non-Aligned Armies",
       "shortName": "NA2",
       "catalogStatus": "complete",
-      "iconStatus": "awaiting-authorized-asset",
+      "iconStatus": "verified",
       "sectorials": [
         {
           "id": "non-aligned-generic",
@@ -323,5 +323,348 @@
         }
       ]
     }
-  ]
+  ],
+  "logos": {
+    "metadataUrl": "https://api.corvusbelli.com/army/infinity/es/metadata",
+    "checkedAt": "2026-11-01",
+    "assets": {
+      "combined-army": {
+        "path": "factions/combined-army.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/combined-army.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/combined-army.svg",
+        "verificationStatus": "verified"
+      },
+      "yu-jing": {
+        "path": "factions/yu-jing.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/yu-jing.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/yu-jing.svg",
+        "verificationStatus": "verified"
+      },
+      "aleph": {
+        "path": "factions/aleph.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/aleph.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/aleph.svg",
+        "verificationStatus": "verified"
+      },
+      "ariadna": {
+        "path": "factions/ariadna.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/ariadna.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/ariadna.svg",
+        "verificationStatus": "verified"
+      },
+      "panoceania": {
+        "path": "factions/panoceania.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/panoceania.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/panoceania.svg",
+        "verificationStatus": "verified"
+      },
+      "nomads": {
+        "path": "factions/nomads.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/nomads.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/nomads.svg",
+        "verificationStatus": "verified"
+      },
+      "tohaa": {
+        "path": "factions/tohaa.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/tohaa.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/tohaa.svg",
+        "verificationStatus": "verified"
+      },
+      "haqqislam": {
+        "path": "factions/haqqislam.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/haqqislam.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/haqqislam.svg",
+        "verificationStatus": "verified"
+      },
+      "bakunin": {
+        "path": "factions/bakunin.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/bakunin.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/bakunin.svg",
+        "verificationStatus": "verified"
+      },
+      "operations": {
+        "path": "factions/operations.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/operations.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/operations.svg",
+        "verificationStatus": "verified"
+      },
+      "corregidor": {
+        "path": "factions/corregidor.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/corregidor.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/corregidor.svg",
+        "verificationStatus": "verified"
+      },
+      "tunguska": {
+        "path": "factions/tunguska.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/tunguska.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/tunguska.svg",
+        "verificationStatus": "verified"
+      },
+      "non-aligned-armies": {
+        "path": "factions/non-aligned-armies.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/non-aligned-armies.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/non-aligned-armies.svg",
+        "verificationStatus": "verified"
+      },
+      "o-12": {
+        "path": "factions/o-12.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/o-12.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/o-12.svg",
+        "verificationStatus": "verified"
+      },
+      "jsa": {
+        "path": "factions/jsa.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/jsa.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/jsa.svg",
+        "verificationStatus": "verified"
+      },
+      "steel-phalanx": {
+        "path": "factions/steel-phalanx.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/steel-phalanx.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/steel-phalanx.svg",
+        "verificationStatus": "verified"
+      },
+      "kestrel-colonial-force": {
+        "path": "factions/kestrel-colonial-force.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/kestrel-colonial-force.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/kestrel-colonial-force.svg",
+        "verificationStatus": "verified"
+      },
+      "invincible-army": {
+        "path": "factions/invincible-army.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/invincible-army.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/invincible-army.svg",
+        "verificationStatus": "verified"
+      },
+      "shock-army-of-acontecimento": {
+        "path": "factions/shock-army-of-acontecimento.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/shock-army-of-acontecimento.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/shock-army-of-acontecimento.svg",
+        "verificationStatus": "verified"
+      },
+      "military-orders": {
+        "path": "factions/military-orders.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/military-orders.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/military-orders.svg",
+        "verificationStatus": "verified"
+      },
+      "varuna-immediate-reaction-division": {
+        "path": "factions/varuna-immediate-reaction-division.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/varuna-immediate-reaction-division.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/varuna-immediate-reaction-division.svg",
+        "verificationStatus": "verified"
+      },
+      "imperial-service": {
+        "path": "factions/imperial-service.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/imperial-service.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/imperial-service.svg",
+        "verificationStatus": "verified"
+      },
+      "svalarheima-s-winter-force": {
+        "path": "factions/svalarheima-s-winter-force.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/svalarheima-s-winter-force.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/svalarheima-s-winter-force.svg",
+        "verificationStatus": "verified"
+      },
+      "neoterran-capitaline-army": {
+        "path": "factions/neoterran-capitaline-army.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/neoterran-capitaline-army.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/neoterran-capitaline-army.svg",
+        "verificationStatus": "verified"
+      },
+      "kosmoflot": {
+        "path": "factions/kosmoflot.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/kosmoflot.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/kosmoflot.svg",
+        "verificationStatus": "verified"
+      },
+      "force-de-reponse-rapide-merovingienne": {
+        "path": "factions/force-de-reponse-rapide-merovingienne.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/force-de-reponse-rapide-merovingienne.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/force-de-reponse-rapide-merovingienne.svg",
+        "verificationStatus": "verified"
+      },
+      "caledonian-highlander-army": {
+        "path": "factions/caledonian-highlander-army.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/caledonian-highlander-army.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/caledonian-highlander-army.svg",
+        "verificationStatus": "verified"
+      },
+      "white-banner": {
+        "path": "factions/white-banner.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/white-banner.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/white-banner.svg",
+        "verificationStatus": "verified"
+      },
+      "tartary": {
+        "path": "factions/tartary.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/tartary.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/tartary.svg",
+        "verificationStatus": "verified"
+      },
+      "hassassin-bahram": {
+        "path": "factions/hassassin-bahram.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/hassassin-bahram.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/hassassin-bahram.svg",
+        "verificationStatus": "verified"
+      },
+      "usariadna": {
+        "path": "factions/usariadna.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/usariadna.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/usariadna.svg",
+        "verificationStatus": "verified"
+      },
+      "qapu-khalqi": {
+        "path": "factions/qapu-khalqi.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/qapu-khalqi.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/qapu-khalqi.svg",
+        "verificationStatus": "verified"
+      },
+      "morat": {
+        "path": "factions/morat.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/morat.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/morat.svg",
+        "verificationStatus": "verified"
+      },
+      "next-wave": {
+        "path": "factions/next-wave.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/next-wave.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/next-wave.svg",
+        "verificationStatus": "verified"
+      },
+      "torchlight-brigade": {
+        "path": "factions/torchlight-brigade.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/torchlight-brigade.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/torchlight-brigade.svg",
+        "verificationStatus": "verified"
+      },
+      "starmada": {
+        "path": "factions/starmada.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/starmada.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/starmada.svg",
+        "verificationStatus": "verified"
+      },
+      "onyx": {
+        "path": "factions/onyx.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/onyx.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/onyx.svg",
+        "verificationStatus": "verified"
+      },
+      "ramah-taskforce": {
+        "path": "factions/ramah-taskforce.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/ramah-taskforce.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/ramah-taskforce.svg",
+        "verificationStatus": "verified"
+      },
+      "shasvastii": {
+        "path": "factions/shasvastii.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/shasvastii.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/shasvastii.svg",
+        "verificationStatus": "verified"
+      },
+      "druze": {
+        "path": "factions/druze.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/druze.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/druze.svg",
+        "verificationStatus": "verified"
+      },
+      "white-company": {
+        "path": "factions/white-company.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/white-company.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/white-company.svg",
+        "verificationStatus": "verified"
+      },
+      "dahshat": {
+        "path": "factions/dahshat.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/dahshat.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/dahshat.svg",
+        "verificationStatus": "verified"
+      },
+      "shindenbutai": {
+        "path": "factions/shindenbutai.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/shindenbutai.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/shindenbutai.svg",
+        "verificationStatus": "verified"
+      },
+      "starco-free-company-of-the-star": {
+        "path": "factions/starco-free-company-of-the-star.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/starco-free-company-of-the-star.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/starco-free-company-of-the-star.svg",
+        "verificationStatus": "verified"
+      },
+      "ikari": {
+        "path": "factions/ikari.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/ikari.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/ikari.svg",
+        "verificationStatus": "verified"
+      },
+      "oban": {
+        "path": "factions/oban.svg",
+        "officialUrl": "https://assets.corvusbelli.net/army/img/logo/factions/oban.svg",
+        "sourceUrl": "https://assets.corvusbelli.com/army/img/logo/factions/oban.svg",
+        "verificationStatus": "verified"
+      }
+    },
+    "factions": {
+      "nomads": "nomads",
+      "aleph": "aleph",
+      "panoceania": "panoceania",
+      "yu-jing": "yu-jing",
+      "ariadna": "ariadna",
+      "haqqislam": "haqqislam",
+      "combined-army": "combined-army",
+      "tohaa": "tohaa",
+      "o-12": "o-12",
+      "non-aligned": "non-aligned-armies",
+      "jsa": "jsa"
+    },
+    "sectorials": {
+      "nomads-generic": "nomads",
+      "nomads-corregidor": "corregidor",
+      "nomads-bakunin": "bakunin",
+      "nomads-tunguska": "tunguska",
+      "aleph-generic": "aleph",
+      "aleph-steel-phalanx": "steel-phalanx",
+      "aleph-oss": "operations",
+      "panoceania-generic": "panoceania",
+      "panoceania-shock-army-of-acontecimento": "shock-army-of-acontecimento",
+      "panoceania-military-orders": "military-orders",
+      "panoceania-neoterran-capitaline-army": "neoterran-capitaline-army",
+      "panoceania-varuna-immediate-reaction-division": "varuna-immediate-reaction-division",
+      "panoceania-svalarheima-s-winter-force": "svalarheima-s-winter-force",
+      "panoceania-kestrel-colonial-force": "kestrel-colonial-force",
+      "yu-jing-generic": "yu-jing",
+      "yu-jing-imperial-service": "imperial-service",
+      "yu-jing-invincible-army": "invincible-army",
+      "yu-jing-white-banner": "white-banner",
+      "ariadna-generic": "ariadna",
+      "ariadna-caledonian-highlander-army": "caledonian-highlander-army",
+      "ariadna-force-de-reponse-rapide-merovingienne": "force-de-reponse-rapide-merovingienne",
+      "ariadna-usariadna": "usariadna",
+      "ariadna-tartary": "tartary",
+      "ariadna-kosmoflot": "kosmoflot",
+      "haqqislam-generic": "haqqislam",
+      "haqqislam-hassassin-bahram": "hassassin-bahram",
+      "haqqislam-qapu-khalqi": "qapu-khalqi",
+      "haqqislam-ramah-taskforce": "ramah-taskforce",
+      "combined-army-generic": "combined-army",
+      "combined-army-morat": "morat",
+      "combined-army-shasvastii": "shasvastii",
+      "combined-army-onyx": "onyx",
+      "combined-army-next-wave": "next-wave",
+      "tohaa-generic": "tohaa",
+      "o-12-generic": "o-12",
+      "o-12-starmada": "starmada",
+      "o-12-torchlight-brigade": "torchlight-brigade",
+      "non-aligned-generic": "non-aligned-armies",
+      "non-aligned-druze": "druze",
+      "non-aligned-ikari": "ikari",
+      "non-aligned-starco-free-company-of-the-star": "starco-free-company-of-the-star",
+      "non-aligned-dahshat": "dahshat",
+      "non-aligned-white-company": "white-company",
+      "jsa-vanilla": "jsa",
+      "jsa-shindenbutai": "shindenbutai",
+      "jsa-oban": "oban"
+    }
+  }
 }

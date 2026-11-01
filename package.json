@@ -9,7 +9,8 @@
     "test": "node --test",
     "migrate:legacy": "node scripts/migrateLegacyData.mjs",
     "catalog:nomads-aleph": "node scripts/buildCatalog.mjs nomads-aleph",
-    "catalog:build": "node scripts/buildCatalog.mjs"
+    "catalog:build": "node scripts/buildCatalog.mjs",
+    "logos:build": "node scripts/buildFactionLogos.mjs"
   },
   "keywords": [],
   "author": "",

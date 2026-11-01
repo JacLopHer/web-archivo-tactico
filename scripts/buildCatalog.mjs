@@ -779,7 +779,9 @@ for (const faction of factions) {
     armyName: englishMetadata.factions.find((candidate) => candidate.id === genericArmy.armyId).name,
     shortName: faction.shortName,
     catalogStatus: 'complete',
-    iconStatus: 'awaiting-authorized-asset',
+    iconStatus: directory.logos?.assets?.[directory.logos.factions?.[faction.id]]?.verificationStatus === 'verified'
+      ? 'verified'
+      : 'awaiting-authorized-asset',
     sectorials: factionSectorials.map(([id, meta], index) => ({
       id,
       name: meta.name,

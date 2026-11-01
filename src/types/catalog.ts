@@ -147,10 +147,22 @@ export interface FactionDirectory {
     verificationStatus: VerificationStatus;
     note: string;
   };
+  logos: {
+    metadataUrl: string;
+    checkedAt: string;
+    assets: Record<string, {
+      path: string | null;
+      officialUrl: string;
+      sourceUrl: string | null;
+      verificationStatus: 'verified' | 'missing';
+    }>;
+    factions: Record<string, string | null>;
+    sectorials: Record<string, string | null>;
+  };
   factions: Array<Faction & {
     armyName: string;
     catalogStatus: 'metadata-only' | 'partial' | 'complete';
-    iconStatus: 'awaiting-authorized-asset';
+    iconStatus: 'awaiting-authorized-asset' | 'verified';
     sectorials: Array<{
       id: string;
       name: string;

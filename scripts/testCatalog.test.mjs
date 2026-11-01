@@ -72,10 +72,17 @@ test('el directorio identifica el catálogo completo y conserva las siete listas
   );
   assert.ok(factionDirectory.factions.every((faction) =>
     faction.catalogStatus === 'complete'
-      && faction.iconStatus === 'awaiting-authorized-asset'
+      && faction.iconStatus === 'verified'
       && !('units' in faction)
       && faction.sectorials.every((sectorial) => !('unitIds' in sectorial)),
   ));
+});
+
+test('JSA conserva logotipos de facción y sectoriales registrados desde metadata', () => {
+  assert.equal(factionDirectory.logos.factions.jsa, 'jsa');
+  assert.equal(factionDirectory.logos.sectorials['jsa-vanilla'], 'jsa');
+  assert.equal(factionDirectory.logos.sectorials['jsa-oban'], 'oban');
+  assert.equal(factionDirectory.logos.sectorials['jsa-shindenbutai'], 'shindenbutai');
 });
 
 test('el catálogo completo conserva las diez unidades iniciales y cubre los siete rosters N5', () => {
