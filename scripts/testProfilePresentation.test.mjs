@@ -113,7 +113,7 @@ test('las unidades JSA muestran insignias SVG oficiales donde hay un recurso dis
   assert.match(app, /'SHINOBU': 'oniwaban-shinobu-kitsune'/);
   assert.match(app, /'YOJIMBO': 'yojimbo-sword-for-hire'/);
   assert.match(app, /'TANUKI': 's-t-r-s-tanuki-team'/);
-  assert.equal((app.match(/unitIconPath\(profile\.unitName\)/g) ?? []).length, 2);
+  assert.equal((app.match(/unitIconPath\(\s*profile\.unitName,\s*profile\.iconPathsBySectorial/g) ?? []).length, 2);
   assert.match(app, /`units\/icons\/\$\{iconSlug\}\.svg`/);
 });
 

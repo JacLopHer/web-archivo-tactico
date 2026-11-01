@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "metadata": {
     "source": "Infinity Army",
-    "sourceUrl": "https://infinityuniverse.com/army/",
-    "checkedAt": "2026-10-28",
+    "sourceUrl": "https://infinityuniverse.com/army/infinity",
+    "checkedAt": "2026-11-01",
     "verificationStatus": "verified",
-    "note": "La verificación cubre los nombres de facción y ejércitos disponibles en Infinity Army. Las unidades añadidas y su disponibilidad por sectorial están en nomadsAlephCatalog.json; el resto del catálogo sigue pendiente."
+    "note": "El catálogo de Nómadas y Aleph cubre todos los perfiles de sus siete rosters en Infinity Army. Los iconos de unidad autorizados están en nomadsAlephCatalog.json; los iconos de facción siguen usando el marcador genérico."
   },
   "factions": [
     {
@@ -13,7 +13,7 @@
       "name": "Nómadas",
       "armyName": "Nomads",
       "shortName": "NOM",
-      "catalogStatus": "partial",
+      "catalogStatus": "complete",
       "iconStatus": "awaiting-authorized-asset",
       "sectorials": [
         { "id": "nomads-generic", "name": "Nomads", "kind": "generic" },
@@ -27,7 +27,7 @@
       "name": "Aleph",
       "armyName": "Aleph",
       "shortName": "ALEPH",
-      "catalogStatus": "partial",
+      "catalogStatus": "complete",
       "iconStatus": "awaiting-authorized-asset",
       "sectorials": [
         { "id": "aleph-generic", "name": "Aleph", "kind": "generic" },
@@ -37,4 +37,3 @@
     }
   ]
 }
-

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import {
   createInitialProjectStore,
@@ -15,6 +16,15 @@ import {
   shouldAutosaveProjects,
   updateProjectCards,
 } from '../src/domain/projects.mjs';
+
+const jsaCatalog = JSON.parse(
+  await readFile(new URL('../src/data/legacyJsaCatalog.json', import.meta.url), 'utf8'),
+);
+const extraCatalog = JSON.parse(
+  await readFile(new URL('../src/data/nomadsAlephCatalog.json', import.meta.url), 'utf8'),
+);
+const availableProfileIds = [...jsaCatalog.units, ...extraCatalog.units]
+  .flatMap((unit) => unit.profiles.map((profile) => profile.id));
 
 function createStorage(initialValue = null) {
   const values = new Map(initialValue === null ? [] : [[PROJECT_STORAGE_KEY, initialValue]]);
@@ -137,6 +147,17 @@ test('crea y valida una copia de seguridad sin perder orden, grupos ni duplicado
   const backup = createProjectsBackup(store, '2026-10-27T13:00:00.000Z');
 
   assert.deepEqual(parseProjectsBackup(JSON.stringify(backup), ['ninja', 'domaru']), store);
+});
+
+test('las copias de seguridad aceptan perfiles del catálogo ampliado', () => {
+  const profileId = extraCatalog.units.find((unit) => unit.name === 'ASURA').profiles[0].id;
+  const store = updateProjectCards(
+    createInitialProjectStore('aleph'),
+    'aleph',
+    [{ id: 0, profileId, groupName: 'Grupo 1' }],
+  );
+  const backup = createProjectsBackup(store);
+  assert.deepEqual(parseProjectsBackup(JSON.stringify(backup), availableProfileIds), store);
 });
 
 test('rechaza copias inválidas, incompatibles o con perfiles ausentes del catálogo', () => {

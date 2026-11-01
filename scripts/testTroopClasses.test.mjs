@@ -24,6 +24,7 @@ test('el vocabulario cerrado contiene las categorías de la tabla y su etiqueta 
     'Warbands',
     'Remotes',
     'TAGs',
+    'Vehicles',
     'Discontinued',
     'No Profile',
     'unclassified',
@@ -35,6 +36,7 @@ test('el vocabulario cerrado contiene las categorías de la tabla y su etiqueta 
   assert.equal(getTroopClassLabel('Warbands'), 'WB — Warband');
   assert.equal(getTroopClassLabel('Remotes'), 'REM — Remoto');
   assert.equal(getTroopClassLabel('TAGs'), 'TAG — Tactical Armored Gear');
+  assert.equal(getTroopClassLabel('Vehicles'), 'VH — Vehículos');
   assert.equal(getTroopClassLabel('No Profile'), 'Sin perfil');
   assert.equal(getTroopClassLabel('unclassified'), 'Sin clasificar');
   assert.equal(troopClassSource, catalog.units[0].troopClassSource);

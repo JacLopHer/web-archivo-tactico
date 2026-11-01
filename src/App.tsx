@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
+import extraFactionsData from './data/nomadsAlephCatalog.json';
 import factionDirectoryData from './data/factionDirectory.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
@@ -21,17 +22,36 @@ import {
   shouldAutosaveProjects,
   updateProjectCards,
 } from './domain/projects.mjs';
-import type { FactionDirectory, JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
+import type { ExtraFactionsCatalog, FactionDirectory, JsaCatalog, TroopProfile, WeaponProfilesCatalog } from './types/catalog';
 import type { TroopClass } from './domain/troopClasses.mjs';
 import type { ImportedProfileLine } from './domain/listImport.mjs';
 import type { ProjectStore } from './domain/projects.mjs';
 
-const catalog = catalogData as JsaCatalog;
+const jsaCatalog = catalogData as JsaCatalog;
+const extraFactionsCatalog = extraFactionsData as ExtraFactionsCatalog;
+const catalog = {
+  ...jsaCatalog,
+  factions: [jsaCatalog.faction, ...extraFactionsCatalog.factions],
+  units: [...jsaCatalog.units, ...extraFactionsCatalog.units],
+  sectorials: [...jsaCatalog.sectorials, ...extraFactionsCatalog.sectorials],
+  troopClassGroups: [...jsaCatalog.troopClassGroups, ...extraFactionsCatalog.troopClassGroups]
+    .reduce<Array<{ troopClass: TroopClass; unitIds: string[] }>>((groups, group) => {
+      const current = groups.find((candidate) => candidate.troopClass === group.troopClass);
+      if (current) current.unitIds.push(...group.unitIds.filter((id) => !current.unitIds.includes(id)));
+      else groups.push({ troopClass: group.troopClass, unitIds: [...group.unitIds] });
+      return groups;
+    }, []),
+};
 const factionDirectory = factionDirectoryData as FactionDirectory;
 for (const unit of catalog.units) assertValidTroopClass(unit.name, unit.troopClass);
 const weaponProfiles = weaponProfilesData as WeaponProfilesCatalog;
+const existingWeaponIndex = createWeaponIndex(weaponProfiles.profiles);
+const supplementalWeaponProfiles = (extraFactionsCatalog.weapons ?? []).filter((weapon) =>
+  !existingWeaponIndex.has(weapon.name)
+  && !(weapon.aliases ?? []).some((alias) => existingWeaponIndex.has(alias)),
+);
 const catalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
-  unit.profiles.map((profile) => ({
+  unit.profiles.filter((profile) => !profile.disabled).map((profile) => ({
     id: profile.id,
     name: profile.armyName,
     variantName: profile.name,
@@ -45,19 +65,26 @@ const catalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
     woundsLabel: unit.woundsLabel,
     sharedSpecialRules: unit.sharedSpecialRules,
     additionalSpecialRules: profile.specialRules,
-    skillsAndEquipment: [...unit.sharedSpecialRules, ...profile.specialRules].join(' · '),
     rangedEquipment: profile.rangedEquipment,
     meleeEquipment: profile.meleeEquipment,
     cap: profile.cap,
     points: profile.points,
     factionId: unit.factionId,
-    sectorialIds: unit.sectorialIds,
+    sectorialIds: profile.sectorialIds ?? unit.sectorialIds,
     edition: unit.edition,
     source: unit.source,
-    verificationStatus: unit.verificationStatus,
+    verificationStatus: profile.verificationStatus ?? unit.verificationStatus,
+    verificationNote: profile.verificationNote,
+    characteristics: unit.characteristics,
+    availabilityBySectorial: unit.availabilityBySectorial,
+    characteristicsBySectorial: unit.characteristicsBySectorial,
+    importNames: profile.importNames,
+    iconPath: unit.iconPath,
+    iconPathsBySectorial: profile.iconPathsBySectorial,
+    skillsAndEquipment: [...unit.sharedSpecialRules, ...profile.specialRules, ...(unit.characteristics ?? [])].join(' · '),
   })),
 );
-const weaponIndex = createWeaponIndex(weaponProfiles.profiles);
+const weaponIndex = createWeaponIndex([...weaponProfiles.profiles, ...supplementalWeaponProfiles]);
 const rangeBands = ['0', '20', '40', '60', '80', '100', '120', '240'];
 
 const statLabels: Array<[keyof TroopProfile['stats'], string]> = [
@@ -157,18 +184,21 @@ const sectorialIconSlug: Record<string, string> = {
   'jsa-shindenbutai': 'shindenbutai',
 };
 
-const unitIconPath = (name: string) => {
+const unitIconPath = (name: string, iconPath?: string) => {
+  if (iconPath) return iconPath;
   const iconSlug = unitIconSlugByName[name];
   return iconSlug
     ? `units/icons/${iconSlug}.svg`
     : `units/icons/${unitSlug(name)}.png`;
 };
+const unitIconKey = (id: string, name: string, sectorialId = '') => `i:${id || unitSlug(name)}:${sectorialId}`;
 
 function App() {
   const [query, setQuery] = useState('');
   const [selectedTroopClass, setSelectedTroopClass] = useState<TroopClass | ''>('');
   const [selectedId, setSelectedId] = useState(catalogProfiles[0]?.id ?? '');
   const [selectedUnitId, setSelectedUnitId] = useState(catalog.units[0]?.id ?? '');
+  const [selectedFactionId, setSelectedFactionId] = useState(jsaCatalog.faction.id);
   const [selectedSectorial, setSelectedSectorial] = useState('');
   const [pendingImport, setPendingImport] = useState<{
     format: 'infinity-army' | 'profile-list';
@@ -213,6 +243,9 @@ function App() {
   const activeProject = projectStore?.projects.find((project) => project.id === activeProjectId);
   const collection = activeProject?.cards ?? [];
   const selectedUnit = catalog.units.find((unit) => unit.id === selectedUnitId);
+  const selectedFaction = catalog.factions.find((faction) => faction.id === selectedFactionId) ?? jsaCatalog.faction;
+  const factionSectorials = catalog.sectorials.filter((sectorial) => sectorial.factionId === selectedFactionId
+    || (!sectorial.factionId && selectedFactionId === jsaCatalog.faction.id));
   const pendingResolvedCount = pendingImport?.resolved.length ?? 0;
   const pendingUnresolvedCount = pendingImport?.unresolved.length ?? 0;
   const collectionEntries = collection.map((item, index) => {
@@ -290,20 +323,34 @@ function App() {
     const sectorial = catalog.sectorials.find((item) => item.id === selectedSectorial);
 
     return catalogProfiles.filter((profile) => {
+      const matchesFaction = profile.factionId === selectedFactionId;
       const matchesQuery =
         !normalizedQuery ||
         `${profile.name} ${profile.unitName} ${profile.variantName} ${profile.troopType} ${getTroopClassLabel(profile.troopClass)} ${profile.rangedEquipment} ${profile.meleeEquipment}`
           .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '')
           .includes(normalizedQuery);
-      const matchesSectorial = !sectorial || sectorial.unitIds.includes(profile.unitId);
+      const matchesSectorial = !sectorial || (profile.sectorialIds
+        ? profile.sectorialIds.includes(selectedSectorial)
+        : sectorial.unitIds.includes(profile.unitId));
       const matchesTroopClass = !selectedTroopClass || profile.troopClass === selectedTroopClass;
-      return matchesQuery && matchesSectorial && matchesTroopClass;
+      return matchesFaction && matchesQuery && matchesSectorial && matchesTroopClass;
+    }).map((profile) => {
+      if (!selectedSectorial || !profile.availabilityBySectorial?.[selectedSectorial]) return profile;
+      return {
+        ...profile,
+        stats: { ...profile.stats, availability: profile.availabilityBySectorial[selectedSectorial] },
+        characteristics: profile.characteristicsBySectorial?.[selectedSectorial] ?? profile.characteristics,
+        skillsAndEquipment: [
+          ...profile.sharedSpecialRules,
+          ...profile.additionalSpecialRules,
+          ...(profile.characteristicsBySectorial?.[selectedSectorial] ?? profile.characteristics ?? []),
+        ].join(' · '),
+      };
     });
-  }, [query, selectedSectorial, selectedTroopClass]);
+  }, [query, selectedFactionId, selectedSectorial, selectedTroopClass]);
 
-  const filteredUnits = catalog.units.filter((unit) =>
-    filteredProfiles.some((profile) => profile.unitId === unit.id),
-  );
+  const filteredUnits = catalog.units.filter((unit) => unit.factionId === selectedFactionId
+    && filteredProfiles.some((profile) => profile.unitId === unit.id));
   const unitProfiles = filteredProfiles.filter((profile) => profile.unitId === selectedUnitId);
   const showClassPicker = !selectedTroopClass && !query.trim();
   const classPickerGroups = catalog.troopClassGroups
@@ -332,12 +379,25 @@ function App() {
     if (firstProfile) setSelectedId(firstProfile.id);
   };
 
+  const selectFaction = (value: string) => {
+    setSelectedFactionId(value);
+    setSelectedSectorial('');
+    setSelectedTroopClass('');
+    setQuery('');
+    const firstProfile = catalogProfiles.find((profile) => profile.factionId === value);
+    setSelectedUnitId(firstProfile?.unitId ?? '');
+    setSelectedId(firstProfile?.id ?? '');
+  };
+
   const selectSectorial = (value: string) => {
     setSelectedSectorial(value);
     if (!value) return;
-    const sectorial = catalog.sectorials.find((item) => item.id === value);
+    const sectorial = factionSectorials.find((item) => item.id === value);
     if (sectorial && !sectorial.unitIds.includes(selectedUnitId)) {
-      const firstProfile = catalogProfiles.find((profile) => sectorial.unitIds.includes(profile.unitId));
+      const firstProfile = catalogProfiles.find((profile) => profile.factionId === selectedFactionId
+        && (profile.sectorialIds
+          ? profile.sectorialIds.includes(value)
+          : sectorial.unitIds.includes(profile.unitId)));
       if (firstProfile) {
         setSelectedUnitId(firstProfile.unitId);
         setSelectedId(firstProfile.id);
@@ -641,10 +701,10 @@ function App() {
           <div className="header-copy">
             <span className="eyebrow">ARCHIVO TÁCTICO · FASE 01</span>
             <h1>Tu fuerza, <span>ficha a ficha.</span></h1>
-            <p>Consulta los perfiles de JSA y prepara el terreno para tus próximas listas.</p>
+            <p>Consulta perfiles verificados de JSA, Nómadas y Aleph y prepara tus próximas listas.</p>
           </div>
         </div>
-        <span className="edition-tag">N5 · PILOTO JSA</span>
+        <span className="edition-tag">N5 · CATÁLOGO PARCIAL</span>
       </header>
 
       <section className="project-manager panel-surface" aria-label="Gestión de proyectos">
@@ -822,10 +882,12 @@ function App() {
         <label className="select-control">
           <span>Facción</span>
           <div className="select-with-icon">
-            <img className="select-icon" src={`${import.meta.env.BASE_URL}units/factions/${catalog.faction.id}.svg`} alt="" aria-hidden="true" />
-            <select value={catalog.faction.id} disabled aria-label="Facción">
-              <option value={catalog.faction.id}>{catalog.faction.name}</option>
-            </select>
+              <img className="select-icon" src={`${import.meta.env.BASE_URL}units/factions/${selectedFactionId === 'jsa' ? 'jsa' : 'generic'}.svg`} alt="" aria-hidden="true" />
+              <select value={selectedFactionId} onChange={(event) => selectFaction(event.target.value)} aria-label="Facción">
+                {catalog.factions.map((faction) => (
+                  <option key={faction.id} value={faction.id}>{faction.name}</option>
+                ))}
+              </select>
           </div>
         </label>
         <label className="select-control">
@@ -833,8 +895,8 @@ function App() {
           <div className="select-with-icon">
             <img className="select-icon" src={`${import.meta.env.BASE_URL}units/factions/${sectorialIconSlug[selectedSectorial] ?? 'generic'}.svg`} alt="" aria-hidden="true" />
             <select value={selectedSectorial} onChange={(event) => selectSectorial(event.target.value)}>
-              <option value="">Catálogo JSA · sin filtrar sectorial</option>
-              {catalog.sectorials.map((sectorial) => (
+              <option value="">Catálogo {selectedFaction.name} · sin filtrar sectorial</option>
+              {factionSectorials.map((sectorial) => (
                 <option
                   key={sectorial.id}
                   value={sectorial.id}
@@ -854,7 +916,7 @@ function App() {
         <div className="upcoming-factions-heading">
           <div>
             <span className="eyebrow">AMPLIACIÓN DEL CATÁLOGO</span>
-            <h2 id="upcoming-factions-title">En preparación</h2>
+            <h2 id="upcoming-factions-title">Facciones incluidas</h2>
           </div>
           <a href={factionDirectory.metadata.sourceUrl} target="_blank" rel="noreferrer">
             Fuente: {factionDirectory.metadata.source}
@@ -867,7 +929,13 @@ function App() {
                 <span className="upcoming-faction-mark" aria-hidden="true">{faction.shortName}</span>
                 <div>
                   <h3>{faction.name}</h3>
-                  <span>Unidades pendientes</span>
+                  <span>
+                    {catalog.units.filter((unit) => unit.factionId === faction.id).length} unidades · {
+                      factionDirectory.factions.find((entry) => entry.id === faction.id)?.catalogStatus === 'complete'
+                        ? 'catálogo completo'
+                        : 'catálogo parcial'
+                    }
+                  </span>
                 </div>
               </div>
               <ul>
@@ -877,7 +945,11 @@ function App() {
                       {sectorial.name}
                       {sectorial.kind === 'generic' ? ' · genérica' : ''}
                     </span>
-                    <span className="upcoming-status">Próximamente</span>
+                    <span className="upcoming-status">
+                      {(catalog.sectorials.find((entry) => entry.id === sectorial.id)?.unitIds.length ?? 0) > 0
+                        ? `${catalog.sectorials.find((entry) => entry.id === sectorial.id)?.unitIds.length} unidades`
+                        : 'Pendiente'}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -890,7 +962,7 @@ function App() {
         <section className="roster-panel catalog-families" aria-label="Unidades del catálogo">
           <div className="panel-heading">
             <div>
-              <span className="eyebrow">JAPANESE SECESSIONIST ARMY</span>
+              <span className="eyebrow">{selectedFaction.name.toLocaleUpperCase()}</span>
               <h2>Unidades</h2>
               <small className="profile-list-hint">
                 {showClassPicker ? 'Elige una clase de tropa o busca por nombre' : 'Selecciona una unidad para ver sus perfiles'}
@@ -937,13 +1009,16 @@ function App() {
                 onClick={() => selectUnit(unit.id)}
                 type="button"
               >
-                        {!brokenImages.has(`i:${unitSlug(unit.name)}`) && (
+                        {!brokenImages.has(unitIconKey(unit.id, unit.name, selectedSectorial)) && (
                           <img
                             className="family-option-icon"
-                            src={`${import.meta.env.BASE_URL}${unitIconPath(unit.name)}`}
+                            src={`${import.meta.env.BASE_URL}${unitIconPath(
+                              unit.name,
+                              unit.iconPathsBySectorial?.[selectedSectorial] ?? unit.iconPath,
+                            )}`}
                             alt=""
                             aria-hidden="true"
-                            onError={() => markImageBroken(`i:${unitSlug(unit.name)}`)}
+                            onError={() => markImageBroken(unitIconKey(unit.id, unit.name, selectedSectorial))}
                           />
                         )}
                         <span className="profile-summary"><strong>{unit.name}</strong></span>
@@ -962,13 +1037,16 @@ function App() {
             <div>
               <span className="eyebrow">PERFILES DISPONIBLES</span>
               <div className="variants-title">
-                {selectedUnit && !brokenImages.has(`i:${unitSlug(selectedUnit.name)}`) && (
+                {selectedUnit && !brokenImages.has(unitIconKey(selectedUnit.id, selectedUnit.name, selectedSectorial)) && (
                   <img
                     className="variants-unit-icon"
-                    src={`${import.meta.env.BASE_URL}${unitIconPath(selectedUnit.name)}`}
+                    src={`${import.meta.env.BASE_URL}${unitIconPath(
+                      selectedUnit.name,
+                      selectedUnit.iconPathsBySectorial?.[selectedSectorial] ?? selectedUnit.iconPath,
+                    )}`}
                     alt=""
                     aria-hidden="true"
-                    onError={() => markImageBroken(`i:${unitSlug(selectedUnit.name)}`)}
+                    onError={() => markImageBroken(unitIconKey(selectedUnit.id, selectedUnit.name, selectedSectorial))}
                   />
                 )}
                 <h2>{selectedUnit?.name || 'Selecciona una unidad'}</h2>
@@ -983,6 +1061,32 @@ function App() {
               <span>{selectedUnit.sharedSpecialRules.join(' · ')}</span>
             </div>
           ) : null}
+          {unitProfiles[0]?.characteristics?.length ? (
+            <div className="unit-shared-rules">
+              <strong>CARACTERÍSTICAS</strong>
+              <span>{unitProfiles[0].characteristics.join(' · ')}</span>
+            </div>
+          ) : null}
+          {selectedUnit && selectedUnit.baseProfileVariants && selectedUnit.baseProfileVariants.length > 1 && (
+            <details className="unit-shared-rules base-profile-details">
+              <summary>PERFILES BASE DE INFINITY ARMY ({selectedUnit.baseProfileVariants.length})</summary>
+              <span className="base-profile-note">
+                La fuente no vincula cada estado base con una opción de equipo; se muestran por separado sin inferir asociaciones.
+              </span>
+              {selectedUnit.baseProfileVariants.map((baseProfile) => (
+                <div className="base-profile-row" key={baseProfile.id}>
+                  <strong>{baseProfile.name} · {getTroopClassShortLabel(baseProfile.troopClass)}</strong>
+                  <span>
+                    MOV {baseProfile.stats.movement} · CC {baseProfile.stats.cc} · CD {baseProfile.stats.bs} ·
+                    FIS {baseProfile.stats.physical} · VOL {baseProfile.stats.willpower} · BLI {baseProfile.stats.armor} ·
+                    PB {baseProfile.stats.bts} · {baseProfile.woundsLabel} {baseProfile.stats.wounds} · S {baseProfile.stats.silhouette}
+                  </span>
+                  {baseProfile.specialRules.length > 0 && <span>{baseProfile.specialRules.join(' · ')}</span>}
+                  {baseProfile.weapons.length > 0 && <span>Armamento: {baseProfile.weapons.join(', ')}</span>}
+                </div>
+              ))}
+            </details>
+          )}
           <div className="profile-list variant-list">
             {unitProfiles.map((profile) => {
               const equipmentLabel = [profile.rangedEquipment, profile.meleeEquipment].filter(Boolean).join(' · ');
@@ -1134,12 +1238,15 @@ function App() {
                   >
                     <div className="collection-entry-summary">
                       <div className="collection-entry-name">
-                        {!brokenImages.has(`i:${unitSlug(profile.unitName)}`) && (
+                        {!brokenImages.has(unitIconKey(profile.unitId, profile.unitName, selectedSectorial)) && (
                           <img
                             className="collection-entry-icon"
-                            src={`${import.meta.env.BASE_URL}${unitIconPath(profile.unitName)}`}
+                            src={`${import.meta.env.BASE_URL}${unitIconPath(
+                              profile.unitName,
+                              profile.iconPathsBySectorial?.[selectedSectorial] ?? profile.iconPath,
+                            )}`}
                             alt=""
-                            onError={() => markImageBroken(`i:${unitSlug(profile.unitName)}`)}
+                            onError={() => markImageBroken(unitIconKey(profile.unitId, profile.unitName, selectedSectorial))}
                           />
                         )}
                         <strong>{profile.unitName}</strong>
@@ -1173,13 +1280,16 @@ function App() {
                           aria-label={`Icono de ${profile.unitName}`}
                         >
                           <span>{profile.unitName.slice(0, 1)}</span>
-                          <small>JSA</small>
-                          {!brokenImages.has(`i:${unitSlug(profile.unitName)}`) && (
+                          <small>{catalog.factions.find((faction) => faction.id === profile.factionId)?.shortName ?? profile.factionId}</small>
+                          {!brokenImages.has(unitIconKey(profile.unitId, profile.unitName, selectedSectorial)) && (
                             <img
                               className="unit-icon"
-                              src={`${import.meta.env.BASE_URL}${unitIconPath(profile.unitName)}`}
+                              src={`${import.meta.env.BASE_URL}${unitIconPath(
+                                profile.unitName,
+                                profile.iconPathsBySectorial?.[selectedSectorial] ?? profile.iconPath,
+                              )}`}
                               alt=""
-                              onError={() => markImageBroken(`i:${unitSlug(profile.unitName)}`)}
+                              onError={() => markImageBroken(unitIconKey(profile.unitId, profile.unitName, selectedSectorial))}
                             />
                           )}
                         </div>
@@ -1214,7 +1324,7 @@ function App() {
                         ))}
                       </div>
                       <div className="skills-band">
-                        <div className="skills-band-title">HABILIDADES ESP.</div>
+                        <div className="skills-band-title">{profile.factionId === 'jsa' ? 'HABILIDADES ESP.' : 'HABILIDADES / EQUIPO'}</div>
                         <p>{profile.skillsAndEquipment || 'No registrado en la fuente heredada.'}</p>
                       </div>
                       <div className="card-lower">
@@ -1253,6 +1363,11 @@ function App() {
                                           {weaponProfile.properties && (
                                             <span className="weapon-properties">{weaponProfile.properties}</span>
                                           )}
+                                          {weaponProfile.verificationStatus === 'incomplete' && (
+                                            <span className="weapon-properties">
+                                              Dato pendiente: {weaponProfile.verificationNote ?? 'información incompleta en Infinity Army.'}
+                                            </span>
+                                          )}
                                         </div>
                                         {weaponProfile.rangeNote ? (
                                           <div className="range-note">{weaponProfile.rangeNote}</div>
@@ -1280,7 +1395,7 @@ function App() {
                                     ) : (
                                       <div className="weapon-unmatched">
                                         <strong>{name}</strong>
-                                        <span>Sin perfil coincidente en el catálogo heredado; no se muestran valores inferidos.</span>
+                                        <span>Sin ficha de arma coincidente; no se muestran valores inferidos.</span>
                                       </div>
                                     )}
                                   </div>
@@ -1288,7 +1403,7 @@ function App() {
                               </div>
                             </div>
                           ) : (
-                            <p className="empty-weapons">Este perfil no tiene armamento registrado en la fuente heredada.</p>
+                            <p className="empty-weapons">Este perfil no tiene armamento registrado en la fuente consultada.</p>
                           )}
                         </section>
                       </div>
@@ -1412,9 +1527,23 @@ function App() {
               )}
             </div>
             {pendingUnresolvedCount > 0 && (
-              <p className="import-unresolved-note">
-                Las unidades no validadas no se añadirán; tendrás que añadirlas manualmente desde el catálogo.
-              </p>
+              <>
+                <p className="import-unresolved-note">
+                  Estas entradas no se añadirán; comprueba los perfiles y añádelos manualmente si corresponde.
+                </p>
+                <ul className="import-unresolved-list" aria-label="Unidades o perfiles no incluidos">
+                  {pendingImport.unresolved.map((entry) => (
+                    <li key={entry.id}>
+                      <span>{entry.displayName ?? entry.originalName}</span>
+                      <small>
+                        {[entry.groupName, entry.candidateIds.length > 1 || entry.resolution === 'ambiguous'
+                          ? 'perfil ambiguo'
+                          : 'sin coincidencia en el catálogo'].filter(Boolean).join(' · ')}
+                      </small>
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
             <div className="dialog-actions">
               <button
@@ -1432,7 +1561,7 @@ function App() {
           </section>
         </div>
       )}
-      <footer className="app-footer">Catálogo piloto · JSA únicamente · preparado para ampliar con fuentes verificadas</footer>
+      <footer className="app-footer">Catálogo N5 parcial · disponibilidad sectorial verificada en Infinity Army</footer>
     </main>
   );
 }

@@ -1,16 +1,16 @@
 # PROMPT MAESTRO — INFINITY DATACARDS
 
-## Estado de ejecución y deuda técnica (28-10-2026)
+## Estado de ejecución y deuda técnica (01-11-2026)
 
 ### Decisión de alcance
 
 - Los perfiles de tropa JSA heredados se utilizan en el flujo MVP por decisión del propietario, pero esto no constituye un cotejo nuevo de sus valores. Se conserva su estado `unverified` y la procedencia heredada.
-- La clase de tropa se modela separada de `troopType` (categorías distintas como T. Línea, T. Apoyo, REM o TAG). Se asigna mediante correspondencias explícitas con la tabla «Japanese Secessionist Army Units» de [Human Sphere](https://www.human-sphere.com/Japanese_Secessionist_Army), con fuente y estado propios; los perfiles heredan la clase de su unidad. Las etiquetas visibles siguen la nomenclatura del propietario: IL, IM, IP, REM, TAG, BAT — Batidor y WB — Warband. Ioann Bann se clasifica como Warband por confirmación expresa del propietario (2026-10-28). Warcor, Monstrucker, Aïda Swanson y Sāchā (IL), Yuan Yuan (WB), Samsa y Raiden (IM, perfil N5), Triphammer (TAG) y Turtlemek (REM) se clasifican según sus páginas individuales de Human Sphere, que constan como fuente de cada unidad. Ruby Monday (IP) y Kobaruto (REM) se clasifican por confirmación expresa del propietario (2026-10-28), que consta como su fuente. El catálogo incluye `troopClassGroups` (clase → unidades) y la sección Unidades muestra primero las clases; al elegir una se listan sus unidades y el buscador sigue localizando cualquier unidad. Las unidades sin coincidencia y las entradas de tabla sin unidad se notifican al migrar; los proyectos no guardan este dato derivado.
-- La disponibilidad sectorial sigue pendiente: no se asignan perfiles a sectoriales ni se habilitan esos filtros sin evidencia específica.
+- La clase de tropa se modela separada de `troopType` (categorías distintas como T. Línea, T. Apoyo, REM o TAG). Se asigna mediante correspondencias explícitas con la tabla «Japanese Secessionist Army Units» de [Human Sphere](https://www.human-sphere.com/Japanese_Secessionist_Army), con fuente y estado propios; los perfiles heredan la clase de su unidad. Las etiquetas visibles siguen la nomenclatura del propietario: IL, IM, IP, REM, TAG, VH, BAT — Batidor y WB — Warband. Los perfiles VH de Nómadas/Aleph se clasifican con el tipo de tropa VH que Infinity Army registra. Ioann Bann se clasifica como Warband por confirmación expresa del propietario (2026-10-28). Warcor, Monstrucker, Aïda Swanson y Sāchā (IL), Yuan Yuan (WB), Samsa y Raiden (IM, perfil N5), Triphammer (TAG) y Turtlemek (REM) se clasifican según sus páginas individuales de Human Sphere, que constan como fuente de cada unidad. Ruby Monday (IP) y Kobaruto (REM) se clasifican por confirmación expresa del propietario (2026-10-28), que consta como su fuente. El catálogo incluye `troopClassGroups` (clase → unidades) y la sección Unidades muestra primero las clases; al elegir una se listan sus unidades y el buscador sigue localizando cualquier unidad. Las unidades sin coincidencia y las entradas de tabla sin unidad se notifican al migrar; los proyectos no guardan este dato derivado.
+- JSA mantiene sus asignaciones sectoriales existentes. Nómadas y Aleph incluyen ahora todos los IDs y grupos de perfil presentes en sus siete rosters de Infinity Army; cada perfil y su icono se vinculan a los sectoriales donde aparecen en la fuente.
 
 ### Flujo MVP implementado
 
-- Catálogo piloto JSA con búsqueda, ficha de detalle y perfiles de armas separados. Las unidades se exploran por clase de tropa (selector con color por clase y `troopClassGroups` en el catálogo, schemaVersion 5); el panel de perfiles muestra el icono de la unidad.
+- Catálogo integrado de JSA y rosters completos de Nómadas/Aleph, con búsqueda, ficha de detalle, perfiles de armas e iconos oficiales autorizados. JSA permanece como facción inicial y conserva sus datos heredados. Las unidades se exploran por clase de tropa; el selector de sectorial habilita las disponibilidades respaldadas por Infinity Army.
 - Importación directa desde el portapapeles mediante el botón «Importar lista» (requiere permiso del navegador). El parser acepta etiquetas BBCode e imágenes del texto copiado de Infinity Army; reconoce unidades, grupos, armamento y costes CAP/puntos, e ignora título, totales y enlace.
 - En Infinity Army se conservan texto fuente, número de línea, grupo y campos de armamento/coste. Se resuelve por nombre de perfil; cuando hay variantes del mismo nombre, se usan armamento y coste para elegir solo si la mejor coincidencia es inequívoca. Los perfiles sin candidato siguen necesitando selección manual.
 - Antes de añadir una lista importada, se muestra un modal de confirmación con recuentos diferenciados de unidades validadas y no validadas. Cada coincidencia válida debe añadirse como una ficha independiente: los duplicados son legítimos en una lista y se conservan, sin deduplicarlos ni tratarlos como error. Las unidades ambiguas o no reconocidas se omiten con un aviso claro y el usuario las añade manualmente desde el catálogo. Las fichas de colección se pueden eliminar, reordenar o limpiar con confirmación; presentan atributos, habilidades/equipo y nombres de armamento y permiten abrir la ficha detallada.
@@ -24,15 +24,30 @@
 **Backlog, por orden de prioridad:**
 
 0. **Clase de tropa:** completa (Ruby Monday IP y Kobaruto REM confirmados por el propietario).
-1. **Ampliación del catálogo (siguiente trabajo):** preparar Nómadas y Aleph antes de cargar sus unidades. Infinity Army muestra Nómadas (genérico), Corregidor Jurisdictional Command, Bakunin Jurisdictional Command y Tunguska Jurisdictional Command; Aleph (genérico), Steel Phalanx y Operations Subsection of the S.S.S. (OSS). Los nombres y sectoriales se registran en `src/data/factionDirectory.json`, con fuente y estado de verificación, y se presentan como “En preparación”, fuera del flujo de selección utilizable hasta que haya unidades válidas. Los iconos oficiales quedan pendientes de los recursos autorizados que aportará el propietario; se usa una marca textual provisional. A continuación, incorporar unidades y perfiles por ejército, basados en Infinity Army y contrastados con fuentes adecuadas; la disponibilidad por unidad/perfil se asignará solo con evidencia. No rellenar el catálogo con unidades ficticias ni derivar pertenencias por nombre.
+1. **Catálogo Nómadas/Aleph (completado para los siete rosters consultados):** 275 IDs únicos están representados por 326 grupos y 1.024 perfiles entre Nómadas genérico, Corregidor, Bakunin, Tunguska, Aleph, Steel Phalanx y OSS. Se guardan versiones, fuentes, nombres de importación español/inglés, disponibilidad perfil/sectorial y 249 iconos oficiales de unidad autorizados. JSA y sus imágenes no se alteraron. El catálogo N5.3 registra que la API no declara explícitamente la edición. De las 115 fichas de arma, siete tienen campos incompletos por falta de datos de Infinity Army; doce grupos contienen varios perfiles base cuya asociación a cada opción no se puede confirmar. El generador `npm run catalog:nomads-aleph` compara los rosters español/inglés, detecta colisiones de IDs entre facciones, valida antes de escribir y evita sobrescribir datos o recursos locales distintos. **Mantenimiento pendiente:** repetir las pruebas al cambiar las versiones de la API y resolver los datos que la fuente no expone; no inferirlos.
+
+### Método aplicado para completar Nómadas y Aleph
+
+El método más rápido y comprobable fue consumir los rosters estructurados de Infinity Army, no transcribir fichas ni raspar páginas. `scripts/buildNomadsAlephCatalog.mjs` obtiene en paralelo la metadata y las versiones española e inglesa de los siete ejércitos. Comprueba que los idiomas y sectoriales de cada facción compartan versión; recorre todos los IDs y grupos; conserva las variantes de opción y su disponibilidad por roster; y registra nombres de importación de ambos idiomas.
+
+Reglas de integridad del proceso:
+
+1. Deduplicar unidades por el ID de Infinity Army y conservar su facción. Cuando el mismo ID aparece en más de una facción, incluir el prefijo de facción en el ID local para que unidades y perfiles no colisionen.
+2. No deducir perfiles ni disponibilidad: cada perfil se une solo a los rosters donde la opción aparece, y se conserva la disponibilidad propia de cada sectorial. Fallar ante versiones incompatibles, traducciones ausentes, referencias no resueltas o estructuras inesperadas.
+3. Preservar el contenido ya generado: antes de escribir, comparar los datos estables de unidades y perfiles previos; detenerse y pedir revisión si detecta cambios. Los IDs locales no se reutilizan entre facciones.
+4. Descargar solo SVG enlazados en los campos `logo` del roster, desde el host/ruta oficiales. Deduplicar por URL, guardar fuente y ruta local, no sobrescribir recursos locales distintos y dejar el marcador si falta logo. La autorización del propietario para los iconos se registró el 2026-11-01.
+5. Si faltan IDs o metadatos de armas, valores o correspondencias de perfiles base, guardar la evidencia y marcar el dato incompleto; nunca inventarlo. Las imágenes no afectan la validez de reglas ni bloquean una ficha.
+6. La API no expone un campo explícito de edición. Se documenta N5.3 como versión de trabajo sin combinar reglas de otras ediciones.
+
+**Próximo paso:** ejecutar `npm run catalog:nomads-aleph` al actualizar Infinity Army, revisar cualquier error de preservación y resolver las siete fichas de arma y doce grupos de perfiles base solo si la fuente proporciona la información faltante.
 2. **Pruebas de interfaz en navegador:** hechas con Playwright (Chromium) contra el servidor local: selector de clases, icono de la cabecera de perfiles, filtro de sectoriales, importación desde el portapapeles, colección (alta manual, persistencia al recargar), reordenación, vista previa detallada y compacta, PDF A4 en modo impresión y ausencia de desbordamiento horizontal a 375, 768 y 1280 px. Se corrigió el recorte de la hoja A4 en la vista previa en pantalla. Las pruebas no están en el repositorio. **Decisión:** se incorporarán como pruebas end-to-end (Playwright como dependencia de desarrollo, con un test mínimo de nº de páginas, ausencia de fichas cortadas/desbordes y PDF A4); pendiente de implementar.
 3. **Spec-Ops y Team-Ops (JSA):** fichas de Kaizoku-1, Kaizoku Heavy y Kobaruto Specbot_2 con las mejoras ya aplicadas y sus puntos propios, perfil mejorado de Kaizoku (IP), Specball y mejoras, sin selector manual de mejoras de momento.
-4. **Imágenes de unidad/perfil:** incorporar imágenes permitidas y asociadas de forma fiable; hoy se usa un marcador.
+4. **Imágenes de unidad/perfil:** incorporados los logos SVG autorizados de Nómadas/Aleph con procedencia y asociación por sectorial. Siguen pendientes los recursos autorizados que falten para JSA; las fichas pueden usar el marcador.
 5. **Rediseño visual:** replantear el diseño gráfico, que no convence al propietario, tras las mejoras funcionales.
 6. **QA del importador (fase final):** probar variantes adicionales y cambios de formato de Infinity Army, comprobando que las resoluciones usen siempre perfiles y armas del catálogo. Ya se han probado listas reales; esto queda como control de calidad. Mantener el catálogo al día; no se admiten opciones ajenas a él. El enlace codificado y los archivos exportados no se procesan.
 7. **Modo de aprendizaje (fase final):** explicaciones didácticas contextuales.
 
-La impresión A4 está validada por el propietario en papel real (28-10-2026); no queda como tarea pendiente. La ampliación de Nómadas y Aleph es la prioridad inmediata, empezando por la estructura de facciones, sectoriales e iconos y continuando después con sus unidades.
+La impresión A4 está validada por el propietario en papel real (28-10-2026); no queda como tarea pendiente. El catálogo de los siete rosters de Nómadas y Aleph ya está integrado; el mantenimiento futuro debe seguir la misma verificación de fuentes y no añadir reglas o imágenes sin evidencia y autorización.
 
 Descartado: mostrar la tabla de armas en las fichas de la colección en pantalla; solo se muestra en la impresión y en el detalle del perfil del catálogo.
 
@@ -73,7 +88,7 @@ El resultado debe ser una aplicación real, funcional, modular, responsive y fá
 
 Dispongo de un archivo HTML existente, «Ultima versión .html», que contiene una herramienta anterior de generación de hojas de ayuda para JSA.
 
-**Alcance inicial acordado:** la primera versión trabajará exclusivamente con JSA para refinar la experiencia. La arquitectura debe permitir incorporar otras facciones y sectoriales después, pero la interfaz solo ofrecerá catálogos que realmente estén cargados y respaldados por datos. No muestres facciones futuras como opciones disponibles.
+**Alcance inicial acordado:** la primera versión trabajó exclusivamente con JSA para refinar la experiencia. La extensión actual completa los rosters de Nómadas y Aleph en Infinity Army; la interfaz muestra únicamente unidades, perfiles, disponibilidad y recursos gráficos con evidencia y procedencia registrada. Los iconos de facción aún usan el marcador genérico.
 
 También existe la carpeta «1 N5 Versions (v4)», con láminas JPG de facciones, sectoriales y categorías especiales. Estas láminas son referencias visuales del catálogo: no equivalen a perfiles de reglas ni bastan por sí solas para asignar una unidad a un sectorial. Mantén separadas la facción, la pertenencia sectorial, la disponibilidad del perfil y su imagen; solo activa un filtro sectorial cuando su relación de perfiles esté respaldada por una fuente comprobable.
 
@@ -382,8 +397,8 @@ Trabaja por fases, con entregables comprobables.
 
 **Fase 2 — MVP funcional**
 - Crear el proyecto React.
-- Implementar el catálogo piloto de JSA y la selección de sus perfiles.
-- Habilitar sectoriales únicamente cuando se disponga de una relación de perfiles verificada.
+- Implementar el catálogo piloto de JSA y la selección de sus perfiles (hecho; sus datos permanecen sin cambios).
+- Integrar la primera selección de unidades Nómadas/Aleph y habilitar sectoriales solo con disponibilidad verificada por perfil (hecho para 10 unidades; el resto pendiente).
 - Implementar importación de texto pegado, con soporte de texto de Infinity Army, grupos de combate, advertencias y resolución manual de coincidencias ambiguas o no encontradas.
 - Utilizar el catálogo JSA heredado en el flujo MVP; mantener su procedencia y su estado `unverified` explícitos. El cotejo de valores y la clasificación LI/MI/HI quedan fuera del alcance funcional de esta fase.
 - Mostrar las unidades en fichas visuales con imágenes o sustitutos.

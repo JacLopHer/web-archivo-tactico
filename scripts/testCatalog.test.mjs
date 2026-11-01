@@ -5,6 +5,9 @@ import test from 'node:test';
 const catalog = JSON.parse(
   await readFile(new URL('../src/data/legacyJsaCatalog.json', import.meta.url), 'utf8'),
 );
+const extraCatalog = JSON.parse(
+  await readFile(new URL('../src/data/nomadsAlephCatalog.json', import.meta.url), 'utf8'),
+);
 const factionDirectory = JSON.parse(
   await readFile(new URL('../src/data/factionDirectory.json', import.meta.url), 'utf8'),
 );
@@ -36,7 +39,7 @@ test('el catálogo migrado conserva el inventario heredado', () => {
   assert.equal('profiles' in catalog, false);
 });
 
-test('el directorio de facciones registra ejércitos oficiales sin inventar unidades', () => {
+test('el directorio identifica el catálogo completo y conserva las siete listas de ejército', () => {
   assert.equal(factionDirectory.metadata.source, 'Infinity Army');
   assert.equal(factionDirectory.metadata.verificationStatus, 'verified');
   assert.deepEqual(
@@ -68,11 +71,141 @@ test('el directorio de facciones registra ejércitos oficiales sin inventar unid
     ],
   );
   assert.ok(factionDirectory.factions.every((faction) =>
-    faction.catalogStatus === 'metadata-only'
+    faction.catalogStatus === 'complete'
       && faction.iconStatus === 'awaiting-authorized-asset'
       && !('units' in faction)
       && faction.sectorials.every((sectorial) => !('unitIds' in sectorial)),
   ));
+});
+
+test('el catálogo completo conserva las diez unidades iniciales y cubre los siete rosters N5', () => {
+  const originalUnits = [
+    ['ALGUACIL', 11],
+    ['BANDIDO', 5],
+    ['BEARCAT', 5],
+    ['TERRITORIAL', 6],
+    ['VIGILANTE', 5],
+    ['DIKPALA', 6],
+    ['ASURA', 4],
+    ['NAGA', 6],
+    ['SHUKRA', 3],
+    ['SHARVARA', 3],
+  ];
+  assert.equal(extraCatalog.metadata.edition, 'N5');
+  assert.match(extraCatalog.metadata.sourceUrl, /^https:\/\/infinityuniverse\.com\/army\/infinity/);
+  assert.match(extraCatalog.metadata.editionNote, /no expone un campo de edición/);
+  assert.match(extraCatalog.metadata.editionSourceUrl, /infinity-rules-update-5-3/);
+  assert.ok(extraCatalog.metadata.iconSource.includes('assets.corvusbelli.net'));
+  assert.match(extraCatalog.metadata.iconSource, /autorización de uso indicada por el propietario/);
+  assert.match(extraCatalog.metadata.apiVersions.nomads, /^\d+\.\d+\.\d+$/);
+  assert.match(extraCatalog.metadata.apiVersions.aleph, /^\d+\.\d+\.\d+$/);
+  assert.match(extraCatalog.metadata.checkedAt, /^\d{4}-\d{2}-\d{2}$/);
+  assert.equal(extraCatalog.metadata.verificationStatus, 'verified');
+  assert.equal(extraCatalog.units.length, 326);
+  assert.deepEqual(
+    ['nomads', 'aleph'].map((factionId) => new Set(
+      extraCatalog.units.filter((unit) => unit.factionId === factionId).map((unit) => unit.infinityArmyId),
+    ).size),
+    [149, 126],
+  );
+  assert.deepEqual(
+    originalUnits.map(([name, count]) => {
+      const unit = extraCatalog.units.find((candidate) => candidate.name === name && !candidate.infinityArmyGroupId);
+      return [unit?.name, unit?.profiles.length];
+    }),
+    originalUnits,
+  );
+  assert.equal(extraCatalog.units.reduce((count, unit) => count + unit.profiles.length, 0), 1024);
+
+  const unitIds = new Set(extraCatalog.units.map((unit) => unit.id));
+  const profileIds = extraCatalog.units.flatMap((unit) => unit.profiles.map((profile) => profile.id));
+  assert.equal(unitIds.size, extraCatalog.units.length);
+  assert.equal(new Set(profileIds).size, profileIds.length);
+  assert.ok(extraCatalog.units.every((unit) => {
+    assert.ok(unit.infinityArmyId);
+    assert.ok(unit.officialName && unit.requestedName);
+    assert.ok(unit.iconPath && unit.iconSource);
+    assert.equal(unit.edition, 'N5');
+    assert.equal(unit.verificationStatus, 'verified');
+    assert.equal(unit.troopClassVerificationStatus, 'verified');
+    assert.ok(unit.source.includes('Infinity Army'));
+    assert.equal(unit.availabilityVerificationStatus, 'verified');
+    assert.equal(Object.keys(unit.availabilityBySectorial).length, unit.sectorialIds.length);
+    assert.deepEqual(Object.keys(unit.stats), [
+      'movement', 'cc', 'bs', 'physical', 'willpower', 'armor', 'bts', 'wounds', 'silhouette', 'availability',
+    ]);
+    assert.ok(unit.profiles.every((profile) =>
+      profile.id.startsWith(`${unit.id}-`)
+        && profile.armyName
+        && profile.importNames.includes(profile.armyName)
+        && profile.points
+        && profile.cap !== undefined
+        && profile.sectorialIds.length
+        && profile.sectorialIds.every((id) => unit.sectorialIds.includes(id)),
+    ));
+    return true;
+  }));
+  assert.ok(!unitIds.has('legacy-unit-0c7c639bd69c'));
+  assert.ok(extraCatalog.units.every((unit) => !unit.id.startsWith('legacy-')));
+  const multiProfileBases = extraCatalog.units.filter((unit) => unit.baseProfileVariants.length > 1);
+  assert.ok(multiProfileBases.length > 0);
+  assert.ok(multiProfileBases.every((unit) => unit.baseProfileMappingStatus === 'incomplete'));
+});
+
+test('la disponibilidad se verifica por unidad y por perfil, sin heredar asignaciones de otro sectorial', () => {
+  const byName = new Map(extraCatalog.units.map((unit) => [unit.name, unit]));
+  assert.deepEqual(byName.get('ALGUACIL').sectorialIds, [
+    'nomads-generic', 'nomads-corregidor', 'nomads-bakunin', 'nomads-tunguska',
+  ]);
+  assert.deepEqual(byName.get('BANDIDO').sectorialIds, ['nomads-corregidor']);
+  assert.deepEqual(byName.get('BEARCAT').sectorialIds, ['nomads-generic', 'nomads-corregidor']);
+  assert.deepEqual(byName.get('DIKPALA').sectorialIds, ['aleph-generic', 'aleph-oss']);
+  assert.deepEqual(byName.get('ASURA').sectorialIds, ['aleph-generic', 'aleph-oss']);
+  assert.equal(byName.get('ASURA').profiles.filter((profile) => profile.sectorialIds.includes('aleph-generic')).length, 3);
+  assert.ok(byName.get('ASURA').profiles.some((profile) =>
+    profile.sectorialIds.length === 1 && profile.sectorialIds[0] === 'aleph-oss'));
+  assert.ok(byName.get('ALGUACIL').profiles.filter((profile) => profile.armyName.includes('GATTA'))
+    .every((profile) => profile.sectorialIds.length === 1 && profile.sectorialIds[0] === 'nomads-corregidor'));
+
+  for (const sectorial of extraCatalog.sectorials) {
+    const expected = extraCatalog.units
+      .filter((unit) => unit.sectorialIds.includes(sectorial.id))
+      .map((unit) => unit.id);
+    assert.deepEqual(sectorial.unitIds, expected, sectorial.id);
+    assert.equal(sectorial.verificationStatus, expected.length ? 'mapped' : 'unmapped');
+    assert.ok(sectorial.source.includes('Infinity Army'));
+  }
+});
+
+test('las armas de Infinity Army se conservan y señalan explícitamente el dato incompleto', () => {
+  assert.equal(extraCatalog.weapons.length, 115);
+  assert.ok(extraCatalog.weapons.every((weapon) =>
+    weapon.id.startsWith('infinity-army-weapon-')
+      && weapon.source.includes('Infinity Army')
+      && ['verified', 'incomplete'].includes(weapon.verificationStatus),
+  ));
+  const incomplete = extraCatalog.weapons.filter((weapon) => weapon.verificationStatus === 'incomplete');
+  assert.equal(incomplete.length, 7);
+  assert.ok(incomplete.some((weapon) => weapon.name === 'Cibermina'
+    && /id de munición 0/.test(weapon.verificationNote)));
+  assert.ok(incomplete.some((weapon) => /no proporcionan su ficha/.test(weapon.verificationNote)));
+  assert.ok(extraCatalog.units.find((unit) => unit.name === 'VIGILANTE').weaponProfilesVerificationStatus === 'incomplete');
+});
+
+test('los iconos de Infinity Army se descargan localmente y cada grupo usa su recurso', async () => {
+  const iconPaths = new Set(extraCatalog.units.flatMap((unit) => [
+    unit.iconPath,
+    ...Object.values(unit.iconPathsBySectorial ?? {}),
+    ...unit.baseProfileVariants.flatMap((baseProfile) => [
+      baseProfile.iconPath,
+      ...Object.values(baseProfile.iconPathsBySectorial ?? {}),
+    ]),
+  ]).filter(Boolean));
+  assert.equal(iconPaths.size, 249);
+  for (const iconPath of iconPaths) {
+    const icon = await readFile(new URL(`../public/${iconPath}`, import.meta.url), 'utf8');
+    assert.match(icon, /<svg/);
+  }
 });
 
 test('agrupa los perfiles FTO con su unidad base sin alterar los nombres de importación', () => {

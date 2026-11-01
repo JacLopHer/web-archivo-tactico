@@ -39,6 +39,14 @@ export interface TroopProfile {
   edition: string;
   source: string;
   verificationStatus: VerificationStatus;
+  verificationNote?: string;
+  iconPath?: string;
+  iconPathsBySectorial?: Record<string, string | undefined>;
+  disabled?: boolean;
+  characteristics?: string[];
+  availabilityBySectorial?: Record<string, string | undefined>;
+  characteristicsBySectorial?: Record<string, string[] | undefined>;
+  importNames?: string[];
 }
 
 export interface TroopVariant {
@@ -50,9 +58,17 @@ export interface TroopVariant {
   meleeEquipment: string;
   cap: string;
   points: string;
+  verificationStatus?: VerificationStatus;
+  verificationNote?: string;
+  disabled?: boolean;
   sectorialIds?: string[];
   infinityArmyOptionId?: number;
+  infinityArmyWeaponIds?: number[];
+  importNames?: string[];
   orders?: string[];
+  iconPath?: string;
+  iconPathsBySectorial?: Record<string, string | undefined>;
+  iconSourcesBySectorial?: Record<string, string | undefined>;
 }
 
 export interface TroopUnit {
@@ -72,11 +88,34 @@ export interface TroopUnit {
   verificationStatus: VerificationStatus;
   profiles: TroopVariant[];
   infinityArmyId?: number;
+  infinityArmyGroupId?: number;
   officialName?: string;
   requestedName?: string;
+  iconPath?: string;
+  iconSource?: string;
+  iconPathsBySectorial?: Record<string, string | undefined>;
+  iconSourcesBySectorial?: Record<string, string | undefined>;
+  baseProfileVariants?: Array<{
+    id: number;
+    name: string;
+    troopType: string;
+    troopClass: TroopClass;
+    stats: TroopStats;
+    woundsLabel: string;
+    specialRules: string[];
+    characteristics: string[];
+    weapons: string[];
+    iconPath?: string;
+    iconSource?: string;
+    iconPathsBySectorial?: Record<string, string | undefined>;
+    iconSourcesBySectorial?: Record<string, string | undefined>;
+  }>;
+  baseProfileMappingStatus?: 'verified' | 'incomplete';
   characteristics?: string[];
-  availabilityBySectorial?: Record<string, string>;
-  characteristicsBySectorial?: Record<string, string[]>;
+  availabilityBySectorial?: Record<string, string | undefined>;
+  characteristicsBySectorial?: Record<string, string[] | undefined>;
+  availabilityVerificationStatus?: 'verified' | 'incomplete';
+  weaponProfilesVerificationStatus?: 'verified' | 'incomplete';
 }
 
 export interface Sectorial {
@@ -106,7 +145,7 @@ export interface FactionDirectory {
   };
   factions: Array<Faction & {
     armyName: string;
-    catalogStatus: 'metadata-only' | 'partial';
+    catalogStatus: 'metadata-only' | 'partial' | 'complete';
     iconStatus: 'awaiting-authorized-asset';
     sectorials: Array<{
       id: string;
@@ -118,6 +157,7 @@ export interface FactionDirectory {
 
 export interface WeaponProfile {
   id: string;
+  infinityArmyWeaponId?: number;
   name: string;
   aliases?: string[];
   rangeModifiers: string;
@@ -130,6 +170,7 @@ export interface WeaponProfile {
   properties: string;
   source: string;
   verificationStatus: VerificationStatus;
+  verificationNote?: string;
 }
 
 export interface WeaponProfilesCatalog {
@@ -153,11 +194,15 @@ export interface ExtraFactionsCatalog {
     checkedAt: string;
     verificationStatus: VerificationStatus;
     editionNote: string;
+    editionSourceUrl: string;
+    iconSource?: string;
+    apiVersions: Record<string, string>;
     note: string;
   };
   sectorials: Sectorial[];
   troopClassGroups: Array<{ troopClass: TroopClass; unitIds: string[] }>;
   units: TroopUnit[];
+  weapons?: WeaponProfile[];
 }
 
 export interface JsaCatalog {

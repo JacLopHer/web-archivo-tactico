@@ -6,15 +6,36 @@ export function normalizeProfileName(value) {
     .replace(/[^a-z0-9]/g, '');
 }
 
+const equipmentNameAliases = [
+  ['apsubmachinegun', 'subfusilap'],
+  ['viraltacticalbow', 'arcotacticoviral'],
+  ['emgrenades', 'granadasem'],
+  ['submachinegun', 'subfusil'],
+  ['emcarbine', 'carabinaem'],
+  ['ccweapon', 'armacc'],
+  ['pistol', 'pistola'],
+  ['1sd', '1de'],
+].sort(([left], [right]) => right.length - left.length);
+
+function normalizeEquipmentName(value) {
+  let normalized = normalizeProfileName(value);
+  for (const [alias, canonical] of equipmentNameAliases) {
+    normalized = normalized.replaceAll(alias, canonical);
+  }
+  return normalized;
+}
+
 function findProfileName(rawName, profiles) {
   const normalizedName = normalizeProfileName(rawName);
   const matches = profiles
-    .map((profile) => ({ profile, normalizedProfileName: normalizeProfileName(profile.name) }))
-    .filter(({ normalizedProfileName }) => normalizedName.startsWith(normalizedProfileName))
+    .flatMap((profile) => [...new Set([profile.name, ...(profile.importNames ?? [])])]
+      .map((name) => ({ profile, name, normalizedProfileName: normalizeProfileName(name) })))
+    .filter(({ normalizedProfileName }) => normalizedProfileName && normalizedName.startsWith(normalizedProfileName))
     .sort((left, right) => right.normalizedProfileName.length - left.normalizedProfileName.length);
   const longestMatchLength = matches[0]?.normalizedProfileName.length ?? 0;
-  const candidates = matches.filter(({ normalizedProfileName }) => normalizedProfileName.length === longestMatchLength);
-  if (!candidates.length) return { profileName: rawName.trim(), candidates: [] };
+  const matchedProfiles = matches.filter(({ normalizedProfileName }) => normalizedProfileName.length === longestMatchLength);
+  const candidates = [...new Map(matchedProfiles.map(({ profile }) => [profile.id, profile])).values()];
+  if (!matchedProfiles.length) return { profileName: rawName.trim(), candidates: [] };
 
   let rawPrefixLength = 0;
   while (
@@ -23,7 +44,7 @@ function findProfileName(rawName, profiles) {
   ) {
     rawPrefixLength += 1;
   }
-  const trailingProfilePunctuation = matches[0].profile.name.match(/[^a-z0-9]+$/i)?.[0] ?? '';
+  const trailingProfilePunctuation = matchedProfiles[0].name.match(/[^a-z0-9]+$/i)?.[0] ?? '';
   if (
     trailingProfilePunctuation
     && rawName.slice(rawPrefixLength, rawPrefixLength + trailingProfilePunctuation.length).toLowerCase()
@@ -35,14 +56,14 @@ function findProfileName(rawName, profiles) {
   return {
     profileName: rawName.slice(0, rawPrefixLength).trim().replace(/\s+/g, ' '),
     remaining: rawName.slice(rawPrefixLength).trim(),
-    candidates: candidates.map(({ profile }) => profile),
+    candidates,
   };
 }
 
 function chooseCandidate(candidates, entry) {
   if (candidates.length <= 1) return candidates[0];
 
-  const importedEquipment = normalizeProfileName(`${entry.rangedEquipment} ${entry.meleeEquipment}`);
+  const importedEquipment = normalizeEquipmentName(`${entry.rangedEquipment} ${entry.meleeEquipment}`);
   const ranked = candidates
     .map((profile) => {
       let score = 0;
@@ -50,7 +71,7 @@ function chooseCandidate(candidates, entry) {
       score += normalizeProfileName(profile.cap) === normalizeProfileName(entry.cap) ? 2 : -2;
       const equipment = [profile.rangedEquipment, profile.meleeEquipment]
         .flatMap((value) => value.split(/[|,]/))
-        .map(normalizeProfileName)
+        .map(normalizeEquipmentName)
         .filter(Boolean);
       score += equipment.filter((item) => importedEquipment.includes(item)).length;
       return { profile, score };
@@ -70,7 +91,8 @@ export function parseProfileList(text, profiles) {
     .map((entry) => {
       const normalizedName = normalizeProfileName(entry.originalName);
       const candidateIds = profiles
-        .filter((profile) => normalizeProfileName(profile.name) === normalizedName)
+        .filter((profile) => [profile.name, ...(profile.importNames ?? [])]
+          .some((name) => normalizeProfileName(name) === normalizedName))
         .map((profile) => profile.id);
 
       return {
@@ -94,14 +116,21 @@ function stripArmyMarkup(line) {
     .trim();
 }
 
-function parseArmyUnitLine(line, lineNumber, groupName, profiles) {
+function getDisplayName(rawLine) {
+  const boldName = rawLine.match(/\[b\]\s*([\s\S]*?)\s*\[\/b\]/i)?.[1];
+  return boldName?.replace(/\s+/g, ' ').trim();
+}
+
+function parseArmyUnitLine(line, lineNumber, groupName, profiles, rawLine) {
   const costMatch = line.match(/\(\s*([+-]?\d+(?:[.,]\d+)?)\s*\|\s*(\d+)\s*\)\s*\.?\s*$/);
   const sides = line.slice(0, costMatch.index).split(/\s+\/\s+/);
   const rawRangedEquipment = sides[0].trim();
   const meleeEquipment = sides.slice(1).join('/').trim();
   const { profileName, remaining, candidates } = findProfileName(rawRangedEquipment, profiles);
+  const displayName = getDisplayName(rawLine);
   const entry = {
     originalName: profileName || rawRangedEquipment,
+    ...(displayName ? { displayName } : {}),
     lineNumber,
     groupName,
     sourceLine: line.trim(),
@@ -130,11 +159,11 @@ export function parseInfinityArmyList(text, profiles) {
 
   text.split(/\r?\n/).forEach((rawLine, index) => {
     const line = stripArmyMarkup(rawLine);
-    const groupMatch = line.match(/^GRUPO\s+([12])(?:\s*\d+)?\b/i);
+    const groupMatch = line.match(/^(?:GRUPO|GROUP)\s+([12])(?:\s*\d+)?\b/i);
     if (groupMatch) {
       groupName = `Grupo ${groupMatch[1]}`;
     } else if (isArmyUnitLine(line)) {
-      entries.push(parseArmyUnitLine(line, index + 1, groupName, profiles));
+      entries.push(parseArmyUnitLine(line, index + 1, groupName, profiles, rawLine));
     }
   });
 

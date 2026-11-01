@@ -6,6 +6,9 @@ import { parseListImport, parseProfileList } from '../src/domain/listImport.mjs'
 const realCatalog = JSON.parse(
   await readFile(new URL('../src/data/legacyJsaCatalog.json', import.meta.url), 'utf8'),
 );
+const extraCatalog = JSON.parse(
+  await readFile(new URL('../src/data/nomadsAlephCatalog.json', import.meta.url), 'utf8'),
+);
 const realProfiles = realCatalog.units.flatMap((unit) =>
   unit.profiles.map((profile) => ({
     id: profile.id,
@@ -15,6 +18,18 @@ const realProfiles = realCatalog.units.flatMap((unit) =>
     cap: profile.cap,
     rangedEquipment: profile.rangedEquipment,
     meleeEquipment: profile.meleeEquipment,
+    importNames: profile.importNames,
+  })),
+);
+const extraProfiles = extraCatalog.units.flatMap((unit) =>
+  unit.profiles.map((profile) => ({
+    id: profile.id,
+    name: profile.armyName,
+    points: profile.points,
+    cap: profile.cap,
+    rangedEquipment: profile.rangedEquipment,
+    meleeEquipment: profile.meleeEquipment,
+    importNames: profile.importNames,
   })),
 );
 
@@ -48,6 +63,47 @@ test('no asigna automáticamente nombres sin coincidencia exacta', () => {
   const [entry] = parseProfileList('NINJA (HACKER)', profiles);
   assert.equal(entry.profileId, '');
   assert.deepEqual(entry.candidateIds, []);
+});
+
+test('resuelve perfiles de Infinity Army por el nombre inglés oficial alternativo', () => {
+  const [entry] = parseListImport(
+    'BANDIT Escopeta Ligera, Fusil Lanzaadhesivo / Pistola de Abordaje, Arma CC DA (PS=6) (0 | 23)',
+    extraProfiles,
+  ).entries;
+  const expected = extraCatalog.units.find((unit) => unit.name === 'BANDIDO')
+    .profiles.find((profile) => profile.points === '23');
+  assert.equal(entry.profileId, expected.id);
+  assert.equal(entry.resolution, 'details');
+});
+
+test('desambigua equipo en inglés para perfiles DART y KINNARA de OSS', () => {
+  const result = parseListImport([
+    'GROUP 1',
+    '[b]DART[/b] AP Submachine Gun, Viral Tactical Bow(+1SD), E/M Grenades / Pistol, CC Weapon. (0 | [b]35[/b])',
+    '[b] KINNARA Scoutbots  (Parachutist)[/b] Submachine Gun, E/M Carbine, D-Charges, Eclipse Grenades / Pistol, Monofilament CC Weapon. (0 | [b]24[/b])',
+  ].join('\n'), extraProfiles);
+
+  assert.equal(result.entries.length, 2);
+  assert.deepEqual(result.entries.map((entry) => entry.profileId), [
+    'ia-1130-1-1',
+    'ia-1901-1-3',
+  ]);
+  assert.deepEqual(result.entries.map((entry) => entry.resolution), ['details', 'details']);
+});
+
+test('conserva los nombres visibles de entradas no resueltas de Infinity Army', () => {
+  const result = parseListImport([
+    'GROUP 1',
+    '[b]DIABLO[/b] Submachine Gun, Grenades / Boarding Pistol. (0 | 9)',
+    '[b] JAZZ FTO [/b] undefined / undefined. (0.5 | 22)',
+    '[b] JAZZ FTO (Hacker, Number 2)[/b] Combi Rifle, Pitcher / Boarding Pistol. (0.5 | 22)',
+  ].join('\n'), []);
+
+  assert.deepEqual(result.entries.map(({ displayName, groupName }) => ({ displayName, groupName })), [
+    { displayName: 'DIABLO', groupName: 'Grupo 1' },
+    { displayName: 'JAZZ FTO', groupName: 'Grupo 1' },
+    { displayName: 'JAZZ FTO (Hacker, Number 2)', groupName: 'Grupo 1' },
+  ]);
 });
 
 const armyProfiles = [
