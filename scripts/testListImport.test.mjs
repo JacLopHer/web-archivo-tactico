@@ -106,6 +106,20 @@ test('conserva los nombres visibles de entradas no resueltas de Infinity Army', 
   ]);
 });
 
+test('resuelve perfiles JAZZ FTO presentes en el roster aunque estén deshabilitados para selección manual', () => {
+  const jazzFto = extraProfiles.find((profile) => profile.name === 'JAZZ FTO');
+  assert.ok(jazzFto);
+
+  const result = parseListImport([
+    'GRUPO 1',
+    '[b]JAZZ FTO[/b] undefined / undefined. (0.5 | [b]22[/b])',
+    '[b]JAZZ FTO (Hacker, Nº2)[/b] Fusil Combi, Pitcher, Cibermina / Arma CC PARA(-3), Pistola de Abordaje. (0.5 | [b]22[/b])',
+  ].join('\n'), [jazzFto]);
+
+  assert.deepEqual(result.entries.map((entry) => entry.profileId), [jazzFto.id, jazzFto.id]);
+  assert.ok(result.entries.every((entry) => entry.resolution === 'exact'));
+});
+
 const armyProfiles = [
   { id: 'miyamoto', name: 'MIYAMOTO MUSHASHI', points: '21', cap: '0', rangedEquipment: 'Chain Rifle, Arco Táctico, Pulso Flash', meleeEquipment: 'Pistola, Arma CC EXP(PS=4)' },
   { id: 'karakuri-mk12', name: 'KARAKURI', points: '38', cap: '0', rangedEquipment: 'Mk12, Chain Rifle, Panzerfaust, Pulso Flash', meleeEquipment: 'Pistola, Arma CC' },

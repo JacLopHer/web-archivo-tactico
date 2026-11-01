@@ -50,8 +50,8 @@ const supplementalWeaponProfiles = (extraFactionsCatalog.weapons ?? []).filter((
   !existingWeaponIndex.has(weapon.name)
   && !(weapon.aliases ?? []).some((alias) => existingWeaponIndex.has(alias)),
 );
-const catalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
-  unit.profiles.filter((profile) => !profile.disabled).map((profile) => ({
+const allCatalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
+  unit.profiles.map((profile) => ({
     id: profile.id,
     name: profile.armyName,
     variantName: profile.name,
@@ -79,11 +79,13 @@ const catalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
     availabilityBySectorial: unit.availabilityBySectorial,
     characteristicsBySectorial: unit.characteristicsBySectorial,
     importNames: profile.importNames,
+    disabled: profile.disabled,
     iconPath: unit.iconPath,
     iconPathsBySectorial: profile.iconPathsBySectorial,
     skillsAndEquipment: [...unit.sharedSpecialRules, ...profile.specialRules, ...(unit.characteristics ?? [])].join(' · '),
   })),
 );
+const catalogProfiles = allCatalogProfiles.filter((profile) => !profile.disabled);
 const weaponIndex = createWeaponIndex([...weaponProfiles.profiles, ...supplementalWeaponProfiles]);
 const rangeBands = ['0', '20', '40', '60', '80', '100', '120', '240'];
 
@@ -249,7 +251,7 @@ function App() {
   const pendingResolvedCount = pendingImport?.resolved.length ?? 0;
   const pendingUnresolvedCount = pendingImport?.unresolved.length ?? 0;
   const collectionEntries = collection.map((item, index) => {
-    const profile = catalogProfiles.find((candidate) => candidate.id === item.profileId);
+    const profile = allCatalogProfiles.find((candidate) => candidate.id === item.profileId);
     return {
       item,
       index,
@@ -426,7 +428,7 @@ function App() {
         return;
       }
 
-      const parsed = parseListImport(clipboardText, catalogProfiles);
+      const parsed = parseListImport(clipboardText, allCatalogProfiles);
       const timestamp = Date.now();
       const entries = parsed.entries.map((entry) => ({
         ...entry,
@@ -665,7 +667,7 @@ function App() {
     try {
       const backupStore = parseProjectsBackup(
         await file.text(),
-        catalogProfiles.map((profile) => profile.id),
+        allCatalogProfiles.map((profile) => profile.id),
       );
       const currentStore = projectStoreRef.current;
       if (!currentStore) throw new Error('No hay proyectos cargados para añadir la copia.');
