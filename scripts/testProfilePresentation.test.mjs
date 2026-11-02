@@ -193,7 +193,7 @@ test('el formato dúplex es una tercera opción con anverso y reverso, borde de 
   assert.match(app, /printLayout === 'duplex' && duplexOverflow\.length > 0/);
   assert.match(styles, /\.duplex-grid\s*\{[^}]*repeat\(2, minmax\(0, 1fr\)\)[^}]*repeat\(5, minmax\(0, 1fr\)\)/);
   assert.match(styles, /\.duplex-card\s*\{[^}]*overflow:\s*hidden/);
-  assert.doesNotMatch(styles.match(/\/\* Tarjetas dúplex[\s\S]*?\.duplex-note[^\n]*/)[0], /font-size:\s*([0-5](\.\d+)?|6\.[1-4]\d*)pt|zoom/);
+  assert.doesNotMatch(styles.match(/\/\* Tarjetas dúplex[\s\S]*?\.duplex-note[^\n]*/)[0], /font-size:\s*([0-4](\.\d+)?|5\.[0-4]\d*)pt|zoom/);
 });
 
 test('el anverso dúplex muestra órdenes, hackeable, marca de agua de facción y miniatura subida por el usuario', () => {

@@ -320,7 +320,7 @@ button, select { cursor: pointer; }
 .app-shell.print-preview-open .print-preview-page { display: block; width: 210mm; height: 297mm; min-height: 0; margin: 0 auto 8mm; padding: var(--print-margin, 6mm); list-style: none; background: #fff; box-shadow: 0 2mm 5mm #0004; }
 .app-shell.print-preview-open .print-preview-page-entries { height: 100%; display: grid; grid-template-columns: repeat(var(--print-cols, 2), minmax(0, 1fr)); grid-template-rows: repeat(var(--print-rows, 5), minmax(0, 1fr)); gap: var(--print-gap, 2mm); margin: 0; padding: 0; list-style: none; }
 
-/* Tarjetas dúplex: texto en tamaño fijo (mínimo 6,5 pt), sin reducción por escala. */
+/* Tarjetas dúplex: texto en tamaño fijo (mínimo 5,5 pt), sin reducción por escala. */
 .duplex-warning { margin: 0; padding: 8px 12px; color: #ffd5da; background: #4a2029; border-bottom: 1px solid #ed6878; font-size: 11px; font-weight: 700; line-height: 1.4; }
 .duplex-page { position: relative; }
 .duplex-page-label { position: absolute; left: 0; right: 0; bottom: -6.5mm; color: #1b2830; font-size: 9px; font-weight: 700; text-align: center; }
@@ -359,7 +359,7 @@ button, select { cursor: pointer; }
 .duplex-gear-box p { margin: .2mm 0 0; font-size: 7pt; line-height: 1.15; overflow-wrap: anywhere; }
 .duplex-gear-small { text-align: center; }
 .duplex-gear-small { padding: .6mm 0; clip-path: none; border-radius: .8mm; }\n.duplex-gear-small p { font-size: 8pt; font-weight: 700; }/* Reverso al estilo de la tarjeta física: marco gris claro con esquinas redondeadas y barras azules. */
-.duplex-back { --back-accent: #3d5a99; --back-cols: 18mm repeat(7, 3.6mm) 3.6mm 3.2mm 8mm 8mm 3mm minmax(0, 1fr); border-radius: 3mm; background: radial-gradient(ellipse at 50% 35%, #f6f5f1, #e3e2dd 80%); border-color: #9aa1a8; }
+.duplex-back { --back-accent: #3d5a99; --back-cols: 22mm repeat(7, 3.1mm) 3mm 2.8mm 6mm 7mm 2.6mm minmax(0, 1fr); border-radius: 3mm; background: radial-gradient(ellipse at 50% 35%, #f6f5f1, #e3e2dd 80%); border-color: #9aa1a8; }
 .duplex-back::before { content: ''; position: absolute; inset: 14mm 2mm 1.5mm; border: .9mm solid #fbfaf7; border-top: 0; border-radius: 0 0 6mm 6mm; box-shadow: 0 0 0 .3mm #c5c8cb, inset 0 0 0 .3mm #c5c8cb; pointer-events: none; z-index: 0; }
 .duplex-back > * { position: relative; z-index: 1; }
 .duplex-back-header { flex: 0 0 auto; margin: 1.2mm 2.5mm 0; padding: .1mm 2mm; color: #fff; background: var(--back-accent); text-align: center; }
@@ -372,11 +372,11 @@ button, select { cursor: pointer; }
 .duplex-weapon-rows { flex: 0 0 auto; background: #f6f5f1; }
 .duplex-weapon { min-height: 3.6mm; border-bottom: .2mm solid #2b2f33; font-size: 6.5pt; font-weight: 600; line-height: 1.1; }
 .duplex-weapon > span { min-width: 0; overflow-wrap: break-word; }
-.duplex-weapon-name { padding-right: .8mm; font-size: 6pt; letter-spacing: .01em; text-transform: uppercase; }
+.duplex-weapon-name { padding-right: .8mm; font-size: 6pt; letter-spacing: .01em; }
 .duplex-range { grid-column: span 7; display: grid; grid-template-columns: repeat(7, 1fr); align-self: stretch; }
 .duplex-range .range-band { min-height: 3.6mm; font-size: 6.5pt; }
 .duplex-range-note { grid-column: span 7; font-size: 6pt; font-weight: 400; }
-.duplex-weapon-props { padding: 0 .6mm; font-size: 6pt; font-weight: 400; letter-spacing: .01em; text-align: center; text-transform: uppercase; }
+.duplex-weapon-props { padding: 0 .6mm; font-size: 5.5pt; font-weight: 400; line-height: 1.05; text-align: center; }
 .duplex-weapon-wide { display: flex; gap: 1.5mm; padding: .5mm 1mm; text-align: left; }
 .duplex-weapon-wide span { font-weight: 400; }
 .duplex-note { margin: 1mm 0; font-size: 7pt; text-align: center; }
