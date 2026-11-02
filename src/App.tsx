@@ -915,62 +915,72 @@ function App() {
         <header className="duplex-back-header">
           <strong>{profile.unitName}</strong>
         </header>
-        <div className="duplex-weapons">
+        <div className="duplex-weapon-table">
           <div className="duplex-weapon-head">
-            <span>ARMA</span>
-            <span className="duplex-range-head" aria-label="Distancias en centímetros">
-              {rangeBands.map((range) => <span key={range}>{range}</span>)}
-            </span>
-            <span>PS</span><span>R</span><span>MUN</span><span>TS</span><span>Nº</span>
+            <span>NOMBRE</span>
+            <span className="duplex-head-range">DISTANCIA</span>
+            <span>PS</span><span>R</span><span>MUN.</span><span>TS: ATR</span><span>Nº</span>
+            <span>PROPIEDADES</span>
           </div>
-          {weapons.length === 0 && <p className="duplex-note">Sin armamento registrado en la fuente consultada.</p>}
-          {weapons.map(({ name, category, profile: weaponProfile, modifier, equipment: isEquipment }, weaponPosition) => {
-            const hasWeaponDetails = Boolean(weaponProfile && ((weaponProfile.properties && weaponProfile.properties !== category) || weaponProfile.verificationStatus === 'incomplete'));
-            return (
-            <div className="duplex-weapon" key={`${name}-${weaponPosition}`}>
-              {weaponProfile ? (
-                <>
-                  <div className="duplex-weapon-name">
+          <div className="duplex-distance-head" aria-label="Distancias en centímetros">
+            <span />
+            {rangeBands.slice(1).map((range) => <span key={range}>{range}</span>)}
+          </div>
+          <div className="duplex-weapon-rows">
+            {weapons.length === 0 && <p className="duplex-note">Sin armamento registrado en la fuente consultada.</p>}
+            {weapons.map(({ name, profile: weaponProfile, modifier, equipment: isEquipment }, weaponPosition) => {
+              if (!weaponProfile) {
+                return (
+                  <div className="duplex-weapon duplex-weapon-wide" key={`${name}-${weaponPosition}`}>
                     <strong>{name}</strong>
-                    {modifier && !name.includes(modifier) && <em> ({modifier})</em>}
-                    {!hasWeaponDetails && <em className="duplex-weapon-category"> {category}</em>}
+                    <span>{isEquipment ? 'Equipo' : 'Sin ficha de arma coincidente; no se muestran valores inferidos.'}</span>
                   </div>
+                );
+              }
+              const rangeGroups: Array<{ value: string; span: number }> = [];
+              getRangeModifiers(weaponProfile).forEach((value) => {
+                const last = rangeGroups[rangeGroups.length - 1];
+                if (last && last.value === value) last.span += 1;
+                else rangeGroups.push({ value, span: 1 });
+              });
+              return (
+                <div className="duplex-weapon" key={`${name}-${weaponPosition}`}>
+                  <span className="duplex-weapon-name">
+                    {name}
+                    {modifier && !name.includes(modifier) && ` (${modifier})`}
+                  </span>
                   {weaponProfile.rangeNote ? (
-                    <div className="duplex-range-note">{weaponProfile.rangeNote}</div>
+                    <span className="duplex-range-note">{weaponProfile.rangeNote}</span>
                   ) : (
-                    <div className="duplex-range">
-                      {getRangeModifiers(weaponProfile).map((value, rangeIndex) => {
+                    <span className="duplex-range">
+                      {rangeGroups.map(({ value, span }, groupIndex) => {
                         const tone = value === '0' ? 'neutral' : value.startsWith('+') ? 'positive' : value === '-3' ? 'short' : value === '-6' ? 'long' : 'unavailable';
-                        return <span className={`range-band ${tone}`} key={`${rangeIndex}-${value}`}>{getRangeModifierLabel(value)}</span>;
+                        return (
+                          <span className={`range-band ${tone}`} key={`${groupIndex}-${value}`} style={{ gridColumn: `span ${span}` }}>
+                            {getRangeModifierLabel(value)}
+                          </span>
+                        );
                       })}
-                    </div>
+                    </span>
                   )}
                   <span>{weaponProfile.damage}</span>
                   <span>{weaponProfile.burst}</span>
                   <span>{weaponProfile.ammunition}</span>
                   <span>{weaponProfile.saveAttribute}</span>
                   <span>{weaponProfile.saves}</span>
-                  {hasWeaponDetails && (
-                    <div className="duplex-weapon-props">
-                      <em>{category}</em>
-                      {weaponProfile.properties && weaponProfile.properties !== category && <> · {weaponProfile.properties}</>}
-                      {weaponProfile.verificationStatus === 'incomplete' && (
-                        <> · Dato pendiente: {weaponProfile.verificationNote ?? 'información incompleta en Infinity Army.'}</>
-                      )}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className="duplex-weapon-name duplex-weapon-wide">
-                  <strong>{name}</strong>
-                  <span>{isEquipment ? 'Equipo' : 'Sin ficha de arma coincidente; no se muestran valores inferidos.'}</span>
+                  <span className="duplex-weapon-props">
+                    {[
+                      weaponProfile.properties,
+                      weaponProfile.verificationStatus === 'incomplete'
+                        ? `Dato pendiente: ${weaponProfile.verificationNote ?? 'información incompleta en Infinity Army.'}`
+                        : '',
+                    ].filter(Boolean).join(' · ')}
+                  </span>
                 </div>
-              )}
-            </div>
-            );
-          })}
-        </div>
-      </article>
+              );
+            })}
+          </div>
+        </div>      </article>
     );
   };
 
