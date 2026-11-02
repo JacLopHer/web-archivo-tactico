@@ -333,11 +333,11 @@ button, select { cursor: pointer; }
 .duplex-left { grid-column: 1; grid-row: 1 / 5; position: relative; }
 .duplex-icon { position: absolute; z-index: 2; top: 0; left: 0; width: 9mm; height: 9mm; display: grid; place-items: center; overflow: hidden; color: #347e7b; background: #fff; border: .25mm solid #7d8b92; border-radius: 1.2mm; font-weight: 800; }
 .duplex-icon img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
-.duplex-tags { position: absolute; z-index: 2; top: 10.5mm; left: 0; width: 7.5mm; display: flex; flex-direction: column; align-items: center; gap: .8mm; margin: 0; padding: .6mm 0 .9mm; background: rgba(74, 66, 64, .55); border-radius: .8mm; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.5mm), calc(100% - 1.5mm) 100%, 0 100%); }
-.duplex-troop { color: #fff; font-size: 7pt; font-weight: 800; line-height: 1.1; }
-.duplex-glyph { position: relative; width: 5mm; height: 5mm; display: block; }
+.duplex-tags { position: absolute; z-index: 2; top: 10.5mm; left: 0; width: 5mm; display: flex; flex-direction: column; align-items: center; gap: .5mm; margin: 0; padding: .4mm 0 .8mm; background: rgba(74, 66, 64, .55); border-radius: .8mm; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.5mm), calc(100% - 1.5mm) 100%, 0 100%); }
+.duplex-troop { color: #fff; font-size: 6.5pt; font-weight: 800; line-height: 1.1; }
+.duplex-glyph { position: relative; width: 3.2mm; height: 3.2mm; display: block; }
 .duplex-glyph img { display: block; width: 100%; height: 100%; }
-.duplex-glyph em { position: absolute; right: -1mm; bottom: -.6mm; min-width: 2.2mm; color: #1b2830; background: #fff; border-radius: 1mm; font-size: 6.5pt; font-style: normal; font-weight: 800; line-height: 1.2; text-align: center; }
+.duplex-glyph em { position: absolute; right: -.8mm; bottom: -.5mm; min-width: 1.8mm; color: #1b2830; background: #fff; border-radius: 1mm; font-size: 6.5pt; font-style: normal; font-weight: 800; line-height: 1.2; text-align: center; }
 .duplex-mini { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
 .duplex-mini-actions { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; display: flex; gap: .8mm; justify-content: center; font-size: 6.5pt; }
 .duplex-mini-actions label, .duplex-mini-actions button { padding: .3mm 1mm; color: #1b2830; background: #ffffffd9; border: .2mm dashed #8a979c; border-radius: 1mm; font: inherit; cursor: pointer; }
@@ -350,7 +350,7 @@ button, select { cursor: pointer; }
 .duplex-stats div { min-width: 0; display: flex; flex-direction: column; padding: .4mm 0; }
 .duplex-stats span { overflow: hidden; color: #e6e9ee; font-size: 6.5pt; font-weight: 800; }
 .duplex-stats strong { font-size: 9pt; line-height: 1.15; white-space: nowrap; }
-.duplex-skills { grid-column: 2; grid-row: 4; min-height: 0; overflow: hidden; padding: .8mm 1.5mm; color: #fff; background: var(--front-panel); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2mm), calc(100% - 2mm) 100%, 0 100%); }
+.duplex-skills { grid-column: 2; grid-row: 4; align-self: start; max-height: 100%; min-height: 0; overflow: hidden; padding: .8mm 1.5mm; color: #fff; background: var(--front-panel); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2mm), calc(100% - 2mm) 100%, 0 100%); }
 .duplex-skills strong { display: block; font-size: 7pt; }
 .duplex-skills p { margin: .3mm 0 0; font-size: 7pt; line-height: 1.2; }
 .duplex-gear { grid-column: 1 / -1; grid-row: 5; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 6mm 6mm; gap: .8mm; }
