@@ -101,12 +101,6 @@ const ORDER_ICON_FILES: Record<string, string> = {
   TACTICAL: 'tactical',
   HACKABLE: 'hackable',
 };
-const PROPERTY_ACRONYMS = /(?<![\p{L}\d])(cc|cd|fís|da|ap|pb|bli|exp|ps|bts|arm)(?![\p{L}\d])/giu;
-
-const sentenceCase = (text: string) => text
-  .toLocaleLowerCase('es')
-  .replace(/(^|[,:·]\s*)(\p{L})/gu, (_, prefix: string, letter: string) => `${prefix}${letter.toLocaleUpperCase('es')}`)
-  .replace(PROPERTY_ACRONYMS, (token) => token.toLocaleUpperCase('es'));
 
 // Iconos oficiales de Infinity Army (assets.corvusbelli.net/army/img/icon), guardados como PNG pequeños en public/orders.
 const cardGlyphSrc = (type: string) => `${import.meta.env.BASE_URL}orders/${ORDER_ICON_FILES[type]}.png`;
@@ -1042,6 +1036,12 @@ function App() {
                   </div>
                 );
               }
+              const propertiesText = [
+                weaponProfile.properties,
+                weaponProfile.verificationStatus === 'incomplete'
+                  ? `Dato pendiente: ${weaponProfile.verificationNote ?? 'información incompleta en Infinity Army.'}`
+                  : '',
+              ].filter(Boolean).join(' · ');
               const rangeGroups: Array<{ value: string; span: number }> = [];
               getRangeModifiers(weaponProfile).forEach((value) => {
                 const last = rangeGroups[rangeGroups.length - 1];
@@ -1073,13 +1073,8 @@ function App() {
                   <span>{weaponProfile.ammunition}</span>
                   <span>{weaponProfile.saveAttribute}</span>
                   <span>{weaponProfile.saves}</span>
-                  <span className="duplex-weapon-props">
-                    {sentenceCase([
-                      weaponProfile.properties,
-                      weaponProfile.verificationStatus === 'incomplete'
-                        ? `Dato pendiente: ${weaponProfile.verificationNote ?? 'información incompleta en Infinity Army.'}`
-                        : '',
-                    ].filter(Boolean).join(' · '))}
+                  <span className="duplex-weapon-props" title={propertiesText}>
+                    {propertiesText}
                   </span>
                 </div>
               );
