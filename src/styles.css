@@ -327,24 +327,38 @@ button, select { cursor: pointer; }
 .duplex-grid { height: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(5, minmax(0, 1fr)); gap: 0; }
 .duplex-card { position: relative; box-sizing: border-box; min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; color: #11181d; background: #fff; border: .2mm solid #8a979c; font-family: 'DM Sans', sans-serif; font-size: 7pt; line-height: 1.25; }
 .duplex-card-empty { border-style: dashed; border-color: #c5cdd0; }
-.duplex-header { display: grid; grid-template-columns: 11mm minmax(0, 1fr) auto; align-items: center; gap: 1.5mm; padding: 1mm 1.5mm; color: #fff; background: #347e7b; }
-.duplex-icon { position: relative; width: 10mm; height: 10mm; display: grid; place-items: center; overflow: hidden; color: #347e7b; background: #fff; border-radius: 1mm; font-weight: 800; }
+.duplex-front { --front-ink: #1b2830; --front-panel: rgba(74, 66, 64, .58); display: grid; grid-template-columns: 22mm minmax(0, 1fr); grid-template-rows: auto auto auto minmax(0, 1fr) auto; column-gap: 1.5mm; row-gap: .8mm; padding: 1.5mm 2mm; border-radius: 3mm; border-color: #9aa1a8; background: linear-gradient(135deg, #f7f6f2, #dcdad5); }
+.duplex-front > * { position: relative; z-index: 1; min-width: 0; }
+.duplex-front > .duplex-watermark { position: absolute; z-index: 0; right: 1mm; top: 1.5mm; width: 54mm; height: 54mm; object-fit: contain; opacity: .16; pointer-events: none; }
+.duplex-left { grid-column: 1; grid-row: 1 / 5; position: relative; }
+.duplex-icon { position: absolute; z-index: 2; top: 0; left: 0; width: 9mm; height: 9mm; display: grid; place-items: center; overflow: hidden; color: #347e7b; background: #fff; border: .25mm solid #7d8b92; border-radius: 1.2mm; font-weight: 800; }
 .duplex-icon img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
-.duplex-title { min-width: 0; display: flex; flex-direction: column; }
-.duplex-title strong { overflow: hidden; font-family: 'Barlow Condensed', sans-serif; font-size: 12pt; line-height: 1.05; text-transform: uppercase; text-overflow: ellipsis; white-space: nowrap; }
-.duplex-title span { overflow: hidden; font-size: 6.5pt; text-overflow: ellipsis; white-space: nowrap; }
-.duplex-cost { font-size: 6.5pt; font-weight: 700; text-align: right; white-space: nowrap; }
-.duplex-cost strong { font-size: 9pt; }
-.duplex-stats { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); background: #dfe3e4; border-bottom: .2mm solid #8e999b; }
-.duplex-stats div { min-width: 0; display: flex; flex-direction: column; align-items: center; padding: .6mm 0; border-right: .2mm solid #a5abad; }
-.duplex-stats div:last-child { border-right: 0; }
-.duplex-stats span { font-size: 6.5pt; font-weight: 700; color: #3b474d; }
-.duplex-stats strong { font-size: 9pt; }
-.duplex-rules { flex: 1 1 auto; min-height: 0; padding: 1mm 1.5mm; }
-.duplex-rules p { margin: 0 0 .8mm; font-size: 7pt; }
-.duplex-rules .duplex-equipment { font-weight: 700; color: #2a5a58; }
-.duplex-tag { flex: 0 0 auto; padding: .4mm 1.5mm; color: #26363d; background: #e6eeee; border-top: .2mm solid #aebfbe; font-size: 6.5pt; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-/* Reverso al estilo de la tarjeta física: marco gris claro con esquinas redondeadas y barras azules. */
+.duplex-tags { position: absolute; z-index: 2; top: 10.5mm; left: 0; width: 7.5mm; display: flex; flex-direction: column; align-items: center; gap: .8mm; margin: 0; padding: .6mm 0 .9mm; background: rgba(74, 66, 64, .55); border-radius: .8mm; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.5mm), calc(100% - 1.5mm) 100%, 0 100%); }
+.duplex-troop { color: #fff; font-size: 7pt; font-weight: 800; line-height: 1.1; }
+.duplex-glyph { position: relative; width: 5mm; height: 5mm; display: block; }
+.duplex-glyph img { display: block; width: 100%; height: 100%; }
+.duplex-glyph em { position: absolute; right: -1mm; bottom: -.6mm; min-width: 2.2mm; color: #1b2830; background: #fff; border-radius: 1mm; font-size: 6.5pt; font-style: normal; font-weight: 800; line-height: 1.2; text-align: center; }
+.duplex-mini { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+.duplex-mini-actions { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; display: flex; gap: .8mm; justify-content: center; font-size: 6.5pt; }
+.duplex-mini-actions label, .duplex-mini-actions button { padding: .3mm 1mm; color: #1b2830; background: #ffffffd9; border: .2mm dashed #8a979c; border-radius: 1mm; font: inherit; cursor: pointer; }
+.duplex-mini-actions input { display: none; }
+.duplex-isc { grid-column: 2; grid-row: 1; margin: 0; overflow: hidden; color: #3b474d; font-size: 6.5pt; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+.duplex-header { grid-column: 2; grid-row: 2; display: flex; align-items: baseline; justify-content: space-between; gap: 1.5mm; padding: .6mm 3mm .6mm 1.5mm; color: var(--front-ink); background: rgba(223, 230, 238, .68); border: .25mm solid rgba(139, 155, 176, .8); clip-path: polygon(0 0, calc(100% - 2.2mm) 0, 100% 2.2mm, 100% 100%, 0 100%); }
+.duplex-header strong { overflow: hidden; font-family: 'Barlow Condensed', sans-serif; font-size: 12pt; line-height: 1.05; text-transform: uppercase; text-overflow: ellipsis; white-space: nowrap; }
+.duplex-header span { flex: none; font-size: 6.5pt; font-weight: 700; }
+.duplex-stats { grid-column: 2; grid-row: 3; display: grid; grid-template-columns: 1.8fr repeat(9, minmax(0, 1fr)); color: #fff; background: var(--front-panel); border-radius: .8mm; text-align: center; }
+.duplex-stats div { min-width: 0; display: flex; flex-direction: column; padding: .4mm 0; }
+.duplex-stats span { overflow: hidden; color: #e6e9ee; font-size: 6.5pt; font-weight: 800; }
+.duplex-stats strong { font-size: 9pt; line-height: 1.15; white-space: nowrap; }
+.duplex-skills { grid-column: 2; grid-row: 4; min-height: 0; overflow: hidden; padding: .8mm 1.5mm; color: #fff; background: var(--front-panel); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2mm), calc(100% - 2mm) 100%, 0 100%); }
+.duplex-skills strong { display: block; font-size: 7pt; }
+.duplex-skills p { margin: .3mm 0 0; font-size: 7pt; line-height: 1.2; }
+.duplex-gear { grid-column: 1 / -1; grid-row: 5; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 6mm 6mm; gap: .8mm; }
+.duplex-gear-box { min-width: 0; padding: .6mm 1.5mm; color: #fff; background: var(--front-panel); clip-path: polygon(0 0, calc(100% - 2mm) 0, 100% 2mm, 100% 100%, 0 100%); }
+.duplex-gear-box strong { display: block; overflow: hidden; font-size: 6.5pt; text-overflow: ellipsis; white-space: nowrap; }
+.duplex-gear-box p { margin: .2mm 0 0; font-size: 7pt; line-height: 1.15; overflow-wrap: anywhere; }
+.duplex-gear-small { text-align: center; }
+.duplex-gear-small { padding: .6mm 0; clip-path: none; border-radius: .8mm; }\n.duplex-gear-small p { font-size: 8pt; font-weight: 700; }/* Reverso al estilo de la tarjeta física: marco gris claro con esquinas redondeadas y barras azules. */
 .duplex-back { --back-accent: #3d5a99; --back-cols: 18mm repeat(7, 3.6mm) 3.6mm 3.2mm 8mm 8mm 3mm minmax(0, 1fr); border-radius: 3mm; background: radial-gradient(ellipse at 50% 35%, #f6f5f1, #e3e2dd 80%); border-color: #9aa1a8; }
 .duplex-back::before { content: ''; position: absolute; inset: 14mm 2mm 1.5mm; border: .9mm solid #fbfaf7; border-top: 0; border-radius: 0 0 6mm 6mm; box-shadow: 0 0 0 .3mm #c5c8cb, inset 0 0 0 .3mm #c5c8cb; pointer-events: none; z-index: 0; }
 .duplex-back > * { position: relative; z-index: 1; }
@@ -504,6 +518,6 @@ button, select { cursor: pointer; }
   .collection-print-card .stat-grid { margin-left: 62px; }
   .collection-section, .collection-section * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .collection-empty { display: none; }
-  .duplex-page-label, .duplex-warning { display: none !important; }
+  .duplex-page-label, .duplex-warning, .duplex-mini-actions { display: none !important; }
   .duplex-card { break-inside: avoid; }
 }

@@ -46,6 +46,7 @@ export interface TroopProfile {
   iconPathsBySectorial?: Record<string, string | undefined>;
   disabled?: boolean;
   characteristics?: string[];
+  orders?: string[];
   availabilityBySectorial?: Record<string, string | undefined>;
   characteristicsBySectorial?: Record<string, string[] | undefined>;
   importNames?: string[];

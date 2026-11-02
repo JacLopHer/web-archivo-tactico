@@ -195,3 +195,23 @@ test('el formato dúplex es una tercera opción con anverso y reverso, borde de 
   assert.match(styles, /\.duplex-card\s*\{[^}]*overflow:\s*hidden/);
   assert.doesNotMatch(styles.match(/\/\* Tarjetas dúplex[\s\S]*?\.duplex-note[^\n]*/)[0], /font-size:\s*([0-5](\.\d+)?|6\.[1-4]\d*)pt|zoom/);
 });
+
+test('el anverso dúplex muestra órdenes, hackeable, marca de agua de facción y miniatura subida por el usuario', () => {
+  assert.match(app, /getUnitCardTags\(profile\)/);
+  assert.match(app, /getCardRules\(profile\)/);
+  assert.match(app, /className="duplex-watermark" src=\{`\$\{import\.meta\.env\.BASE_URL\}\$\{factionLogoPath\(profile\.factionId\)\}`\}/);
+  assert.match(app, /orders: profile\.orders/);
+  assert.match(app, /type="file" accept="image\/\*"/);
+  assert.match(app, /infinity-datacards-miniatures/);
+  assert.match(styles, /\.duplex-mini-actions[^}]*display:\s*none\s*!important|\.duplex-mini-actions\s*\{\s*display:\s*none/);
+  assert.match(styles, /\.duplex-watermark\s*\{[^}]*opacity/);
+});
+test('los iconos de orden son los oficiales de Infinity Army y la tarjeta no repite el nombre en una franja', async () => {
+  const { access } = await import('node:fs/promises');
+  for (const name of ['regular', 'irregular', 'impetuous', 'lieutenant', 'tactical', 'hackable']) {
+    await access(new URL(`../public/orders/${name}.png`, import.meta.url));
+  }
+  assert.match(app, /orders\/\$\{ORDER_ICON_FILES\[type\]\}\.png/);
+  assert.doesNotMatch(app, /duplex-band/);
+  assert.doesNotMatch(styles, /\.duplex-band/);
+});

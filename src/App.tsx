@@ -9,6 +9,7 @@ import { PRINT_LAYOUTS, buildDuplexSheets, getCellSizeMm, isCardOverflowing, pag
 import type { DuplexFlipEdge, DuplexSlot, PrintLayoutName } from './domain/printLayout.mjs';
 import { assertValidTroopClass, getTroopClassLabel, getTroopClassShortLabel } from './domain/troopClasses.mjs';
 import { parseListImport } from './domain/listImport.mjs';
+import { getCardRules, getUnitCardTags } from './domain/unitCardInfo.mjs';
 import {
   createInitialProjectStore,
   createProjectsBackup,
@@ -78,6 +79,7 @@ const allCatalogProfiles: TroopProfile[] = catalog.units.flatMap((unit) =>
     verificationStatus: profile.verificationStatus ?? unit.verificationStatus,
     verificationNote: profile.verificationNote,
     characteristics: unit.characteristics,
+    orders: profile.orders,
     availabilityBySectorial: unit.availabilityBySectorial,
     characteristicsBySectorial: unit.characteristicsBySectorial,
     importNames: profile.importNames,
@@ -91,6 +93,45 @@ const catalogProfiles = allCatalogProfiles.filter((profile) => !profile.disabled
 const weaponIndex = createWeaponIndex([...weaponProfiles.profiles, ...supplementalWeaponProfiles]);
 const rangeBands = ['0', '20', '40', '60', '80', '100', '120', '240'];
 
+const ORDER_ICON_FILES: Record<string, string> = {
+  REGULAR: 'regular',
+  IRREGULAR: 'irregular',
+  IMPETUOUS: 'impetuous',
+  LIEUTENANT: 'lieutenant',
+  TACTICAL: 'tactical',
+  HACKABLE: 'hackable',
+};
+// Iconos oficiales de Infinity Army (assets.corvusbelli.net/army/img/icon), guardados como PNG pequeños en public/orders.
+const cardGlyphSrc = (type: string) => `${import.meta.env.BASE_URL}orders/${ORDER_ICON_FILES[type]}.png`;
+const MINIATURE_STORAGE_KEY = 'infinity-datacards-miniatures';
+const MINIATURE_MAX_SIDE = 480;
+const loadMiniatures = (): Record<string, string> => {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(MINIATURE_STORAGE_KEY) ?? '{}');
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+};
+const readMiniatureFile = (file: File) => new Promise<string>((resolve, reject) => {
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.onload = () => {
+    const scale = Math.min(1, MINIATURE_MAX_SIDE / Math.max(image.naturalWidth, image.naturalHeight));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+    canvas.getContext('2d')?.drawImage(image, 0, 0, canvas.width, canvas.height);
+    URL.revokeObjectURL(url);
+    resolve(canvas.toDataURL('image/webp', 0.9));
+  };
+  image.onerror = () => {
+    URL.revokeObjectURL(url);
+    reject(new Error('No se pudo leer la imagen.'));
+  };
+  image.src = url;
+});
+
 const statLabels: Array<[keyof TroopProfile['stats'], string]> = [
   ['movement', 'MOV'],
   ['cc', 'CC'],
@@ -103,6 +144,7 @@ const statLabels: Array<[keyof TroopProfile['stats'], string]> = [
   ['silhouette', 'S'],
   ['availability', 'DISP'],
 ];
+const duplexStatLabels = [...statLabels.slice(0, 8), statLabels[9], statLabels[8]];
 
 // Las imágenes se buscan en public/units/<slug>.png (miniatura) y public/units/icons/<slug>.png (icono).
 const unitSlug = (name: string) => name
@@ -363,6 +405,32 @@ function App() {
   const [duplexOverflow, setDuplexOverflow] = useState<string[]>([]);
   const [brokenImages, setBrokenImages] = useState<Set<string>>(() => new Set());
   const markImageBroken = (key: string) => setBrokenImages((current) => (current.has(key) ? current : new Set(current).add(key)));
+  const [miniatures, setMiniatures] = useState<Record<string, string>>(loadMiniatures);
+  const [miniatureError, setMiniatureError] = useState('');
+  const updateMiniatures = (next: Record<string, string>) => {
+    try {
+      window.localStorage.setItem(MINIATURE_STORAGE_KEY, JSON.stringify(next));
+      setMiniatureError('');
+    } catch {
+      setMiniatureError('No hay espacio en el navegador para guardar la miniatura; prueba con una imagen más pequeña.');
+      return;
+    }
+    setMiniatures(next);
+  };
+  const handleMiniatureFile = async (unitId: string, event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file) return;
+    try {
+      updateMiniatures({ ...miniatures, [unitId]: await readMiniatureFile(file) });
+    } catch (error) {
+      setMiniatureError(error instanceof Error ? error.message : 'No se pudo cargar la imagen.');
+    }
+  };
+  const removeMiniature = (unitId: string) => {
+    const { [unitId]: _removed, ...rest } = miniatures;
+    updateMiniatures(rest);
+  };
   const [printPreviewOpen, setPrintPreviewOpen] = useState(false);
   const [clipboardBusy, setClipboardBusy] = useState(false);
   const [clipboardFeedback, setClipboardFeedback] = useState<{ message: string; isError: boolean } | null>(null);
@@ -870,41 +938,71 @@ function App() {
       return <div className="duplex-card duplex-card-empty" key={key} data-duplex-key={key} aria-hidden="true" />;
     }
     const { item, profile } = slot.entry;
-    const equipment = [profile.rangedEquipment, profile.meleeEquipment].filter(Boolean).join(' · ');
     if (face === 'front') {
+      const tags = getUnitCardTags(profile);
+      const miniature = miniatures[profile.unitId];
+      const sectorialId = profile.sectorialIds.includes(selectedSectorial) ? selectedSectorial : profile.sectorialIds[0];
+      const iconKey = unitIconKey(profile.unitId, profile.unitName, sectorialId ?? selectedSectorial);
+      const rules = getCardRules(profile) || 'No registrado en la fuente heredada.';
       return (
         <article className="duplex-card duplex-front" key={key} data-duplex-key={key} data-duplex-pair={`${slot.sheet}-${slot.position}`} data-collection-id={item.id}>
-          <header className="duplex-header">
+          <img className="duplex-watermark" src={`${import.meta.env.BASE_URL}${factionLogoPath(profile.factionId)}`} alt="" aria-hidden="true" />
+          <div className="duplex-left">
             <div className="duplex-icon" aria-hidden="true">
               <span>{profile.unitName.slice(0, 1)}</span>
-              {!brokenImages.has(unitIconKey(profile.unitId, profile.unitName, selectedSectorial)) && (
+              {!brokenImages.has(iconKey) && (
                 <img
                   src={`${import.meta.env.BASE_URL}${unitIconPath(
                     profile.unitName,
-                    profile.iconPathsBySectorial?.[selectedSectorial] ?? profile.iconPath,
+                    profile.iconPathsBySectorial?.[sectorialId ?? selectedSectorial] ?? profile.iconPath,
                   )}`}
                   alt=""
-                  onError={() => markImageBroken(unitIconKey(profile.unitId, profile.unitName, selectedSectorial))}
+                  onError={() => markImageBroken(iconKey)}
                 />
               )}
             </div>
-            <div className="duplex-title">
-              <strong>{profile.unitName}</strong>
-              <span>{getTroopClassShortLabel(profile.troopClass)}</span>
+            {(tags.orders.length > 0 || tags.hackable || profile.troopClass) && (
+              <div className="duplex-tags" aria-label="Clase de tropa, órdenes y características">
+                <strong className="duplex-troop" title={getTroopClassLabel(profile.troopClass)}>{getTroopClassShortLabel(profile.troopClass)}</strong>
+                {tags.orders.map((order) => (
+                  <span className="duplex-glyph" key={order.type} title={order.label}>
+                    <img src={cardGlyphSrc(order.type)} alt={order.label} />
+                    {order.count > 1 && <em>{order.count}</em>}
+                  </span>
+                ))}
+                {tags.hackable && <span className="duplex-glyph" title="Hackeable"><img src={cardGlyphSrc('HACKABLE')} alt="Hackeable" /></span>}
+              </div>
+            )}
+            {miniature && <img className="duplex-mini" src={miniature} alt={`Miniatura de ${profile.unitName}`} />}
+            <div className="duplex-mini-actions">
+              <label title={miniature ? 'Cambiar miniatura' : 'Subir miniatura'}>
+                <input type="file" accept="image/*" onChange={(event) => handleMiniatureFile(profile.unitId, event)} />
+                {miniature ? 'Cambiar' : 'Subir miniatura'}
+              </label>
+              {miniature && <button type="button" onClick={() => removeMiniature(profile.unitId)}>Quitar</button>}
             </div>
-            <div className="duplex-cost"><strong>{profile.points}</strong> PTS · CAP <strong>{profile.cap}</strong></div>
+          </div>
+          <p className="duplex-isc">{profile.unitOfficialName ? `ISC: ${profile.unitOfficialName}` : ''}</p>
+          <header className="duplex-header">
+            <strong>{profile.unitName}</strong>
           </header>
           <div className="duplex-stats">
-            {statLabels.map(([statKey, label]) => (
+            {duplexStatLabels.map(([statKey, label]) => (
               <div key={statKey}>
                 <span>{statKey === 'wounds' ? profile.woundsLabel : label}</span>
                 <strong>{profile.stats[statKey]}</strong>
               </div>
             ))}
           </div>
-          <div className="duplex-rules">
-            <p>{profile.skillsAndEquipment || 'No registrado en la fuente heredada.'}</p>
-            {equipment && <p className="duplex-equipment">{equipment}</p>}
+          <div className="duplex-skills">
+            <strong>Habilidades Esp. y Equipo</strong>
+            <p>{rules}</p>
+          </div>
+          <div className="duplex-gear">
+            <div className="duplex-gear-box duplex-gear-ranged"><strong>Armamento | Equipo | Periféricos</strong><p>{profile.rangedEquipment || '—'}</p></div>
+            <div className="duplex-gear-box duplex-gear-melee"><strong>Armas melé</strong><p>{profile.meleeEquipment || '—'}</p></div>
+            <div className="duplex-gear-box duplex-gear-small"><strong>CAP</strong><p>{profile.cap}</p></div>
+            <div className="duplex-gear-box duplex-gear-small"><strong>C</strong><p>{profile.points}</p></div>
           </div>
         </article>
       );
@@ -1493,6 +1591,9 @@ function App() {
               ({duplexOverflow.map((key) => key.replace(/^(\d+)-(front|back)-(\d+)$/, (_m, sheet, face, slot) => `hoja ${sheet} ${face === 'front' ? 'anverso' : 'reverso'} casilla ${slot}`)).join('; ')}).
               Quita armas o divide la unidad y vuelve a comprobar.
             </p>
+          )}
+          {printPreviewOpen && printLayout === 'duplex' && miniatureError && (
+            <p className="duplex-warning" role="alert">{miniatureError}</p>
           )}
           {collection.length && printLayout === 'duplex' && printPreviewOpen ? (
             <ol className="collection-list print-preview-pages duplex-pages" ref={collectionListRef}>
