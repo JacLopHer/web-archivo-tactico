@@ -23,7 +23,7 @@
     ],
     "editionSourceUrl": "https://infinityuniverse.com/blog/infinity-rules-update-5-3",
     "iconSource": "Infinity Army (assets.corvusbelli.net/army/img/logo/units); autorización de uso indicada por el propietario el 2026-11-01.",
-    "note": "Catálogo completo de las unidades de los 4 ejércitos consultados (Haqqislam): 154 grupos/unidades de Haqqislam. Se incluyen 104 fichas de arma; 6 dato(s) de munición no están resueltos y quedan marcados como incompletos. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
+    "note": "Catálogo completo de las unidades de los 4 ejércitos consultados (Haqqislam): 154 grupos/unidades de Haqqislam. Se incluyen 104 fichas de arma; 0 siguen incompletas tras cotejar las fuentes verificadas. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
   },
   "sectorials": [
     {
@@ -3545,7 +3545,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-337-1-1",
@@ -3580,8 +3580,7 @@
             "haqqislam-generic": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
             "haqqislam-hassassin-bahram": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/hassassin-barids-1-1.svg",
@@ -3621,8 +3620,7 @@
             "haqqislam-generic": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
             "haqqislam-hassassin-bahram": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/hassassin-barids-1-1.svg",
@@ -3662,8 +3660,7 @@
             "haqqislam-generic": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
             "haqqislam-hassassin-bahram": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/hassassin-barids-1-1.svg",
@@ -3706,8 +3703,7 @@
             "haqqislam-generic": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
             "haqqislam-hassassin-bahram": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/hassassin-barids-1-1.svg",
@@ -3750,8 +3746,7 @@
             "haqqislam-generic": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
             "haqqislam-hassassin-bahram": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-hassassin-barids-1-1-979d84d743.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/hassassin-barids-1-1.svg",
@@ -7886,7 +7881,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-314-1-1",
@@ -8017,8 +8012,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-najjarun-engineers-1-1-c85b0f4c40.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-najjarun-engineers-1-1-c85b0f4c40.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 222. El roster incluye el arma 222, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-najjarun-engineers-1-1-c85b0f4c40.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/najjarun-engineers-1-1.svg",
@@ -11041,7 +11035,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-329-1-1",
@@ -11150,8 +11144,7 @@
             "haqqislam-generic": "units/icons/infinity-army-asawira-regiment-1-1-c7e52b8f33.svg",
             "haqqislam-hassassin-bahram": "units/icons/infinity-army-asawira-regiment-1-1-c7e52b8f33.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-asawira-regiment-1-1-c7e52b8f33.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/asawira-regiment-1-1.svg",
@@ -12848,7 +12841,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-324-1-4",
@@ -12922,8 +12915,7 @@
             "haqqislam-generic": "units/icons/infinity-army-odalisques-1-1-4c1c8c890c.svg",
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-odalisques-1-1-4c1c8c890c.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-odalisques-1-1-4c1c8c890c.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/odalisques-1-1.svg",
@@ -13583,7 +13575,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-309-1-1-v9f574accea",
@@ -13695,8 +13687,7 @@
           "iconPathsBySectorial": {
             "haqqislam-generic": "units/icons/infinity-army-maghariba-guard-1-1-646a2b644e.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-maghariba-guard-1-1-646a2b644e.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/maghariba-guard-1-1.svg"
@@ -13812,8 +13803,7 @@
           "iconPathsBySectorial": {
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-maghariba-guard-1-1-646a2b644e.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-maghariba-guard-1-1-646a2b644e.svg",
           "iconSourcesBySectorial": {
             "haqqislam-ramah-taskforce": "https://assets.corvusbelli.net/army/img/logo/units/maghariba-guard-1-1.svg"
@@ -14315,7 +14305,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-303-1-3",
@@ -14417,8 +14407,7 @@
           "iconPathsBySectorial": {
             "haqqislam-generic": "units/icons/infinity-army-khawarijs-1-1-9ecdc36569.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-khawarijs-1-1-9ecdc36569.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/khawarijs-1-1.svg"
@@ -14613,7 +14602,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-303-bce319a-1-3",
@@ -14715,8 +14704,7 @@
           "iconPathsBySectorial": {
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-khawarijs-1-1-9ecdc36569.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-khawarijs-1-1-9ecdc36569.svg",
           "iconSourcesBySectorial": {
             "haqqislam-ramah-taskforce": "https://assets.corvusbelli.net/army/img/logo/units/khawarijs-1-1.svg"
@@ -15461,7 +15449,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-1894-1-1",
@@ -15501,8 +15489,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-dr-claire-lazhari-genephilosopher-and-optimate-1-1-f14de0e130.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-dr-claire-lazhari-genephilosopher-and-optimate-1-1-f14de0e130.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-dr-claire-lazhari-genephilosopher-and-optimate-1-1-f14de0e130.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/dr-claire-lazhari-genephilosopher-and-optimate-1-1.svg",
@@ -15549,8 +15536,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-dr-claire-lazhari-genephilosopher-and-optimate-1-1-f14de0e130.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-dr-claire-lazhari-genephilosopher-and-optimate-1-1-f14de0e130.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-dr-claire-lazhari-genephilosopher-and-optimate-1-1-f14de0e130.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/dr-claire-lazhari-genephilosopher-and-optimate-1-1.svg",
@@ -16445,7 +16431,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-331-1-1",
@@ -16481,8 +16467,7 @@
             "haqqislam-generic": "units/icons/infinity-army-al-hawwa-unit-1-1-61d730713f.svg",
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-al-hawwa-unit-1-1-61d730713f.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-al-hawwa-unit-1-1-61d730713f.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/al-hawwa-unit-1-1.svg",
@@ -16602,8 +16587,7 @@
             "haqqislam-generic": "units/icons/infinity-army-al-hawwa-unit-1-1-61d730713f.svg",
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-al-hawwa-unit-1-1-61d730713f.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-al-hawwa-unit-1-1-61d730713f.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/al-hawwa-unit-1-1.svg",
@@ -19650,7 +19634,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-1905-1-1",
@@ -19712,8 +19696,7 @@
           "iconPathsBySectorial": {
             "haqqislam-generic": "units/icons/infinity-army-racerbots-1-1-18772dfc83.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-racerbots-1-1-18772dfc83.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/racerbots-1-1.svg"
@@ -20518,7 +20501,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-10464-1-1",
@@ -20555,8 +20538,7 @@
             "haqqislam-hassassin-bahram": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg",
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/valerya-gromoz-mercenary-hacker-1-1.svg",
@@ -21300,7 +21282,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-11071-1-1",
@@ -21338,8 +21320,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/uhahu-hacker-for-hire-1-1.svg",
@@ -22584,7 +22565,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-10265-1-1",
@@ -22624,8 +22605,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg",
@@ -22673,8 +22653,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg",
@@ -22718,8 +22697,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg",
@@ -27900,7 +27878,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "verified",
+      "weaponProfilesVerificationStatus": "incomplete",
       "profiles": [
         {
           "id": "ia-haqqislam-11556-1-6",
@@ -29200,7 +29178,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-11344-1-1",
@@ -29238,8 +29216,7 @@
             "haqqislam-hassassin-bahram": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/laxmee-hacker-of-fortune-1-1.svg",
@@ -32182,7 +32159,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-10379-1-1",
@@ -32446,8 +32423,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg",
@@ -32495,8 +32471,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg",
@@ -32641,7 +32616,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-11333-1-1",
@@ -32767,8 +32742,7 @@
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg",
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 219. El roster incluye el arma 219, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg",
           "iconSourcesBySectorial": {
             "haqqislam-generic": "https://assets.corvusbelli.net/army/img/logo/units/monstruckers-1-1.svg",
@@ -34390,7 +34364,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-779-1-1",
@@ -34571,8 +34545,7 @@
           "iconPathsBySectorial": {
             "haqqislam-hassassin-bahram": "units/icons/infinity-army-hassassin-ayyar-1-1-e559ddf3bb.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-hassassin-ayyar-1-1-e559ddf3bb.svg",
           "iconSourcesBySectorial": {
             "haqqislam-hassassin-bahram": "https://assets.corvusbelli.net/army/img/logo/units/hassassin-ayyar-1-1.svg"
@@ -36043,7 +36016,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-986-1-1",
@@ -36074,8 +36047,7 @@
           "iconPathsBySectorial": {
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-security-chief-arslan-1-1-908ae37d0e.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-security-chief-arslan-1-1-908ae37d0e.svg",
           "iconSourcesBySectorial": {
             "haqqislam-qapu-khalqi": "https://assets.corvusbelli.net/army/img/logo/units/security-chief-arslan-1-1.svg"
@@ -36114,8 +36086,7 @@
           "iconPathsBySectorial": {
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-security-chief-arslan-1-1-908ae37d0e.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-security-chief-arslan-1-1-908ae37d0e.svg",
           "iconSourcesBySectorial": {
             "haqqislam-qapu-khalqi": "https://assets.corvusbelli.net/army/img/logo/units/security-chief-arslan-1-1.svg"
@@ -36227,7 +36198,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1344-1-1",
@@ -36261,8 +36232,7 @@
           "iconPathsBySectorial": {
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg",
           "iconSourcesBySectorial": {
             "haqqislam-qapu-khalqi": "https://assets.corvusbelli.net/army/img/logo/units/laxmee-hacker-of-fortune-1-1.svg"
@@ -36904,7 +36874,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-379-1-1",
@@ -37117,8 +37087,7 @@
           "iconPathsBySectorial": {
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "haqqislam-qapu-khalqi": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg"
@@ -37157,8 +37126,7 @@
           "iconPathsBySectorial": {
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "haqqislam-qapu-khalqi": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg"
@@ -38015,7 +37983,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-383-1-1",
@@ -38048,8 +38016,7 @@
           "iconPathsBySectorial": {
             "haqqislam-qapu-khalqi": "units/icons/infinity-army-iguana-squadron-1-1-75cb79feb0.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-iguana-squadron-1-1-75cb79feb0.svg",
           "iconSourcesBySectorial": {
             "haqqislam-qapu-khalqi": "https://assets.corvusbelli.net/army/img/logo/units/iguana-squadron-1-1.svg"
@@ -38782,7 +38749,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1333-1-1",
@@ -38884,8 +38851,7 @@
           "iconPathsBySectorial": {
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 219. El roster incluye el arma 219, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg",
           "iconSourcesBySectorial": {
             "haqqislam-ramah-taskforce": "https://assets.corvusbelli.net/army/img/logo/units/monstruckers-1-1.svg"
@@ -39872,7 +39838,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-haqqislam-464-1-1",
@@ -39905,8 +39871,7 @@
           "iconPathsBySectorial": {
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg",
           "iconSourcesBySectorial": {
             "haqqislam-ramah-taskforce": "https://assets.corvusbelli.net/army/img/logo/units/valerya-gromoz-mercenary-hacker-1-1.svg"
@@ -40502,7 +40467,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1316-1-1",
@@ -40676,8 +40641,7 @@
           "iconPathsBySectorial": {
             "haqqislam-ramah-taskforce": "units/icons/infinity-army-hortlak-janissaries-1-1-8d8185f01a.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-hortlak-janissaries-1-1-8d8185f01a.svg",
           "iconSourcesBySectorial": {
             "haqqislam-ramah-taskforce": "https://assets.corvusbelli.net/army/img/logo/units/hortlak-janissaries-1-1.svg"
@@ -41467,13 +41431,12 @@
       "rangeNote": "short ≤40cm: 0 · long ≤60cm: -3 · max ≤120cm: -6",
       "damage": "-",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "-",
       "saves": "-",
       "properties": "Ataque Especulativo, Desechable (2), Indiscriminado, No Letal, Sin Objetivo, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 154",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 154; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-87",
@@ -41809,17 +41772,15 @@
       "id": "infinity-army-weapon-222",
       "infinityArmyWeaponId": 222,
       "name": "Torreta Artillada (Fusil)",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 222",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 222, pero los metadatos consultados no proporcionan su ficha."
+      "rangeModifiers": "0,+3,-3,-3,-6,-6,--",
+      "damage": "7",
+      "burst": "3",
+      "ammunition": "N",
+      "saveAttribute": "BLI",
+      "saves": "1",
+      "properties": "Fuego de Supresión",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 222; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 186; Infinity Wiki, Armed Turret and Weapon Chart (Rifles): https://infinitythewiki.com/Armed_Turret and https://infinitythewiki.com/Weapon_Chart#RIFLES",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-82",
@@ -41916,16 +41877,15 @@
       "infinityArmyWeaponId": 208,
       "name": "Disco Baller (Disco Ball)",
       "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "-",
-      "burst": "-",
-      "ammunition": "",
-      "saveAttribute": "-",
-      "saves": "-",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 208",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "rangeNote": "Weapon Chart: 0, +3, -3, -6, --, --, --, --.",
+      "damage": "1",
+      "burst": "--",
+      "ammunition": "--",
+      "saveAttribute": "--",
+      "saves": "--",
+      "properties": "Ataque Especulativo, Desechable (2), Doble Disparo, Sin Objetivo, [*]",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 208; datos complementados con ficha verificada: Infinity Wiki, Weapon Chart (Uncategorized), perfil Disco Baller; Disco Baller: https://infinitythewiki.com/Weapon_Chart#UNCATEGORIZED and https://infinitythewiki.com/Disco_Baller",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-197",
@@ -42025,13 +41985,12 @@
       "rangeNote": "short ≤20cm: 0 · med ≤40cm: +3 · long ≤60cm: -3 · max ≤120cm: -6",
       "damage": "-",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "-",
       "saves": "1",
       "properties": "Doble Disparo, Ataque Especulativo, Desechable (2), Sin Objetivo, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 176",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 176; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 190",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-13",
@@ -42116,13 +42075,12 @@
       "rangeNote": "",
       "damage": "5",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "PB",
       "saves": "2",
       "properties": "Ataque de Comunicaciones, Ataque Intuitivo, Camuflado, Desechable (3), No Letal, Plantilla Directa (Lágrima Pequeña), Posicionable, Estado: Aturdido / Inmobilizado-B, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 174",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 174; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 190",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-211",
@@ -42458,17 +42416,15 @@
       "id": "infinity-army-weapon-219",
       "infinityArmyWeaponId": 219,
       "name": "Torreta Artillada (Fusil AP)",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 219",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 219, pero los metadatos consultados no proporcionan su ficha."
+      "rangeModifiers": "0,+3,-3,-3,-6,-6,--",
+      "damage": "7",
+      "burst": "3",
+      "ammunition": "AP",
+      "saveAttribute": "BLI/2",
+      "saves": "1",
+      "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 219; datos complementados con ficha verificada: Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil AP, p. 186.; Infinity Wiki, Armed Turret and Weapon Chart (Rifles): https://infinitythewiki.com/Armed_Turret and https://infinitythewiki.com/Weapon_Chart#RIFLES",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-214",

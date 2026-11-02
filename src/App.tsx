@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import type { ChangeEvent, FormEvent } from 'react';
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import type { ChangeEvent, FormEvent, KeyboardEvent as ReactKeyboardEvent } from 'react';
 import catalogData from './data/legacyJsaCatalog.json';
 import { extraFactionsCatalog } from './data/extraCatalogs';
 import factionDirectoryData from './data/factionDirectory.json';
@@ -193,6 +193,147 @@ const sectorialLogoPath = (sectorialId: string, factionId: string) => {
     ? factionDirectory.logos.assets[slug]?.path ?? factionLogoPath(factionId)
     : factionLogoPath(factionId);
 };
+const genericSectorialId = (factionId: string) => factionId === 'jsa' ? 'jsa-vanilla' : `${factionId}-generic`;
+
+interface LogoSelectOption {
+  value: string;
+  label: string;
+  iconPath: string;
+  disabled?: boolean;
+}
+
+function LogoSelect({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: LogoSelectOption[];
+  onChange: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const optionRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const listboxId = useId();
+  const selectedIndex = Math.max(0, options.findIndex((option) => option.value === value));
+  const selectedOption = options[selectedIndex];
+
+  useEffect(() => {
+    if (!open) return;
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, [open]);
+
+  useEffect(() => {
+    if (open) optionRefs.current[activeIndex]?.focus();
+  }, [activeIndex, open]);
+
+  const openMenu = () => {
+    setActiveIndex(selectedIndex);
+    setOpen(true);
+  };
+  const moveActiveOption = (startIndex: number, direction: 1 | -1) => {
+    for (let offset = 1; offset <= options.length; offset += 1) {
+      const index = (startIndex + direction * offset + options.length) % options.length;
+      if (!options[index].disabled) {
+        setActiveIndex(index);
+        return;
+      }
+    }
+  };
+  const handleOptionKeyDown = (event: ReactKeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      moveActiveOption(activeIndex, event.key === 'ArrowDown' ? 1 : -1);
+    } else if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault();
+      const indexes = options.map((option, index) => option.disabled ? -1 : index).filter((index) => index >= 0);
+      if (indexes.length) setActiveIndex(event.key === 'Home' ? indexes[0] : indexes[indexes.length - 1]);
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      setOpen(false);
+      triggerRef.current?.focus();
+    }
+  };
+
+  return (
+    <div
+      className="select-control"
+      onBlur={(event) => {
+        if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
+    >
+      <span>{label}</span>
+      <div className="logo-select" ref={rootRef}>
+        <button
+          ref={triggerRef}
+          className="logo-select-trigger"
+          type="button"
+          aria-label={label}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-controls={listboxId}
+          onClick={() => (open ? setOpen(false) : openMenu())}
+          onKeyDown={(event) => {
+            if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+              event.preventDefault();
+              if (!open) openMenu();
+            }
+          }}
+        >
+          <img src={`${import.meta.env.BASE_URL}${selectedOption.iconPath}`} alt="" aria-hidden="true" />
+          <span>{selectedOption.label}</span>
+          <span className="logo-select-chevron" aria-hidden="true">▾</span>
+        </button>
+        {open && (
+          <div
+            className="logo-select-options"
+            id={listboxId}
+            role="listbox"
+            aria-label={label}
+            onKeyDown={(event) => {
+              if (event.target === event.currentTarget && event.key === 'Escape') {
+                setOpen(false);
+                triggerRef.current?.focus();
+              }
+            }}
+          >
+            {options.map((option, index) => (
+              <button
+                key={option.value}
+                ref={(element) => { optionRefs.current[index] = element; }}
+                id={`${listboxId}-option-${index}`}
+                className="logo-select-option"
+                type="button"
+                role="option"
+                aria-selected={option.value === value}
+                disabled={option.disabled}
+                tabIndex={activeIndex === index ? 0 : -1}
+                onFocus={() => setActiveIndex(index)}
+                onKeyDown={handleOptionKeyDown}
+                onClick={() => {
+                  onChange(option.value);
+                  setOpen(false);
+                  triggerRef.current?.focus();
+                }}
+              >
+                <img src={`${import.meta.env.BASE_URL}${option.iconPath}`} alt="" aria-hidden="true" />
+                <span>{option.label}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 const unitIconPath = (name: string, iconPath?: string) => {
   if (iconPath) return iconPath;
@@ -209,7 +350,7 @@ function App() {
   const [selectedId, setSelectedId] = useState(catalogProfiles[0]?.id ?? '');
   const [selectedUnitId, setSelectedUnitId] = useState(catalog.units[0]?.id ?? '');
   const [selectedFactionId, setSelectedFactionId] = useState(jsaCatalog.faction.id);
-  const [selectedSectorial, setSelectedSectorial] = useState('');
+  const [selectedSectorial, setSelectedSectorial] = useState(genericSectorialId(jsaCatalog.faction.id));
   const [pendingImport, setPendingImport] = useState<{
     format: 'infinity-army' | 'profile-list';
     resolved: Array<ImportedProfileLine & { id: string }>;
@@ -390,11 +531,16 @@ function App() {
   };
 
   const selectFaction = (value: string) => {
+    const sectorialId = genericSectorialId(value);
+    const sectorial = catalog.sectorials.find((item) => item.id === sectorialId);
     setSelectedFactionId(value);
-    setSelectedSectorial('');
+    setSelectedSectorial(sectorialId);
     setSelectedTroopClass('');
     setQuery('');
-    const firstProfile = catalogProfiles.find((profile) => profile.factionId === value);
+    const firstProfile = catalogProfiles.find((profile) => profile.factionId === value
+      && (profile.sectorialIds
+        ? profile.sectorialIds.includes(sectorialId)
+        : sectorial?.unitIds.includes(profile.unitId)));
     setSelectedUnitId(firstProfile?.unitId ?? '');
     setSelectedId(firstProfile?.id ?? '');
   };
@@ -894,37 +1040,28 @@ function App() {
       </section>
 
       <section className="catalog-controls" aria-label="Filtros del catálogo">
-        <label className="select-control">
-          <span>Facción</span>
-          <div className="select-with-icon">
-              <img className="select-icon" src={`${import.meta.env.BASE_URL}${factionLogoPath(selectedFactionId)}`} alt="" aria-hidden="true" />
-              <select value={selectedFactionId} onChange={(event) => selectFaction(event.target.value)} aria-label="Facción">
-                {catalog.factions.map((faction) => (
-                  <option key={faction.id} value={faction.id}>{faction.name}</option>
-                ))}
-              </select>
-          </div>
-        </label>
-        <label className="select-control">
-          <span>Sectorial</span>
-          <div className="select-with-icon">
-            <img className="select-icon" src={`${import.meta.env.BASE_URL}${selectedSectorial ? sectorialLogoPath(selectedSectorial, selectedFactionId) : factionLogoPath(selectedFactionId)}`} alt="" aria-hidden="true" />
-            <select value={selectedSectorial} onChange={(event) => selectSectorial(event.target.value)}>
-              <option value="">Todos los sectoriales</option>
-              {factionSectorials.map((sectorial) => (
-                <option
-                  key={sectorial.id}
-                  value={sectorial.id}
-                  disabled={sectorial.verificationStatus === 'unmapped'}
-                >
-                  {sectorial.name}
-                  {sectorial.verificationStatus === 'unmapped' ? ' · datos pendientes' : ''}
-                  {sectorial.verificationStatus === 'unit-level' ? ' · por unidad' : ''}
-                </option>
-              ))}
-            </select>
-          </div>
-        </label>
+        <LogoSelect
+          label="Facción"
+          value={selectedFactionId}
+          options={catalog.factions.map((faction) => ({
+            value: faction.id,
+            label: faction.name,
+            iconPath: factionLogoPath(faction.id),
+          }))}
+          onChange={selectFaction}
+        />
+        <LogoSelect
+          label="Sectorial"
+          value={selectedSectorial}
+          options={factionSectorials.map((sectorial) => ({
+              value: sectorial.id,
+              label: `${sectorial.id === genericSectorialId(selectedFactionId)
+                && !/\bgen[eé]rica\b/i.test(sectorial.name) ? `${sectorial.name} (genérica)` : sectorial.name}${sectorial.verificationStatus === 'unmapped' ? ' · datos pendientes' : ''}${sectorial.verificationStatus === 'unit-level' ? ' · por unidad' : ''}`,
+              iconPath: sectorialLogoPath(sectorial.id, selectedFactionId),
+              disabled: sectorial.verificationStatus === 'unmapped',
+            }))}
+          onChange={selectSectorial}
+        />
       </section>
 
       <div className="workspace">

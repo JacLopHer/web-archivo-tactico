@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { supplementVerifiedWeapons } from './verifiedWeaponSupplements.mjs';
 
 const catalog = JSON.parse(
   await readFile(new URL('../src/data/legacyJsaCatalog.json', import.meta.url), 'utf8'),
@@ -194,7 +195,7 @@ test('la disponibilidad se verifica por unidad y por perfil, sin heredar asignac
   }
 });
 
-test('las armas de Infinity Army se conservan y señalan explícitamente el dato incompleto', () => {
+test('las armas de Infinity Army conservan perfiles verificados y señalan entradas no identificadas', () => {
   assert.equal(extraCatalog.weapons.length, 115);
   assert.ok(extraCatalog.weapons.every((weapon) =>
     weapon.id.startsWith('infinity-army-weapon-')
@@ -202,11 +203,76 @@ test('las armas de Infinity Army se conservan y señalan explícitamente el dato
       && ['verified', 'incomplete'].includes(weapon.verificationStatus),
   ));
   const incomplete = extraCatalog.weapons.filter((weapon) => weapon.verificationStatus === 'incomplete');
-  assert.equal(incomplete.length, 7);
-  assert.ok(incomplete.some((weapon) => weapon.name === 'Cibermina'
-    && /id de munición 0/.test(weapon.verificationNote)));
-  assert.ok(incomplete.some((weapon) => /no proporcionan su ficha/.test(weapon.verificationNote)));
-  assert.ok(extraCatalog.units.find((unit) => unit.name === 'VIGILANTE').weaponProfilesVerificationStatus === 'incomplete');
+  assert.deepEqual(incomplete, []);
+  const supplemented = extraCatalog.weapons.find((weapon) => weapon.infinityArmyWeaponId === 174);
+  assert.equal(supplemented.verificationStatus, 'verified');
+  assert.equal(supplemented.ammunition, '--');
+  assert.match(supplemented.source, /Tablas de referencia rápida N5/);
+  const discoBaller = extraCatalog.weapons.find((weapon) => weapon.infinityArmyWeaponId === 208);
+  assert.equal(discoBaller.verificationStatus, 'verified');
+  assert.equal(discoBaller.damage, '1');
+  assert.match(discoBaller.source, /Weapon_Chart#UNCATEGORIZED/);
+  assert.ok(extraCatalog.weapons.some((weapon) => weapon.name === 'Torreta Artillada (F. Precisión)'
+    && weapon.verificationStatus === 'verified'
+    && weapon.source.includes('Weapon_Chart#MARKSMAN_RIFLES')));
+  assert.ok(extraCatalog.units.find((unit) => unit.name === 'HAWKWOOD').weaponProfilesVerificationStatus === 'incomplete');
+});
+
+test('solo completa armas con correspondencia explícita a un perfil local verificado', () => {
+  const weapon = (id, name, verificationNote) => ({
+    id: `infinity-army-weapon-${id}`,
+    infinityArmyWeaponId: id,
+    name,
+    rangeModifiers: '',
+    damage: '',
+    burst: '',
+    ammunition: '',
+    saveAttribute: '',
+    saves: '',
+    properties: '',
+    source: `Infinity Army, arma ${id}`,
+    verificationStatus: 'incomplete',
+    verificationNote,
+  });
+  const catalog = {
+    weapons: [
+      weapon(174, 'Cibermina', 'Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.'),
+      weapon(209, 'Torreta Artillada (F. Combi)', 'El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha.'),
+      weapon(208, 'Disco Baller (Disco Ball)', 'El roster incluye el arma 208, pero los metadatos consultados no proporcionan su ficha.'),
+      weapon(215, 'Torreta Artillada (F. Precisión)', 'El roster incluye el arma 215, pero los metadatos consultados no proporcionan su ficha.'),
+      weapon(222, 'Torreta Artillada (Fusil)', 'El roster incluye el arma 222, pero los metadatos consultados no proporcionan su ficha.'),
+      weapon(228, 'Torreta Artillada (E/Mitter)', 'El roster incluye el arma 228, pero los metadatos consultados no proporcionan su ficha.'),
+      weapon(144, 'SymbioBomb', 'El roster incluye el arma 144, pero los metadatos consultados no proporcionan su ficha.'),
+    ],
+    units: [{
+      weaponProfilesVerificationStatus: 'incomplete',
+      profiles: [
+        { infinityArmyWeaponIds: [174], verificationStatus: 'incomplete', verificationNote: 'Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.' },
+        { infinityArmyWeaponIds: [209], verificationStatus: 'incomplete', verificationNote: 'Faltan los metadatos de Infinity Army para el arma 209.' },
+        { infinityArmyWeaponIds: [208], verificationStatus: 'incomplete', verificationNote: 'Faltan los metadatos de Infinity Army para el arma 208.' },
+        { infinityArmyWeaponIds: [215], verificationStatus: 'incomplete', verificationNote: 'Faltan los metadatos de Infinity Army para el arma 215.' },
+        { infinityArmyWeaponIds: [222], verificationStatus: 'incomplete', verificationNote: 'Faltan los metadatos de Infinity Army para el arma 222.' },
+        { infinityArmyWeaponIds: [228], verificationStatus: 'incomplete', verificationNote: 'Faltan los metadatos de Infinity Army para el arma 228.' },
+        { infinityArmyWeaponIds: [144], verificationStatus: 'incomplete', verificationNote: 'Faltan los metadatos de Infinity Army para el arma 144.' },
+      ],
+    }],
+  };
+  supplementVerifiedWeapons(catalog, weaponCatalog.profiles);
+
+  assert.equal(catalog.weapons.find(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 174).verificationStatus, 'verified');
+  assert.equal(catalog.weapons.find(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 174).ammunition, '--');
+  assert.equal(catalog.weapons.find(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 209).damage, '7');
+  assert.equal(catalog.weapons.find(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 209).verificationStatus, 'verified');
+  assert.equal(catalog.weapons.find(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 208).damage, '1');
+  assert.equal(catalog.weapons.find(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 208).verificationStatus, 'verified');
+  assert.equal(catalog.weapons.find(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 215).damage, '7');
+  assert.equal(catalog.weapons.find(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 222).damage, '7');
+  assert.equal(catalog.weapons.find(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 228).ammunition, 'E/M');
+  assert.equal(catalog.weapons.some(({ infinityArmyWeaponId }) => infinityArmyWeaponId === 144), false);
+  assert.deepEqual(catalog.units[0].profiles.map(({ verificationStatus }) => verificationStatus), [
+    'verified', 'verified', 'verified', 'verified', 'verified', 'verified', 'verified',
+  ]);
+  assert.equal(catalog.units[0].weaponProfilesVerificationStatus, 'verified');
 });
 
 test('los iconos de Infinity Army se descargan localmente y cada grupo usa su recurso', async () => {

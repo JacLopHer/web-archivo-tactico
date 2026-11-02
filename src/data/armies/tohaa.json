@@ -19,7 +19,7 @@
     },
     "editionSourceUrl": "https://infinityuniverse.com/blog/infinity-rules-update-5-3",
     "iconSource": "Infinity Army (assets.corvusbelli.net/army/img/logo/units); autorización de uso indicada por el propietario el 2026-11-01.",
-    "note": "Catálogo completo de las unidades de los 1 ejércitos consultados (Tohaa): 102 grupos/unidades de Tohaa. Se incluyen 103 fichas de arma; 5 dato(s) de munición no están resueltos y quedan marcados como incompletos. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
+    "note": "Catálogo completo de las unidades de los 1 ejércitos consultados (Tohaa): 102 grupos/unidades de Tohaa. Se incluyen 103 fichas de arma; 0 siguen incompletas tras cotejar las fuentes verificadas. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
   },
   "sectorials": [
     {
@@ -449,7 +449,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-719-1-1",
@@ -482,8 +482,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-kaeltar-specialists-1-1-2776920885.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 144. El roster incluye el arma 144, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-kaeltar-specialists-1-1-2776920885.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/kaeltar-specialists-1-1.svg"
@@ -521,8 +520,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-kaeltar-specialists-1-1-2776920885.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 144. El roster incluye el arma 144, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-kaeltar-specialists-1-1-2776920885.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/kaeltar-specialists-1-1.svg"
@@ -6042,7 +6040,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-tohaa-265-1-1",
@@ -6076,8 +6074,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg"
@@ -6116,8 +6113,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg"
@@ -11560,7 +11556,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-tohaa-10464-1-1",
@@ -11593,8 +11589,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/valerya-gromoz-mercenary-hacker-1-1.svg"
@@ -12172,7 +12167,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-tohaa-11071-1-1",
@@ -12204,8 +12199,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/uhahu-hacker-for-hire-1-1.svg"
@@ -13174,7 +13168,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-tohaa-10265-1-1",
@@ -13208,8 +13202,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg"
@@ -13248,8 +13241,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg"
@@ -13284,8 +13276,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg"
@@ -17875,7 +17866,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "verified",
+      "weaponProfilesVerificationStatus": "incomplete",
       "profiles": [
         {
           "id": "ia-tohaa-11556-1-6",
@@ -19261,7 +19252,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-tohaa-11344-1-1",
@@ -19295,8 +19286,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/laxmee-hacker-of-fortune-1-1.svg"
@@ -20935,7 +20925,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-tohaa-10379-1-1",
@@ -21148,8 +21138,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg"
@@ -21188,8 +21177,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg"
@@ -21298,7 +21286,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-tohaa-11333-1-1",
@@ -21400,8 +21388,7 @@
           "iconPathsBySectorial": {
             "tohaa-generic": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 219. El roster incluye el arma 219, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg",
           "iconSourcesBySectorial": {
             "tohaa-generic": "https://assets.corvusbelli.net/army/img/logo/units/monstruckers-1-1.svg"
@@ -21872,22 +21859,6 @@
       "properties": "Arma CD (VOL), Estado: Aturdido, No Letal",
       "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 72",
       "verificationStatus": "verified"
-    },
-    {
-      "id": "infinity-army-weapon-144",
-      "infinityArmyWeaponId": 144,
-      "name": "SymbioBomb",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 144",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 144, pero los metadatos consultados no proporcionan su ficha."
     },
     {
       "id": "infinity-army-weapon-69",
@@ -22632,29 +22603,27 @@
       "rangeNote": "",
       "damage": "5",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "PB",
       "saves": "2",
       "properties": "Ataque de Comunicaciones, Ataque Intuitivo, Camuflado, Desechable (3), No Letal, Plantilla Directa (Lágrima Pequeña), Posicionable, Estado: Aturdido / Inmobilizado-B, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 174",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 174; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 190",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-208",
       "infinityArmyWeaponId": 208,
       "name": "Disco Baller (Disco Ball)",
       "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "-",
-      "burst": "-",
-      "ammunition": "",
-      "saveAttribute": "-",
-      "saves": "-",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 208",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "rangeNote": "Weapon Chart: 0, +3, -3, -6, --, --, --, --.",
+      "damage": "1",
+      "burst": "--",
+      "ammunition": "--",
+      "saveAttribute": "--",
+      "saves": "--",
+      "properties": "Ataque Especulativo, Desechable (2), Doble Disparo, Sin Objetivo, [*]",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 208; datos complementados con ficha verificada: Infinity Wiki, Weapon Chart (Uncategorized), perfil Disco Baller; Disco Baller: https://infinitythewiki.com/Weapon_Chart#UNCATEGORIZED and https://infinitythewiki.com/Disco_Baller",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-9",
@@ -22919,13 +22888,12 @@
       "rangeNote": "short ≤40cm: 0 · long ≤60cm: -3 · max ≤120cm: -6",
       "damage": "-",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "-",
       "saves": "-",
       "properties": "Ataque Especulativo, Desechable (2), Indiscriminado, No Letal, Sin Objetivo, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 154",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 154; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-193",
@@ -23365,18 +23333,16 @@
     {
       "id": "infinity-army-weapon-219",
       "infinityArmyWeaponId": 219,
-      "name": "Arma Infinity Army 219",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 219",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 219, pero los metadatos consultados no proporcionan su ficha."
+      "name": "Torreta Artillada (Fusil AP)",
+      "rangeModifiers": "0,+3,-3,-3,-6,-6,--",
+      "damage": "7",
+      "burst": "3",
+      "ammunition": "AP",
+      "saveAttribute": "BLI/2",
+      "saves": "1",
+      "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 219; datos complementados con ficha verificada: Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil AP, p. 186.; Infinity Wiki, Armed Turret and Weapon Chart (Rifles): https://infinitythewiki.com/Armed_Turret and https://infinitythewiki.com/Weapon_Chart#RIFLES",
+      "verificationStatus": "verified"
     }
   ]
 }

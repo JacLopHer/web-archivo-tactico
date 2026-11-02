@@ -19,7 +19,7 @@
     },
     "editionSourceUrl": "https://infinityuniverse.com/blog/infinity-rules-update-5-3",
     "iconSource": "Infinity Army (assets.corvusbelli.net/army/img/logo/units); autorización de uso indicada por el propietario el 2026-11-01.",
-    "note": "Catálogo completo de las unidades de los 7 ejércitos consultados (PanOceanía): 199 grupos/unidades de PanOceanía. Se incluyen 112 fichas de arma; 8 dato(s) de munición no están resueltos y quedan marcados como incompletos. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
+    "note": "Catálogo completo de las unidades de los 7 ejércitos consultados (PanOceanía): 199 grupos/unidades de PanOceanía. Se incluyen 112 fichas de arma; 0 siguen incompletas tras cotejar las fuentes verificadas. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
   },
   "sectorials": [
     {
@@ -2970,7 +2970,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1809-1-1",
@@ -3169,8 +3169,7 @@
             "panoceania-generic": "units/icons/infinity-army-fireflies-clandestine-demo-squad-1-1-36d88ef670.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-fireflies-clandestine-demo-squad-1-1-36d88ef670.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 215. El roster incluye el arma 215, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-fireflies-clandestine-demo-squad-1-1-36d88ef670.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/fireflies-clandestine-demo-squad-1-1.svg",
@@ -5061,8 +5060,7 @@
           "iconPathsBySectorial": {
             "panoceania-generic": "units/icons/infinity-army-zulu-cobra-1-1-694f2da952.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-zulu-cobra-1-1-694f2da952.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/zulu-cobra-1-1.svg"
@@ -5141,7 +5139,7 @@
             "panoceania-varuna-immediate-reaction-division": "units/icons/infinity-army-zulu-cobra-1-1-694f2da952.svg"
           },
           "verificationStatus": "incomplete",
-          "verificationNote": "2 entrada(s) de arma de Infinity Army no contienen ID y no pueden identificarse. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationNote": "2 entrada(s) de arma de Infinity Army no contienen ID y no pueden identificarse.",
           "iconPath": "units/icons/infinity-army-zulu-cobra-1-1-694f2da952.svg",
           "iconSourcesBySectorial": {
             "panoceania-varuna-immediate-reaction-division": "https://assets.corvusbelli.net/army/img/logo/units/zulu-cobra-1-1.svg"
@@ -5344,7 +5342,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1750-1-1",
@@ -5380,8 +5378,7 @@
             "panoceania-generic": "units/icons/infinity-army-reinf-blockers-1-1-95a156e88a.svg",
             "panoceania-neoterran-capitaline-army": "units/icons/infinity-army-reinf-blockers-1-1-95a156e88a.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-reinf-blockers-1-1-95a156e88a.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/reinf-blockers-1-1.svg",
@@ -8832,7 +8829,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1815-1-1",
@@ -8920,8 +8917,7 @@
             "panoceania-military-orders": "units/icons/infinity-army-team-crux-father-knights-1-1-66f5c7234e.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-team-crux-father-knights-1-1-66f5c7234e.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 209. El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-team-crux-father-knights-1-1-66f5c7234e.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/team-crux-father-knights-1-1.svg",
@@ -9800,7 +9796,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-15-1-1",
@@ -9912,8 +9908,7 @@
             "panoceania-generic": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 209. El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/machinists-1-1.svg",
@@ -10030,8 +10025,7 @@
           "iconPathsBySectorial": {
             "panoceania-shock-army-of-acontecimento": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 209. El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg",
           "iconSourcesBySectorial": {
             "panoceania-shock-army-of-acontecimento": "https://assets.corvusbelli.net/army/img/logo/units/machinists-1-1.svg"
@@ -10070,8 +10064,7 @@
           "iconPathsBySectorial": {
             "panoceania-shock-army-of-acontecimento": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 228. El roster incluye el arma 228, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg",
           "iconSourcesBySectorial": {
             "panoceania-shock-army-of-acontecimento": "https://assets.corvusbelli.net/army/img/logo/units/machinists-1-1.svg"
@@ -10190,8 +10183,7 @@
           "iconPathsBySectorial": {
             "panoceania-neoterran-capitaline-army": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 209. El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg",
           "iconSourcesBySectorial": {
             "panoceania-neoterran-capitaline-army": "https://assets.corvusbelli.net/army/img/logo/units/machinists-1-1.svg"
@@ -10310,8 +10302,7 @@
           "iconPathsBySectorial": {
             "panoceania-varuna-immediate-reaction-division": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 209. El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg",
           "iconSourcesBySectorial": {
             "panoceania-varuna-immediate-reaction-division": "https://assets.corvusbelli.net/army/img/logo/units/machinists-1-1.svg"
@@ -10388,8 +10379,7 @@
           "iconPathsBySectorial": {
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 209. El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-machinists-1-1-8b9f967e32.svg",
           "iconSourcesBySectorial": {
             "panoceania-svalarheima-s-winter-force": "https://assets.corvusbelli.net/army/img/logo/units/machinists-1-1.svg"
@@ -14039,7 +14029,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-769-1-3",
@@ -14200,8 +14190,7 @@
             "panoceania-neoterran-capitaline-army": "units/icons/infinity-army-locust-clandestine-action-team-1-1-c7c791a34f.svg",
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-locust-clandestine-action-team-1-1-c7c791a34f.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-locust-clandestine-action-team-1-1-c7c791a34f.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/locust-clandestine-action-team-1-1.svg",
@@ -14245,8 +14234,7 @@
             "panoceania-neoterran-capitaline-army": "units/icons/infinity-army-locust-clandestine-action-team-1-1-c7c791a34f.svg",
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-locust-clandestine-action-team-1-1-c7c791a34f.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-locust-clandestine-action-team-1-1-c7c791a34f.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/locust-clandestine-action-team-1-1.svg",
@@ -15042,7 +15030,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-panoceania-1905-1-1",
@@ -15104,8 +15092,7 @@
           "iconPathsBySectorial": {
             "panoceania-generic": "units/icons/infinity-army-racerbots-1-1-18772dfc83.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-racerbots-1-1-18772dfc83.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/racerbots-1-1.svg"
@@ -18038,7 +18025,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-panoceania-1903-g2-2-1",
@@ -18072,8 +18059,7 @@
             "panoceania-generic": "units/icons/infinity-army-pilot-x-team-2-1-3c2e28073c.svg",
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-pilot-x-team-2-1-3c2e28073c.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-pilot-x-team-2-1-3c2e28073c.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/pilot-x-team-2-1.svg",
@@ -19520,7 +19506,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1803-1-1",
@@ -19821,8 +19807,7 @@
             "panoceania-generic": "units/icons/infinity-army-fennec-fusiliers-1-1-c0f160b867.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-fennec-fusiliers-1-1-c0f160b867.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-fennec-fusiliers-1-1-c0f160b867.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/fennec-fusiliers-1-1.svg",
@@ -22180,7 +22165,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-8-1-3",
@@ -22250,8 +22235,7 @@
             "panoceania-generic": "units/icons/infinity-army-aquila-guard-1-1-a180aee55a.svg",
             "panoceania-neoterran-capitaline-army": "units/icons/infinity-army-aquila-guard-1-1-a180aee55a.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-aquila-guard-1-1-a180aee55a.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/aquila-guard-1-1.svg",
@@ -22293,8 +22277,7 @@
             "panoceania-generic": "units/icons/infinity-army-aquila-guard-1-1-a180aee55a.svg",
             "panoceania-neoterran-capitaline-army": "units/icons/infinity-army-aquila-guard-1-1-a180aee55a.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-aquila-guard-1-1-a180aee55a.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/aquila-guard-1-1.svg",
@@ -22335,8 +22318,7 @@
           "iconPathsBySectorial": {
             "panoceania-neoterran-capitaline-army": "units/icons/infinity-army-aquila-guard-1-1-a180aee55a.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-aquila-guard-1-1-a180aee55a.svg",
           "iconSourcesBySectorial": {
             "panoceania-neoterran-capitaline-army": "https://assets.corvusbelli.net/army/img/logo/units/aquila-guard-1-1.svg"
@@ -23300,7 +23282,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-panoceania-10464-1-1",
@@ -23345,8 +23327,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/valerya-gromoz-mercenary-hacker-1-1.svg",
@@ -24235,7 +24216,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-panoceania-11071-1-1",
@@ -24279,8 +24260,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/uhahu-hacker-for-hire-1-1.svg",
@@ -25801,7 +25781,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-panoceania-10265-1-1",
@@ -25847,8 +25827,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg",
@@ -25905,8 +25884,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg",
@@ -25959,8 +25937,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg",
@@ -33875,7 +33852,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "verified",
+      "weaponProfilesVerificationStatus": "incomplete",
       "profiles": [
         {
           "id": "ia-panoceania-11556-1-6",
@@ -36418,7 +36395,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-panoceania-11344-1-1",
@@ -36464,8 +36441,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/laxmee-hacker-of-fortune-1-1.svg",
@@ -40340,7 +40316,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-panoceania-10379-1-1",
@@ -40655,8 +40631,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg",
@@ -40713,8 +40688,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg",
@@ -40895,7 +40869,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-panoceania-11333-1-1",
@@ -41045,8 +41019,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 219. El roster incluye el arma 219, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg",
           "iconSourcesBySectorial": {
             "panoceania-generic": "https://assets.corvusbelli.net/army/img/logo/units/monstruckers-1-1.svg",
@@ -41920,7 +41893,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-21-1-1",
@@ -42092,8 +42065,7 @@
           "iconPathsBySectorial": {
             "panoceania-shock-army-of-acontecimento": "units/icons/infinity-army-acontecimento-regulars-1-1-e964e6abce.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-acontecimento-regulars-1-1-e964e6abce.svg",
           "iconSourcesBySectorial": {
             "panoceania-shock-army-of-acontecimento": "https://assets.corvusbelli.net/army/img/logo/units/acontecimento-regulars-1-1.svg"
@@ -45847,7 +45819,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-panoceania-721-1-1",
@@ -45884,8 +45856,7 @@
           "iconPathsBySectorial": {
             "panoceania-shock-army-of-acontecimento": "units/icons/infinity-army-scylla-steel-phalanx-s-nco-1-1-c750292acc.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-scylla-steel-phalanx-s-nco-1-1-c750292acc.svg",
           "iconSourcesBySectorial": {
             "panoceania-shock-army-of-acontecimento": "https://assets.corvusbelli.net/army/img/logo/units/scylla-steel-phalanx-s-nco-1-1.svg"
@@ -45926,8 +45897,7 @@
           "iconPathsBySectorial": {
             "panoceania-shock-army-of-acontecimento": "units/icons/infinity-army-scylla-steel-phalanx-s-nco-1-1-c750292acc.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-scylla-steel-phalanx-s-nco-1-1-c750292acc.svg",
           "iconSourcesBySectorial": {
             "panoceania-shock-army-of-acontecimento": "https://assets.corvusbelli.net/army/img/logo/units/scylla-steel-phalanx-s-nco-1-1.svg"
@@ -45966,8 +45936,7 @@
           "iconPathsBySectorial": {
             "panoceania-shock-army-of-acontecimento": "units/icons/infinity-army-scylla-steel-phalanx-s-nco-1-1-c750292acc.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-scylla-steel-phalanx-s-nco-1-1-c750292acc.svg",
           "iconSourcesBySectorial": {
             "panoceania-shock-army-of-acontecimento": "https://assets.corvusbelli.net/army/img/logo/units/scylla-steel-phalanx-s-nco-1-1.svg"
@@ -46716,7 +46685,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-43-1-3",
@@ -46748,8 +46717,7 @@
           "iconPathsBySectorial": {
             "panoceania-military-orders": "units/icons/infinity-army-crusader-brethren-1-1-03be03d25d.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-crusader-brethren-1-1-03be03d25d.svg",
           "iconSourcesBySectorial": {
             "panoceania-military-orders": "https://assets.corvusbelli.net/army/img/logo/units/crusader-brethren-1-1.svg"
@@ -47625,7 +47593,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-24-1-1",
@@ -47729,8 +47697,7 @@
           "iconPathsBySectorial": {
             "panoceania-military-orders": "units/icons/infinity-army-order-sergeants-1-1-70207ca579.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-order-sergeants-1-1-70207ca579.svg",
           "iconSourcesBySectorial": {
             "panoceania-military-orders": "https://assets.corvusbelli.net/army/img/logo/units/order-sergeants-1-1.svg"
@@ -49785,7 +49752,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1913-1-1",
@@ -49925,8 +49892,7 @@
           "iconPathsBySectorial": {
             "panoceania-military-orders": "units/icons/infinity-army-confessor-spec-ops-1-1-ee1cc85eaa.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-confessor-spec-ops-1-1-ee1cc85eaa.svg",
           "iconSourcesBySectorial": {
             "panoceania-military-orders": "https://assets.corvusbelli.net/army/img/logo/units/confessor-spec-ops-1-1.svg"
@@ -50328,7 +50294,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1927-1-1",
@@ -50468,8 +50434,7 @@
           "iconPathsBySectorial": {
             "panoceania-military-orders": "units/icons/infinity-army-confessor-team-ops-1-1-61ec188e64.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-confessor-team-ops-1-1-61ec188e64.svg",
           "iconSourcesBySectorial": {
             "panoceania-military-orders": "https://assets.corvusbelli.net/army/img/logo/units/confessor-team-ops-1-1.svg"
@@ -50665,7 +50630,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1927-g2-2-1",
@@ -50768,8 +50733,7 @@
           "iconPathsBySectorial": {
             "panoceania-military-orders": "units/icons/infinity-army-confessor-team-ops-2-1-79ca4dc964.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-confessor-team-ops-2-1-79ca4dc964.svg",
           "iconSourcesBySectorial": {
             "panoceania-military-orders": "https://assets.corvusbelli.net/army/img/logo/units/confessor-team-ops-2-1.svg"
@@ -51965,7 +51929,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1489-1-1",
@@ -52076,8 +52040,7 @@
             "panoceania-military-orders": "units/icons/infinity-army-knight-of-justice-1-1-926eec9941.svg",
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-knight-of-justice-1-1-926eec9941.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-knight-of-justice-1-1-926eec9941.svg",
           "iconSourcesBySectorial": {
             "panoceania-military-orders": "https://assets.corvusbelli.net/army/img/logo/units/knight-of-justice-1-1.svg",
@@ -52394,7 +52357,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-47-1-1",
@@ -52428,8 +52391,7 @@
           "iconPathsBySectorial": {
             "panoceania-military-orders": "units/icons/infinity-army-indigo-brother-konstantinos-1-1-5b181d3223.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-indigo-brother-konstantinos-1-1-5b181d3223.svg",
           "iconSourcesBySectorial": {
             "panoceania-military-orders": "https://assets.corvusbelli.net/army/img/logo/units/indigo-brother-konstantinos-1-1.svg"
@@ -53034,7 +52996,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1588-1-1",
@@ -53102,8 +53064,7 @@
           "iconPathsBySectorial": {
             "panoceania-military-orders": "units/icons/infinity-army-raveneye-officers-1-1-c44470e43f.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-raveneye-officers-1-1-c44470e43f.svg",
           "iconSourcesBySectorial": {
             "panoceania-military-orders": "https://assets.corvusbelli.net/army/img/logo/units/raveneye-officers-1-1.svg"
@@ -53233,7 +53194,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1490-1-1",
@@ -53357,8 +53318,7 @@
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-fusilier-indigo-richard-quinn-1-1-b23a17e067.svg",
             "panoceania-kestrel-colonial-force": "units/icons/infinity-army-fusilier-indigo-richard-quinn-1-1-b23a17e067.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-fusilier-indigo-richard-quinn-1-1-b23a17e067.svg",
           "iconSourcesBySectorial": {
             "panoceania-neoterran-capitaline-army": "https://assets.corvusbelli.net/army/img/logo/units/fusilier-indigo-richard-quinn-1-1.svg",
@@ -57916,7 +57876,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1486-1-2",
@@ -58058,8 +58018,7 @@
           "iconPathsBySectorial": {
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-vargar-maximum-security-team-1-1-560923ec38.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-vargar-maximum-security-team-1-1-560923ec38.svg",
           "iconSourcesBySectorial": {
             "panoceania-svalarheima-s-winter-force": "https://assets.corvusbelli.net/army/img/logo/units/vargar-maximum-security-team-1-1.svg"
@@ -58209,7 +58168,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1507-1-1",
@@ -58239,8 +58198,7 @@
           "iconPathsBySectorial": {
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-boyg-soldiers-1-1-d4b1b21900.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-boyg-soldiers-1-1-d4b1b21900.svg",
           "iconSourcesBySectorial": {
             "panoceania-svalarheima-s-winter-force": "https://assets.corvusbelli.net/army/img/logo/units/boyg-soldiers-1-1.svg"
@@ -58274,8 +58232,7 @@
           "iconPathsBySectorial": {
             "panoceania-svalarheima-s-winter-force": "units/icons/infinity-army-boyg-soldiers-1-1-d4b1b21900.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-boyg-soldiers-1-1-d4b1b21900.svg",
           "iconSourcesBySectorial": {
             "panoceania-svalarheima-s-winter-force": "https://assets.corvusbelli.net/army/img/logo/units/boyg-soldiers-1-1.svg"
@@ -60831,17 +60788,15 @@
       "id": "infinity-army-weapon-215",
       "infinityArmyWeaponId": 215,
       "name": "Torreta Artillada (F. Precisión)",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 215",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 215, pero los metadatos consultados no proporcionan su ficha."
+      "rangeModifiers": "-3,+3,+3,-3,-3,-6,--",
+      "damage": "7",
+      "burst": "3",
+      "ammunition": "N",
+      "saveAttribute": "BLI",
+      "saves": "1",
+      "properties": "Fuego de Supresión",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 215; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 188; Infinity Wiki, Armed Turret and Weapon Chart (Marksman Rifles): https://infinitythewiki.com/Armed_Turret and https://infinitythewiki.com/Weapon_Chart#MARKSMAN_RIFLES",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-216",
@@ -60956,13 +60911,12 @@
       "rangeNote": "short ≤40cm: 0 · long ≤60cm: -3 · max ≤120cm: -6",
       "damage": "-",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "-",
       "saves": "-",
       "properties": "Ataque Especulativo, Desechable (2), Indiscriminado, No Letal, Sin Objetivo, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 154",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 154; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-145",
@@ -61178,17 +61132,15 @@
       "id": "infinity-army-weapon-209",
       "infinityArmyWeaponId": 209,
       "name": "Torreta Artillada (F. Combi)",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 209",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha."
+      "rangeModifiers": "+3,+3,-3,-3,-6,-6,--",
+      "damage": "7",
+      "burst": "3",
+      "ammunition": "N",
+      "saveAttribute": "BLI",
+      "saves": "1",
+      "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 209; datos complementados con ficha verificada: Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil Combi, p. 186.; Infinity Wiki, Armed Turret and Weapon Chart (Rifles): https://infinitythewiki.com/Armed_Turret and https://infinitythewiki.com/Weapon_Chart#RIFLES",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-98",
@@ -61239,17 +61191,15 @@
       "id": "infinity-army-weapon-228",
       "infinityArmyWeaponId": 228,
       "name": "Torreta Artillada (E/Mitter)",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 228",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 228, pero los metadatos consultados no proporcionan su ficha."
+      "rangeModifiers": "-3,0,+3,+3,0,0,--",
+      "damage": "7",
+      "burst": "2",
+      "ammunition": "E/M",
+      "saveAttribute": "PB/2",
+      "saves": "2",
+      "properties": "No Letal, [**]",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 228; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 195; Infinity Wiki, Armed Turret and Weapon Chart (Uncategorized): https://infinitythewiki.com/Armed_Turret and https://infinitythewiki.com/Weapon_Chart#UNCATEGORIZED",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-230",
@@ -61409,13 +61359,12 @@
       "rangeNote": "short ≤20cm: 0 · med ≤40cm: +3 · long ≤60cm: -3 · max ≤120cm: -6",
       "damage": "-",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "-",
       "saves": "1",
       "properties": "Doble Disparo, Ataque Especulativo, Desechable (2), Sin Objetivo, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 176",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 176; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 190",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-207",
@@ -61557,16 +61506,15 @@
       "infinityArmyWeaponId": 208,
       "name": "Disco Baller (Disco Ball)",
       "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "-",
-      "burst": "-",
-      "ammunition": "",
-      "saveAttribute": "-",
-      "saves": "-",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 208",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "rangeNote": "Weapon Chart: 0, +3, -3, -6, --, --, --, --.",
+      "damage": "1",
+      "burst": "--",
+      "ammunition": "--",
+      "saveAttribute": "--",
+      "saves": "--",
+      "properties": "Ataque Especulativo, Desechable (2), Doble Disparo, Sin Objetivo, [*]",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 208; datos complementados con ficha verificada: Infinity Wiki, Weapon Chart (Uncategorized), perfil Disco Baller; Disco Baller: https://infinitythewiki.com/Weapon_Chart#UNCATEGORIZED and https://infinitythewiki.com/Disco_Baller",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-29",
@@ -61756,13 +61704,12 @@
       "rangeNote": "",
       "damage": "5",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "PB",
       "saves": "2",
       "properties": "Ataque de Comunicaciones, Ataque Intuitivo, Camuflado, Desechable (3), No Letal, Plantilla Directa (Lágrima Pequeña), Posicionable, Estado: Aturdido / Inmobilizado-B, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 174",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 174; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 190",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-81",
@@ -62038,17 +61985,15 @@
       "id": "infinity-army-weapon-219",
       "infinityArmyWeaponId": 219,
       "name": "Torreta Artillada (Fusil AP)",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 219",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 219, pero los metadatos consultados no proporcionan su ficha."
+      "rangeModifiers": "0,+3,-3,-3,-6,-6,--",
+      "damage": "7",
+      "burst": "3",
+      "ammunition": "AP",
+      "saveAttribute": "BLI/2",
+      "saves": "1",
+      "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 219; datos complementados con ficha verificada: Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil AP, p. 186.; Infinity Wiki, Armed Turret and Weapon Chart (Rifles): https://infinitythewiki.com/Armed_Turret and https://infinitythewiki.com/Weapon_Chart#RIFLES",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-179",

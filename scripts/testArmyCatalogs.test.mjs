@@ -4,6 +4,7 @@ import { access, readFile, readdir } from 'node:fs/promises';
 import test from 'node:test';
 import { parseListImport } from '../src/domain/listImport.mjs';
 import { assertValidTroopClass } from '../src/domain/troopClasses.mjs';
+import { createWeaponIndex, getProfileWeapons } from '../src/domain/weaponProfiles.mjs';
 
 const dataUrl = (path) => new URL(`../src/data/${path}`, import.meta.url);
 const readJson = async (path) => JSON.parse(await readFile(dataUrl(path), 'utf8'));
@@ -131,6 +132,63 @@ test('cada unidad y perfil conserva datos obligatorios, fuente, edición y dispo
       assert.ok(Array.isArray(profile.orders));
       assert.ok(Array.isArray(profile.infinityArmyWeaponIds));
     }
+  }
+});
+
+test('los suplementos verificados resuelven solo los IDs mapeados y conservan el resto pendiente', () => {
+  for (const { key, catalog } of catalogs) {
+    const incompleteCount = catalog.weapons.filter((weapon) => weapon.verificationStatus === 'incomplete').length;
+    assert.match(catalog.metadata.note, new RegExp(`${incompleteCount} siguen incompletas tras cotejar las fuentes verificadas`), key);
+  }
+
+  const incompleteWeaponIds = [...new Set(catalogs.flatMap(({ catalog }) =>
+    catalog.weapons.filter((weapon) => weapon.verificationStatus === 'incomplete')
+      .map((weapon) => weapon.infinityArmyWeaponId),
+  ))].sort((a, b) => a - b);
+  assert.deepEqual(incompleteWeaponIds, []);
+
+  for (const id of [73, 114, 154, 174, 176, 208, 209, 215, 219, 222, 228]) {
+    const records = catalogs.flatMap(({ catalog }) => catalog.weapons)
+      .filter((weapon) => weapon.infinityArmyWeaponId === id);
+    assert.ok(records.length > 0, `falta el arma ${id}`);
+    assert.ok(records.every((weapon) => weapon.verificationStatus === 'verified'), `el arma ${id} sigue incompleta`);
+    if (id !== 208) {
+      assert.ok(records.every((weapon) => weapon.source.includes('datos complementados con ficha verificada')),
+        `el arma ${id} no conserva su fuente complementaria`);
+    } else {
+      assert.ok(records.every((weapon) => weapon.source.includes('infinitythewiki.com/Disco_Baller')),
+        'Disco Baller no conserva la fuente Wiki');
+    }
+  }
+  for (const [id, sourceFragment] of [
+    [209, 'Weapon_Chart#RIFLES'],
+    [215, 'Weapon_Chart#MARKSMAN_RIFLES'],
+    [219, 'Weapon_Chart#RIFLES'],
+    [222, 'Weapon_Chart#RIFLES'],
+    [228, 'Weapon_Chart#UNCATEGORIZED'],
+  ]) {
+    const weapons = catalogs.flatMap(({ catalog }) => catalog.weapons)
+      .filter((weapon) => weapon.infinityArmyWeaponId === id);
+    assert.ok(weapons.length > 0, `presencia del arma ${id}`);
+    assert.ok(weapons.every((weapon) => weapon.source.includes(sourceFragment)), `fuente Wiki del arma ${id}`);
+  }
+  assert.ok(catalogs.every(({ catalog }) => catalog.weapons.every(({ infinityArmyWeaponId }) => infinityArmyWeaponId !== 144)));
+  assert.ok(allProfiles.some(({ profile }) =>
+    profile.verificationStatus === 'incomplete'
+      && /no contienen ID/.test(profile.verificationNote ?? ''),
+  ));
+});
+
+test('SymbioBomb se conserva como equipo especial sin perfil balístico incompleto', () => {
+  const entries = allProfiles.filter(({ profile }) => profile.infinityArmyWeaponIds.includes(144));
+  assert.ok(entries.length > 0);
+  assert.ok(entries.every(({ profile }) => profile.verificationStatus === 'verified'));
+  const weaponIndex = createWeaponIndex(catalogs.flatMap(({ catalog }) => catalog.weapons));
+  for (const { profile } of entries) {
+    const row = getProfileWeapons({ rangedEquipment: profile.rangedEquipment, meleeEquipment: '' }, weaponIndex)
+      .find(({ name }) => name.startsWith('SymbioBomb'));
+    assert.equal(row?.equipment, true);
+    assert.equal(row?.profile, undefined);
   }
 });
 

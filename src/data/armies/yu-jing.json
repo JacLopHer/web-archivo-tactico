@@ -19,7 +19,7 @@
     },
     "editionSourceUrl": "https://infinityuniverse.com/blog/infinity-rules-update-5-3",
     "iconSource": "Infinity Army (assets.corvusbelli.net/army/img/logo/units); autorización de uso indicada por el propietario el 2026-11-01.",
-    "note": "Catálogo completo de las unidades de los 4 ejércitos consultados (Yu Jing): 154 grupos/unidades de Yu Jing. Se incluyen 105 fichas de arma; 6 dato(s) de munición no están resueltos y quedan marcados como incompletos. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
+    "note": "Catálogo completo de las unidades de los 4 ejércitos consultados (Yu Jing): 154 grupos/unidades de Yu Jing. Se incluyen 105 fichas de arma; 0 siguen incompletas tras cotejar las fuentes verificadas. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita."
   },
   "sectorials": [
     {
@@ -1474,7 +1474,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-159-1-1",
@@ -1554,8 +1554,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-yaoxie-rui-shi-1-1-0f3931bf01.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-yaoxie-rui-shi-1-1-0f3931bf01.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-yaoxie-rui-shi-1-1-0f3931bf01.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/yaoxie-rui-shi-1-1.svg",
@@ -2248,7 +2247,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-125-1-1",
@@ -2359,8 +2358,7 @@
             "yu-jing-generic": "units/icons/infinity-army-zhanying-imperial-agents-1-1-c54df838a7.svg",
             "yu-jing-imperial-service": "units/icons/infinity-army-zhanying-imperial-agents-1-1-c54df838a7.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-zhanying-imperial-agents-1-1-c54df838a7.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/zhanying-imperial-agents-1-1.svg",
@@ -2882,7 +2880,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-138-1-1",
@@ -3001,8 +2999,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-mech-engineer-1-1-132de78141.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-mech-engineer-1-1-132de78141.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 209. El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-mech-engineer-1-1-132de78141.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/mech-engineer-1-1.svg",
@@ -8703,7 +8700,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1756-1-1",
@@ -8738,8 +8735,7 @@
             "yu-jing-generic": "units/icons/infinity-army-dokkaebi-cyberteam-1-1-76c55e1873.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-dokkaebi-cyberteam-1-1-76c55e1873.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-dokkaebi-cyberteam-1-1-76c55e1873.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/dokkaebi-cyberteam-1-1.svg",
@@ -8780,8 +8776,7 @@
             "yu-jing-generic": "units/icons/infinity-army-dokkaebi-cyberteam-1-1-76c55e1873.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-dokkaebi-cyberteam-1-1-76c55e1873.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-dokkaebi-cyberteam-1-1-76c55e1873.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/dokkaebi-cyberteam-1-1.svg",
@@ -9392,7 +9387,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1246-1-2",
@@ -9503,8 +9498,7 @@
             "yu-jing-generic": "units/icons/infinity-army-h-idao-special-support-group-1-1-ce651600db.svg",
             "yu-jing-invincible-army": "units/icons/infinity-army-h-idao-special-support-group-1-1-ce651600db.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-h-idao-special-support-group-1-1-ce651600db.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/h-idao-special-support-group-1-1.svg",
@@ -10726,7 +10720,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1257-1-1",
@@ -10844,8 +10838,7 @@
             "yu-jing-generic": "units/icons/infinity-army-hulang-shocktroopers-1-1-7183bb5505.svg",
             "yu-jing-invincible-army": "units/icons/infinity-army-hulang-shocktroopers-1-1-7183bb5505.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-hulang-shocktroopers-1-1-7183bb5505.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/hulang-shocktroopers-1-1.svg",
@@ -11627,7 +11620,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1752-1-2",
@@ -11774,8 +11767,7 @@
             "yu-jing-generic": "units/icons/infinity-army-hwarang-corps-1-1-7507fa177d.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-hwarang-corps-1-1-7507fa177d.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-hwarang-corps-1-1-7507fa177d.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/hwarang-corps-1-1.svg",
@@ -11898,7 +11890,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-yu-jing-1905-1-1",
@@ -11960,8 +11952,7 @@
           "iconPathsBySectorial": {
             "yu-jing-generic": "units/icons/infinity-army-racerbots-1-1-18772dfc83.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-racerbots-1-1-18772dfc83.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/racerbots-1-1.svg"
@@ -14767,7 +14758,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-128-1-1",
@@ -14871,8 +14862,7 @@
             "yu-jing-generic": "units/icons/infinity-army-yan-hu-invicibles-1-1-3d979049b4.svg",
             "yu-jing-invincible-army": "units/icons/infinity-army-yan-hu-invicibles-1-1-3d979049b4.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-yan-hu-invicibles-1-1-3d979049b4.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/yan-hu-invicibles-1-1.svg",
@@ -15896,7 +15886,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1842-1-1",
@@ -15932,8 +15922,7 @@
             "yu-jing-imperial-service": "units/icons/infinity-army-feiquan-imperial-tactical-wing-1-1-a6210666e9.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-feiquan-imperial-tactical-wing-1-1-a6210666e9.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-feiquan-imperial-tactical-wing-1-1-a6210666e9.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/feiquan-imperial-tactical-wing-1-1.svg",
@@ -16517,7 +16506,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1254-1-3",
@@ -16589,8 +16578,7 @@
             "yu-jing-generic": "units/icons/infinity-army-mowang-troops-1-1-ff4b55463b.svg",
             "yu-jing-invincible-army": "units/icons/infinity-army-mowang-troops-1-1-ff4b55463b.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-mowang-troops-1-1-ff4b55463b.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/mowang-troops-1-1.svg",
@@ -18277,7 +18265,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-yu-jing-10464-1-1",
@@ -18316,8 +18304,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-valerya-gromoz-mercenary-hacker-1-1-7b8368cd26.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/valerya-gromoz-mercenary-hacker-1-1.svg",
@@ -19052,7 +19039,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-yu-jing-11071-1-1",
@@ -19090,8 +19077,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-uhahu-hacker-for-hire-1-1-5040d424bb.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/uhahu-hacker-for-hire-1-1.svg",
@@ -20316,7 +20302,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-yu-jing-10265-1-1",
@@ -20356,8 +20342,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg",
@@ -20405,8 +20390,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg",
@@ -20450,8 +20434,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-wardrivers-merc-hackers-1-1-2a86452446.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/wardrivers-merc-hackers-1-1.svg",
@@ -26716,7 +26699,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "verified",
+      "weaponProfilesVerificationStatus": "incomplete",
       "profiles": [
         {
           "id": "ia-yu-jing-11556-1-6",
@@ -28485,7 +28468,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-yu-jing-11344-1-1",
@@ -28525,8 +28508,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado. Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-laxmee-hacker-of-fortune-1-1-489c7f4ffd.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/laxmee-hacker-of-fortune-1-1.svg",
@@ -31488,7 +31470,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-yu-jing-10379-1-1",
@@ -31752,8 +31734,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg",
@@ -31801,8 +31782,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-druze-shock-teams-1-1-98cc2fafde.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/druze-shock-teams-1-1.svg",
@@ -31947,7 +31927,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-yu-jing-11333-1-1",
@@ -32073,8 +32053,7 @@
             "yu-jing-invincible-army": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Faltan los metadatos de Infinity Army para el arma 219. El roster incluye el arma 219, pero los metadatos consultados no proporcionan su ficha.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-monstruckers-1-1-218bbeeb34.svg",
           "iconSourcesBySectorial": {
             "yu-jing-generic": "https://assets.corvusbelli.net/army/img/logo/units/monstruckers-1-1.svg",
@@ -33129,7 +33108,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1866-1-1",
@@ -33160,8 +33139,7 @@
           "iconPathsBySectorial": {
             "yu-jing-imperial-service": "units/icons/infinity-army-bayara-palace-guard-1-1-999ecbf95a.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-bayara-palace-guard-1-1-999ecbf95a.svg",
           "iconSourcesBySectorial": {
             "yu-jing-imperial-service": "https://assets.corvusbelli.net/army/img/logo/units/bayara-palace-guard-1-1.svg"
@@ -36865,7 +36843,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-1540-1-1",
@@ -36900,8 +36878,7 @@
             "yu-jing-imperial-service": "units/icons/infinity-army-adil-mehmut-1-1-228c33af4c.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-adil-mehmut-1-1-228c33af4c.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-adil-mehmut-1-1-228c33af4c.svg",
           "iconSourcesBySectorial": {
             "yu-jing-imperial-service": "https://assets.corvusbelli.net/army/img/logo/units/adil-mehmut-1-1.svg",
@@ -36944,8 +36921,7 @@
             "yu-jing-imperial-service": "units/icons/infinity-army-adil-mehmut-1-1-228c33af4c.svg",
             "yu-jing-white-banner": "units/icons/infinity-army-adil-mehmut-1-1-228c33af4c.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-adil-mehmut-1-1-228c33af4c.svg",
           "iconSourcesBySectorial": {
             "yu-jing-imperial-service": "https://assets.corvusbelli.net/army/img/logo/units/adil-mehmut-1-1.svg",
@@ -38715,7 +38691,7 @@
         ]
       },
       "availabilityVerificationStatus": "verified",
-      "weaponProfilesVerificationStatus": "incomplete",
+      "weaponProfilesVerificationStatus": "verified",
       "profiles": [
         {
           "id": "ia-847-1-1",
@@ -38749,8 +38725,7 @@
           "iconPathsBySectorial": {
             "yu-jing-imperial-service": "units/icons/infinity-army-gu-feng-xi-zhuang-1-1-3c263bdef6.svg"
           },
-          "verificationStatus": "incomplete",
-          "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado.",
+          "verificationStatus": "verified",
           "iconPath": "units/icons/infinity-army-gu-feng-xi-zhuang-1-1-3c263bdef6.svg",
           "iconSourcesBySectorial": {
             "yu-jing-imperial-service": "https://assets.corvusbelli.net/army/img/logo/units/gu-feng-xi-zhuang-1-1.svg"
@@ -41754,13 +41729,12 @@
       "rangeNote": "short ≤20cm: 0 · med ≤40cm: +3 · long ≤60cm: -3 · max ≤120cm: -6",
       "damage": "-",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "-",
       "saves": "1",
       "properties": "Doble Disparo, Ataque Especulativo, Desechable (2), Sin Objetivo, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 176",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 176; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 190",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-26",
@@ -41935,13 +41909,12 @@
       "rangeNote": "short ≤40cm: 0 · long ≤60cm: -3 · max ≤120cm: -6",
       "damage": "-",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "-",
       "saves": "-",
       "properties": "Ataque Especulativo, Desechable (2), Indiscriminado, No Letal, Sin Objetivo, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 154",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 154; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 196",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-150",
@@ -42007,17 +41980,15 @@
       "id": "infinity-army-weapon-209",
       "infinityArmyWeaponId": 209,
       "name": "Torreta Artillada (F. Combi)",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 209",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 209, pero los metadatos consultados no proporcionan su ficha."
+      "rangeModifiers": "+3,+3,-3,-3,-6,-6,--",
+      "damage": "7",
+      "burst": "3",
+      "ammunition": "N",
+      "saveAttribute": "BLI",
+      "saves": "1",
+      "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 209; datos complementados con ficha verificada: Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil Combi, p. 186.; Infinity Wiki, Armed Turret and Weapon Chart (Rifles): https://infinitythewiki.com/Armed_Turret and https://infinitythewiki.com/Weapon_Chart#RIFLES",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-81",
@@ -42552,13 +42523,12 @@
       "rangeNote": "",
       "damage": "5",
       "burst": "1",
-      "ammunition": "",
+      "ammunition": "--",
       "saveAttribute": "PB",
       "saves": "2",
       "properties": "Ataque de Comunicaciones, Ataque Intuitivo, Camuflado, Desechable (3), No Letal, Plantilla Directa (Lágrima Pequeña), Posicionable, Estado: Aturdido / Inmobilizado-B, [*]",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 174",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 174; datos complementados con ficha verificada: Tablas de referencia rápida N5, actualización 5.3, tabla de armas, p. 190",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-39",
@@ -42640,16 +42610,15 @@
       "infinityArmyWeaponId": 208,
       "name": "Disco Baller (Disco Ball)",
       "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "-",
-      "burst": "-",
-      "ammunition": "",
-      "saveAttribute": "-",
-      "saves": "-",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 208",
-      "verificationStatus": "incomplete",
-      "verificationNote": "Infinity Army indica id de munición 0, pero no proporciona su nombre en el conjunto de datos consultado."
+      "rangeNote": "Weapon Chart: 0, +3, -3, -6, --, --, --, --.",
+      "damage": "1",
+      "burst": "--",
+      "ammunition": "--",
+      "saveAttribute": "--",
+      "saves": "--",
+      "properties": "Ataque Especulativo, Desechable (2), Doble Disparo, Sin Objetivo, [*]",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 208; datos complementados con ficha verificada: Infinity Wiki, Weapon Chart (Uncategorized), perfil Disco Baller; Disco Baller: https://infinitythewiki.com/Weapon_Chart#UNCATEGORIZED and https://infinitythewiki.com/Disco_Baller",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-193",
@@ -43165,17 +43134,15 @@
       "id": "infinity-army-weapon-219",
       "infinityArmyWeaponId": 219,
       "name": "Torreta Artillada (Fusil AP)",
-      "rangeModifiers": "",
-      "rangeNote": "",
-      "damage": "",
-      "burst": "",
-      "ammunition": "",
-      "saveAttribute": "",
-      "saves": "",
-      "properties": "",
-      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 219",
-      "verificationStatus": "incomplete",
-      "verificationNote": "El roster incluye el arma 219, pero los metadatos consultados no proporcionan su ficha."
+      "rangeModifiers": "0,+3,-3,-3,-6,-6,--",
+      "damage": "7",
+      "burst": "3",
+      "ammunition": "AP",
+      "saveAttribute": "BLI/2",
+      "saves": "1",
+      "properties": "Desechable (1), Perimetral, Posicionable, No Recargable, Fuego de Supresión",
+      "source": "Infinity Army (api.corvusbelli.com/army/infinity/es/metadata), perfil de arma 219; datos complementados con ficha verificada: Infinity Wiki, Armed Turret (https://infinitythewiki.com/Armed_Turret): el arma CD se indica entre paréntesis en el perfil de tropa. Perfil de Fusil AP, p. 186.; Infinity Wiki, Armed Turret and Weapon Chart (Rifles): https://infinitythewiki.com/Armed_Turret and https://infinitythewiki.com/Weapon_Chart#RIFLES",
+      "verificationStatus": "verified"
     },
     {
       "id": "infinity-army-weapon-23",

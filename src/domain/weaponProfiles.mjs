@@ -58,7 +58,7 @@ export function getRangeModifierLabel(value) {
 }
 
 // Equipo automático y periféricos: no son armas y no tienen perfil de arma.
-const EQUIPMENT_ONLY = /^(ECM\b|Cobertura Desplegable|KOBARUTO|TURTLEMEK)/i;
+const EQUIPMENT_ONLY = /^(ECM\b|Cobertura Desplegable|KOBARUTO|TURTLEMEK|SymbioBomb)/i;
 
 function findWeapon(index, name) {
   const exact = index.get(normalize(name));

@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { catalogSets, factionDirectoryOrder } from './catalogSets.mjs';
+import { supplementVerifiedWeapons } from './verifiedWeaponSupplements.mjs';
 
 const setKey = process.argv[2];
 const catalogSet = catalogSets[setKey];
@@ -637,6 +638,8 @@ for (const unit of units) {
   }
   unit.weaponProfilesVerificationStatus = hasIncompleteWeaponData ? 'incomplete' : 'verified';
 }
+const verifiedWeaponCatalog = JSON.parse(await readFile(resolve(root, 'src/data/weaponProfiles.json'), 'utf8'));
+supplementVerifiedWeapons({ units, weapons: supplementalWeapons }, verifiedWeaponCatalog.profiles);
 
 const iconUrls = new Set();
 for (const army of armies) {
@@ -723,7 +726,7 @@ const catalog = {
     ...(baseSplitReport.length ? { baseProfileSplits: baseSplitReport } : {}),
     editionSourceUrl: 'https://infinityuniverse.com/blog/infinity-rules-update-5-3',
     iconSource: assetSource,
-    note: `Catálogo completo de las unidades de los ${armies.length} ejércitos consultados (${catalogSet.label}): ${factions.map((faction) => `${units.filter((unit) => unit.factionId === faction.id).length} grupos/unidades de ${faction.name}`).join(' y ')}. Se incluyen ${supplementalWeapons.length} fichas de arma; ${weaponIdsWithPendingData.size} dato(s) de munición no están resueltos y quedan marcados como incompletos. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita.`,
+    note: `Catálogo completo de las unidades de los ${armies.length} ejércitos consultados (${catalogSet.label}): ${factions.map((faction) => `${units.filter((unit) => unit.factionId === faction.id).length} grupos/unidades de ${faction.name}`).join(' y ')}. Se incluyen ${supplementalWeapons.length} fichas de arma; ${supplementalWeapons.filter((weapon) => weapon.verificationStatus === 'incomplete').length} siguen incompletas tras cotejar las fuentes verificadas. Las imágenes se copian de los logos enlazados por Infinity Army. Los perfiles base múltiples se conservan; su asociación a cada opción se marca incompleta cuando la API no la explicita.`,
   },
   sectorials,
   troopClassGroups: classGroups,
