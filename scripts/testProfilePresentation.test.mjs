@@ -162,7 +162,7 @@ test('la vista previa muestra las fichas compactas con las opciones elegidas ant
 test('permite imprimir la misma datacard completa en cuadrícula A4: 10 compactas o 3 detalladas por hoja', () => {
   assert.match(app, /Formato de impresión/);
   assert.ok(app.indexOf('Formato de impresión') < app.indexOf('Saltos de página'));
-  assert.match(app, /useState<PrintLayoutName>\('compact'\)/);
+  assert.match(app, /useState<PrintLayoutName>\('duplex'\)/);
   assert.match(app, /value="compact">Compacto · 10 por hoja/);
   assert.match(app, /value="detailed">Detallado · 3 por hoja/);
   assert.ok(app.indexOf('value="compact"') < app.indexOf('value="detailed"'));
@@ -188,8 +188,7 @@ test('el formato dúplex es una tercera opción con anverso y reverso, borde de 
   assert.match(app, /value="detailed">Detallado · 3 por hoja/);
   assert.match(app, /buildDuplexSheets\(collectionEntries, duplexFlipEdge, pageBreakMode\)/);
   assert.match(app, /data-duplex-face=\{face\}/);
-  assert.match(app, /ANVERSO · \{tag\}/);
-  assert.match(app, /REVERSO · \{tag\}/);
+  assert.match(app, /data-duplex-pair=/);
   assert.match(app, /isCardOverflowing\(card\)/);
   assert.match(app, /printLayout === 'duplex' && duplexOverflow\.length > 0/);
   assert.match(styles, /\.duplex-grid\s*\{[^}]*repeat\(2, minmax\(0, 1fr\)\)[^}]*repeat\(5, minmax\(0, 1fr\)\)/);

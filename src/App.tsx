@@ -358,7 +358,7 @@ function App() {
     unresolved: Array<ImportedProfileLine & { id: string }>;
   } | null>(null);
   const [pageBreakMode, setPageBreakMode] = useState<'automatic' | 'group' | 'card'>('automatic');
-  const [printLayout, setPrintLayout] = useState<PrintLayoutName>('compact');
+  const [printLayout, setPrintLayout] = useState<PrintLayoutName>('duplex');
   const [duplexFlipEdge, setDuplexFlipEdge] = useState<DuplexFlipEdge>('long');
   const [duplexOverflow, setDuplexOverflow] = useState<string[]>([]);
   const [brokenImages, setBrokenImages] = useState<Set<string>>(() => new Set());
@@ -870,7 +870,6 @@ function App() {
       return <div className="duplex-card duplex-card-empty" key={key} data-duplex-key={key} aria-hidden="true" />;
     }
     const { item, profile } = slot.entry;
-    const tag = `Hoja ${slot.sheet} · Pos. ${slot.position}`;
     const equipment = [profile.rangedEquipment, profile.meleeEquipment].filter(Boolean).join(' · ');
     if (face === 'front') {
       return (
@@ -891,9 +890,7 @@ function App() {
             </div>
             <div className="duplex-title">
               <strong>{profile.unitName}</strong>
-              <span>
-                {getTroopClassShortLabel(profile.troopClass)} · {profile.troopType} · {profile.variantName}
-              </span>
+              <span>{getTroopClassShortLabel(profile.troopClass)}</span>
             </div>
             <div className="duplex-cost"><strong>{profile.points}</strong> PTS · CAP <strong>{profile.cap}</strong></div>
           </header>
@@ -909,7 +906,6 @@ function App() {
             <p>{profile.skillsAndEquipment || 'No registrado en la fuente heredada.'}</p>
             {equipment && <p className="duplex-equipment">{equipment}</p>}
           </div>
-          <footer className="duplex-tag">ANVERSO · {tag}{item.groupName ? ` · ${item.groupName}` : ''}</footer>
         </article>
       );
     }
@@ -918,8 +914,6 @@ function App() {
       <article className="duplex-card duplex-back" key={key} data-duplex-key={key} data-duplex-pair={`${slot.sheet}-${slot.position}`} data-collection-id={item.id}>
         <header className="duplex-back-header">
           <strong>{profile.unitName}</strong>
-          <span>{profile.variantName}</span>
-          <span className="duplex-back-tag">REVERSO · {tag}{item.groupName ? ` · ${item.groupName}` : ''}</span>
         </header>
         <div className="duplex-weapons">
           <div className="duplex-weapon-head">
