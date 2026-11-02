@@ -331,9 +331,9 @@ button, select { cursor: pointer; }
 .duplex-front > * { position: relative; z-index: 1; min-width: 0; }
 .duplex-front > .duplex-watermark { position: absolute; z-index: 0; right: 1mm; top: 1.5mm; width: 54mm; height: 54mm; object-fit: contain; opacity: .16; pointer-events: none; }
 .duplex-left { grid-column: 1; grid-row: 1 / 5; position: relative; }
-.duplex-icon { position: absolute; z-index: 2; top: 0; left: 0; width: 9mm; height: 9mm; display: grid; place-items: center; overflow: hidden; color: #347e7b; background: #fff; border: .25mm solid #7d8b92; border-radius: 1.2mm; font-weight: 800; }
+.duplex-icon { position: absolute; z-index: 2; top: 0; left: 0; width: 6.5mm; height: 6.5mm; display: grid; place-items: center; overflow: hidden; color: #347e7b; background: #fff; border: .25mm solid #7d8b92; border-radius: 1.2mm; font-weight: 800; }
 .duplex-icon img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
-.duplex-tags { position: absolute; z-index: 2; top: 10.5mm; left: 0; width: 5mm; display: flex; flex-direction: column; align-items: center; gap: .5mm; margin: 0; padding: .4mm 0 .8mm; background: rgba(74, 66, 64, .55); border-radius: .8mm; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.5mm), calc(100% - 1.5mm) 100%, 0 100%); }
+.duplex-tags { position: absolute; z-index: 2; top: 8mm; left: 0; width: 5mm; display: flex; flex-direction: column; align-items: center; gap: .5mm; margin: 0; padding: .4mm 0 .8mm; background: rgba(74, 66, 64, .55); border-radius: .8mm; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.5mm), calc(100% - 1.5mm) 100%, 0 100%); }
 .duplex-troop { color: #fff; font-size: 6.5pt; font-weight: 800; line-height: 1.1; }
 .duplex-glyph { position: relative; width: 3.2mm; height: 3.2mm; display: block; }
 .duplex-glyph img { display: block; width: 100%; height: 100%; }
