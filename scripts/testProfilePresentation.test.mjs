@@ -113,7 +113,7 @@ test('las unidades JSA muestran insignias SVG oficiales donde hay un recurso dis
   assert.match(app, /'SHINOBU': 'oniwaban-shinobu-kitsune'/);
   assert.match(app, /'YOJIMBO': 'yojimbo-sword-for-hire'/);
   assert.match(app, /'TANUKI': 's-t-r-s-tanuki-team'/);
-  assert.equal((app.match(/unitIconPath\(\s*profile\.unitName,\s*profile\.iconPathsBySectorial/g) ?? []).length, 2);
+  assert.equal((app.match(/unitIconPath\(\s*profile\.unitName,\s*profile\.iconPathsBySectorial/g) ?? []).length, 3);
   assert.match(app, /`units\/icons\/\$\{iconSlug\}\.svg`/);
 });
 
@@ -162,7 +162,7 @@ test('la vista previa muestra las fichas compactas con las opciones elegidas ant
 test('permite imprimir la misma datacard completa en cuadrícula A4: 10 compactas o 3 detalladas por hoja', () => {
   assert.match(app, /Formato de impresión/);
   assert.ok(app.indexOf('Formato de impresión') < app.indexOf('Saltos de página'));
-  assert.match(app, /useState<'detailed' \| 'compact'>\('compact'\)/);
+  assert.match(app, /useState<PrintLayoutName>\('compact'\)/);
   assert.match(app, /value="compact">Compacto · 10 por hoja/);
   assert.match(app, /value="detailed">Detallado · 3 por hoja/);
   assert.ok(app.indexOf('value="compact"') < app.indexOf('value="detailed"'));
@@ -180,4 +180,19 @@ test('permite imprimir la misma datacard completa en cuadrícula A4: 10 compacta
   assert.match(styles, /\.app-shell\.print-preview-open \.print-preview-page\s*\{[^}]*height:\s*calc\(297mm - 2 \* var\(--print-margin,\s*6mm\)\)/);
   assert.match(styles, /\.app-shell\.print-preview-open \.print-preview-page-entries/);
   assert.match(styles, /\.app-shell\.print-preview-open \.print-preview-page\s*\{[^}]*break-after:\s*page/);
+});
+
+test('el formato dúplex es una tercera opción con anverso y reverso, borde de volteo y bloqueo por desborde', () => {
+  assert.match(app, /value="duplex">Tarjetas dúplex · 10 por hoja, anverso y reverso/);
+  assert.match(app, /value="compact">Compacto · 10 por hoja/);
+  assert.match(app, /value="detailed">Detallado · 3 por hoja/);
+  assert.match(app, /buildDuplexSheets\(collectionEntries, duplexFlipEdge, pageBreakMode\)/);
+  assert.match(app, /data-duplex-face=\{face\}/);
+  assert.match(app, /ANVERSO · \{tag\}/);
+  assert.match(app, /REVERSO · \{tag\}/);
+  assert.match(app, /isCardOverflowing\(card\)/);
+  assert.match(app, /printLayout === 'duplex' && duplexOverflow\.length > 0/);
+  assert.match(styles, /\.duplex-grid\s*\{[^}]*repeat\(2, minmax\(0, 1fr\)\)[^}]*repeat\(5, minmax\(0, 1fr\)\)/);
+  assert.match(styles, /\.duplex-card\s*\{[^}]*overflow:\s*hidden/);
+  assert.doesNotMatch(styles.match(/\/\* Tarjetas dúplex[\s\S]*?\.duplex-note[^\n]*/)[0], /font-size:\s*([0-5](\.\d+)?|6\.[1-4]\d*)pt|zoom/);
 });

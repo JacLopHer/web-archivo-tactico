@@ -319,6 +319,54 @@ button, select { cursor: pointer; }
 .app-shell.print-preview-open .collection-list { width: calc(210mm + 16mm); max-width: 100%; max-height: none; flex: 1 1 auto; margin: 0 auto; overflow: auto; padding: 8mm; background: #c8ced1; }
 .app-shell.print-preview-open .print-preview-page { display: block; width: 210mm; height: 297mm; min-height: 0; margin: 0 auto 8mm; padding: var(--print-margin, 6mm); list-style: none; background: #fff; box-shadow: 0 2mm 5mm #0004; }
 .app-shell.print-preview-open .print-preview-page-entries { height: 100%; display: grid; grid-template-columns: repeat(var(--print-cols, 2), minmax(0, 1fr)); grid-template-rows: repeat(var(--print-rows, 5), minmax(0, 1fr)); gap: var(--print-gap, 2mm); margin: 0; padding: 0; list-style: none; }
+
+/* Tarjetas dúplex: texto en tamaño fijo (mínimo 6,5 pt), sin reducción por escala. */
+.duplex-warning { margin: 0; padding: 8px 12px; color: #ffd5da; background: #4a2029; border-bottom: 1px solid #ed6878; font-size: 11px; font-weight: 700; line-height: 1.4; }
+.duplex-page { position: relative; }
+.duplex-page-label { position: absolute; left: 0; right: 0; bottom: -6.5mm; color: #1b2830; font-size: 9px; font-weight: 700; text-align: center; }
+.duplex-grid { height: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(5, minmax(0, 1fr)); gap: 0; }
+.duplex-card { position: relative; box-sizing: border-box; min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; color: #11181d; background: #fff; border: .2mm solid #8a979c; font-family: 'DM Sans', sans-serif; font-size: 7pt; line-height: 1.25; }
+.duplex-card-empty { border-style: dashed; border-color: #c5cdd0; }
+.duplex-header { display: grid; grid-template-columns: 11mm minmax(0, 1fr) auto; align-items: center; gap: 1.5mm; padding: 1mm 1.5mm; color: #fff; background: #347e7b; }
+.duplex-icon { position: relative; width: 10mm; height: 10mm; display: grid; place-items: center; overflow: hidden; color: #347e7b; background: #fff; border-radius: 1mm; font-weight: 800; }
+.duplex-icon img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.duplex-title { min-width: 0; display: flex; flex-direction: column; }
+.duplex-title strong { overflow: hidden; font-family: 'Barlow Condensed', sans-serif; font-size: 12pt; line-height: 1.05; text-transform: uppercase; text-overflow: ellipsis; white-space: nowrap; }
+.duplex-title span { overflow: hidden; font-size: 6.5pt; text-overflow: ellipsis; white-space: nowrap; }
+.duplex-cost { font-size: 6.5pt; font-weight: 700; text-align: right; white-space: nowrap; }
+.duplex-cost strong { font-size: 9pt; }
+.duplex-stats { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); background: #dfe3e4; border-bottom: .2mm solid #8e999b; }
+.duplex-stats div { min-width: 0; display: flex; flex-direction: column; align-items: center; padding: .6mm 0; border-right: .2mm solid #a5abad; }
+.duplex-stats div:last-child { border-right: 0; }
+.duplex-stats span { font-size: 6.5pt; font-weight: 700; color: #3b474d; }
+.duplex-stats strong { font-size: 9pt; }
+.duplex-rules { flex: 1 1 auto; min-height: 0; padding: 1mm 1.5mm; }
+.duplex-rules p { margin: 0 0 .8mm; font-size: 7pt; }
+.duplex-rules .duplex-equipment { font-weight: 700; color: #2a5a58; }
+.duplex-tag { flex: 0 0 auto; padding: .4mm 1.5mm; color: #26363d; background: #e6eeee; border-top: .2mm solid #aebfbe; font-size: 6.5pt; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.duplex-back-header { flex: 0 0 auto; display: flex; align-items: baseline; gap: 2mm; padding: .5mm 1.5mm; color: #fff; background: #347e7b; }
+.duplex-back-header strong { font-family: 'Barlow Condensed', sans-serif; font-size: 11pt; text-transform: uppercase; white-space: nowrap; }
+.duplex-back-header .duplex-back-tag { flex: none; margin-left: auto; font-weight: 700; }
+.duplex-back-header span { min-width: 0; }
+.duplex-back-header span { overflow: hidden; font-size: 6.5pt; text-overflow: ellipsis; white-space: nowrap; }
+.duplex-weapons { flex: 1 1 auto; min-height: 0; padding: .3mm 1.5mm; }
+.duplex-weapon-head, .duplex-weapon { display: grid; grid-template-columns: minmax(0, 1fr) 32mm 5mm 4mm 13.5mm 7mm 3.5mm; align-items: center; gap: .8mm; }
+.duplex-weapon-head { font-size: 6.5pt; font-weight: 800; color: #3b474d; border-bottom: .2mm solid #8e999b; }
+.duplex-weapon { padding: .2mm 0; border-bottom: .15mm solid #d3d9db; font-size: 7pt; line-height: 1.15; text-align: center; }
+.duplex-weapon > span { min-width: 0; font-weight: 700; font-size: 6.5pt; overflow-wrap: anywhere; }
+.duplex-range-head { font-size: 6pt; }
+.duplex-range-head, .duplex-range { display: grid; letter-spacing: -.02em; grid-template-columns: repeat(8, 1fr); text-align: center; }
+.duplex-range { height: 3.6mm; }
+.duplex-range .range-band { font-size: 6.5pt; }
+.duplex-range-note { font-size: 6.5pt; }
+.duplex-weapon-name { min-width: 0; text-align: left; }
+.duplex-weapon-name .duplex-weapon-category { font-weight: 700; }
+.duplex-weapon-name em { font-size: 6.5pt; font-style: normal; color: #4a585e; }
+.duplex-weapon > span:nth-of-type(3) { font-size: 6pt; letter-spacing: -.02em; }
+.duplex-weapon-props { grid-column: 1 / -1; font-size: 6.5pt; font-weight: 400; line-height: 1.15; color: #4a585e; text-align: left; }
+.duplex-weapon-props em { font-style: normal; font-weight: 700; }
+.duplex-weapon-wide { grid-column: 1 / -1; }
+.duplex-note { margin: 1mm 0; font-size: 7pt; }
 .app-shell.print-preview-open .collection-entry { position: relative; min-height: 0; display: block; overflow: hidden; padding: 0; border: 0; background: transparent; }
 .app-shell.print-preview-open .collection-entry-summary { display: none; }
 .app-shell.print-preview-open .collection-print-card { position: relative; box-sizing: border-box; display: block; width: 150mm; max-width: none; margin: 0; zoom: var(--compact-card-scale, 1); box-shadow: 0 1mm 2mm #0004; }
@@ -457,4 +505,6 @@ button, select { cursor: pointer; }
   .collection-print-card .stat-grid { margin-left: 62px; }
   .collection-section, .collection-section * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .collection-empty { display: none; }
+  .duplex-page-label, .duplex-warning { display: none !important; }
+  .duplex-card { break-inside: avoid; }
 }

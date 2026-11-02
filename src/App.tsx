@@ -5,7 +5,8 @@ import { extraFactionsCatalog } from './data/extraCatalogs';
 import factionDirectoryData from './data/factionDirectory.json';
 import weaponProfilesData from './data/weaponProfiles.json';
 import { createWeaponIndex, getProfileWeapons, getRangeModifierLabel, getRangeModifiers } from './domain/weaponProfiles.mjs';
-import { PRINT_LAYOUTS, getCellSizeMm, paginateEntries } from './domain/printLayout.mjs';
+import { PRINT_LAYOUTS, buildDuplexSheets, getCellSizeMm, isCardOverflowing, paginateEntries } from './domain/printLayout.mjs';
+import type { DuplexFlipEdge, DuplexSlot, PrintLayoutName } from './domain/printLayout.mjs';
 import { assertValidTroopClass, getTroopClassLabel, getTroopClassShortLabel } from './domain/troopClasses.mjs';
 import { parseListImport } from './domain/listImport.mjs';
 import {
@@ -357,7 +358,9 @@ function App() {
     unresolved: Array<ImportedProfileLine & { id: string }>;
   } | null>(null);
   const [pageBreakMode, setPageBreakMode] = useState<'automatic' | 'group' | 'card'>('automatic');
-  const [printLayout, setPrintLayout] = useState<'detailed' | 'compact'>('compact');
+  const [printLayout, setPrintLayout] = useState<PrintLayoutName>('compact');
+  const [duplexFlipEdge, setDuplexFlipEdge] = useState<DuplexFlipEdge>('long');
+  const [duplexOverflow, setDuplexOverflow] = useState<string[]>([]);
   const [brokenImages, setBrokenImages] = useState<Set<string>>(() => new Set());
   const markImageBroken = (key: string) => setBrokenImages((current) => (current.has(key) ? current : new Set(current).add(key)));
   const [printPreviewOpen, setPrintPreviewOpen] = useState(false);
@@ -412,6 +415,10 @@ function App() {
   const previewPages = useMemo(
     () => paginateEntries(collectionEntries, printGrid.cols * printGrid.rows, pageBreakMode),
     [collectionEntries, pageBreakMode, printGrid],
+  );
+  const duplexSheets = useMemo(
+    () => (printLayout === 'duplex' ? buildDuplexSheets(collectionEntries, duplexFlipEdge, pageBreakMode) : []),
+    [collectionEntries, duplexFlipEdge, pageBreakMode, printLayout],
   );
 
   useEffect(() => {
@@ -692,6 +699,19 @@ function App() {
   useLayoutEffect(() => {
     const list = collectionListRef.current;
     if (!printPreviewOpen || !list) return;
+    if (printLayout === 'duplex') {
+      // Las tarjetas dúplex no se reducen: se mide cada cara y se avisa si su contenido no cabe.
+      const checkOverflow = () => {
+        const overflowing = Array.from(list.querySelectorAll<HTMLElement>('.duplex-card'))
+          .filter((card) => isCardOverflowing(card))
+          .map((card) => card.dataset.duplexKey ?? '');
+        setDuplexOverflow((current) => (current.join('|') === overflowing.join('|') ? current : overflowing));
+      };
+      checkOverflow();
+      list.addEventListener('load', checkOverflow, true);
+      void document.fonts?.ready.then(checkOverflow);
+      return () => list.removeEventListener('load', checkOverflow, true);
+    }
     const mmPerPixel = 25.4 / 96;
     const { width: cellWidth, height: cellHeight } = getCellSizeMm(printGrid);
     const cellHeightPx = cellHeight / mmPerPixel;
@@ -718,7 +738,7 @@ function App() {
     list.addEventListener('load', fitCards, true);
     void document.fonts?.ready.then(fitCards);
     return () => list.removeEventListener('load', fitCards, true);
-  }, [brokenImages, collection, pageBreakMode, printGrid, printPreviewOpen]);
+  }, [brokenImages, collection, duplexFlipEdge, pageBreakMode, printGrid, printLayout, printPreviewOpen]);
 
   useEffect(() => {
     if (!projectConfirmation) return;
@@ -841,6 +861,123 @@ function App() {
     } finally {
       setBackupBusy(false);
     }
+  };
+
+  type DuplexEntry = DuplexSlot<(typeof collectionEntries)[number]>;
+  const renderDuplexCard = (slot: DuplexEntry, face: 'front' | 'back') => {
+    const key = `${slot.sheet}-${face}-${slot.slot + 1}`;
+    if (!slot.entry) {
+      return <div className="duplex-card duplex-card-empty" key={key} data-duplex-key={key} aria-hidden="true" />;
+    }
+    const { item, profile } = slot.entry;
+    const tag = `Hoja ${slot.sheet} · Pos. ${slot.position}`;
+    const equipment = [profile.rangedEquipment, profile.meleeEquipment].filter(Boolean).join(' · ');
+    if (face === 'front') {
+      return (
+        <article className="duplex-card duplex-front" key={key} data-duplex-key={key} data-duplex-pair={`${slot.sheet}-${slot.position}`} data-collection-id={item.id}>
+          <header className="duplex-header">
+            <div className="duplex-icon" aria-hidden="true">
+              <span>{profile.unitName.slice(0, 1)}</span>
+              {!brokenImages.has(unitIconKey(profile.unitId, profile.unitName, selectedSectorial)) && (
+                <img
+                  src={`${import.meta.env.BASE_URL}${unitIconPath(
+                    profile.unitName,
+                    profile.iconPathsBySectorial?.[selectedSectorial] ?? profile.iconPath,
+                  )}`}
+                  alt=""
+                  onError={() => markImageBroken(unitIconKey(profile.unitId, profile.unitName, selectedSectorial))}
+                />
+              )}
+            </div>
+            <div className="duplex-title">
+              <strong>{profile.unitName}</strong>
+              <span>
+                {getTroopClassShortLabel(profile.troopClass)} · {profile.troopType} · {profile.variantName}
+              </span>
+            </div>
+            <div className="duplex-cost"><strong>{profile.points}</strong> PTS · CAP <strong>{profile.cap}</strong></div>
+          </header>
+          <div className="duplex-stats">
+            {statLabels.map(([statKey, label]) => (
+              <div key={statKey}>
+                <span>{statKey === 'wounds' ? profile.woundsLabel : label}</span>
+                <strong>{profile.stats[statKey]}</strong>
+              </div>
+            ))}
+          </div>
+          <div className="duplex-rules">
+            <p>{profile.skillsAndEquipment || 'No registrado en la fuente heredada.'}</p>
+            {equipment && <p className="duplex-equipment">{equipment}</p>}
+          </div>
+          <footer className="duplex-tag">ANVERSO · {tag}{item.groupName ? ` · ${item.groupName}` : ''}</footer>
+        </article>
+      );
+    }
+    const weapons = getProfileWeapons(profile, weaponIndex);
+    return (
+      <article className="duplex-card duplex-back" key={key} data-duplex-key={key} data-duplex-pair={`${slot.sheet}-${slot.position}`} data-collection-id={item.id}>
+        <header className="duplex-back-header">
+          <strong>{profile.unitName}</strong>
+          <span>{profile.variantName}</span>
+          <span className="duplex-back-tag">REVERSO · {tag}{item.groupName ? ` · ${item.groupName}` : ''}</span>
+        </header>
+        <div className="duplex-weapons">
+          <div className="duplex-weapon-head">
+            <span>ARMA</span>
+            <span className="duplex-range-head" aria-label="Distancias en centímetros">
+              {rangeBands.map((range) => <span key={range}>{range}</span>)}
+            </span>
+            <span>PS</span><span>R</span><span>MUN</span><span>TS</span><span>Nº</span>
+          </div>
+          {weapons.length === 0 && <p className="duplex-note">Sin armamento registrado en la fuente consultada.</p>}
+          {weapons.map(({ name, category, profile: weaponProfile, modifier, equipment: isEquipment }, weaponPosition) => {
+            const hasWeaponDetails = Boolean(weaponProfile && ((weaponProfile.properties && weaponProfile.properties !== category) || weaponProfile.verificationStatus === 'incomplete'));
+            return (
+            <div className="duplex-weapon" key={`${name}-${weaponPosition}`}>
+              {weaponProfile ? (
+                <>
+                  <div className="duplex-weapon-name">
+                    <strong>{name}</strong>
+                    {modifier && !name.includes(modifier) && <em> ({modifier})</em>}
+                    {!hasWeaponDetails && <em className="duplex-weapon-category"> {category}</em>}
+                  </div>
+                  {weaponProfile.rangeNote ? (
+                    <div className="duplex-range-note">{weaponProfile.rangeNote}</div>
+                  ) : (
+                    <div className="duplex-range">
+                      {getRangeModifiers(weaponProfile).map((value, rangeIndex) => {
+                        const tone = value === '0' ? 'neutral' : value.startsWith('+') ? 'positive' : value === '-3' ? 'short' : value === '-6' ? 'long' : 'unavailable';
+                        return <span className={`range-band ${tone}`} key={`${rangeIndex}-${value}`}>{getRangeModifierLabel(value)}</span>;
+                      })}
+                    </div>
+                  )}
+                  <span>{weaponProfile.damage}</span>
+                  <span>{weaponProfile.burst}</span>
+                  <span>{weaponProfile.ammunition}</span>
+                  <span>{weaponProfile.saveAttribute}</span>
+                  <span>{weaponProfile.saves}</span>
+                  {hasWeaponDetails && (
+                    <div className="duplex-weapon-props">
+                      <em>{category}</em>
+                      {weaponProfile.properties && weaponProfile.properties !== category && <> · {weaponProfile.properties}</>}
+                      {weaponProfile.verificationStatus === 'incomplete' && (
+                        <> · Dato pendiente: {weaponProfile.verificationNote ?? 'información incompleta en Infinity Army.'}</>
+                      )}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="duplex-weapon-name duplex-weapon-wide">
+                  <strong>{name}</strong>
+                  <span>{isEquipment ? 'Equipo' : 'Sin ficha de arma coincidente; no se muestran valores inferidos.'}</span>
+                </div>
+              )}
+            </div>
+            );
+          })}
+        </div>
+      </article>
+    );
   };
 
   return (
@@ -1278,7 +1415,9 @@ function App() {
           </div>
           {printPreviewOpen && (
             <p className="print-preview-description" id="print-preview-description">
-              {printLayout === 'compact'
+              {printLayout === 'duplex'
+                ? `Tarjetas a doble cara: 10 posiciones por hoja A4 vertical (2 × 5, celdas de 99 × 57 mm). Cada hoja genera una página de anversos seguida de su página de reversos; imprímelas a doble cara con volteo por borde ${duplexFlipEdge === 'long' ? 'largo' : 'corto'}. Las tarjetas no se reducen: si un anverso o reverso no cabe, se avisa y la impresión queda bloqueada.`
+                : printLayout === 'compact'
                 ? 'Formato compacto: la ficha completa reducida en dos columnas por cinco filas, 10 por hoja A4 vertical. Cada grupo empieza en hoja nueva y los grupos de más de 10 se reparten.'
                 : 'Formato detallado: 3 fichas por hoja A4 vertical, cada una en un tercio exacto de la página. Si una ficha ocupa menos, el resto del tercio queda vacío dentro de su marco; si ocupa más, se reduce. Cada grupo empieza en hoja nueva.'}
               {' '}El ajuste final puede variar ligeramente según el navegador y la impresora.
@@ -1289,12 +1428,28 @@ function App() {
               <span>Formato de impresión</span>
               <select
                 value={printLayout}
-                onChange={(event) => setPrintLayout(event.target.value === 'compact' ? 'compact' : 'detailed')}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setPrintLayout(value === 'compact' || value === 'duplex' ? value : 'detailed');
+                }}
               >
                 <option value="compact">Compacto · 10 por hoja</option>
                 <option value="detailed">Detallado · 3 por hoja</option>
+                <option value="duplex">Tarjetas dúplex · 10 por hoja, anverso y reverso</option>
               </select>
             </label>
+            {printLayout === 'duplex' && (
+              <label className="print-control">
+                <span>Borde de volteo</span>
+                <select
+                  value={duplexFlipEdge}
+                  onChange={(event) => setDuplexFlipEdge(event.target.value === 'short' ? 'short' : 'long')}
+                >
+                  <option value="long">Borde largo</option>
+                  <option value="short">Borde corto</option>
+                </select>
+              </label>
+            )}
             <label className="print-control">
               <span>Saltos de página</span>
               <select
@@ -1314,7 +1469,7 @@ function App() {
               className="action-button primary print-button"
               type="button"
               onClick={() => printPreviewOpen ? window.print() : setPrintPreviewOpen(true)}
-              disabled={!collection.length}
+              disabled={!collection.length || (printPreviewOpen && printLayout === 'duplex' && duplexOverflow.length > 0)}
             >
               {printPreviewOpen ? 'Imprimir / Guardar PDF' : 'Vista previa'}
             </button>
@@ -1328,7 +1483,27 @@ function App() {
               Limpiar
             </button>
           </div>
-          {collection.length ? (
+          {printPreviewOpen && printLayout === 'duplex' && duplexOverflow.length > 0 && (
+            <p className="duplex-warning" role="alert">
+              Impresión bloqueada: {duplexOverflow.length} {duplexOverflow.length === 1 ? 'cara no cabe' : 'caras no caben'} sin reducir el texto
+              ({duplexOverflow.map((key) => key.replace(/^(\d+)-(front|back)-(\d+)$/, (_m, sheet, face, slot) => `hoja ${sheet} ${face === 'front' ? 'anverso' : 'reverso'} casilla ${slot}`)).join('; ')}).
+              Quita armas o divide la unidad y vuelve a comprobar.
+            </p>
+          )}
+          {collection.length && printLayout === 'duplex' && printPreviewOpen ? (
+            <ol className="collection-list print-preview-pages duplex-pages" ref={collectionListRef}>
+              {duplexSheets.flatMap((sheet) => (['front', 'back'] as const).map((face) => (
+                <li className="print-preview-page duplex-page" key={`${sheet.sheet}-${face}`} data-duplex-face={face} data-duplex-sheet={sheet.sheet}>
+                  <div className="duplex-page-label">
+                    Hoja {sheet.sheet} · {face === 'front' ? 'ANVERSOS' : 'REVERSOS'} (volteo por borde {duplexFlipEdge === 'long' ? 'largo' : 'corto'})
+                  </div>
+                  <div className="duplex-grid">
+                    {sheet[face].map((slot) => renderDuplexCard(slot, face))}
+                  </div>
+                </li>
+              )))}
+            </ol>
+          ) : collection.length ? (
             <ol className={`collection-list${printPreviewOpen ? ' print-preview-pages' : ''}`} ref={collectionListRef}>
               {(printPreviewOpen ? previewPages : [collectionEntries]).map((page, pageIndex) => (
                 <li className="print-preview-page" key={`page-${pageIndex}`} data-preview-page={pageIndex + 1}>
