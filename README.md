@@ -18,6 +18,19 @@ La importación de listas acepta el texto copiado de Infinity Army, incluidas la
 
 Los iconos SVG oficiales de unidad enlazados por Infinity Army se guardan localmente en `public/units/icons/`; se registran sus URLs de procedencia en el catálogo. Los logotipos SVG oficiales de facción y sectorial se guardan en `public/factions/` y se registran en `src/data/factionDirectory.json`, con slug de `infinity/es/metadata`, URL oficial, ruta local y estado de verificación. `npm run logos:build` los vuelve a consultar y compara los recursos existentes ignorando CRLF y espacios finales; usa `assets.corvusbelli.com` si `.net` no responde y deja el marcador genérico si falta un recurso. El propietario autorizó el uso de los recursos el 2026-11-01.
 
+## Cómo añadir la imagen de una miniatura
+
+Cada unidad muestra, si existe, el archivo estático `public/units/<slug>.png`, donde `<slug>` es el nombre de la unidad en minúsculas, sin tildes y con guiones (`SHINOBU` → `shinobu.png`, `ASURA` → `asura.png`). Se usa en la tarjeta de lista y en el anverso dúplex; si el archivo falta, no se muestra nada y la ficha se genera igualmente. Una miniatura subida a mano desde la tarjeta dúplex (guardada en el navegador) tiene prioridad sobre el archivo.
+
+Procedimiento:
+
+1. Buscar la unidad en [Human Sphere](https://www.human-sphere.com/) (por ejemplo `https://www.human-sphere.com/Asura`) y localizar una foto de la miniatura pintada. Las URLs de las imágenes se obtienen del HTML de la página (`/images/<x>/<xx>/<archivo>`); la «Vyo» `Aleph_-_Asura_-_-N3-_-Vyo-.png` es solo el icono vectorial, no la foto.
+2. Descargar el archivo original (no la versión `thumb/`) con `curl.exe -o origen.jpg <url>`.
+3. Recortar la figura y quitar el fondo: `python scripts/cropMiniature.py origen.jpg public/units/<slug>.png X0 Y0 X1 Y1 --height 272` (requiere `pip install pillow numpy scipy`). El script deja un PNG transparente de 272 px de alto, como `shinobu.png`. Si la foto ya tiene fondo limpio, añadir `--keep-bg`.
+4. Revisar el resultado a mano (restos de brillo azul en la base) y comprobar la tarjeta en `npm run dev`.
+
+Ejemplo real: `asura.png` sale de `Battle-pack-operation-mazebreaker-14.webp` (sección «Current Miniatures» de la página de Asura en Human Sphere, imagen con fondo transparente), recortada con `240 170 840 900`. Si el origen ya tiene transparencia, el script la respeta y no hace falta quitar el fondo. Las fotos antiguas de holotarjeta (`Asura2.jpg`) sirven solo como alternativa. Las imágenes son propiedad de Corvus Belli; se usan con la autorización del propietario del proyecto para uso no comercial y la fuente queda anotada aquí.
+
 ## Catálogo de Nómadas y Aleph
 
 - `src/data/nomadsAlephCatalog.json` cubre 275 IDs de unidad únicos, representados por 326 grupos de perfil, con 1.024 perfiles en Nómadas genérico, Corregidor, Bakunin, Tunguska, Aleph genérica, Steel Phalanx y OSS. Se conservan nombres de Infinity Army en español e inglés, puntos, CAP, atributos, tipo/clase, habilidades, equipo, armamento y disponibilidad individual por perfil/sectorial.

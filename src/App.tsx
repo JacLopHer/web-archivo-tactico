@@ -941,7 +941,10 @@ function App() {
     const { item, profile } = slot.entry;
     if (face === 'front') {
       const tags = getUnitCardTags(profile);
-      const miniature = miniatures[profile.unitId];
+      const uploadedMiniature = miniatures[profile.unitId];
+      const staticMiniatureKey = `m:${unitSlug(profile.unitName)}`;
+      const miniature = uploadedMiniature
+        ?? (brokenImages.has(staticMiniatureKey) ? undefined : `${import.meta.env.BASE_URL}units/${unitSlug(profile.unitName)}.png`);
       const sectorialId = profile.sectorialIds.includes(selectedSectorial) ? selectedSectorial : profile.sectorialIds[0];
       const iconKey = unitIconKey(profile.unitId, profile.unitName, sectorialId ?? selectedSectorial);
       const rules = getCardRules(profile) || 'No registrado en la fuente heredada.';
@@ -974,13 +977,13 @@ function App() {
                 {tags.hackable && <span className="duplex-glyph" title="Hackeable"><img src={cardGlyphSrc('HACKABLE')} alt="Hackeable" /></span>}
               </div>
             )}
-            {miniature && <img className="duplex-mini" src={miniature} alt={`Miniatura de ${profile.unitName}`} />}
+            {miniature && <img className="duplex-mini" src={miniature} alt={`Miniatura de ${profile.unitName}`} onError={uploadedMiniature ? undefined : () => markImageBroken(staticMiniatureKey)} />}
             <div className="duplex-mini-actions">
               <label title={miniature ? 'Cambiar miniatura' : 'Subir miniatura'}>
                 <input type="file" accept="image/*" onChange={(event) => handleMiniatureFile(profile.unitId, event)} />
                 {miniature ? 'Cambiar' : 'Subir miniatura'}
               </label>
-              {miniature && <button type="button" onClick={() => removeMiniature(profile.unitId)}>Quitar</button>}
+              {uploadedMiniature && <button type="button" onClick={() => removeMiniature(profile.unitId)}>Quitar</button>}
             </div>
           </div>
           <p className="duplex-isc">{profile.unitOfficialName ? `ISC: ${profile.unitOfficialName}` : ''}</p>
